@@ -25,7 +25,11 @@ class HomeNavbar extends StatelessWidget {
               ],
             ),
           ),
-          const Icon(FontAwesomeIcons.search, color: Colors.white),
+          const Icon(
+            FontAwesomeIcons.search,
+            color: Colors.white,
+            size: 22.5,
+          ),
         ],
       ),
     );
