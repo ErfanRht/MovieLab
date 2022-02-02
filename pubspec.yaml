@@ -18,6 +18,7 @@ dependencies:
   ms_undraw: ^3.0.1+1
   flutter_spinkit: ^5.1.0
   shared_preferences: ^2.0.12
+  http: ^0.13.4
 
 dev_dependencies:
   flutter_test:
@@ -27,8 +28,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+     - assets/logo/logo.png
   #   - images/a_dot_ham.jpeg
   # fonts:
   #   - family: Schyler

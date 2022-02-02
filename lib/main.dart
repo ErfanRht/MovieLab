@@ -9,7 +9,7 @@ void main() {
 }
 
 class App extends StatelessWidget {
-  final String initRoute = homeScreenRoute;
+  final String initRoute = splashScreenRoute;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
