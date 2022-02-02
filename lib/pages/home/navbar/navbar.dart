@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movielab/constants/colors.dart';
 
 class HomeNavbar extends StatelessWidget {
   const HomeNavbar({Key? key}) : super(key: key);
@@ -12,12 +13,19 @@ class HomeNavbar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            "MovieLab",
-            style: GoogleFonts.ubuntu(
-                color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
+          RichText(
+            text: TextSpan(
+              text: 'Movie',
+              style: GoogleFonts.ubuntu(
+                  color: Colors.white,
+                  fontSize: 27.5,
+                  fontWeight: FontWeight.bold),
+              children: const <TextSpan>[
+                TextSpan(text: 'Lab', style: TextStyle(color: kPrimaryColor)),
+              ],
+            ),
           ),
-          Icon(FontAwesomeIcons.search, color: Colors.white),
+          const Icon(FontAwesomeIcons.search, color: Colors.white),
         ],
       ),
     );
