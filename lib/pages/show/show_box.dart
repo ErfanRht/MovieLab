@@ -28,9 +28,12 @@ class ShowBox extends StatelessWidget {
           child: CachedNetworkImage(
               fit: BoxFit.cover,
               imageUrl: movie.image,
-              errorWidget: (context, url, error) => Icon(Icons.error),
-              placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+              placeholder: (context, url) => const Center(
+                    child: SpinKitThreeBounce(
+                      color: Colors.white,
+                      size: 30.0,
+                    ),
                   )),
         )),
         Container(
