@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movielab/constants/routes.dart';
-import 'package:movielab/pages/home/imdb_lists/box.dart';
+import 'box.dart';
 
 class HomeIMDbLists extends StatelessWidget {
   const HomeIMDbLists({Key? key}) : super(key: key);

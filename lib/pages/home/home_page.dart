@@ -3,10 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/modules/system_ui_overlay_style.dart';
-import 'package:movielab/pages/home/imdb_lists/lists.dart';
-import 'package:movielab/pages/home/navbar/navbar.dart';
-import 'package:movielab/pages/home/popular/popular_movies.dart';
-import 'package:movielab/pages/home/popular/popular_tv.dart';
+import 'package:movielab/pages/home/sections/box_office/box_office.dart';
+import 'package:movielab/pages/home/sections/imdb_lists/lists.dart';
+import 'package:movielab/pages/home/sections/navbar/navbar.dart';
+import 'package:movielab/pages/home/sections/popular/popular_movies.dart';
+import 'package:movielab/pages/home/sections/popular/popular_tv.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -78,6 +79,25 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: HomeIMDbLists(),
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 15, bottom: 5),
+                  child: Text(
+                    'Box Office',
+                    style: GoogleFonts.ubuntu(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ],
+            ),
+            // ignore: prefer_const_constructors
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: HomeBoxOffice(),
             )
           ],
         ),
