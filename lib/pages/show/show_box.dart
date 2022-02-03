@@ -1,49 +1,42 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movielab/models/movie.dart';
-import 'package:movielab/pages/home/home_data_controller.dart';
+import 'package:movielab/models/show.dart';
 
-class ShowMovieBox extends StatelessWidget {
-  int index;
-  // ignore: invalid_required_positional_param
-  ShowMovieBox(@required this.index);
+class ShowBox extends StatelessWidget {
+  Show movie;
+  ShowBox({required this.movie});
 
   @override
   Widget build(BuildContext context) {
-    MovieBox movie;
-
-    movie = Get.find<HomeDataController>().popularMovies[index];
     String title = movie.title;
     String year = movie.year;
     String crew = movie.crew;
 
-    if (title.length > 12) {
-      title = movie.title.substring(0, 12) + '...';
+    if (title.length > 11) {
+      title = movie.title.substring(0, 11) + '...';
     }
-    if (crew.length > 28) {
-      crew = crew.substring(0, 28) + '...';
+    if (crew.length > 25) {
+      crew = crew.substring(0, 25) + '...';
     }
     return Column(
       children: [
         Expanded(
-          child: Container(
-            margin: const EdgeInsets.only(left: 10, right: 10),
-            width: 155,
-            height: 120,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(17.5),
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                      movie.image,
-                    ))),
-          ),
-        ),
+            child: ClipRRect(
+          borderRadius: BorderRadius.circular(17.5),
+          child: CachedNetworkImage(
+              fit: BoxFit.cover,
+              imageUrl: movie.image,
+              errorWidget: (context, url, error) => Icon(Icons.error),
+              placeholder: (context, url) => Center(
+                    child: CircularProgressIndicator(),
+                  )),
+        )),
         Container(
           width: 155,
           alignment: Alignment.bottomLeft,
-          padding: const EdgeInsets.only(left: 0, right: 10, top: 5),
+          padding: const EdgeInsets.only(left: 5, right: 10, top: 5),
           child: Row(
             children: [
               Row(
@@ -64,7 +57,7 @@ class ShowMovieBox extends StatelessWidget {
         Container(
           width: 155,
           alignment: Alignment.bottomLeft,
-          padding: const EdgeInsets.only(left: 0, right: 10),
+          padding: const EdgeInsets.only(left: 5, right: 10),
           child: Row(
             children: [
               Row(

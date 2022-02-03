@@ -1,4 +1,4 @@
-class MovieBox {
+class Show {
   final String id;
   final String rank;
   final String title;
@@ -8,7 +8,7 @@ class MovieBox {
   final String year;
   final String imDbRating;
 
-  const MovieBox({
+  const Show({
     required this.id,
     required this.rank,
     required this.title,
@@ -19,14 +19,15 @@ class MovieBox {
     required this.imDbRating,
   });
 
-  factory MovieBox.fromJson(Map<String, dynamic> json) {
-    return MovieBox(
+  factory Show.fromJson(Map<String, dynamic> json) {
+    return Show(
       id: json['id'],
       rank: json['rank'],
       title: json['title'],
       fullTitle: json['fullTitle'],
       crew: json['crew'],
-      image: json['image'],
+      image: json['image'].toString().replaceAll(
+          "._V1_UX128_CR0,3,128,176_AL_.jpg", "._V1_Ratio0.6716_AL_.jpg"),
       year: json['year'],
       imDbRating: json['imDbRating'],
     );

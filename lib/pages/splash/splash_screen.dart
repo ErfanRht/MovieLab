@@ -70,8 +70,14 @@ class SplashScreen extends StatelessWidget {
 }
 
 getData(BuildContext context) async {
+  bool error = false;
   await getPopularMovies().then((value) => {
-        Get.find<HomeDataController>().updatePopularMovies(popularMovies: value)
+        if (value = false) {error = true}
       });
-  Navigator.pushReplacementNamed(context, homeScreenRoute);
+  await getPopularTVShows().then((value) => {
+        if (value = false) {error = true}
+      });
+  if (!error) {
+    Navigator.pushReplacementNamed(context, homeScreenRoute);
+  }
 }

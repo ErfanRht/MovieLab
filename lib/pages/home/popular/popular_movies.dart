@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:movielab/constants/routes.dart';
 import 'package:movielab/pages/home/home_data_controller.dart';
 import 'package:movielab/pages/home/home_page.dart';
-import 'package:movielab/pages/home/popular/movie_box.dart';
+import 'package:movielab/pages/show/show_box.dart';
 
 class HomePopularMovies extends StatelessWidget {
   const HomePopularMovies({Key? key}) : super(key: key);
@@ -21,10 +21,15 @@ class HomePopularMovies extends StatelessWidget {
             itemBuilder: (context, index) {
               return InkWell(
                 child: Container(
-                    margin: const EdgeInsets.only(top: 10, bottom: 10),
+                    margin: const EdgeInsets.only(
+                        top: 10, bottom: 10, left: 5, right: 5),
                     decoration:
                         BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                    child: InkWell(child: ShowMovieBox(index))),
+                    child: InkWell(
+                      child: ShowBox(
+                          movie: Get.find<HomeDataController>()
+                              .popularMovies[index]),
+                    )),
                 onTap: () {
                   Navigator.pushNamed(context, showPageRoute);
                 },
