@@ -3,6 +3,7 @@ import 'package:movielab/pages/splash/splash_screen.dart';
 import 'constants/colors.dart';
 import 'constants/routes.dart';
 import 'pages/home/home_page.dart';
+import 'pages/show/show_page.dart';
 
 void main() {
   runApp(App());
@@ -22,6 +23,7 @@ class App extends StatelessWidget {
       routes: {
         splashScreenRoute: (context) => const SplashScreen(),
         homeScreenRoute: (context) => const HomePage(),
+        showPageRoute: (context) => const ShowPage(),
       },
     );
   }

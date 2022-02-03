@@ -18,7 +18,7 @@ class HomeNavbar extends StatelessWidget {
               text: 'Movie',
               style: GoogleFonts.ubuntu(
                   color: Colors.white,
-                  fontSize: 27.5,
+                  fontSize: 30,
                   fontWeight: FontWeight.bold),
               children: const <TextSpan>[
                 TextSpan(text: 'Lab', style: TextStyle(color: kPrimaryColor)),
