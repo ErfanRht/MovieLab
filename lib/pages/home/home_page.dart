@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/modules/system_ui_overlay_style.dart';
+import 'package:movielab/pages/home/imdb_lists/lists.dart';
 import 'package:movielab/pages/home/navbar/navbar.dart';
 import 'package:movielab/pages/home/popular/popular_movies.dart';
 import 'package:movielab/pages/home/popular/popular_tv.dart';
@@ -76,6 +77,7 @@ class HomePage extends StatelessWidget {
             // ignore: prefer_const_constructors
             Padding(
               padding: const EdgeInsets.only(left: 10),
+              child: HomeIMDbLists(),
             )
           ],
         ),
