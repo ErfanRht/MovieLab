@@ -12,5 +12,13 @@ setSystemUIOverlayStyle({required SystemUIOverlayStyle systemUIOverlayStyle}) {
         systemNavigationBarIconBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.light,
         statusBarBrightness: Brightness.light));
+  } else if (systemUIOverlayStyle == SystemUIOverlayStyle.RED) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: kPrimaryColor,
+        systemNavigationBarDividerColor: Colors.transparent,
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.light));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movielab/constants/colors.dart';
 
 class HomeIMDbBox extends StatelessWidget {
   String title;
@@ -11,7 +12,7 @@ class HomeIMDbBox extends StatelessWidget {
       width: 250,
       height: 100,
       decoration: BoxDecoration(
-        color: Color(0xffE6B91E),
+        color: kIMDBColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(children: [
@@ -20,7 +21,7 @@ class HomeIMDbBox extends StatelessWidget {
           child: Text(
             title,
             style: GoogleFonts.ubuntu(
-                color: Color(0xff000000),
+                color: const Color(0xff000000),
                 fontSize: 25,
                 fontWeight: FontWeight.bold),
           ),
