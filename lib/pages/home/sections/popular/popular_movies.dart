@@ -31,7 +31,7 @@ class HomePopularMovies extends StatelessWidget {
                               .popularMovies[index]),
                     )),
                 onTap: () {
-                  Navigator.pushNamed(context, showPageRoute);
+                  //Navigator.pushNamed(context, showPageRoute);
                 },
                 borderRadius: BorderRadius.circular(20),
               );

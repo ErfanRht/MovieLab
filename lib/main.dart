@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movielab/pages/main/main_page.dart';
 import 'package:movielab/pages/splash/splash_screen.dart';
 import 'constants/colors.dart';
 import 'constants/routes.dart';
@@ -22,7 +23,7 @@ class App extends StatelessWidget {
       initialRoute: initRoute,
       routes: {
         splashScreenRoute: (context) => const SplashScreen(),
-        homeScreenRoute: (context) => const HomePage(),
+        homeScreenRoute: (context) => const MainPage(),
         showPageRoute: (context) => const ShowPage(),
       },
     );
