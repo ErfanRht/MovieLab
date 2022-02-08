@@ -7,7 +7,8 @@ import 'package:movielab/constants/routes.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/modules/api_requester.dart';
 import 'package:movielab/modules/system_ui_overlay_style.dart';
-import 'package:movielab/pages/home/home_data_controller.dart';
+import 'package:movielab/pages/main/home/home_data_controller.dart';
+import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
 import 'package:movielab/pages/show/show_page/controller.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -17,6 +18,7 @@ class SplashScreen extends StatelessWidget {
     setSystemUIOverlayStyle(systemUIOverlayStyle: SystemUIOverlayStyle.DARK);
     Get.put(HomeDataController());
     Get.put(ShowPageController());
+    Get.put(SearchBarController());
     getData(context);
     return Scaffold(
         backgroundColor: kBackgroundColor,

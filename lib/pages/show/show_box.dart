@@ -18,9 +18,14 @@ class ShowBox extends StatelessWidget {
     String year = show.year;
     String crew = show.crew;
     String id = show.id;
-
-    if (title.length > 11) {
-      title = show.title.substring(0, 11) + '...';
+    if (year != "") {
+      if (title.length > 11) {
+        title = show.title.substring(0, 11) + '...';
+      }
+    } else {
+      if (title.length > 17) {
+        title = show.title.substring(0, 17) + '...';
+      }
     }
     if (crew.length > 25) {
       crew = crew.substring(0, 25) + '...';
@@ -37,23 +42,27 @@ class ShowBox extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: Container(
         margin: const EdgeInsets.only(top: 10, bottom: 10, left: 5, right: 5),
+        width: 155,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
         child: Column(
           children: [
-            Expanded(
+            SizedBox(
+                width: 145,
+                height: 210,
                 child: ClipRRect(
-              borderRadius: BorderRadius.circular(17.5),
-              child: CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl: show.image,
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                  placeholder: (context, url) => const Center(
-                        child: SpinKitThreeBounce(
-                          color: Colors.white,
-                          size: 30.0,
-                        ),
-                      )),
-            )),
+                  borderRadius: BorderRadius.circular(17.5),
+                  child: CachedNetworkImage(
+                      fit: BoxFit.cover,
+                      imageUrl: show.image,
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                      placeholder: (context, url) => const Center(
+                            child: SpinKitThreeBounce(
+                              color: Colors.white,
+                              size: 30.0,
+                            ),
+                          )),
+                )),
             Container(
               width: 155,
               alignment: Alignment.bottomLeft,
@@ -63,7 +72,7 @@ class ShowBox extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "$title ($year)",
+                        year != "" ? "$title ($year)" : title,
                         softWrap: true,
                         style: GoogleFonts.ubuntu(
                             color: Colors.white,

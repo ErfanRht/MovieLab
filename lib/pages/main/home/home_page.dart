@@ -3,11 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/modules/system_ui_overlay_style.dart';
-import 'package:movielab/pages/home/sections/box_office/box_office.dart';
-import 'package:movielab/pages/home/sections/imdb_lists/lists.dart';
-import 'package:movielab/pages/home/sections/navbar/navbar.dart';
-import 'package:movielab/pages/home/sections/popular/popular_movies.dart';
-import 'package:movielab/pages/home/sections/popular/popular_tv.dart';
+import 'sections/box_office/box_office.dart';
+import 'sections/imdb_lists/lists.dart';
+import 'sections/navbar/navbar.dart';
+import 'sections/popular/popular_movies.dart';
+import 'sections/popular/popular_tv.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

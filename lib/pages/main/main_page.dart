@@ -5,10 +5,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/modules/system_ui_overlay_style.dart';
-import 'package:movielab/pages/home/home_page.dart';
+import 'home/home_page.dart';
 import 'package:movielab/pages/show/show_page/controller.dart';
-import 'package:movielab/pages/show/show_page/show_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+
+import 'search/search_page.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -69,9 +70,9 @@ class MainPage extends StatelessWidget {
 List<Widget> _buildScreens() {
   return [
     const HomePage(),
-    const HomePage(),
-    const HomePage(),
-    const HomePage(),
+    const SearchPage(),
+    const SearchPage(),
+    const SearchPage(),
   ];
 }
 
