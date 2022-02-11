@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/modules/system_ui_overlay_style.dart';
+import 'package:movielab/pages/main/main_controller.dart';
 import 'home/home_page.dart';
 import 'package:movielab/pages/show/show_page/controller.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -16,9 +17,7 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PersistentTabController _controller;
-
-    _controller = PersistentTabController(initialIndex: 0);
+    PersistentTabController _controller = Get.find<MainController>().controller;
     return GetBuilder<ShowPageController>(builder: (_) {
       return WillPopScope(
         onWillPop: () async {

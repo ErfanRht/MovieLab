@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:movielab/models/show.dart';
+import 'package:movielab/models/models.dart';
 
 class HomeDataController extends GetxController {
   List popularMovies = [];

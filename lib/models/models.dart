@@ -81,7 +81,7 @@ class FullShow {
           "._V1_UX128_CR0,3,128,176_AL_.jpg", "._V1_Ratio0.6716_AL_.jpg"),
       year: json['year'],
       genres: json['genres'],
-      releaseDate: json['releaseDate'],
+      releaseDate: json['releaseDate'] ?? "",
       runTime: json['runtimeStr'] ?? "",
       plot: json['plot'],
       awards: json['awards'],
@@ -90,8 +90,8 @@ class FullShow {
       countries: json['countries'],
       languages: json['languages'],
       companies: json['companies'],
-      imDbRating: json['imDbRating'],
-      contentRating: json['contentRating'],
+      imDbRating: json['imDbRating'] ?? "0.0",
+      contentRating: json['contentRating'] ?? "",
       similars: getSimilars(json: json['similars']),
     );
   }
@@ -104,4 +104,28 @@ getSimilars({required json}) {
     similars.add(Show.fromJson(json[i]));
   }
   return similars;
+}
+
+class SearchResult {
+  final String id;
+  final String title;
+  final String image;
+  final String description;
+
+  const SearchResult({
+    required this.id,
+    required this.title,
+    required this.image,
+    required this.description,
+  });
+
+  factory SearchResult.fromJson(Map<String, dynamic> json) {
+    return SearchResult(
+      id: json['id'],
+      title: json['title'],
+      image: json['image'].replaceAll(
+          "._V1_UX128_CR0,3,128,176_AL_.jpg", "._V1_Ratio0.6716_AL_.jpg"),
+      description: json['description'].replaceAll("(", "").replaceAll(")", ""),
+    );
+  }
 }

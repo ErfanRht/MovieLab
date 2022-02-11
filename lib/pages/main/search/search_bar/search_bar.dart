@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
+import 'package:movielab/modules/api_requester.dart';
 
 import 'search_bar_controller.dart';
 
@@ -10,23 +11,30 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController controller =
+        Get.find<SearchBarController>().controller;
     return GetBuilder<SearchBarController>(builder: (_) {
       return Container(
         width: MediaQuery.of(context).size.width,
         height: 60,
-        margin: const EdgeInsets.only(left: 15, right: 15),
+        margin: const EdgeInsets.only(left: 5, right: 5),
         decoration: BoxDecoration(
           color: const Color(0xff24243B),
           borderRadius: BorderRadius.circular(30),
         ),
         child: Row(
           children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 15, right: 10),
-              child: Icon(
-                FontAwesomeIcons.search,
-                color: Colors.white,
-                size: 20,
+            GestureDetector(
+              onTap: () {
+                search(expression: null);
+              },
+              child: const Padding(
+                padding: EdgeInsets.only(left: 15, right: 10),
+                child: Icon(
+                  FontAwesomeIcons.search,
+                  color: Colors.white,
+                  size: 20,
+                ),
               ),
             ),
             Expanded(
@@ -41,6 +49,7 @@ class SearchBar extends StatelessWidget {
                 ),
                 scrollPhysics: const BouncingScrollPhysics(),
                 autocorrect: true,
+                controller: controller,
                 enableIMEPersonalizedLearning: true,
                 enableInteractiveSelection: true,
                 cursorColor: kPrimaryColor,
@@ -48,8 +57,10 @@ class SearchBar extends StatelessWidget {
                 enabled: true,
                 enableSuggestions: true,
                 onSubmitted: (text) {
-                  _.updateFieldState(text: text);
+                  _.updateResult(result: []);
+                  search(expression: text);
                 },
+                onChanged: (value) => _.updateFieldState(text: value),
                 textInputAction: TextInputAction.search,
                 onTap: () {
                   _.updateFieldState(tapped: true);
@@ -66,14 +77,32 @@ class SearchBar extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(right: 15),
-              child: Icon(
-                FontAwesomeIcons.microphoneAlt,
-                color: Colors.white,
-                size: 20,
-              ),
-            ),
+            _.fieldText == null
+                ? GestureDetector(
+                    child: const Padding(
+                      padding: EdgeInsets.only(right: 15),
+                      child: Icon(
+                        FontAwesomeIcons.microphoneAlt,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                    ),
+                  )
+                : GestureDetector(
+                    onTap: () {
+                      _.updateFieldState(tapped: false, text: null);
+                      _.updateResult(result: null);
+                      _.controller.clear();
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.only(right: 15),
+                      child: Icon(
+                        Icons.close_rounded,
+                        color: Colors.white,
+                        size: 27.5,
+                      ),
+                    ),
+                  ),
           ],
         ),
       );

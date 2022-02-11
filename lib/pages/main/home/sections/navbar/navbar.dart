@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
+import 'package:movielab/pages/main/main_controller.dart';
 
 class HomeNavbar extends StatelessWidget {
   const HomeNavbar({Key? key}) : super(key: key);
@@ -9,7 +11,7 @@ class HomeNavbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.only(start: 20, top: 12.5, end: 20),
+      padding: const EdgeInsets.only(left: 20, top: 12.5, right: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -25,10 +27,15 @@ class HomeNavbar extends StatelessWidget {
               ],
             ),
           ),
-          const Icon(
-            FontAwesomeIcons.search,
-            color: Colors.white,
-            size: 22.5,
+          IconButton(
+            icon: const Icon(
+              FontAwesomeIcons.search,
+              color: Colors.white,
+              size: 22.5,
+            ),
+            onPressed: () {
+              Get.find<MainController>().controller.jumpToTab(1);
+            },
           ),
         ],
       ),
