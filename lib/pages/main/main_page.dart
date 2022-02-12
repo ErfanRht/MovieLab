@@ -9,7 +9,7 @@ import 'package:movielab/pages/main/main_controller.dart';
 import 'home/home_page.dart';
 import 'package:movielab/pages/show/show_page/controller.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'search/search_page.dart';
 
 class MainPage extends StatelessWidget {
@@ -18,98 +18,75 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PersistentTabController _controller = Get.find<MainController>().controller;
-    return GetBuilder<ShowPageController>(builder: (_) {
-      return WillPopScope(
-        onWillPop: () async {
-          return back();
-        },
-        child: PersistentTabView(
-          context,
-          onWillPop: null,
-          controller: _controller,
-          screens: _buildScreens(),
-          items: _navBarsItems(),
-          confineInSafeArea: true,
-          backgroundColor: kBackgroundColor,
-          handleAndroidBackButtonPress: true,
-          resizeToAvoidBottomInset: true,
-          stateManagement: true,
-          hideNavigationBar: _.hideNavigationBar,
-          hideNavigationBarWhenKeyboardShows: true,
-          decoration: NavBarDecoration(
-            borderRadius: BorderRadius.circular(15.0),
-            colorBehindNavBar: kBackgroundColor,
+    return GetBuilder<ShowPageController>(builder: (__) {
+      return GetBuilder<MainController>(builder: (_) {
+        return Scaffold(
+          body: pages.elementAt(_.selectedIndex),
+          bottomNavigationBar: Container(
+            decoration: BoxDecoration(
+              color: kBackgroundColor,
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 20,
+                  color: Colors.black.withOpacity(.1),
+                )
+              ],
+            ),
+            child: SafeArea(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 22.5, vertical: 10),
+                child: GNav(
+                  backgroundColor: kBackgroundColor,
+                  rippleColor: kBlueColor,
+                  hoverColor: kBlueColor,
+                  activeColor: CupertinoColors.activeBlue,
+                  tabBackgroundColor: kBlueColor,
+                  color: CupertinoColors.systemGrey,
+                  gap: 5,
+                  iconSize: 27,
+                  textStyle: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: CupertinoColors.activeBlue),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  duration: const Duration(milliseconds: 400),
+                  tabs: const [
+                    GButton(
+                      icon: Icons.home_max_rounded,
+                      text: 'Home',
+                    ),
+                    GButton(
+                      icon: Icons.search_rounded,
+                      text: 'Search',
+                    ),
+                    GButton(
+                      icon: Icons.bookmark_outline_rounded,
+                      text: 'Saved',
+                    ),
+                    GButton(
+                      icon: Icons.person_outline_rounded,
+                      text: 'Profile',
+                    ),
+                  ],
+                  selectedIndex: _.selectedIndex,
+                  onTabChange: (index) {
+                    _.changeIndex(index);
+                  },
+                ),
+              ),
+            ),
           ),
-          popAllScreensOnTapOfSelectedTab: true,
-          popActionScreens: PopActionScreensType.all,
-          itemAnimationProperties: const ItemAnimationProperties(
-            duration: Duration(milliseconds: 200),
-            curve: Curves.ease,
-          ),
-          screenTransitionAnimation: const ScreenTransitionAnimation(
-            animateTabTransition: true,
-            curve: Curves.ease,
-            duration: Duration(milliseconds: 200),
-          ),
-          navBarStyle: NavBarStyle.style1,
-        ),
-      );
+        );
+      });
     });
   }
-
-  Future<bool> back() async {
-    await Get.find<ShowPageController>().updateHideNavigationBar();
-    await Get.find<ShowPageController>().updateShow(show: null);
-    setSystemUIOverlayStyle(systemUIOverlayStyle: SystemUIOverlayStyle.DARK);
-
-    return true;
-  }
 }
 
-List<Widget> _buildScreens() {
-  return [
-    const HomePage(),
-    const SearchPage(),
-    const SearchPage(),
-    const SearchPage(),
-  ];
-}
-
-List<PersistentBottomNavBarItem> _navBarsItems() {
-  return [
-    bottomNavItem(
-        icon: const Icon(
-          Icons.home_max_rounded,
-          size: 27,
-        ),
-        title: "Home"),
-    bottomNavItem(
-        icon: const Icon(
-          Icons.search_rounded,
-          size: 27,
-        ),
-        title: "Search"),
-    bottomNavItem(
-        icon: const Icon(
-          Icons.bookmark_outline_rounded,
-          size: 27,
-        ),
-        title: "Saved"),
-    bottomNavItem(
-        icon: const Icon(
-          Icons.person_outline_rounded,
-          size: 27,
-        ),
-        title: "Profile")
-  ];
-}
-
-bottomNavItem({required Icon icon, required String title}) {
-  return PersistentBottomNavBarItem(
-    icon: icon,
-    title: (title),
-    textStyle: GoogleFonts.ubuntu(fontSize: 16, fontWeight: FontWeight.w700),
-    activeColorPrimary: CupertinoColors.activeBlue,
-    inactiveColorPrimary: CupertinoColors.systemGrey,
-  );
-}
+const List<Widget> pages = <Widget>[
+  HomePage(),
+  SearchPage(),
+  SearchPage(),
+  SearchPage(),
+];

@@ -78,7 +78,7 @@ class HomePage extends StatelessWidget {
             // ignore: prefer_const_constructors
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: HomeIMDbLists(),
+              child: const HomeIMDbLists(),
             ),
             Row(
               children: [
@@ -97,7 +97,7 @@ class HomePage extends StatelessWidget {
             // ignore: prefer_const_constructors
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: HomeBoxOffice(),
+              child: const HomeBoxOffice(),
             )
           ],
         ),

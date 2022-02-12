@@ -6,7 +6,8 @@ import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
 import 'package:movielab/pages/show/show_page/controller.dart';
 
-const String apiKey = "k_6lgd4s89";
+// const String apiKey = "k_6lgd4s89";
+const String apiKey = "k_y9zcdoq3";
 
 Future<bool> getPopularMovies() async {
   final response = await http

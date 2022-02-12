@@ -22,6 +22,7 @@ dependencies:
   cached_network_image: ^3.2.0
   persistent_bottom_nav_bar: ^4.0.2
   flutter_rating_bar: ^4.0.0
+  google_nav_bar: ^5.0.5
 
 dev_dependencies:
   flutter_test:
