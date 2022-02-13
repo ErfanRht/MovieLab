@@ -2,12 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
-import 'package:movielab/constants/types.dart';
-import 'package:movielab/modules/system_ui_overlay_style.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import '../show_box.dart';
+import 'package:movielab/pages/show/show_page/sections/cast.dart';
+import 'package:movielab/pages/show/show_page/sections/main_info.dart';
+import 'package:movielab/pages/show/show_page/sections/more_info.dart';
+import 'package:movielab/pages/show/show_page/sections/navbar.dart';
+import 'package:movielab/pages/show/show_page/sections/plot.dart';
+import 'package:movielab/pages/show/show_page/sections/rating.dart';
+import 'package:movielab/pages/show/show_page/sections/similars.dart';
+import 'package:movielab/pages/show/show_page/sections/title.dart';
 import 'controller.dart';
 
 // ignore: must_be_immutable
@@ -17,28 +20,16 @@ class ShowPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    late dynamic show;
     return GetBuilder<ShowPageController>(
       builder: (_) {
-        if (_.show != null) {
-          // setSystemUIOverlayStyle(
-          //     systemUIOverlayStyle: SystemUIOverlayStyle.RED);
+        show = _.show;
+        if (show != null) {
           return WillPopScope(
             onWillPop: _willPopCallback, // Empty Function.
             child: Scaffold(
               resizeToAvoidBottomInset: true,
               backgroundColor: kBackgroundColor,
-              // bottomNavigationBar: Container(
-              //   color: kPrimaryColor,
-              //   height: 50,
-              //   child: Center(
-              //     child: Text("Watch Now",
-              //         textAlign: TextAlign.center,
-              //         style: GoogleFonts.ubuntu(
-              //             color: Colors.white,
-              //             fontSize: 22.5,
-              //             fontWeight: FontWeight.w600)),
-              //   ),
-              // ),
               body: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(
@@ -69,7 +60,7 @@ class ShowPage extends StatelessWidget {
                                         (2 / 3) -
                                     35,
                                 width: MediaQuery.of(context).size.width,
-                                imageUrl: _.show.image,
+                                imageUrl: show.image,
                                 errorWidget: (context, url, error) =>
                                     const Icon(Icons.error),
                                 placeholder: (context, url) => const Center(
@@ -84,143 +75,28 @@ class ShowPage extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Center(
-                                  child: Text(_.show.title,
-                                      textAlign: TextAlign.center,
-                                      style: GoogleFonts.ubuntu(
-                                          color: Colors.white,
-                                          fontSize: 35,
-                                          fontWeight: FontWeight.w700)),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Center(
-                                    child: Text(
-                                        "${_.show.year} •	${_.show.genres} • ${_.show.runTime}",
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.ubuntu(
-                                            color:
-                                                Colors.white.withOpacity(0.7),
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w700)),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 2, right: 5),
-                                        child: Text(_.show.imDbRating,
-                                            textAlign: TextAlign.center,
-                                            style: GoogleFonts.ubuntu(
-                                                color: kIMDBColor,
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w700)),
-                                      ),
-                                      RatingBarIndicator(
-                                        rating:
-                                            double.parse(_.show.imDbRating) / 2,
-                                        itemBuilder: (context, index) =>
-                                            const Icon(
-                                          Icons.star,
-                                          color: kIMDBColor,
-                                        ),
-                                        unratedColor: kGreyColor,
-                                        itemCount: 5,
-                                        itemSize: 22.5,
-                                        direction: Axis.horizontal,
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                ShowPageTitle(title: show.title),
+                                ShowPageMainInfo(
+                                    year: show.year,
+                                    genres: show.genres,
+                                    runTime: show.runTime),
+                                ShowPageRating(imDbRating: show.imDbRating)
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              // ignore: prefer_const_literals_to_create_immutables
-                              children: [
-                                IconButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  icon: const Icon(
-                                    Icons.arrow_back_ios_new_outlined,
-                                    color: Colors.white,
-                                    size: 25,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.bookmark_add_outlined,
-                                    color: Colors.white,
-                                    size: 32.5,
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
+                          const ShowPageNavBar()
                         ],
                       ),
                     ),
-                    sectionTitle(title: "Plot Summary"),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 10, right: 10, bottom: 20),
-                      child: Text(_.show.plot,
-                          textAlign: TextAlign.justify,
-                          style: GoogleFonts.ubuntu(
-                              color: Colors.white.withOpacity(0.55),
-                              fontSize: 15,
-                              fontWeight: FontWeight.w400)),
-                    ),
-                    sectionTitle(title: "Cast"),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 2.5, right: 2.5, top: 5),
-                      child: SizedBox(
-                          height: 135,
-                          child: Expanded(
-                            child: ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              itemCount: Get.find<ShowPageController>()
-                                  .show
-                                  .actorList
-                                  .length,
-                              itemBuilder: (context, index) {
-                                return actorBox(
-                                    actor: Get.find<ShowPageController>()
-                                        .show
-                                        .actorList[index]);
-                              },
-                            ),
-                          )),
-                    ),
-                    sectionTitle(title: "More Information"),
-                    info(
-                        infoName: "Release Date",
-                        infoValue: _.show.releaseDate),
-                    info(
-                        infoName: "Content Rating",
-                        infoValue: _.show.contentRating),
-                    info(infoName: "director(s)", infoValue: _.show.directors),
-                    info(infoName: "Language(s)", infoValue: _.show.languages),
-                    info(infoName: "Countrie(s)", infoValue: _.show.countries),
-                    info(infoName: "companie(s)", infoValue: _.show.companies),
-                    info(infoName: "award(s)", infoValue: _.show.awards),
+                    ShowPagePlot(plot: show.plot),
+                    ShowPageCast(),
+                    ShowPageMoreInfo(show: show),
                     const SizedBox(
                       height: 10,
                     ),
-                    sectionTitle(title: "Similars"),
-                    similarSection(similars: _.show.similars)
+                    ShowPageSimilars(
+                      show: show,
+                    )
                   ],
                 ),
               ),
@@ -242,109 +118,7 @@ class ShowPage extends StatelessWidget {
   }
 
   Future<bool> _willPopCallback() {
-    print("What the fuckkkkkkkkkkkkkkkkkkkkkkkkkk");
+    Get.find<ShowPageController>().updateShow(show: null);
     return Future.value(true);
   }
-}
-
-sectionTitle({required final String title}) {
-  return Row(
-    children: [
-      Padding(
-        padding: const EdgeInsets.only(left: 10, right: 10, bottom: 12.5),
-        child: Text(title,
-            style: GoogleFonts.ubuntu(
-                color: Colors.white,
-                fontSize: 19,
-                fontWeight: FontWeight.w500)),
-      ),
-    ],
-  );
-}
-
-actorBox({required final actor}) {
-  return Flexible(
-      child: SizedBox(
-    width: 90,
-    height: 150,
-    child: Column(
-      children: [
-        SizedBox(
-          width: 70,
-          height: 70,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(100),
-            child: CachedNetworkImage(
-                fit: BoxFit.cover,
-                imageUrl: actor["image"],
-                errorWidget: (context, url, error) => const Icon(Icons.error),
-                placeholder: (context, url) => const Center(
-                      child: SpinKitThreeBounce(
-                        color: Colors.white,
-                        size: 15.0,
-                      ),
-                    )),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 7, bottom: 3),
-          child: Text(actor["name"],
-              textAlign: TextAlign.center,
-              style: GoogleFonts.ubuntu(
-                  color: Colors.white.withOpacity(0.8),
-                  fontSize: 11,
-                  fontWeight: FontWeight.w600)),
-        ),
-        Text(actor["asCharacter"],
-            textAlign: TextAlign.center,
-            style: GoogleFonts.ubuntu(
-                color: Colors.white.withOpacity(0.5),
-                fontSize: 10,
-                fontWeight: FontWeight.w500)),
-      ],
-    ),
-  ));
-}
-
-info({required final String infoName, required final String infoValue}) {
-  return Padding(
-    padding: const EdgeInsets.only(left: 10, right: 10, bottom: 7.5),
-    child: Row(
-      children: [
-        Text(infoName + ":",
-            softWrap: true,
-            style: GoogleFonts.ubuntu(
-                color: Colors.white.withOpacity(0.8),
-                fontSize: 12.5,
-                fontWeight: FontWeight.w600)),
-        Flexible(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 5),
-            child: Text(infoValue,
-                softWrap: true,
-                style: GoogleFonts.ubuntu(
-                    color: Colors.white.withOpacity(0.6),
-                    fontSize: 12.5,
-                    fontWeight: FontWeight.w500)),
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-similarSection({required similars}) {
-  return SizedBox(
-    height: 265,
-    child: Expanded(
-      child: ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemCount: similars.length,
-          itemBuilder: (context, index) {
-            return ShowBox(show: similars[index]);
-          }),
-    ),
-  );
 }

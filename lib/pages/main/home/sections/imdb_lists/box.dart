@@ -12,7 +12,7 @@ class HomeIMDbBox extends StatelessWidget {
       width: 250,
       height: 100,
       decoration: BoxDecoration(
-        color: kIMDBColor,
+        color: kSecondaryColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(children: [
