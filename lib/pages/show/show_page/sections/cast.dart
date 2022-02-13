@@ -19,20 +19,24 @@ class ShowPageCast extends StatelessWidget {
           padding: const EdgeInsets.only(left: 2.5, right: 2.5, top: 5),
           child: SizedBox(
               height: 135,
-              child: Expanded(
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount:
-                      Get.find<ShowPageController>().show.actorList.length,
-                  itemBuilder: (context, index) {
-                    return actorBox(
-                        actor: Get.find<ShowPageController>()
-                            .show
-                            .actorList[index]);
-                  },
-                ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount:
+                          Get.find<ShowPageController>().show.actorList.length,
+                      itemBuilder: (context, index) {
+                        return actorBox(
+                            actor: Get.find<ShowPageController>()
+                                .show
+                                .actorList[index]);
+                      },
+                    ),
+                  ),
+                ],
               )),
         ),
       ],
@@ -41,8 +45,7 @@ class ShowPageCast extends StatelessWidget {
 }
 
 actorBox({required final actor}) {
-  return Flexible(
-      child: SizedBox(
+  return SizedBox(
     width: 90,
     height: 150,
     child: Column(
@@ -81,5 +84,5 @@ actorBox({required final actor}) {
                 fontWeight: FontWeight.w500)),
       ],
     ),
-  ));
+  );
 }

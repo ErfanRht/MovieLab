@@ -23,15 +23,19 @@ class ShowPageSimilars extends StatelessWidget {
 similars({required List similars}) {
   return SizedBox(
     height: 265,
-    child: Expanded(
-      child: ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemCount: similars.length,
-          itemBuilder: (context, index) {
-            return ShowBox(show: similars[index]);
-          }),
+    child: Row(
+      children: [
+        Expanded(
+          child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: similars.length,
+              itemBuilder: (context, index) {
+                return ShowBox(show: similars[index]);
+              }),
+        ),
+      ],
     ),
   );
 }

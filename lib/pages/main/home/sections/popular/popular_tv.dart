@@ -10,16 +10,20 @@ class HomePopularTVShows extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 265,
-      child: Expanded(
-        child: ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemCount: Get.find<HomeDataController>().popularShows.length,
-            itemBuilder: (context, index) {
-              return ShowBox(
-                  show: Get.find<HomeDataController>().popularShows[index]);
-            }),
+      child: Row(
+        children: [
+          Expanded(
+            child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: Get.find<HomeDataController>().popularShows.length,
+                itemBuilder: (context, index) {
+                  return ShowBox(
+                      show: Get.find<HomeDataController>().popularShows[index]);
+                }),
+          ),
+        ],
       ),
     );
   }

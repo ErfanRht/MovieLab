@@ -6,6 +6,8 @@ import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/modules/system_ui_overlay_style.dart';
 import 'package:movielab/pages/main/main_controller.dart';
+import 'package:movielab/pages/main/profile/profile_page.dart';
+import 'package:movielab/pages/main/saved/saved_page.dart';
 import 'home/home_page.dart';
 import 'package:movielab/pages/show/show_page/controller.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -87,6 +89,6 @@ class MainPage extends StatelessWidget {
 const List<Widget> pages = <Widget>[
   HomePage(),
   SearchPage(),
-  SearchPage(),
-  SearchPage(),
+  SavedPage(),
+  ProfilePage()
 ];
