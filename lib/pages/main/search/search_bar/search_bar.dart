@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/modules/api_requester.dart';
+import 'package:movielab/pages/main/search/search_bar/voice_search.dart';
+import 'package:speech_to_text/speech_recognition_result.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 
 import 'search_bar_controller.dart';
 
@@ -14,6 +18,11 @@ class SearchBar extends StatelessWidget {
     TextEditingController controller =
         Get.find<SearchBarController>().controller;
     return GetBuilder<SearchBarController>(builder: (_) {
+      doSearch({required final String text}) {
+        _.updateResult(result: []);
+        search(expression: text);
+      }
+
       return Container(
         width: MediaQuery.of(context).size.width,
         height: 60,
@@ -57,8 +66,7 @@ class SearchBar extends StatelessWidget {
                 enabled: true,
                 enableSuggestions: true,
                 onSubmitted: (text) {
-                  _.updateResult(result: []);
-                  search(expression: text);
+                  doSearch(text: text);
                 },
                 onChanged: (value) => _.updateFieldState(text: value),
                 textInputAction: TextInputAction.search,
@@ -77,20 +85,30 @@ class SearchBar extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            _.fieldText == null
+            _.fieldText == ""
                 ? GestureDetector(
+                    onTap: () async {
+                      // await _.speechToText.listen(onResult: _onSpeechResult);
+                      // Get.find<SearchBarController>()
+                      //     .updateSpeechToText(listening: true);
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const VoiceSearchAlertDialog();
+                          });
+                    },
                     child: const Padding(
-                      padding: EdgeInsets.only(right: 15),
+                      padding: EdgeInsets.only(right: 15, left: 5),
                       child: Icon(
                         FontAwesomeIcons.microphoneAlt,
                         color: Colors.white,
-                        size: 20,
+                        size: 22.5,
                       ),
                     ),
                   )
                 : GestureDetector(
                     onTap: () {
-                      _.updateFieldState(tapped: false, text: null);
+                      _.updateFieldState(tapped: false, text: "");
                       _.updateResult(result: null);
                       _.controller.clear();
                     },
