@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/models/models.dart';
 import 'package:movielab/modules/api_requester.dart';
+import 'package:movielab/pages/show/show_box/show_box_common.dart';
 import 'package:movielab/pages/show/show_page/show_page.dart';
 
 class ShowBox extends StatelessWidget {
@@ -31,10 +32,7 @@ class ShowBox extends StatelessWidget {
     }
     return InkWell(
       onTap: () async {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ShowPage(id: id)),
-        );
+        openShowPage(context, id);
       },
       borderRadius: BorderRadius.circular(20),
       child: Container(

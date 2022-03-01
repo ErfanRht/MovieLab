@@ -8,6 +8,7 @@ Future<FullShow?> getShowInfo({required String id}) async {
   await getShowInfoFromCache(id: id).then((response) async {
     if (response != null) {
       print("GET SHOW INFO FROM CACHE");
+      await Future.delayed(const Duration(seconds: 1));
       show = response;
     } else if (response == null) {
       await getShow(id: id).then((response) {

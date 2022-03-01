@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/models/models.dart';
+import 'package:movielab/pages/show/show_box/show_box_common.dart';
 import 'package:movielab/pages/show/show_page/show_page.dart';
 
 class SearchShowBox extends StatelessWidget {
@@ -20,10 +21,7 @@ class SearchShowBox extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
       child: InkWell(
         onTap: () async {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ShowPage(id: id)),
-          );
+          openShowPage(context, id);
         },
         borderRadius: BorderRadius.circular(15),
         child: Container(
