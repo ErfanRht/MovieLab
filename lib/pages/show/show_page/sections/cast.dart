@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movielab/pages/show/show_page/controller.dart';
 
 import 'section_title.dart';
 
 class ShowPageCast extends StatelessWidget {
-  ShowPageCast({Key? key}) : super(key: key);
+  List actorList;
+  ShowPageCast({Key? key, required this.actorList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +26,9 @@ class ShowPageCast extends StatelessWidget {
                       physics: const BouncingScrollPhysics(),
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
-                      itemCount:
-                          Get.find<ShowPageController>().show.actorList.length,
+                      itemCount: actorList.length,
                       itemBuilder: (context, index) {
-                        return actorBox(
-                            actor: Get.find<ShowPageController>()
-                                .show
-                                .actorList[index]);
+                        return actorBox(actor: actorList[index]);
                       },
                     ),
                   ),

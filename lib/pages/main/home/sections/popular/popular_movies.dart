@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home_data_controller.dart';
-import 'package:movielab/pages/show/show_box.dart';
+import 'package:movielab/pages/show/show_box/show_box.dart';
 
 class HomePopularMovies extends StatelessWidget {
   const HomePopularMovies({Key? key}) : super(key: key);

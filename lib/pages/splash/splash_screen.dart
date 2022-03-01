@@ -6,11 +6,11 @@ import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/routes.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/modules/api_requester.dart';
+import 'package:movielab/modules/cache/cache_data.dart';
 import 'package:movielab/modules/system_ui_overlay_style.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/main/main_controller.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
-import 'package:movielab/pages/show/show_page/controller.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class SplashScreen extends StatelessWidget {
     Get.put(MainController());
     Get.put(HomeDataController());
     Get.put(SearchBarController());
-    Get.put(ShowPageController());
+    Get.put(CacheData());
     getData(context);
     return Scaffold(
         backgroundColor: kBackgroundColor,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/models/models.dart';
-import 'package:movielab/pages/show/show_box.dart';
+import 'package:movielab/pages/show/show_box/show_box.dart';
 
 import 'section_title.dart';
 

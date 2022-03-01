@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:movielab/models/models.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
-import 'package:movielab/pages/show/show_page/controller.dart';
 
 const String apiKey = "k_6lgd4s89";
 // const String apiKey = "k_y9zcdoq3";
@@ -45,15 +44,15 @@ Future<bool> getPopularTVShows() async {
   }
 }
 
-Future<bool> getShow({required String id}) async {
+Future<FullShow?> getShow({required String id}) async {
   final response = await http
       .get(Uri.parse('https://imdb-api.com/en/API/Title/$apiKey/$id'));
   if (response.statusCode == 200) {
-    var json = jsonDecode(response.body);
-    Get.find<ShowPageController>().updateShow(show: FullShow.fromJson(json));
-    return true;
+    var showJson = jsonDecode(response.body);
+    FullShow show = FullShow.fromJson(showJson);
+    return show;
   } else {
-    return false;
+    return null;
   }
 }
 

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
-import 'package:movielab/pages/show/search_show_box.dart';
+import 'package:movielab/pages/show/show_box/search_show_box.dart';
 import 'package:ms_undraw/ms_undraw.dart';
 
 class SearchPage extends StatelessWidget {

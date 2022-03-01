@@ -1,0 +1,24 @@
+import 'package:get/get.dart';
+import 'package:movielab/models/models.dart';
+import 'package:movielab/modules/api_requester.dart';
+import 'package:movielab/modules/cache/cacheholder.dart';
+
+Future<FullShow?> getShowInfo({required String id}) async {
+  FullShow? show;
+  await getShowInfoFromCache(id: id).then((response) async {
+    if (response != null) {
+      print("GET SHOW INFO FROM CACHE");
+      show = response;
+    } else if (response == null) {
+      await getShow(id: id).then((response) {
+        if (response != null) {
+          print("GET SHOW INFO FROM API");
+          print("SAVE SHOW INFO IN CACHE");
+          saveShowInfoInCache(show: response);
+          show = response;
+        }
+      });
+    }
+  });
+  return show;
+}
