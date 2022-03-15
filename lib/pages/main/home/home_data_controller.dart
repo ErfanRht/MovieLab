@@ -15,4 +15,18 @@ class HomeDataController extends GetxController {
     this.popularShows = popularShows;
     update();
   }
+
+  List topRatedMovies = [];
+
+  updateTopRatedMovies({required List topRatedMovies}) {
+    this.topRatedMovies = topRatedMovies;
+    update();
+  }
+
+  List topRatedShows = [];
+
+  updateTopRatedShows({required List topRatedShows}) {
+    this.topRatedShows = topRatedShows;
+    update();
+  }
 }

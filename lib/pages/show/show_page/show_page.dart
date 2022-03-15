@@ -31,7 +31,6 @@ class _ShowPageState extends State<ShowPage> {
       setState(() {
         show = response;
       });
-      print(show);
     });
   }
 

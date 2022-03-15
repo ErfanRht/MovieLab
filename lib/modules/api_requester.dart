@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:movielab/constants/types.dart';
 import 'package:movielab/models/models.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
@@ -44,15 +45,42 @@ Future<bool> getPopularTVShows() async {
   }
 }
 
-Future<FullShow?> getShow({required String id}) async {
-  final response = await http
-      .get(Uri.parse('https://imdb-api.com/en/API/Title/$apiKey/$id'));
-  if (response.statusCode == 200) {
-    var showJson = jsonDecode(response.body);
-    FullShow show = FullShow.fromJson(showJson);
-    return show;
+Future<bool> getIMDBlists({required ImdbList listName}) async {
+  if (listName == ImdbList.TOP_250_MOVIES) {
+    final response = await http
+        .get(Uri.parse('https://imdb-api.com/en/API/Top250Movies/$apiKey'));
+
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body)["items"];
+      List<Show> topRatedMovies = [];
+      for (int i = 0; i < json.length; i++) {
+        topRatedMovies.add(Show.fromJson(json[i]));
+      }
+      Get.find<HomeDataController>()
+          .updateTopRatedMovies(topRatedMovies: topRatedMovies);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  if (listName == ImdbList.TOP_250_TVS) {
+    final response = await http
+        .get(Uri.parse('https://imdb-api.com/en/API/Top250TVs/$apiKey'));
+
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body)["items"];
+      List<Show> topRatedShows = [];
+      for (int i = 0; i < json.length; i++) {
+        topRatedShows.add(Show.fromJson(json[i]));
+      }
+      Get.find<HomeDataController>()
+          .updateTopRatedShows(topRatedShows: topRatedShows);
+      return true;
+    } else {
+      return false;
+    }
   } else {
-    return null;
+    return false;
   }
 }
 
@@ -71,5 +99,17 @@ Future<bool> search({required expression}) async {
     return true;
   } else {
     return false;
+  }
+}
+
+Future<FullShow?> getShow({required String id}) async {
+  final response = await http
+      .get(Uri.parse('https://imdb-api.com/en/API/Title/$apiKey/$id'));
+  if (response.statusCode == 200) {
+    var showJson = jsonDecode(response.body);
+    FullShow show = FullShow.fromJson(showJson);
+    return show;
+  } else {
+    return null;
   }
 }

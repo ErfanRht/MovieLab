@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movielab/constants/routes.dart';
+import 'package:movielab/constants/types.dart';
+import 'package:movielab/modules/api_requester.dart';
+import 'package:movielab/pages/main/home/sections/imdb_lists/pages/top_TVs.dart';
+import 'package:movielab/pages/main/home/sections/imdb_lists/pages/top_movies.dart';
+import 'package:page_transition/page_transition.dart';
 import 'box.dart';
 
 class HomeIMDbLists extends StatelessWidget {
@@ -20,7 +25,13 @@ class HomeIMDbLists extends StatelessWidget {
               child: HomeIMDbBox(title: "Top 250 Movies"),
             ),
             onTap: () {
-              //Navigator.pushNamed(context, showPageRoute);
+              getIMDBlists(listName: ImdbList.TOP_250_MOVIES);
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.fade,
+                      duration: const Duration(milliseconds: 500),
+                      child: const Top250MoviesPage()));
             },
             borderRadius: BorderRadius.circular(27.5),
           ),
@@ -31,7 +42,13 @@ class HomeIMDbLists extends StatelessWidget {
               child: HomeIMDbBox(title: "Top 250 TVs"),
             ),
             onTap: () {
-              //Navigator.pushNamed(context, showPageRoute);
+              getIMDBlists(listName: ImdbList.TOP_250_TVS);
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.fade,
+                      duration: const Duration(milliseconds: 500),
+                      child: const Top250TVsPage()));
             },
             borderRadius: BorderRadius.circular(27.5),
           ),

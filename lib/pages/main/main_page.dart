@@ -1,15 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
-import 'package:movielab/constants/types.dart';
-import 'package:movielab/modules/system_ui_overlay_style.dart';
+import 'package:movielab/pages/main/bookmarks/bookmarks_page.dart';
 import 'package:movielab/pages/main/main_controller.dart';
 import 'package:movielab/pages/main/profile/profile_page.dart';
-import 'package:movielab/pages/main/saved/saved_page.dart';
 import 'home/home_page.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'search/search_page.dart';
 
@@ -18,7 +14,6 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PersistentTabController _controller = Get.find<MainController>().controller;
     return GetBuilder<MainController>(builder: (_) {
       return Scaffold(
         body: pages.elementAt(_.selectedIndex),
@@ -50,7 +45,7 @@ class MainPage extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                     color: CupertinoColors.activeBlue),
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 duration: const Duration(milliseconds: 400),
                 tabs: const [
                   GButton(
@@ -63,7 +58,7 @@ class MainPage extends StatelessWidget {
                   ),
                   GButton(
                     icon: Icons.bookmark_outline_rounded,
-                    text: 'Saved',
+                    text: 'Bookmarks',
                   ),
                   GButton(
                     icon: Icons.person_outline_rounded,
@@ -86,6 +81,6 @@ class MainPage extends StatelessWidget {
 const List<Widget> pages = <Widget>[
   HomePage(),
   SearchPage(),
-  SavedPage(),
+  BookmarksPage(),
   ProfilePage()
 ];

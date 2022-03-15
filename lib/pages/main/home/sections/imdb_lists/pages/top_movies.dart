@@ -1,0 +1,74 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:movielab/constants/colors.dart';
+import 'package:movielab/pages/main/home/home_data_controller.dart';
+import 'package:movielab/pages/show/show_box/imdb_list_show_box.dart';
+
+class Top250MoviesPage extends StatelessWidget {
+  const Top250MoviesPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<HomeDataController>(
+      builder: (_) {
+        return Scaffold(
+            backgroundColor: kBackgroundColor,
+            appBar: AppBar(
+              centerTitle: true,
+              automaticallyImplyLeading: false,
+              leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    FontAwesomeIcons.arrowLeft,
+                    color: kBackgroundColor,
+                    size: 22.5,
+                  )),
+              backgroundColor: kSecondaryColor,
+              title: Text("IMDB Top 250 Movies",
+                  style: GoogleFonts.poppins(
+                      color: kBackgroundColor,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold)),
+            ),
+            body: SafeArea(
+              child: ListView(
+                children: [
+                  // Padding(
+                  //     padding: const EdgeInsets.only(
+                  //         left: 20, right: 20, top: 10, bottom: 5),
+                  //     child: Row(
+                  //       children: [
+                  //         T
+                  //       ],
+                  //     )),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    child: _.topRatedMovies.isNotEmpty
+                        ? ListView.builder(
+                            itemCount: _.topRatedMovies.length,
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return IMDBListShowBox(
+                                  show: _.topRatedMovies[index]);
+                            },
+                          )
+                        : const Center(
+                            child: SpinKitThreeBounce(
+                              color: Colors.white,
+                              size: 35,
+                            ),
+                          ),
+                  )
+                ],
+              ),
+            ));
+      },
+    );
+  }
+}
