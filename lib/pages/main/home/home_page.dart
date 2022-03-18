@@ -19,11 +19,11 @@ class HomePage extends StatelessWidget {
       backgroundColor: kBackgroundColor,
       body: SafeArea(
         child: ListView(
-          //mainAxisSize: MainAxisSize.min,
           physics: const BouncingScrollPhysics(),
           children: [
             const HomeNavbar(),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 20, top: 30, bottom: 5),
@@ -35,6 +35,16 @@ class HomePage extends StatelessWidget {
                         fontWeight: FontWeight.w500),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 20, top: 30, bottom: 5),
+                  child: Text(
+                    'Show All',
+                    style: GoogleFonts.ubuntu(
+                        color: Colors.white.withOpacity(0.75),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
               ],
             ),
             // ignore: prefer_const_constructors
@@ -43,6 +53,7 @@ class HomePage extends StatelessWidget {
               child: const HomePopularMovies(),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 20, top: 15, bottom: 5),
@@ -51,6 +62,16 @@ class HomePage extends StatelessWidget {
                     style: GoogleFonts.ubuntu(
                         color: Colors.white,
                         fontSize: 20,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 20, top: 15, bottom: 5),
+                  child: Text(
+                    'Show All',
+                    style: GoogleFonts.ubuntu(
+                        color: Colors.white.withOpacity(0.75),
+                        fontSize: 15,
                         fontWeight: FontWeight.w500),
                   ),
                 ),
@@ -75,10 +96,9 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            // ignore: prefer_const_constructors
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: const HomeIMDbLists(),
+            const Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: HomeIMDbLists(),
             ),
             Row(
               children: [
@@ -94,10 +114,9 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            // ignore: prefer_const_constructors
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: const HomeBoxOffice(),
+            const Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: HomeBoxOffice(),
             )
           ],
         ),
