@@ -6,8 +6,8 @@ import 'package:movielab/modules/system_ui_overlay_style.dart';
 import 'sections/box_office/box_office.dart';
 import 'sections/imdb_lists/lists.dart';
 import 'sections/navbar/navbar.dart';
-import 'sections/popular/popular_movies.dart';
-import 'sections/popular/popular_tv.dart';
+import 'sections/populars/popular_movies.dart';
+import 'sections/populars/popular_tv.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
