@@ -38,14 +38,6 @@ class Top250MoviesPage extends StatelessWidget {
             body: SafeArea(
               child: ListView(
                 children: [
-                  // Padding(
-                  //     padding: const EdgeInsets.only(
-                  //         left: 20, right: 20, top: 10, bottom: 5),
-                  //     child: Row(
-                  //       children: [
-                  //         T
-                  //       ],
-                  //     )),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,

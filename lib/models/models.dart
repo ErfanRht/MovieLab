@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Show {
   final String id;
   final String rank;
@@ -29,6 +31,25 @@ class Show {
       imDbRating: json['imDbRating'],
     );
   }
+
+  static Map<String, dynamic> toMap(Show show) => {
+        'id': show.id,
+        'rank': show.rank,
+        'title': show.title,
+        'crew': show.crew,
+        'image': show.image,
+        'year': show.year,
+        'imDbRating': show.imDbRating,
+      };
+
+  static String encode(List<Show> shows) => json.encode(
+        shows.map<Map<String, dynamic>>((music) => Show.toMap(music)).toList(),
+      );
+
+  static List<Show> decode(String shows) =>
+      (json.decode(shows) as List<dynamic>)
+          .map<Show>((item) => Show.fromJson(item))
+          .toList();
 }
 
 class FullShow {

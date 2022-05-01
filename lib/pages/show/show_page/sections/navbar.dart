@@ -1,7 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:movielab/models/models.dart';
+import 'package:movielab/modules/preferences_shareholder.dart';
 
-class ShowPageNavBar extends StatelessWidget {
-  const ShowPageNavBar({Key? key}) : super(key: key);
+class ShowPageNavBar extends StatefulWidget {
+  FullShow show;
+  bool isBookmarked;
+  ShowPageNavBar({Key? key, required this.show, required this.isBookmarked})
+      : super(key: key);
+
+  @override
+  State<ShowPageNavBar> createState() => _ShowPageNavBarState();
+}
+
+class _ShowPageNavBarState extends State<ShowPageNavBar> {
+  bool isBookmarked = false;
+  @override
+  void initState() {
+    super.initState();
+    isBookmarked = widget.isBookmarked;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +27,6 @@ class ShowPageNavBar extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2.5),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          // ignore: prefer_const_literals_to_create_immutables
           children: [
             IconButton(
               onPressed: () {
@@ -23,9 +39,25 @@ class ShowPageNavBar extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.bookmark_add_outlined,
+              onPressed: () {
+                isBookmarked
+                    ? {
+                        deleteBookmark(fullShow: widget.show),
+                        setState(() {
+                          isBookmarked = false;
+                        })
+                      }
+                    : {
+                        addBookmark(fullShow: widget.show),
+                        setState(() {
+                          isBookmarked = true;
+                        })
+                      };
+              },
+              icon: Icon(
+                isBookmarked
+                    ? Icons.bookmark_added
+                    : Icons.bookmark_add_outlined,
                 color: Colors.white,
                 size: 32.5,
               ),

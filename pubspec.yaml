@@ -25,6 +25,9 @@ dependencies:
   google_nav_bar: ^5.0.5
   speech_to_text: ^5.4.3
   page_transition: ^2.0.5
+  floating_action_bubble: ^1.1.4
+  fab_circular_menu: ^1.0.2
+  flutter_slidable: ^1.2.0
 
 dev_dependencies:
   flutter_test:

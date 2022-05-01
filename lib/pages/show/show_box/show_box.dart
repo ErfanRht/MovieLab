@@ -19,8 +19,8 @@ class ShowBox extends StatelessWidget {
     String crew = show.crew;
     String id = show.id;
     if (year != "") {
-      if (title.length > 11) {
-        title = show.title.substring(0, 11) + '...';
+      if (title.length > 10) {
+        title = show.title.substring(0, 10) + '...';
       }
     } else {
       if (title.length > 17) {

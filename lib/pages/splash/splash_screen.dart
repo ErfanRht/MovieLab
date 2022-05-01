@@ -7,7 +7,9 @@ import 'package:movielab/constants/routes.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/modules/api_requester.dart';
 import 'package:movielab/modules/cache/cache_data.dart';
+import 'package:movielab/modules/preferences_shareholder.dart';
 import 'package:movielab/modules/system_ui_overlay_style.dart';
+import 'package:movielab/pages/main/bookmarks/bookmarks_controller.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/main/main_controller.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
@@ -21,6 +23,7 @@ class SplashScreen extends StatelessWidget {
     Get.put(HomeDataController());
     Get.put(SearchBarController());
     Get.put(CacheData());
+    Get.put(BookmarksPageController());
     getData(context);
     return Scaffold(
         backgroundColor: kBackgroundColor,
@@ -61,9 +64,8 @@ class SplashScreen extends StatelessWidget {
               const SizedBox(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                // ignore: prefer_const_literals_to_create_immutables
-                children: [
-                  const SpinKitThreeBounce(
+                children: const [
+                  SpinKitThreeBounce(
                     color: Colors.white,
                     size: 40,
                   )
@@ -81,6 +83,9 @@ getData(BuildContext context) async {
         if (value = false) {error = true}
       });
   await getPopularTVShows().then((value) => {
+        if (value = false) {error = true}
+      });
+  await getBookmarks().then((value) => {
         if (value = false) {error = true}
       });
   if (!error) {

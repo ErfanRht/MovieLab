@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
+import 'package:movielab/modules/preferences_shareholder.dart';
 import 'package:movielab/pages/show/show_page/get_show_info.dart';
 import 'package:movielab/pages/show/show_page/sections/cast.dart';
 import 'package:movielab/pages/show/show_page/sections/main_info.dart';
@@ -24,12 +25,17 @@ class ShowPage extends StatefulWidget {
 
 class _ShowPageState extends State<ShowPage> {
   dynamic show;
+  bool isBookmarked = false;
+
   @override
   void initState() {
     super.initState();
     getShowInfo(id: widget.id).then((response) {
       setState(() {
         show = response;
+      });
+      isThereInBookmarks(showId: show.id).then((value) {
+        isBookmarked = value;
       });
     });
   }
@@ -107,7 +113,10 @@ class _ShowPageState extends State<ShowPage> {
                             ],
                           ),
                         ),
-                        const ShowPageNavBar()
+                        ShowPageNavBar(
+                          show: show,
+                          isBookmarked: isBookmarked,
+                        )
                       ],
                     ),
                   ),

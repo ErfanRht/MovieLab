@@ -1,10 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/models.dart';
+import 'package:movielab/modules/preferences_shareholder.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
 
 class IMDBListShowBox extends StatelessWidget {
@@ -22,120 +25,156 @@ class IMDBListShowBox extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
       child: InkWell(
-        onTap: () async {
-          openShowPage(context, id);
-        },
-        borderRadius: BorderRadius.circular(15),
-        child: Container(
-          margin: const EdgeInsets.all(10),
-          width: MediaQuery.of(context).size.width,
-          height: 150,
-          child: Row(
-            children: [
-              SizedBox(
-                  width: 100,
-                  height: 150,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(7.5),
-                    child: CachedNetworkImage(
-                        fit: BoxFit.cover,
-                        imageUrl: image,
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
-                        placeholder: (context, url) => const Center(
-                              child: SpinKitThreeBounce(
-                                color: Colors.white,
-                                size: 20.0,
-                              ),
-                            )),
-                  )),
-              Container(
-                alignment: Alignment.bottomLeft,
-                width: MediaQuery.of(context).size.width - 155,
-                padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
-                child: Column(
-                  children: [
-                    Row(
+          onTap: () async {
+            openShowPage(context, id);
+          },
+          borderRadius: BorderRadius.circular(15),
+          child: Slidable(
+            key: const ValueKey(0),
+            startActionPane: ActionPane(
+              motion: const ScrollMotion(),
+              dismissible: DismissiblePane(
+                onDismissed: () => delete(context, show),
+              ),
+              children: [
+                SlidableAction(
+                  onPressed: (context) => delete(context, show),
+                  autoClose: true,
+                  backgroundColor: Colors.transparent,
+                  foregroundColor: Colors.white,
+                  icon: Icons.delete,
+                  label: 'Delete',
+                ),
+              ],
+            ),
+            endActionPane: ActionPane(
+              motion: const ScrollMotion(),
+              dismissible: DismissiblePane(onDismissed: () {}),
+              children: [
+                SlidableAction(
+                  onPressed: (context) => delete(context, show),
+                  autoClose: true,
+                  backgroundColor: Colors.transparent,
+                  foregroundColor: Colors.white,
+                  icon: Icons.delete,
+                  label: 'Delete',
+                ),
+              ],
+            ),
+            child: Container(
+              margin: const EdgeInsets.all(10),
+              width: MediaQuery.of(context).size.width,
+              height: 150,
+              child: Row(
+                children: [
+                  SizedBox(
+                      width: 100,
+                      height: 150,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(7.5),
+                        child: CachedNetworkImage(
+                            fit: BoxFit.cover,
+                            imageUrl: image,
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                            placeholder: (context, url) => const Center(
+                                  child: SpinKitThreeBounce(
+                                    color: Colors.white,
+                                    size: 20.0,
+                                  ),
+                                )),
+                      )),
+                  Container(
+                    alignment: Alignment.bottomLeft,
+                    width: MediaQuery.of(context).size.width - 155,
+                    padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
+                    child: Column(
                       children: [
-                        Flexible(
-                          child: Text(
-                            title,
-                            softWrap: true,
-                            style: GoogleFonts.ubuntu(
-                                color: Colors.white,
-                                fontSize: 16.5,
-                                fontWeight: FontWeight.w500),
+                        Row(
+                          children: [
+                            Flexible(
+                              child: Text(
+                                title,
+                                softWrap: true,
+                                style: GoogleFonts.ubuntu(
+                                    color: Colors.white,
+                                    fontSize: 16.5,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Row(
+                            children: [
+                              Text(
+                                year,
+                                softWrap: true,
+                                style: GoogleFonts.ubuntu(
+                                    color: Colors.white.withOpacity(0.8),
+                                    fontSize: 13.5,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Row(
+                            children: [
+                              Flexible(
+                                  child: Text(
+                                crew,
+                                softWrap: true,
+                                style: GoogleFonts.ubuntu(
+                                    color: Colors.white.withOpacity(0.8),
+                                    fontSize: 13.5,
+                                    fontWeight: FontWeight.w500),
+                              )),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Row(
+                            children: [
+                              Text(
+                                imDbRating,
+                                softWrap: true,
+                                style: GoogleFonts.ubuntu(
+                                    color: kSecondaryColor,
+                                    fontSize: 13.5,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              RatingBarIndicator(
+                                rating: double.parse(imDbRating) / 2,
+                                itemBuilder: (context, index) => const Icon(
+                                  Icons.star,
+                                  color: kSecondaryColor,
+                                ),
+                                unratedColor: kGreyColor,
+                                itemCount: 5,
+                                itemSize: 16.5,
+                                direction: Axis.horizontal,
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Row(
-                        children: [
-                          Text(
-                            year,
-                            softWrap: true,
-                            style: GoogleFonts.ubuntu(
-                                color: Colors.white.withOpacity(0.8),
-                                fontSize: 13.5,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Row(
-                        children: [
-                          Flexible(
-                              child: Text(
-                            crew,
-                            softWrap: true,
-                            style: GoogleFonts.ubuntu(
-                                color: Colors.white.withOpacity(0.8),
-                                fontSize: 13.5,
-                                fontWeight: FontWeight.w500),
-                          )),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Row(
-                        children: [
-                          Text(
-                            imDbRating,
-                            softWrap: true,
-                            style: GoogleFonts.ubuntu(
-                                color: kSecondaryColor,
-                                fontSize: 13.5,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          RatingBarIndicator(
-                            rating: double.parse(imDbRating) / 2,
-                            itemBuilder: (context, index) => const Icon(
-                              Icons.star,
-                              color: kSecondaryColor,
-                            ),
-                            unratedColor: kGreyColor,
-                            itemCount: 5,
-                            itemSize: 16.5,
-                            direction: Axis.horizontal,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-      ),
+            ),
+          )),
     );
   }
+}
+
+void delete(BuildContext context, Show show) {
+  deleteBookmark(show: show);
 }
