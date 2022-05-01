@@ -16,7 +16,7 @@ Future<bool> getPopularMovies() async {
   if (response.statusCode == 200) {
     var json = jsonDecode(response.body)["items"];
     List<Show> popularMovies = [];
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < json.length; i++) {
       popularMovies.add(Show.fromJson(json[i]));
     }
     Get.find<HomeDataController>()
@@ -34,7 +34,7 @@ Future<bool> getPopularTVShows() async {
   if (response.statusCode == 200) {
     var json = jsonDecode(response.body)["items"];
     List<Show> popularShows = [];
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < json.length; i++) {
       popularShows.add(Show.fromJson(json[i]));
     }
     Get.find<HomeDataController>()

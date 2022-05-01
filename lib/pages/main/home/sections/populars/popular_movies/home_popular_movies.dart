@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../home_data_controller.dart';
+import '../../../home_data_controller.dart';
 import 'package:movielab/pages/show/show_box/show_box.dart';
 
-class HomePopularTVShows extends StatelessWidget {
-  const HomePopularTVShows({Key? key}) : super(key: key);
+class HomePopularMovies extends StatelessWidget {
+  const HomePopularMovies({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +17,11 @@ class HomePopularTVShows extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: Get.find<HomeDataController>().popularShows.length,
+                itemCount: 10,
                 itemBuilder: (context, index) {
                   return ShowBox(
-                      show: Get.find<HomeDataController>().popularShows[index]);
+                      show:
+                          Get.find<HomeDataController>().popularMovies[index]);
                 }),
           ),
         ],
