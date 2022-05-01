@@ -28,7 +28,8 @@ class Show {
       image: json['image'].toString().replaceAll(
           "._V1_UX128_CR0,3,128,176_AL_.jpg", "._V1_Ratio0.6716_AL_.jpg"),
       year: json['year'] ?? "",
-      imDbRating: json['imDbRating'],
+      imDbRating:
+          json['imDbRating'] == "" ? "0.0" : json['imDbRating'] ?? "0.0",
     );
   }
 
@@ -101,23 +102,23 @@ class FullShow {
       genres: json['genres'],
       releaseDate: json['releaseDate'] ?? "",
       runTime: json['runtimeStr'] ?? "",
-      plot: json['plot'],
-      awards: json['awards'],
-      directors: json['directors'],
-      actorList: json['actorList'],
-      countries: json['countries'],
-      languages: json['languages'],
-      companies: json['companies'],
+      plot: json['plot'] ?? "",
+      awards: json['awards'] ?? "",
+      directors: json['directors'] ?? "",
+      actorList: json['actorList'] ?? [],
+      countries: json['countries'] ?? "",
+      languages: json['languages'] ?? "",
+      companies: json['companies'] ?? "",
       imDbRating: json['imDbRating'] ?? "0.0",
       contentRating: json['contentRating'] ?? "",
-      similars: getSimilars(json: json['similars']),
+      similars: getSimilars(json: json['similars']) ?? [],
     );
   }
 }
 
 getSimilars({required json}) {
   List<Show> similars = [];
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < json.length; i++) {
     json[i]["rank"] = i.toString();
     similars.add(Show.fromJson(json[i]));
   }
@@ -143,7 +144,8 @@ class SearchResult {
       title: json['title'],
       image: json['image'].replaceAll(
           "._V1_UX128_CR0,3,128,176_AL_.jpg", "._V1_Ratio0.6716_AL_.jpg"),
-      description: json['description'].replaceAll("(", "").replaceAll(")", ""),
+      description:
+          json['description'].replaceAll("(", "").replaceAll(")", "") ?? "",
     );
   }
 }

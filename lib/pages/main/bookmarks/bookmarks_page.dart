@@ -1,17 +1,13 @@
-import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
-import 'package:movielab/models/models.dart';
 import 'package:movielab/modules/preferences_shareholder.dart';
 import 'package:movielab/pages/main/bookmarks/bookmarks_controller.dart';
-import 'package:movielab/pages/show/show_box/imdb_list_show_box.dart';
+import 'package:movielab/pages/show/show_box/bookmarks_show_box.dart';
 import 'package:ms_undraw/ms_undraw.dart';
-
-import 'sections/navbar.dart';
 
 class BookmarksPage extends StatelessWidget {
   const BookmarksPage({Key? key}) : super(key: key);
@@ -54,7 +50,7 @@ class BookmarksPage extends StatelessWidget {
                     itemCount: _.bookmarks.length,
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
-                      return IMDBListShowBox(
+                      return BookmarksShowBox(
                           show: _.bookmarks[_.bookmarks.length - index - 1]);
                     },
                   )
