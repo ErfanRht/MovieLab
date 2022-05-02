@@ -11,12 +11,14 @@ class ShowPageSimilars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SectionTitle(title: "Similars"),
-        similars(similars: show.similars)
-      ],
-    );
+    return show.similars.length > 0
+        ? Column(
+            children: [
+              SectionTitle(title: "Similars"),
+              similars(similars: show.similars)
+            ],
+          )
+        : const Text("");
   }
 }
 

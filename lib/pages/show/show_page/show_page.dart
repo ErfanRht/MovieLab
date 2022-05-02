@@ -5,7 +5,9 @@ import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/modules/preferences_shareholder.dart';
 import 'package:movielab/pages/show/show_page/get_show_info.dart';
+import 'package:movielab/pages/show/show_page/sections/box_office.dart';
 import 'package:movielab/pages/show/show_page/sections/cast.dart';
+import 'package:movielab/pages/show/show_page/sections/keywords.dart';
 import 'package:movielab/pages/show/show_page/sections/main_info.dart';
 import 'package:movielab/pages/show/show_page/sections/more_info.dart';
 import 'package:movielab/pages/show/show_page/sections/navbar.dart';
@@ -106,10 +108,15 @@ class _ShowPageState extends State<ShowPage> {
                             children: [
                               ShowPageTitle(title: show.title),
                               ShowPageMainInfo(
-                                  year: show.year,
-                                  genres: show.genres,
-                                  runTime: show.runTime),
-                              ShowPageRating(imDbRating: show.imDbRating)
+                                year: show.year,
+                                genres: show.genres,
+                                runTime: show.runTime,
+                                contentRating: show.contentRating,
+                                countries: show.countries,
+                              ),
+                              ShowPageRating(
+                                  imDbRating: show.imDbRating,
+                                  imDbVotes: show.imDbVotes),
                             ],
                           ),
                         ),
@@ -125,12 +132,11 @@ class _ShowPageState extends State<ShowPage> {
                     actorList: show.actorList,
                   ),
                   ShowPageMoreInfo(show: show),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  ShowPageBoxOffice(show: show),
                   ShowPageSimilars(
                     show: show,
-                  )
+                  ),
+                  ShowPageKeywords(show: show)
                 ],
               ),
             ),

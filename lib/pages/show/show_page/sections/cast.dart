@@ -18,7 +18,7 @@ class ShowPageCast extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 2.5, right: 2.5, top: 5),
           child: SizedBox(
-              height: 135,
+              height: 150,
               child: Row(
                 children: [
                   Expanded(
@@ -43,7 +43,6 @@ class ShowPageCast extends StatelessWidget {
 actorBox({required final actor}) {
   return SizedBox(
     width: 90,
-    height: 150,
     child: Column(
       children: [
         SizedBox(

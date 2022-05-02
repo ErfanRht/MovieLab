@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'section_title.dart';
 
 class ShowPageMoreInfo extends StatelessWidget {
@@ -9,38 +8,50 @@ class ShowPageMoreInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SectionTitle(title: "More Information"),
-        show.releaseDate != ""
-            ? info(infoName: "Release Date", infoValue: show.releaseDate)
-            : nothing(),
-        show.contentRating != ""
-            ? info(infoName: "Content Rating", infoValue: show.contentRating)
-            : nothing(),
-        show.directors != ""
-            ? info(infoName: "director(s)", infoValue: show.directors)
-            : nothing(),
-        show.directors != ""
-            ? info(infoName: "Language(s)", infoValue: show.languages)
-            : nothing(),
-        show.countries != ""
-            ? info(infoName: "Countrie(s)", infoValue: show.countries)
-            : nothing(),
-        show.companies != ""
-            ? info(infoName: "companie(s)", infoValue: show.companies)
-            : nothing(),
-        show.awards != ""
-            ? info(infoName: "award(s)", infoValue: show.awards)
-            : nothing(),
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Column(
+        children: [
+          SectionTitle(title: "More Information"),
+          show.releaseDate != ""
+              ? info(infoName: "Release Date", infoValue: show.releaseDate)
+              : nothing(),
+          show.yearEnd != ""
+              ? info(infoName: "Year End", infoValue: show.yearEnd)
+              : nothing(),
+          show.contentRating != ""
+              ? info(infoName: "Content Rating", infoValue: show.contentRating)
+              : nothing(),
+          show.directors != ""
+              ? info(infoName: "director(s)", infoValue: show.directors)
+              : nothing(),
+          show.writers != ""
+              ? info(infoName: "writer(s)", infoValue: show.writers)
+              : nothing(),
+          show.creators != ""
+              ? info(infoName: "Creator(s)", infoValue: show.creators)
+              : nothing(),
+          show.languages != ""
+              ? info(infoName: "Language(s)", infoValue: show.languages)
+              : nothing(),
+          show.countries != ""
+              ? info(infoName: "Countrie(s)", infoValue: show.countries)
+              : nothing(),
+          show.companies != ""
+              ? info(infoName: "companie(s)", infoValue: show.companies)
+              : nothing(),
+          show.awards != ""
+              ? info(infoName: "award(s)", infoValue: show.awards)
+              : nothing(),
+        ],
+      ),
     );
   }
 }
 
 info({required final String infoName, required final String infoValue}) {
   return Padding(
-    padding: const EdgeInsets.only(left: 10, right: 10, bottom: 7.5),
+    padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
     child: Row(
       children: [
         Text(infoName + ":",

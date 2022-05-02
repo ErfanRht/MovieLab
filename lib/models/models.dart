@@ -60,17 +60,28 @@ class FullShow {
   final String year;
   final String genres;
   final String releaseDate;
+  final String yearEnd;
   final String runTime;
   final String plot;
   final String awards;
   final String directors;
+  final String writers;
+  final String creators;
+  final List<dynamic> seasons;
   final List<dynamic> actorList;
   final String countries;
   final String companies;
   final String languages;
   final String imDbRating;
+  final String imDbVotes;
   final String contentRating;
+  final String budget;
+  final String openingWeekendUSA;
+  final String grossUSA;
+  final String cumulativeWorldwideGross;
   final List<Show> similars;
+  final String tagline;
+  final String keywords;
 
   const FullShow({
     required this.id,
@@ -79,17 +90,28 @@ class FullShow {
     required this.year,
     required this.genres,
     required this.releaseDate,
+    required this.yearEnd,
     required this.runTime,
     required this.plot,
     required this.awards,
     required this.directors,
+    required this.writers,
+    required this.creators,
+    required this.seasons,
     required this.actorList,
     required this.countries,
     required this.languages,
     required this.companies,
     required this.imDbRating,
+    required this.imDbVotes,
     required this.contentRating,
+    required this.budget,
+    required this.openingWeekendUSA,
+    required this.grossUSA,
+    required this.cumulativeWorldwideGross,
     required this.similars,
+    required this.tagline,
+    required this.keywords,
   });
 
   factory FullShow.fromJson(Map<String, dynamic> json) {
@@ -101,17 +123,29 @@ class FullShow {
       year: json['year'],
       genres: json['genres'],
       releaseDate: json['releaseDate'] ?? "",
+      yearEnd: json["tvSeriesInfo"]?['yearEnd'] ?? "",
       runTime: json['runtimeStr'] ?? "",
       plot: json['plot'] ?? "",
       awards: json['awards'] ?? "",
       directors: json['directors'] ?? "",
+      writers: json['writers'] ?? "",
+      creators: json["tvSeriesInfo"]?['creators'] ?? "",
+      seasons: json["tvSeriesInfo"]?['seasons'] ?? [],
       actorList: json['actorList'] ?? [],
       countries: json['countries'] ?? "",
       languages: json['languages'] ?? "",
       companies: json['companies'] ?? "",
       imDbRating: json['imDbRating'] ?? "0.0",
+      imDbVotes: json['imDbRatingVotes'] ?? "0",
       contentRating: json['contentRating'] ?? "",
+      budget: json["boxOffice"]?['budget'] ?? "",
+      openingWeekendUSA: json["boxOffice"]?['openingWeekendUSA'] ?? "",
+      grossUSA: json["boxOffice"]?['gtossUSA'] ?? "",
+      cumulativeWorldwideGross:
+          json["boxOffice"]?['cumulativeWorldwideGross'] ?? "",
       similars: getSimilars(json: json['similars']) ?? [],
+      tagline: json['tagline'] ?? "",
+      keywords: json['keywords'].toString().replaceAll(",", ", "),
     );
   }
 }
