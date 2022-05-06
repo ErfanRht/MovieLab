@@ -20,7 +20,7 @@ class HomePopularMovies extends StatelessWidget {
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   return ShowBox(
-                      show:
+                      showPreview:
                           Get.find<HomeDataController>().popularMovies[index]);
                 }),
           ),

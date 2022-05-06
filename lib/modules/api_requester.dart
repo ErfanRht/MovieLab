@@ -16,9 +16,9 @@ Future<bool> getPopularMovies() async {
 
   if (response.statusCode == 200) {
     var json = jsonDecode(response.body)["items"];
-    List<Show> popularMovies = [];
+    List<ShowPreview> popularMovies = [];
     for (int i = 0; i < json.length; i++) {
-      popularMovies.add(Show.fromJson(json[i]));
+      popularMovies.add(ShowPreview.fromJson(json[i]));
     }
     Get.find<HomeDataController>()
         .updatePopularMovies(popularMovies: popularMovies);
@@ -34,9 +34,9 @@ Future<bool> getPopularTVShows() async {
 
   if (response.statusCode == 200) {
     var json = jsonDecode(response.body)["items"];
-    List<Show> popularShows = [];
+    List<ShowPreview> popularShows = [];
     for (int i = 0; i < json.length; i++) {
-      popularShows.add(Show.fromJson(json[i]));
+      popularShows.add(ShowPreview.fromJson(json[i]));
     }
     Get.find<HomeDataController>()
         .updatePopularShows(popularShows: popularShows);
@@ -53,9 +53,9 @@ Future<bool> getIMDBlists({required ImdbList listName}) async {
 
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body)["items"];
-      List<Show> topRatedMovies = [];
+      List<ShowPreview> topRatedMovies = [];
       for (int i = 0; i < json.length; i++) {
-        topRatedMovies.add(Show.fromJson(json[i]));
+        topRatedMovies.add(ShowPreview.fromJson(json[i]));
       }
       Get.find<HomeDataController>()
           .updateTopRatedMovies(topRatedMovies: topRatedMovies);
@@ -70,9 +70,9 @@ Future<bool> getIMDBlists({required ImdbList listName}) async {
 
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body)["items"];
-      List<Show> topRatedShows = [];
+      List<ShowPreview> topRatedShows = [];
       for (int i = 0; i < json.length; i++) {
-        topRatedShows.add(Show.fromJson(json[i]));
+        topRatedShows.add(ShowPreview.fromJson(json[i]));
       }
       Get.find<HomeDataController>()
           .updateTopRatedShows(topRatedShows: topRatedShows);

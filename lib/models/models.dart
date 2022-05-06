@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-class Show {
+// Movie or TV show preview model class
+class ShowPreview {
   final String id;
   final String rank;
   final String title;
@@ -9,7 +10,7 @@ class Show {
   final String year;
   final String imDbRating;
 
-  const Show({
+  const ShowPreview({
     required this.id,
     required this.rank,
     required this.title,
@@ -19,8 +20,8 @@ class Show {
     required this.imDbRating,
   });
 
-  factory Show.fromJson(Map<String, dynamic> json) {
-    return Show(
+  factory ShowPreview.fromJson(Map<String, dynamic> json) {
+    return ShowPreview(
       id: json['id'],
       rank: json['rank'],
       title: json['title'],
@@ -33,7 +34,7 @@ class Show {
     );
   }
 
-  static Map<String, dynamic> toMap(Show show) => {
+  static Map<String, dynamic> toMap(ShowPreview show) => {
         'id': show.id,
         'rank': show.rank,
         'title': show.title,
@@ -43,13 +44,15 @@ class Show {
         'imDbRating': show.imDbRating,
       };
 
-  static String encode(List<Show> shows) => json.encode(
-        shows.map<Map<String, dynamic>>((music) => Show.toMap(music)).toList(),
+  static String encode(List<ShowPreview> shows) => json.encode(
+        shows
+            .map<Map<String, dynamic>>((music) => ShowPreview.toMap(music))
+            .toList(),
       );
 
-  static List<Show> decode(String shows) =>
+  static List<ShowPreview> decode(String shows) =>
       (json.decode(shows) as List<dynamic>)
-          .map<Show>((item) => Show.fromJson(item))
+          .map<ShowPreview>((item) => ShowPreview.fromJson(item))
           .toList();
 }
 
@@ -79,7 +82,7 @@ class FullShow {
   final String openingWeekendUSA;
   final String grossUSA;
   final String cumulativeWorldwideGross;
-  final List<Show> similars;
+  final List<ShowPreview> similars;
   final String tagline;
   final String keywords;
 
@@ -154,10 +157,10 @@ class FullShow {
 }
 
 getSimilars({required json}) {
-  List<Show> similars = [];
+  List<ShowPreview> similars = [];
   for (int i = 0; i < json.length; i++) {
     json[i]["rank"] = i.toString();
-    similars.add(Show.fromJson(json[i]));
+    similars.add(ShowPreview.fromJson(json[i]));
   }
   return similars;
 }

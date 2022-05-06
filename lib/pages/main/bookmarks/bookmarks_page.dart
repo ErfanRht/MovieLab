@@ -51,7 +51,8 @@ class BookmarksPage extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
                       return BookmarksShowBox(
-                          show: _.bookmarks[_.bookmarks.length - index - 1]);
+                          showPreview:
+                              _.bookmarks[_.bookmarks.length - index - 1]);
                     },
                   )
                 : Center(

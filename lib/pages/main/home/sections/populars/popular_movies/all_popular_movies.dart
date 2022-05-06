@@ -28,7 +28,8 @@ class AllPopularMovies extends StatelessWidget {
                         itemCount: _.popularMovies.length,
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
-                          return IMDBListShowBox(show: _.popularMovies[index]);
+                          return IMDBListShowBox(
+                              showPreview: _.popularMovies[index]);
                         },
                       ))
                 ],

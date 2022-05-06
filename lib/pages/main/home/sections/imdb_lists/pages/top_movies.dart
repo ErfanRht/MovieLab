@@ -47,7 +47,7 @@ class Top250MoviesPage extends StatelessWidget {
                             physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
                               return IMDBListShowBox(
-                                  show: _.topRatedMovies[index]);
+                                  showPreview: _.topRatedMovies[index]);
                             },
                           )
                         : const Center(

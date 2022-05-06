@@ -1,30 +1,27 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/models/models.dart';
-import 'package:movielab/modules/api_requester.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
-import 'package:movielab/pages/show/show_page/show_page.dart';
 
 class ShowBox extends StatelessWidget {
-  Show show;
-  ShowBox({required this.show});
+  ShowPreview showPreview;
+  ShowBox({required this.showPreview});
 
   @override
   Widget build(BuildContext context) {
-    String title = show.title;
-    String year = show.year;
-    String crew = show.crew;
-    String id = show.id;
+    String title = showPreview.title;
+    String year = showPreview.year;
+    String crew = showPreview.crew;
+    String id = showPreview.id;
     if (year != "") {
       if (title.length > 10) {
-        title = show.title.substring(0, 10) + '...';
+        title = showPreview.title.substring(0, 10) + '...';
       }
     } else {
       if (title.length > 17) {
-        title = show.title.substring(0, 17) + '...';
+        title = showPreview.title.substring(0, 17) + '...';
       }
     }
     if (crew.length > 25) {
@@ -48,7 +45,7 @@ class ShowBox extends StatelessWidget {
                   borderRadius: BorderRadius.circular(17.5),
                   child: CachedNetworkImage(
                       fit: BoxFit.cover,
-                      imageUrl: show.image,
+                      imageUrl: showPreview.image,
                       errorWidget: (context, url, error) =>
                           const Icon(Icons.error),
                       placeholder: (context, url) => const Center(

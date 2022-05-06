@@ -11,17 +11,17 @@ import 'package:movielab/modules/preferences_shareholder.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
 
 class BookmarksShowBox extends StatelessWidget {
-  Show show;
-  BookmarksShowBox({Key? key, required this.show}) : super(key: key);
+  ShowPreview showPreview;
+  BookmarksShowBox({Key? key, required this.showPreview}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String image = show.image;
-    String title = show.title;
-    String year = show.year;
-    String crew = show.crew;
-    String imDbRating = show.imDbRating;
-    String id = show.id;
+    String image = showPreview.image;
+    String title = showPreview.title;
+    String year = showPreview.year;
+    String crew = showPreview.crew;
+    String imDbRating = showPreview.imDbRating;
+    String id = showPreview.id;
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
       child: InkWell(
@@ -34,11 +34,11 @@ class BookmarksShowBox extends StatelessWidget {
             startActionPane: ActionPane(
               motion: const ScrollMotion(),
               dismissible: DismissiblePane(
-                onDismissed: () => delete(context, show),
+                onDismissed: () => delete(context, showPreview),
               ),
               children: [
                 SlidableAction(
-                  onPressed: (context) => delete(context, show),
+                  onPressed: (context) => delete(context, showPreview),
                   autoClose: true,
                   backgroundColor: Colors.transparent,
                   foregroundColor: Colors.white,
@@ -52,7 +52,7 @@ class BookmarksShowBox extends StatelessWidget {
               dismissible: DismissiblePane(onDismissed: () {}),
               children: [
                 SlidableAction(
-                  onPressed: (context) => delete(context, show),
+                  onPressed: (context) => delete(context, showPreview),
                   autoClose: true,
                   backgroundColor: Colors.transparent,
                   foregroundColor: Colors.white,
@@ -175,6 +175,6 @@ class BookmarksShowBox extends StatelessWidget {
   }
 }
 
-void delete(BuildContext context, Show show) {
-  deleteBookmark(show: show);
+void delete(BuildContext context, ShowPreview showPreview) {
+  deleteBookmark(show: showPreview);
 }

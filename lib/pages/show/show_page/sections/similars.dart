@@ -34,7 +34,7 @@ similars({required List similars}) {
               scrollDirection: Axis.horizontal,
               itemCount: similars.length,
               itemBuilder: (context, index) {
-                return ShowBox(show: similars[index]);
+                return ShowBox(showPreview: similars[index]);
               }),
         ),
       ],

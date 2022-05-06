@@ -6,9 +6,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<bool> getBookmarks() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   final bookmarksString = prefs.getString('bookmarks');
-  List<Show> bookmarks = [];
+  List<ShowPreview> bookmarks = [];
   if (bookmarksString != null) {
-    bookmarks = Show.decode(bookmarksString);
+    bookmarks = ShowPreview.decode(bookmarksString);
   }
   Get.find<BookmarksPageController>().updateBookmarksList(bookmarks: bookmarks);
   return true;
@@ -25,15 +25,15 @@ Future<bool> deleteBookmarks() async {
 Future<bool> addBookmark({required FullShow fullShow}) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   final bookmarksJson = prefs.getString("bookmarks");
-  List<Show> bookmarks = [];
+  List<ShowPreview> bookmarks = [];
   if (bookmarksJson != null) {
-    bookmarks = Show.decode(bookmarksJson);
+    bookmarks = ShowPreview.decode(bookmarksJson);
   }
   String showCrew = "";
   await getShowCrew(fullShow: fullShow).then((value) => showCrew = value);
 
   // Type "FullShow" is not a subtype of "Show", so we have to convert it to "Show"
-  Show show = Show(
+  ShowPreview show = ShowPreview(
     id: fullShow.id,
     rank: (bookmarks.length + 1).toString(),
     title: fullShow.title,
@@ -46,7 +46,7 @@ Future<bool> addBookmark({required FullShow fullShow}) async {
   bookmarks.add(show);
 
   // Encode the bookmarks to json, so it can be stored in SharedPreferences
-  final String encodedData = Show.encode(bookmarks);
+  final String encodedData = ShowPreview.encode(bookmarks);
   prefs.setString("bookmarks", encodedData);
   Get.find<BookmarksPageController>().updateBookmarksList(bookmarks: bookmarks);
   print("Item added to bookmarks");
@@ -54,9 +54,9 @@ Future<bool> addBookmark({required FullShow fullShow}) async {
   return true;
 }
 
-Future<bool> deleteBookmark({FullShow? fullShow, Show? show}) async {
+Future<bool> deleteBookmark({FullShow? fullShow, ShowPreview? show}) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  List<Show> bookmarks = Get.find<BookmarksPageController>().bookmarks;
+  List<ShowPreview> bookmarks = Get.find<BookmarksPageController>().bookmarks;
 
   for (int i = 0; i < bookmarks.length; i++) {
     if (fullShow != null) {
@@ -73,7 +73,7 @@ Future<bool> deleteBookmark({FullShow? fullShow, Show? show}) async {
       }
     }
   }
-  final String encodedData = Show.encode(bookmarks);
+  final String encodedData = ShowPreview.encode(bookmarks);
   prefs.setString("bookmarks", encodedData);
   Get.find<BookmarksPageController>().updateBookmarksList(bookmarks: bookmarks);
   print("Item deleted from bookmarks");
@@ -82,7 +82,7 @@ Future<bool> deleteBookmark({FullShow? fullShow, Show? show}) async {
 }
 
 Future<bool> isThereInBookmarks({required String showId}) async {
-  List<Show> bookmarks = Get.find<BookmarksPageController>().bookmarks;
+  List<ShowPreview> bookmarks = Get.find<BookmarksPageController>().bookmarks;
   bool isThere = false;
   for (int i = 0; i < bookmarks.length; i++) {
     if (bookmarks[i].id == showId) {
