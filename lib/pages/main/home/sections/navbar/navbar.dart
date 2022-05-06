@@ -33,8 +33,9 @@ class HomeNavbar extends StatelessWidget {
               color: Colors.white,
               size: 22.5,
             ),
-            onPressed: () {
-              Get.find<MainController>().controller.jumpToTab(1);
+            onPressed: () async {
+              await Future.delayed(const Duration(milliseconds: 250));
+              Get.find<MainController>().changeIndex(1);
             },
           ),
         ],

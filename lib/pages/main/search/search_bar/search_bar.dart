@@ -86,18 +86,17 @@ class SearchBar extends StatelessWidget {
               ),
             ),
             _.fieldText == ""
-                ? GestureDetector(
-                    onTap: () async {
-                      // await _.speechToText.listen(onResult: _onSpeechResult);
-                      // Get.find<SearchBarController>()
-                      //     .updateSpeechToText(listening: true);
+                ? IconButton(
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onPressed: () async {
                       showDialog(
                           context: context,
                           builder: (context) {
                             return const VoiceSearchAlertDialog();
                           });
                     },
-                    child: const Padding(
+                    icon: const Padding(
                       padding: EdgeInsets.only(right: 15, left: 5),
                       child: Icon(
                         FontAwesomeIcons.microphoneAlt,
@@ -106,13 +105,15 @@ class SearchBar extends StatelessWidget {
                       ),
                     ),
                   )
-                : GestureDetector(
-                    onTap: () {
+                : IconButton(
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onPressed: () {
                       _.updateFieldState(tapped: false, text: "");
                       _.updateResult(result: null);
                       _.controller.clear();
                     },
-                    child: const Padding(
+                    icon: const Padding(
                       padding: EdgeInsets.only(right: 15),
                       child: Icon(
                         Icons.close_rounded,

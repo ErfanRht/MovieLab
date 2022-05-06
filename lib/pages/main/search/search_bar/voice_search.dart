@@ -4,110 +4,120 @@ import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/modules/api_requester.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
-import 'package:speech_to_text/speech_recognition_result.dart';
-import 'package:speech_to_text/speech_to_text.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:avatar_glow/avatar_glow.dart';
 
-class VoiceSearchAlertDialog extends StatelessWidget {
+class VoiceSearchAlertDialog extends StatefulWidget {
   const VoiceSearchAlertDialog({Key? key}) : super(key: key);
 
   @override
+  State<VoiceSearchAlertDialog> createState() => _VoiceSearchAlertDialogState();
+}
+
+class _VoiceSearchAlertDialogState extends State<VoiceSearchAlertDialog> {
+  final stt.SpeechToText _speech = stt.SpeechToText();
+  bool _isListening = false;
+  double _confidence = 1.0;
+  TextEditingController controller = Get.find<SearchBarController>().controller;
+  String _text = "Tap to talk!";
+
+  @override
   Widget build(BuildContext context) {
-    return StatefulBuilder(builder: (context, setState) {
-      TextEditingController controller =
-          Get.find<SearchBarController>().controller;
-      double halfScreen =
-          ((MediaQuery.of(context).size.width.round().toDouble()) / 2) - 150;
-      return GetBuilder<SearchBarController>(
-        builder: (_) {
-          SpeechToText speechToText = _.speechToText;
-          _initSpeech() async {
-            _.speechEnabled = await _.speechToText.initialize();
-          }
+    initState() {
+      super.initState();
+      _listen();
+    }
 
-          _initSpeech();
-          Future<void> _onSpeechResult(SpeechRecognitionResult result) async {
-            _.updateSpeechToText(recognized: result.recognizedWords);
-            // _.controller.text = result.recognizedWords;
-            //_.updateResult(result: []);
-            //search(expression: result.recognizedWords);
-            //await Future.delayed(const Duration(seconds: 1));
-            //_.updateSpeechToText(listening: false);
-            //Navigator.pop(context);
-          }
-
-          void _stopListening() async {
-            await _.speechToText.stop();
-            setState(() {});
-          }
-
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: halfScreen),
-            child: AlertDialog(
-              contentPadding: const EdgeInsets.all(5),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              content: Container(
-                height: 200.0,
-                width: 200,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: kBackgroundColor),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: InkWell(
-                        onTap: () async {
-                          if (_.isListening) {
-                            _stopListening();
-                            _.updateSpeechToText(listening: false);
-                          } else {
-                            await _.speechToText
-                                .listen(onResult: _onSpeechResult);
-                            _.updateSpeechToText(listening: true);
-                          }
-                        },
-                        child: CircleAvatar(
-                          backgroundColor:
-                              !_.isListening ? Colors.white : kBlueColor,
-                          radius: 35,
-                          child: Icon(
-                            FontAwesomeIcons.microphoneAlt,
-                            color: _.isListening ? Colors.white : kBlueColor,
-                            size: 25,
-                          ),
-                        ),
+    double halfScreen =
+        ((MediaQuery.of(context).size.width.round().toDouble()) / 2) - 150;
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: halfScreen),
+      child: AlertDialog(
+        contentPadding: const EdgeInsets.all(5),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        content: Container(
+          height: 200.0,
+          width: 200,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15), color: kBackgroundColor),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: InkWell(
+                  onTap: _listen,
+                  child: AvatarGlow(
+                    animate: _isListening,
+                    glowColor: kLightBlueColor,
+                    endRadius: 50.0,
+                    duration: const Duration(milliseconds: 2000),
+                    repeatPauseDuration: const Duration(milliseconds: 100),
+                    repeat: true,
+                    child: CircleAvatar(
+                      backgroundColor:
+                          !_isListening ? Colors.white : kBlueColor,
+                      radius: 35,
+                      child: Icon(
+                        FontAwesomeIcons.microphoneAlt,
+                        color: _isListening ? Colors.white : kBlueColor,
+                        size: 25,
                       ),
                     ),
-                    _.recognizedText != ""
-                        ? Text(
-                            _.recognizedText,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700),
-                          )
-                        : !_.isListening
-                            ? const Text(
-                                "Tap to talk!",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700),
-                              )
-                            : Text(
-                                "Talk now!",
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700),
-                              )
-                  ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+              Text(
+                _text,
+                style: TextStyle(
+                    color: _isListening
+                        ? kLightBlueColor.withOpacity(0.75)
+                        : Colors.white,
+                    fontWeight: FontWeight.w700),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _listen() async {
+    if (!_isListening) {
+      bool available = await _speech.initialize(
+        onStatus: (val) => print('onStatus: $val'),
+        onError: (val) => print('onError: $val'),
       );
-    });
+      if (available) {
+        setState(() => _isListening = true);
+        setState(() => _text = "Listening...");
+        print('>>> Listening started...');
+
+        _speech.listen(
+          onResult: (val) => setState(() async {
+            _text = val.recognizedWords;
+            _confidence = val.confidence;
+
+            if (val.hasConfidenceRating && val.confidence > 0) {
+              SearchBarController _ = Get.find<SearchBarController>();
+              print('Word: $_text, Confidence: $_confidence');
+              _.controller.text = _text;
+              _.fieldText = _text;
+              await Future.delayed(const Duration(seconds: 1));
+              _.updateResult(result: []);
+              Navigator.pop(context);
+              search(expression: _text);
+            }
+          }),
+        );
+      }
+    } else {
+      setState(() => _isListening = false);
+      setState(() => _text = "Tap to talk!");
+      _speech.stop();
+      print('>>> Listening stopped.');
+    }
   }
 }
