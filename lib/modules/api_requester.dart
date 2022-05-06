@@ -3,11 +3,12 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/models/models.dart';
+import 'package:movielab/modules/cache/cacheholder.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
 
-const String apiKey = "k_6lgd4s89";
-// const String apiKey = "k_y9zcdoq3";
+// const String apiKey = "k_6lgd4s89";
+const String apiKey = "k_y9zcdoq3";
 
 Future<bool> getPopularMovies() async {
   final response = await http
@@ -108,6 +109,25 @@ Future<FullShow?> getShow({required String id}) async {
   if (response.statusCode == 200) {
     var showJson = jsonDecode(response.body);
     FullShow show = FullShow.fromJson(showJson);
+    return show;
+  } else {
+    return null;
+  }
+}
+
+Future<FullShow?> getShowEpisodes(
+    {required dynamic show, required int season}) async {
+  final response = await http.get(Uri.parse(
+      'https://imdb-api.com/en/API/SeasonEpisodes/$apiKey/${show.id}/$season'));
+  if (response.statusCode == 200) {
+    var json = jsonDecode(response.body)["episodes"];
+    List<Episode> seasonEpisodes = [];
+    for (int i = 0; i < json.length; i++) {
+      seasonEpisodes.add(Episode.fromJson(json[i]));
+    }
+    show.seasons[season - 1] = seasonEpisodes;
+    saveShowInfoInCache(show: show);
+    print("Season $season Episodes has been added");
     return show;
   } else {
     return null;

@@ -7,6 +7,7 @@ import 'package:movielab/modules/preferences_shareholder.dart';
 import 'package:movielab/pages/show/show_page/get_show_info.dart';
 import 'package:movielab/pages/show/show_page/sections/box_office.dart';
 import 'package:movielab/pages/show/show_page/sections/cast.dart';
+import 'package:movielab/pages/show/show_page/sections/episode_guide.dart';
 import 'package:movielab/pages/show/show_page/sections/keywords.dart';
 import 'package:movielab/pages/show/show_page/sections/main_info.dart';
 import 'package:movielab/pages/show/show_page/sections/more_info.dart';
@@ -131,6 +132,7 @@ class _ShowPageState extends State<ShowPage> {
                   ShowPageCast(
                     actorList: show.actorList,
                   ),
+                  ShowPageEpisodeGuide(show: show),
                   ShowPageMoreInfo(show: show),
                   ShowPageBoxOffice(show: show),
                   ShowPageSimilars(
