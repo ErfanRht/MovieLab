@@ -7,9 +7,11 @@ import 'package:movielab/modules/cache/cacheholder.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
 
-// const String apiKey = "k_6lgd4s89";
-const String apiKey = "k_y9zcdoq3";
+// API keys to access the IMDB API:
+const String apiKey = "k_6lgd4s89";
+// const String apiKey = "k_y9zcdoq3";
 
+// Get recently popular movies from the IMDB API
 Future<bool> getPopularMovies() async {
   final response = await http
       .get(Uri.parse('https://imdb-api.com/en/API/MostPopularMovies/$apiKey'));
@@ -28,6 +30,7 @@ Future<bool> getPopularMovies() async {
   }
 }
 
+// Get recently popular TV shows from the IMDB API
 Future<bool> getPopularTVShows() async {
   final response = await http
       .get(Uri.parse('https://imdb-api.com/en/API/MostPopularTVs/$apiKey'));
@@ -46,6 +49,7 @@ Future<bool> getPopularTVShows() async {
   }
 }
 
+// Get IMDB 250 most popular movies or TV shows from the IMDB API
 Future<bool> getIMDBlists({required ImdbList listName}) async {
   if (listName == ImdbList.TOP_250_MOVIES) {
     final response = await http
@@ -85,6 +89,7 @@ Future<bool> getIMDBlists({required ImdbList listName}) async {
   }
 }
 
+// Get results of a search query from the IMDB API
 Future<bool> search({required expression}) async {
   expression ??= Get.find<SearchBarController>().fieldText;
   final response = await http
@@ -103,6 +108,7 @@ Future<bool> search({required expression}) async {
   }
 }
 
+// Get full details of a show from the IMDB API
 Future<FullShow?> getShow({required String id}) async {
   final response = await http
       .get(Uri.parse('https://imdb-api.com/en/API/Title/$apiKey/$id'));
@@ -115,6 +121,7 @@ Future<FullShow?> getShow({required String id}) async {
   }
 }
 
+// Get episodes info of a season of a show from the IMDB API
 Future<FullShow?> getShowEpisodes(
     {required dynamic show, required int season}) async {
   final response = await http.get(Uri.parse(

@@ -56,6 +56,7 @@ class ShowPreview {
           .toList();
 }
 
+// Movie or TV show all detail model class
 class FullShow {
   final String id;
   final String title;
@@ -156,6 +157,7 @@ class FullShow {
   }
 }
 
+// Get similar movies or TV shows to a movie or TV show from the API
 getSimilars({required json}) {
   List<ShowPreview> similars = [];
   for (int i = 0; i < json.length; i++) {
@@ -165,6 +167,7 @@ getSimilars({required json}) {
   return similars;
 }
 
+// A episode of a TV show model class
 class Episode {
   final String id;
   final String title;
@@ -207,6 +210,7 @@ class Episode {
   }
 }
 
+// Movie or TV show as result of a search model class
 class SearchResult {
   final String id;
   final String title;

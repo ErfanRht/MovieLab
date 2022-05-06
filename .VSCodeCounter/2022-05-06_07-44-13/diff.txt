@@ -1,0 +1,99 @@
+Date : 2022-05-06 07:44:13
+Directory : c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib
+Total : 50 files,  1767 codes, 6 comments, 106 blanks, all 1879 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Dart     |         50 |      1,767 |          6 |        106 |      1,879 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                             | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                |         50 |      1,767 |          6 |        106 |      1,879 |
+| constants                                                                                                                        |          1 |          1 |          0 |          0 |          1 |
+| models                                                                                                                           |          1 |         94 |          1 |          7 |        102 |
+| modules                                                                                                                          |          4 |        182 |          3 |         22 |        207 |
+| modules\cache                                                                                                                    |          2 |         35 |          1 |          6 |         42 |
+| pages                                                                                                                            |         44 |      1,490 |          2 |         77 |      1,569 |
+| pages\main                                                                                                                       |         20 |        556 |          4 |         39 |        599 |
+| pages\main\bookmarks                                                                                                             |          3 |        112 |          0 |          9 |        121 |
+| pages\main\bookmarks\sections                                                                                                    |          1 |         31 |          0 |          3 |         34 |
+| pages\main\home                                                                                                                  |         12 |        312 |         -5 |         19 |        326 |
+| pages\main\home\sections                                                                                                         |         10 |        255 |         -2 |         15 |        268 |
+| pages\main\home\sections\imdb_lists                                                                                              |          3 |        147 |         -2 |          6 |        151 |
+| pages\main\home\sections\imdb_lists\pages                                                                                        |          2 |        128 |          0 |          6 |        134 |
+| pages\main\home\sections\popular                                                                                                 |          2 |        -49 |          0 |         -6 |        -55 |
+| pages\main\home\sections\populars                                                                                                |          5 |        157 |          0 |         15 |        172 |
+| pages\main\home\sections\populars\popular_movies                                                                                 |          2 |         67 |          0 |          7 |         74 |
+| pages\main\home\sections\populars\popular_tvs                                                                                    |          2 |         67 |          0 |          6 |         73 |
+| pages\main\profile                                                                                                               |          1 |         11 |          0 |          3 |         14 |
+| pages\main\search                                                                                                                |          3 |        127 |          9 |          8 |        144 |
+| pages\main\search\search_bar                                                                                                     |          3 |        127 |          9 |          8 |        144 |
+| pages\show                                                                                                                       |         23 |        928 |         -1 |         38 |        965 |
+| pages\show\show_box                                                                                                              |          6 |        681 |          0 |         20 |        701 |
+| pages\show\show_page                                                                                                             |         15 |        455 |         -1 |         24 |        478 |
+| pages\show\show_page\sections                                                                                                    |         12 |        419 |         -1 |         23 |        441 |
+| pages\show\show_page\sections\episode_guide                                                                                      |          3 |        160 |          0 |         11 |        171 |
+| pages\splash                                                                                                                     |          1 |          6 |         -1 |          0 |          5 |
++----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                                         | language | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\constants\types.dart                                                      | Dart     |          1 |          0 |          0 |          1 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\models\models.dart                                                        | Dart     |         94 |          1 |          7 |        102 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\modules\api_requester.dart                                                | Dart     |         55 |          0 |          4 |         59 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\modules\cache\cache_data.dart                                             | Dart     |          9 |          0 |          3 |         12 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\modules\cache\cacheholder.dart                                            | Dart     |         26 |          1 |          3 |         30 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\modules\preferences_shareholder.dart                                      | Dart     |         92 |          2 |         12 |        106 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\bookmarks\bookmarks_controller.dart                            | Dart     |          9 |          0 |          3 |         12 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\bookmarks\bookmarks_page.dart                                  | Dart     |         72 |          0 |          3 |         75 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\bookmarks\sections\navbar.dart                                 | Dart     |         31 |          0 |          3 |         34 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\home\home_data_controller.dart                                 | Dart     |         10 |          0 |          4 |         14 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\home\home_page.dart                                            | Dart     |         47 |         -3 |          0 |         44 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\home\sections\imdb_lists\lists.dart                            | Dart     |         19 |         -2 |          0 |         17 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\home\sections\imdb_lists\pages\top_TVs.dart                    | Dart     |         64 |          0 |          3 |         67 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\home\sections\imdb_lists\pages\top_movies.dart                 | Dart     |         64 |          0 |          3 |         67 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\home\sections\popular\popular_movies.dart                      | Dart     |        -25 |          0 |         -3 |        -28 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\home\sections\popular\popular_tv.dart                          | Dart     |        -24 |          0 |         -3 |        -27 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\home\sections\populars\commons.dart                            | Dart     |         23 |          0 |          2 |         25 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\home\sections\populars\popular_movies\all_popular_movies.dart  | Dart     |         38 |          0 |          4 |         42 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\home\sections\populars\popular_movies\home_popular_movies.dart | Dart     |         29 |          0 |          3 |         32 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\home\sections\populars\popular_tvs\all_popular_tvs.dart        | Dart     |         38 |          0 |          3 |         41 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\home\sections\populars\popular_tvs\popular_tvs.dart            | Dart     |         29 |          0 |          3 |         32 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\main_page.dart                                                 | Dart     |         -6 |          0 |          0 |         -6 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\profile\profile_page.dart                                      | Dart     |         11 |          0 |          3 |         14 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\search\search_bar\search_bar.dart                              | Dart     |         14 |          3 |          1 |         18 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\search\search_bar\search_bar_controller.dart                   | Dart     |         11 |          0 |          1 |         12 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\main\search\search_bar\voice_search.dart                            | Dart     |        102 |          6 |          6 |        114 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\search_show_box.dart                                           | Dart     |        -98 |          0 |         -3 |       -101 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_box.dart                                                  | Dart     |       -110 |          0 |         -3 |       -113 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_box\bookmarks_show_box.dart                               | Dart     |        177 |          0 |          4 |        181 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_box\episode_show_box.dart                                 | Dart     |        157 |          0 |          4 |        161 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_box\imdb_list_show_box.dart                               | Dart     |        142 |          0 |          4 |        146 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_box\search_show_box.dart                                  | Dart     |         92 |          0 |          3 |         95 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_box\show_box.dart                                         | Dart     |        102 |          0 |          3 |        105 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_box\show_box_common.dart                                  | Dart     |         11 |          0 |          2 |         13 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_page\controller.dart                                      | Dart     |        -14 |          0 |         -4 |        -18 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_page\get_show_info.dart                                   | Dart     |         24 |          0 |          2 |         26 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_page\sections\box_office.dart                             | Dart     |         65 |          0 |          5 |         70 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_page\sections\cast.dart                                   | Dart     |         -2 |          0 |          0 |         -2 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_page\sections\episode_guide.dart                          | Dart     |         71 |          0 |          3 |         74 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_page\sections\episode_guide\episode_guide_page.dart       | Dart     |        109 |          0 |          5 |        114 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_page\sections\episode_guide\season_episodes_list.dart     | Dart     |         19 |          0 |          3 |         22 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_page\sections\episode_guide\season_page.dart              | Dart     |         32 |          0 |          3 |         35 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_page\sections\keywords.dart                               | Dart     |         51 |          0 |          3 |         54 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_page\sections\main_info.dart                              | Dart     |          8 |          0 |          0 |          8 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_page\sections\more_info.dart                              | Dart     |         12 |          0 |         -1 |         11 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_page\sections\navbar.dart                                 | Dart     |         33 |         -1 |          2 |         34 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_page\sections\rating.dart                                 | Dart     |         15 |          0 |          0 |         15 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_page\sections\similars.dart                               | Dart     |          6 |          0 |          0 |          6 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\show\show_page\show_page.dart                                       | Dart     |         26 |          0 |          3 |         29 |
+| c:\Users\MasterMind\Erfan\FlutterProjects\movielab\lib\pages\splash\splash_screen.dart                                           | Dart     |          6 |         -1 |          0 |          5 |
+| Total                                                                                                                            |          |      1,767 |          6 |        106 |      1,879 |
++----------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

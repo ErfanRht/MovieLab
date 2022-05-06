@@ -3,6 +3,7 @@ import 'package:movielab/models/models.dart';
 import 'package:movielab/pages/main/bookmarks/bookmarks_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// Get all bookmarks from the shared preferences
 Future<bool> getBookmarks() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   final bookmarksString = prefs.getString('bookmarks');
@@ -14,6 +15,7 @@ Future<bool> getBookmarks() async {
   return true;
 }
 
+// Delete all bookmarks from the shared preferences
 Future<bool> deleteBookmarks() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.remove('bookmarks');
@@ -22,6 +24,7 @@ Future<bool> deleteBookmarks() async {
   return true;
 }
 
+// Add a movie to the bookmarks list in the shared preferences
 Future<bool> addBookmark({required FullShow fullShow}) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   final bookmarksJson = prefs.getString("bookmarks");
@@ -54,6 +57,7 @@ Future<bool> addBookmark({required FullShow fullShow}) async {
   return true;
 }
 
+// Delete a movie or tv show from the bookmarks list in the shared preferences
 Future<bool> deleteBookmark({FullShow? fullShow, ShowPreview? show}) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   List<ShowPreview> bookmarks = Get.find<BookmarksPageController>().bookmarks;
@@ -81,6 +85,7 @@ Future<bool> deleteBookmark({FullShow? fullShow, ShowPreview? show}) async {
   return true;
 }
 
+// Get a bool value that is there any bookmarks in the shared preferences or not
 Future<bool> isThereInBookmarks({required String showId}) async {
   List<ShowPreview> bookmarks = Get.find<BookmarksPageController>().bookmarks;
   bool isThere = false;
