@@ -140,3 +140,16 @@ Future<FullShow?> getShowEpisodes(
     return null;
   }
 }
+
+// Get full details of a show from the IMDB API
+Future<FullActor?> getActor({required String id}) async {
+  final response =
+      await http.get(Uri.parse('https://imdb-api.com/en/API/Name/$apiKey/$id'));
+  if (response.statusCode == 200) {
+    var actorJson = jsonDecode(response.body);
+    FullActor actor = FullActor.fromJson(actorJson);
+    return actor;
+  } else {
+    return null;
+  }
+}

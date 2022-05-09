@@ -15,18 +15,6 @@ class ShowBox extends StatelessWidget {
     String year = showPreview.year;
     String crew = showPreview.crew;
     String id = showPreview.id;
-    if (year != "") {
-      if (title.length > 10) {
-        title = showPreview.title.substring(0, 10) + '...';
-      }
-    } else {
-      if (title.length > 17) {
-        title = showPreview.title.substring(0, 17) + '...';
-      }
-    }
-    if (crew.length > 25) {
-      crew = crew.substring(0, 25) + '...';
-    }
     return InkWell(
       onTap: () async {
         openShowPage(context, id);
@@ -58,40 +46,56 @@ class ShowBox extends StatelessWidget {
             Container(
               width: 155,
               alignment: Alignment.bottomLeft,
-              padding: const EdgeInsets.only(left: 5, right: 10, top: 5),
+              padding: const EdgeInsets.only(left: 5, right: 5, top: 5),
               child: Row(
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        year != "" ? "$title ($year)" : title,
-                        softWrap: true,
-                        style: GoogleFonts.ubuntu(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ],
+                  Flexible(
+                    flex: 2,
+                    child: RichText(
+                      overflow: TextOverflow.ellipsis,
+                      text: TextSpan(
+                          style: GoogleFonts.ubuntu(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500),
+                          text: title),
+                    ),
                   ),
+                  year != ""
+                      ? Flexible(
+                          flex: 1,
+                          child: RichText(
+                            overflow: TextOverflow.ellipsis,
+                            text: TextSpan(
+                              style: GoogleFonts.ubuntu(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500),
+                              text: " ($year)",
+                            ),
+                          ),
+                        )
+                      : const Text("")
                 ],
               ),
             ),
             Container(
               width: 155,
               alignment: Alignment.bottomLeft,
-              padding: const EdgeInsets.only(left: 5, right: 10),
+              padding: const EdgeInsets.only(left: 5, right: 5),
               child: Row(
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        crew,
+                  Flexible(
+                    child: RichText(
+                      overflow: TextOverflow.ellipsis,
+                      text: TextSpan(
                         style: GoogleFonts.ubuntu(
                             color: Colors.white.withOpacity(0.7),
                             fontSize: 10,
                             fontWeight: FontWeight.w500),
+                        text: crew,
                       ),
-                    ],
+                    ),
                   ),
                 ],
               ),

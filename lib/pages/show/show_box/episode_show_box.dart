@@ -66,7 +66,8 @@ class EpisodeShowBox extends StatelessWidget {
                         Flexible(
                           child: Text(
                             "$episodeNumber - $title",
-                            softWrap: true,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.ubuntu(
                                 color: Colors.white,
                                 fontSize: 17.5,

@@ -29,6 +29,7 @@ dependencies:
   fab_circular_menu: ^1.0.2
   flutter_slidable: ^1.2.0
   avatar_glow: ^2.0.2
+  iconsax: ^0.0.8
 
 dev_dependencies:
   flutter_test:

@@ -102,7 +102,7 @@ Future<String> getShowCrew({required FullShow fullShow}) async {
   String crew = "";
   if (fullShow.actorList != null) {
     for (int i = 0; i < 3; i++) {
-      crewList.add(fullShow.actorList[i]["name"]);
+      crewList.add(fullShow.actorList[i].name);
     }
     crew = crewList.join(", ");
   }
