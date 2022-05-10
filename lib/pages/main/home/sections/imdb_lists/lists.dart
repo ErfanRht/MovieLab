@@ -12,6 +12,8 @@ class HomeIMDbLists extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final apiRequester = APIRequester();
+
     return SizedBox(
       height: 200,
       child: ListView(
@@ -25,7 +27,7 @@ class HomeIMDbLists extends StatelessWidget {
               child: HomeIMDbBox(title: "Top 250 Movies"),
             ),
             onTap: () {
-              getIMDBlists(listName: ImdbList.TOP_250_MOVIES);
+              apiRequester.getIMDBlists(listName: ImdbList.TOP_250_MOVIES);
               Navigator.push(
                   context,
                   PageTransition(
@@ -42,7 +44,7 @@ class HomeIMDbLists extends StatelessWidget {
               child: HomeIMDbBox(title: "Top 250 TVs"),
             ),
             onTap: () {
-              getIMDBlists(listName: ImdbList.TOP_250_TVS);
+              apiRequester.getIMDBlists(listName: ImdbList.TOP_250_TVS);
               Navigator.push(
                   context,
                   PageTransition(

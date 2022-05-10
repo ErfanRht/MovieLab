@@ -14,6 +14,8 @@ class BookmarksPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final preferencesShareholder = PreferencesShareholder();
+
     return GetBuilder<BookmarksPageController>(
       builder: (_) {
         return Scaffold(
@@ -25,7 +27,7 @@ class BookmarksPage extends StatelessWidget {
               child: FittedBox(
                 child: FloatingActionButton(
                     onPressed: () {
-                      deleteBookmarks();
+                      preferencesShareholder.deleteBookmarks();
                     },
                     tooltip: "Delete all",
                     backgroundColor: Colors.white,

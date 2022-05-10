@@ -14,6 +14,8 @@ class ShowPageNavBar extends StatefulWidget {
 
 class _ShowPageNavBarState extends State<ShowPageNavBar> {
   bool isBookmarked = false;
+  final preferencesShareholder = PreferencesShareholder();
+
   @override
   void initState() {
     super.initState();
@@ -42,13 +44,15 @@ class _ShowPageNavBarState extends State<ShowPageNavBar> {
               onPressed: () {
                 isBookmarked
                     ? {
-                        deleteBookmark(fullShow: widget.show),
+                        preferencesShareholder.deleteBookmark(
+                            fullShow: widget.show),
                         setState(() {
                           isBookmarked = false;
                         })
                       }
                     : {
-                        addBookmark(fullShow: widget.show),
+                        preferencesShareholder.addBookmark(
+                            fullShow: widget.show),
                         setState(() {
                           isBookmarked = true;
                         })

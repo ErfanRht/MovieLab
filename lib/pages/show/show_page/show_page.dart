@@ -29,6 +29,7 @@ class ShowPage extends StatefulWidget {
 class _ShowPageState extends State<ShowPage> {
   dynamic show;
   bool isBookmarked = false;
+  final preferencesShareholder = PreferencesShareholder();
 
   @override
   void initState() {
@@ -37,7 +38,7 @@ class _ShowPageState extends State<ShowPage> {
       setState(() {
         show = response;
       });
-      isThereInBookmarks(showId: show.id).then((value) {
+      preferencesShareholder.isThereInBookmarks(showId: show.id).then((value) {
         isBookmarked = value;
       });
     });

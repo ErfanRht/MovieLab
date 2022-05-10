@@ -141,5 +141,6 @@ class IMDBListShowBox extends StatelessWidget {
 }
 
 void delete(BuildContext context, ShowPreview showPreview) {
-  deleteBookmark(show: showPreview);
+  final preferencesShareholder = PreferencesShareholder();
+  preferencesShareholder.deleteBookmark(show: showPreview);
 }

@@ -21,6 +21,8 @@ class _EpisodeGuidePageState extends State<EpisodeGuidePage>
   late TabController _controller;
   late int _selectedIndex;
   late dynamic show;
+  final apiRequester = APIRequester();
+
   @override
   void initState() {
     show = widget.show;
@@ -31,7 +33,9 @@ class _EpisodeGuidePageState extends State<EpisodeGuidePage>
         vsync: this);
     super.initState();
     if (show.seasons[widget.initialIndex].length == 0) {
-      getShowEpisodes(show: show, season: _controller.index + 1).then((value) {
+      apiRequester
+          .getShowEpisodes(show: show, season: _controller.index + 1)
+          .then((value) {
         setState(() {
           show = value;
         });
@@ -42,7 +46,8 @@ class _EpisodeGuidePageState extends State<EpisodeGuidePage>
         _selectedIndex = _controller.index;
       });
       if (show.seasons[_selectedIndex].length == 0) {
-        getShowEpisodes(show: show, season: _controller.index + 1)
+        apiRequester
+            .getShowEpisodes(show: show, season: _controller.index + 1)
             .then((value) {
           setState(() {
             show = value;

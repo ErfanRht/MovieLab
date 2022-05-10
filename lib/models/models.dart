@@ -121,11 +121,11 @@ class FullShow {
   factory FullShow.fromJson(Map<String, dynamic> json) {
     return FullShow(
       id: json['id'],
-      title: json['title'],
+      title: json['title'] ?? "",
       image: json['image'].toString().replaceAll(
           "._V1_UX128_CR0,3,128,176_AL_.jpg", "._V1_Ratio0.6716_AL_.jpg"),
-      year: json['year'],
-      genres: json['genres'],
+      year: json['year'] ?? "",
+      genres: json['genres'] ?? "",
       releaseDate: json['releaseDate'] ?? "",
       yearEnd: json["tvSeriesInfo"]?['yearEnd'] ?? "",
       runTime: json['runtimeStr'] ?? "",
@@ -153,7 +153,7 @@ class FullShow {
       grossUSA: json["boxOffice"]?['gtossUSA'] ?? "",
       cumulativeWorldwideGross:
           json["boxOffice"]?['cumulativeWorldwideGross'] ?? "",
-      similars: getSimilars(json: json['similars']) ?? [],
+      similars: getSimilars(json: json['similars'] ?? []) ?? [],
       tagline: json['tagline'] ?? "",
       keywords: json['keywords'].toString().replaceAll(",", ", "),
     );
@@ -189,7 +189,7 @@ class Episode {
   factory Episode.fromJson(Map<String, dynamic> json) {
     return Episode(
       id: json['id'],
-      title: json['title'],
+      title: json['title'] ?? "",
       image: json['image'].toString().replaceAll(
           "._V1_UX128_CR0,3,128,176_AL_.jpg", "._V1_Ratio0.6716_AL_.jpg"),
       year: json['year'] ?? "",

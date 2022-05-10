@@ -16,6 +16,8 @@ class VoiceSearchAlertDialog extends StatefulWidget {
 
 class _VoiceSearchAlertDialogState extends State<VoiceSearchAlertDialog> {
   final stt.SpeechToText _speech = stt.SpeechToText();
+  final apiRequester = APIRequester();
+
   bool _isListening = false;
   double _confidence = 1.0;
   TextEditingController controller = Get.find<SearchBarController>().controller;
@@ -108,7 +110,7 @@ class _VoiceSearchAlertDialogState extends State<VoiceSearchAlertDialog> {
               await Future.delayed(const Duration(seconds: 1));
               _.updateResult(result: []);
               Navigator.pop(context);
-              search(expression: _text);
+              apiRequester.search(expression: _text);
             }
           }),
         );

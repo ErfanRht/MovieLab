@@ -15,12 +15,14 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final apiRequester = APIRequester();
+
     TextEditingController controller =
         Get.find<SearchBarController>().controller;
     return GetBuilder<SearchBarController>(builder: (_) {
       doSearch({required final String text}) {
         _.updateResult(result: []);
-        search(expression: text);
+        apiRequester.search(expression: text);
       }
 
       return Container(
@@ -35,7 +37,7 @@ class SearchBar extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                search(expression: null);
+                apiRequester.search(expression: null);
               },
               child: const Padding(
                 padding: EdgeInsets.only(left: 15, right: 10),
