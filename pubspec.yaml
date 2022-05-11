@@ -26,6 +26,7 @@ dependencies:
   page_transition: ^2.0.5
   flutter_slidable: ^1.2.0
   avatar_glow: ^2.0.2
+  circular_check_box: ^1.0.4
 
 dev_dependencies:
   flutter_test:

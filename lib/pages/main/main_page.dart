@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/pages/main/bookmarks/bookmarks_page.dart';
 import 'package:movielab/pages/main/main_controller.dart';
-import 'package:movielab/pages/main/profile/profile_page.dart';
+import 'Suggestions/Suggestions.dart';
 import 'home/home_page.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'search/search_page.dart';
@@ -61,8 +61,8 @@ class MainPage extends StatelessWidget {
                     text: 'Bookmarks',
                   ),
                   GButton(
-                    icon: Icons.person_outline_rounded,
-                    text: 'Profile',
+                    icon: Icons.podcasts_rounded,
+                    text: 'Suggestions',
                   ),
                 ],
                 selectedIndex: _.selectedIndex,
@@ -82,5 +82,5 @@ const List<Widget> pages = <Widget>[
   HomePage(),
   SearchPage(),
   BookmarksPage(),
-  ProfilePage()
+  SuggestionsPage()
 ];

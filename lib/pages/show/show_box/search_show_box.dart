@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movielab/models/models.dart';
-import 'package:movielab/pages/show/show_box/show_box_common.dart';
+import 'package:movielab/pages/actor/actor_page/actor_page.dart';
 import 'package:movielab/pages/show/show_page/show_page.dart';
+import 'package:page_transition/page_transition.dart';
+import '../../../models/models.dart';
+import '../../../pages/show/show_box/show_box_common.dart';
 
 class SearchShowBox extends StatelessWidget {
   SearchResult show;
@@ -17,11 +18,19 @@ class SearchShowBox extends StatelessWidget {
     String image = show.image;
     String description = show.description;
     String id = show.id;
+    String resultType = show.resultType;
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
       child: InkWell(
         onTap: () async {
-          openShowPage(context, id);
+          Navigator.push(
+              context,
+              PageTransition(
+                  type: PageTransitionType.fade,
+                  duration: const Duration(milliseconds: 500),
+                  child: resultType == "Name"
+                      ? ActorPage(id: id)
+                      : ShowPage(id: id)));
         },
         borderRadius: BorderRadius.circular(15),
         child: Container(
@@ -71,13 +80,18 @@ class SearchShowBox extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 10),
                       child: Row(
                         children: [
-                          Text(
-                            description,
-                            softWrap: true,
-                            style: GoogleFonts.ubuntu(
-                                color: Colors.white.withOpacity(0.8),
-                                fontSize: 13.5,
-                                fontWeight: FontWeight.w500),
+                          Flexible(
+                            flex: 2,
+                            child: RichText(
+                              //overflow: TextOverflow.ellipsis,
+                              softWrap: true,
+                              text: TextSpan(
+                                  style: GoogleFonts.ubuntu(
+                                      color: Colors.white.withOpacity(0.8),
+                                      fontSize: 13.5,
+                                      fontWeight: FontWeight.w500),
+                                  text: description),
+                            ),
                           ),
                         ],
                       ),

@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:movielab/constants/colors.dart';
-import 'package:movielab/modules/api_requester.dart';
-import 'package:movielab/pages/main/search/search_bar/voice_search.dart';
-import 'package:speech_to_text/speech_recognition_result.dart';
-import 'package:speech_to_text/speech_to_text.dart';
-
+import '../../../../constants/colors.dart';
+import '../../../../modules/api_requester.dart';
+import 'voice_search.dart';
 import 'search_bar_controller.dart';
 
 class SearchBar extends StatelessWidget {

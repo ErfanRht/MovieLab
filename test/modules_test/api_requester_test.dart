@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:movielab/constants/types.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:test/test.dart';
 import 'package:movielab/modules/api_requester.dart';
@@ -10,7 +11,7 @@ void main() {
 
     var result = await apiRequester.getPopularMovies();
     expect(result, isNotNull);
-    if (result) {
+    if (result == RequestResult.SUCCESS) {
       expect(Get.find<HomeDataController>().popularMovies, isNotEmpty);
     }
   });
@@ -20,7 +21,7 @@ void main() {
 
     var result = await apiRequester.getPopularTVShows();
     expect(result, isNotNull);
-    if (result) {
+    if (result == RequestResult.SUCCESS) {
       expect(Get.find<HomeDataController>().popularShows, isNotEmpty);
     }
   });

@@ -13,13 +13,12 @@ class APIRequester {
   static const String apiKey = "k_y9zcdoq3";
   // static const String apiKey = "";
   // Get recently popular movies from the IMDB API
-  Future<bool> getPopularMovies() async {
+  Future<RequestResult> getPopularMovies() async {
     final response = await http.get(
         Uri.parse('https://imdb-api.com/en/API/MostPopularMovies/$apiKey'));
     if (response.statusCode == 200) {
-      if (jsonDecode(response.body)["errorMessage"] == "Invalid API Key") {
-        print("Invalid API Key Error");
-        return false;
+      if (jsonDecode(response.body)["errorMessage"] != "") {
+        return RequestResult.FAILURE_SERVER_PROBLEM;
       }
       var json = jsonDecode(response.body)["items"];
       List<ShowPreview> popularMovies = [];
@@ -28,21 +27,20 @@ class APIRequester {
       }
       Get.find<HomeDataController>()
           .updatePopularMovies(popularMovies: popularMovies);
-      return true;
+      return RequestResult.SUCCESS;
     } else {
-      return false;
+      return RequestResult.FAILURE_SERVER_PROBLEM;
     }
   }
 
   // Get recently popular TV shows from the IMDB API
-  Future<bool> getPopularTVShows() async {
+  Future<RequestResult> getPopularTVShows() async {
     final response = await http
         .get(Uri.parse('https://imdb-api.com/en/API/MostPopularTVs/$apiKey'));
 
     if (response.statusCode == 200) {
-      if (jsonDecode(response.body)["errorMessage"] == "Invalid API Key") {
-        print("Invalid API Key Error");
-        return false;
+      if (jsonDecode(response.body)["errorMessage"] != "") {
+        return RequestResult.FAILURE_SERVER_PROBLEM;
       }
       var json = jsonDecode(response.body)["items"];
 
@@ -52,9 +50,9 @@ class APIRequester {
       }
       Get.find<HomeDataController>()
           .updatePopularShows(popularShows: popularShows);
-      return true;
+      return RequestResult.SUCCESS;
     } else {
-      return false;
+      return RequestResult.FAILURE_SERVER_PROBLEM;
     }
   }
 
@@ -102,7 +100,7 @@ class APIRequester {
   Future<bool> search({required expression}) async {
     expression ??= Get.find<SearchBarController>().fieldText;
     final response = await http.get(
-        Uri.parse('https://imdb-api.com/en/API/Search/$apiKey/$expression'));
+        Uri.parse('https://imdb-api.com/en/API/SearchAll/$apiKey/$expression'));
 
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body)["results"];
