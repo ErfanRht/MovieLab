@@ -14,8 +14,12 @@ class APIRequester {
   // static const String apiKey = "";
   // Get recently popular movies from the IMDB API
   Future<RequestResult> getPopularMovies() async {
-    final response = await http.get(
-        Uri.parse('https://imdb-api.com/en/API/MostPopularMovies/$apiKey'));
+    final response = await http
+        .get(Uri.parse('https://imdb-api.com/en/API/MostPopularMovies/$apiKey'))
+        .timeout(
+          const Duration(seconds: 10),
+        );
+
     if (response.statusCode == 200) {
       if (jsonDecode(response.body)["errorMessage"] != "") {
         return RequestResult.FAILURE_SERVER_PROBLEM;
@@ -36,7 +40,8 @@ class APIRequester {
   // Get recently popular TV shows from the IMDB API
   Future<RequestResult> getPopularTVShows() async {
     final response = await http
-        .get(Uri.parse('https://imdb-api.com/en/API/MostPopularTVs/$apiKey'));
+        .get(Uri.parse('https://imdb-api.com/en/API/MostPopularTVs/$apiKey'))
+        .timeout(const Duration(seconds: 10));
 
     if (response.statusCode == 200) {
       if (jsonDecode(response.body)["errorMessage"] != "") {

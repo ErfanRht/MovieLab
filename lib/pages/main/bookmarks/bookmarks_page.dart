@@ -57,19 +57,30 @@ class BookmarksPage extends StatelessWidget {
                               _.bookmarks[_.bookmarks.length - index - 1]);
                     },
                   )
-                : Center(
-                    child: UnDraw(
-                      color: kGreyColor,
-                      illustration: UnDrawIllustration.file_searching,
-                      padding: const EdgeInsets.all(65),
-                      placeholder: const Center(
-                        child: SpinKitThreeBounce(
-                          color: Colors.white,
-                          size: 30,
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                        const SizedBox(height: 100),
+                        Text("You haven't bookmarked anything yet!",
+                            style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600)),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.width,
+                          child: UnDraw(
+                            color: kGreyColor,
+                            illustration: UnDrawIllustration.empty,
+                            padding: const EdgeInsets.all(65),
+                            placeholder: const Center(
+                              child: SpinKitThreeBounce(
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ));
+                      ]));
       },
     );
   }

@@ -11,6 +11,16 @@ class SuggestionsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColor,
+      appBar: AppBar(
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+        backgroundColor: kBackgroundColor,
+        title: Text("Suggestions",
+            style: GoogleFonts.poppins(
+                color: Colors.white,
+                fontSize: 25,
+                fontWeight: FontWeight.bold)),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

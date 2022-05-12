@@ -47,17 +47,12 @@ class _SplashScreenState extends State<SplashScreen> {
               const SizedBox(),
               const SizedBox(),
               Center(
-                child: RichText(
-                  text: TextSpan(
-                    text: 'Movie',
-                    style: GoogleFonts.ubuntu(
-                        color: Colors.white,
-                        fontSize: 39,
-                        fontWeight: FontWeight.bold),
-                    children: const <TextSpan>[
-                      TextSpan(
-                          text: 'Lab', style: TextStyle(color: kPrimaryColor)),
-                    ],
+                child: Padding(
+                  padding: const EdgeInsets.all(50.0),
+                  child: Image.asset(
+                    "assets/logo/logo.png",
+                    color: kPrimaryColor,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
@@ -76,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
       case RequestResult.LOADING:
         return const Center(
           child: SpinKitRipple(
-            color: Colors.white,
+            color: kPrimaryColor,
             size: 100,
             borderWidth: 10,
           ),
@@ -96,7 +91,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: kGreyColor.withOpacity(0.2),
+                  color: kPrimaryColor.withOpacity(0.2),
                 ),
                 child: Column(
                   children: [
