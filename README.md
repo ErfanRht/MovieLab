@@ -1,6 +1,6 @@
 # MovieLab
 
-An open source movie information database application.
+An open source movie database application.
 
 <p float="center">
     <img src="./screenshots/mockups/MovieLab_mockup.jpg" height="400" />
