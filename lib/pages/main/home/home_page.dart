@@ -47,6 +47,8 @@ class HomePage extends StatelessWidget {
                             duration: const Duration(milliseconds: 500),
                             child: const AllPopularMovies()));
                   },
+                  highlightColor: Colors.transparent,
+                  focusColor: Colors.transparent,
                   child: Padding(
                     padding:
                         const EdgeInsets.only(right: 20, top: 30, bottom: 5),
@@ -61,10 +63,9 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            // ignore: prefer_const_constructors
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: const HomePopularMovies(),
+            const Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: HomePopularMovies(),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,6 +89,8 @@ class HomePage extends StatelessWidget {
                             duration: const Duration(milliseconds: 500),
                             child: const AllPopularTVs()));
                   },
+                  highlightColor: Colors.transparent,
+                  focusColor: Colors.transparent,
                   child: Padding(
                     padding:
                         const EdgeInsets.only(right: 20, top: 15, bottom: 5),
