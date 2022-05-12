@@ -63,39 +63,53 @@ class APIRequester {
 
   // Get IMDB 250 most popular movies or TV shows from the IMDB API
   Future<bool> getIMDBlists({required ImdbList listName}) async {
-    if (listName == ImdbList.TOP_250_MOVIES) {
-      final response = await http
-          .get(Uri.parse('https://imdb-api.com/en/API/Top250Movies/$apiKey'));
-
-      if (response.statusCode == 200) {
-        var json = jsonDecode(response.body)["items"];
-        List<ShowPreview> topRatedMovies = [];
-        for (int i = 0; i < json.length; i++) {
-          topRatedMovies.add(ShowPreview.fromJson(json[i]));
-        }
-        Get.find<HomeDataController>()
-            .updateTopRatedMovies(topRatedMovies: topRatedMovies);
-        return true;
-      } else {
-        return false;
-      }
+    HomeDataController homeDataController = Get.find<HomeDataController>();
+    http.Response response;
+    switch (listName) {
+      case ImdbList.TOP_250_MOVIES:
+        response = await http
+            .get(Uri.parse('https://imdb-api.com/en/API/Top250Movies/$apiKey'))
+            .timeout(const Duration(seconds: 10));
+        break;
+      case ImdbList.TOP_250_TVS:
+        response = await http
+            .get(Uri.parse('https://imdb-api.com/en/API/Top250TVs/$apiKey'))
+            .timeout(const Duration(seconds: 10));
+        break;
+      case ImdbList.BoxOffice:
+        response = await http
+            .get(Uri.parse('https://imdb-api.com/en/API/BoxOffice/$apiKey'))
+            .timeout(const Duration(seconds: 10));
+        break;
+      case ImdbList.AllTimeBoxOffice:
+        response = await http
+            .get(Uri.parse(
+                'https://imdb-api.com/en/API/BoxOfficeAllTime/$apiKey'))
+            .timeout(const Duration(seconds: 10));
+        break;
     }
-    if (listName == ImdbList.TOP_250_TVS) {
-      final response = await http
-          .get(Uri.parse('https://imdb-api.com/en/API/Top250TVs/$apiKey'));
-
-      if (response.statusCode == 200) {
-        var json = jsonDecode(response.body)["items"];
-        List<ShowPreview> topRatedShows = [];
-        for (int i = 0; i < json.length; i++) {
-          topRatedShows.add(ShowPreview.fromJson(json[i]));
-        }
-        Get.find<HomeDataController>()
-            .updateTopRatedShows(topRatedShows: topRatedShows);
-        return true;
-      } else {
-        return false;
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body)["items"];
+      List<ShowPreview> resultList = [];
+      for (int i = 0; i < json.length; i++) {
+        resultList.add(ShowPreview.fromJson(json[i]));
       }
+      switch (listName) {
+        case ImdbList.TOP_250_MOVIES:
+          homeDataController.updateTopRatedMovies(topRatedMovies: resultList);
+          break;
+        case ImdbList.TOP_250_TVS:
+          homeDataController.updateTopRatedShows(topRatedShows: resultList);
+          break;
+        case ImdbList.BoxOffice:
+          homeDataController.updateBoxOffice(boxOffice: resultList);
+          break;
+        case ImdbList.AllTimeBoxOffice:
+          homeDataController.updateAllTimeBoxOffice(
+              allTimeBoxOffice: resultList);
+          break;
+      }
+      return true;
     } else {
       return false;
     }

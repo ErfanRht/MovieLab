@@ -47,6 +47,14 @@ class PreferencesShareholder {
           "._V1_UX128_CR0,3,128,176_AL_.jpg", "._V1_Ratio0.6716_AL_.jpg"),
       year: fullShow.year,
       imDbRating: fullShow.imDbRating,
+      weekend: fullShow.weekend,
+      gross: fullShow.gross,
+      weeks: fullShow.weeks,
+      worldwideLifetimeGross: fullShow.worldwideLifetimeGross,
+      domestic: fullShow.domestic,
+      domesticLifetimeGross: fullShow.domesticLifetimeGross,
+      foreign: fullShow.foreign,
+      foreignLifetimeGross: fullShow.foreignLifetimeGross,
     );
     bookmarks.add(show);
 

@@ -5,7 +5,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/models.dart';
-import 'package:movielab/modules/preferences_shareholder.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
 
 class IMDBListShowBox extends StatelessWidget {
@@ -14,12 +13,13 @@ class IMDBListShowBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String id = showPreview.id;
+    String rank = showPreview.rank;
     String image = showPreview.image;
     String title = showPreview.title;
     String year = showPreview.year;
     String crew = showPreview.crew;
     String imDbRating = showPreview.imDbRating;
-    String id = showPreview.id;
     return Padding(
         padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
         child: InkWell(
@@ -60,7 +60,7 @@ class IMDBListShowBox extends StatelessWidget {
                         children: [
                           Flexible(
                             child: Text(
-                              title,
+                              "$rank. $title",
                               softWrap: true,
                               style: GoogleFonts.ubuntu(
                                   color: Colors.white,
@@ -138,9 +138,4 @@ class IMDBListShowBox extends StatelessWidget {
           ),
         ));
   }
-}
-
-void delete(BuildContext context, ShowPreview showPreview) {
-  final preferencesShareholder = PreferencesShareholder();
-  preferencesShareholder.deleteBookmark(show: showPreview);
 }

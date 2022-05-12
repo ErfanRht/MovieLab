@@ -9,6 +9,14 @@ class ShowPreview {
   final String image;
   final String year;
   final String imDbRating;
+  final String weekend;
+  final String gross;
+  final String weeks;
+  final String worldwideLifetimeGross;
+  final String domesticLifetimeGross;
+  final String domestic;
+  final String foreignLifetimeGross;
+  final String foreign;
 
   const ShowPreview({
     required this.id,
@@ -18,6 +26,14 @@ class ShowPreview {
     required this.image,
     required this.year,
     required this.imDbRating,
+    required this.weekend,
+    required this.gross,
+    required this.weeks,
+    required this.worldwideLifetimeGross,
+    required this.domesticLifetimeGross,
+    required this.domestic,
+    required this.foreignLifetimeGross,
+    required this.foreign,
   });
 
   factory ShowPreview.fromJson(Map<String, dynamic> json) {
@@ -31,6 +47,14 @@ class ShowPreview {
       year: json['year'] ?? "",
       imDbRating:
           json['imDbRating'] == "" ? "0.0" : json['imDbRating'] ?? "0.0",
+      weekend: json['weekend'] ?? "",
+      gross: json['gross'] ?? "",
+      weeks: json['weeks'] ?? "",
+      worldwideLifetimeGross: json['worldwideLifetimeGross'] ?? "",
+      domesticLifetimeGross: json['domesticLifetimeGross'] ?? "",
+      domestic: json['domestic'] ?? "",
+      foreignLifetimeGross: json['foreignLifetimeGross'] ?? "",
+      foreign: json['foreign'] ?? "",
     );
   }
 
@@ -86,6 +110,14 @@ class FullShow {
   final List<ShowPreview> similars;
   final String tagline;
   final String keywords;
+  final String weekend;
+  final String gross;
+  final String weeks;
+  final String worldwideLifetimeGross;
+  final String domesticLifetimeGross;
+  final String domestic;
+  final String foreignLifetimeGross;
+  final String foreign;
 
   const FullShow({
     required this.id,
@@ -116,6 +148,14 @@ class FullShow {
     required this.similars,
     required this.tagline,
     required this.keywords,
+    required this.weekend,
+    required this.gross,
+    required this.weeks,
+    required this.worldwideLifetimeGross,
+    required this.domesticLifetimeGross,
+    required this.domestic,
+    required this.foreignLifetimeGross,
+    required this.foreign,
   });
 
   factory FullShow.fromJson(Map<String, dynamic> json) {
@@ -156,6 +196,14 @@ class FullShow {
       similars: getSimilars(json: json['similars'] ?? []) ?? [],
       tagline: json['tagline'] ?? "",
       keywords: json['keywords'].toString().replaceAll(",", ", "),
+      weekend: json['weekend'] ?? "",
+      gross: json['gross'] ?? "",
+      weeks: json['weeks'] ?? "",
+      worldwideLifetimeGross: json['worldwideLifetimeGross'] ?? "",
+      domesticLifetimeGross: json['domesticLifetimeGross'] ?? "",
+      domestic: json['domestic'] ?? "",
+      foreignLifetimeGross: json['foreignLifetimeGross'] ?? "",
+      foreign: json['foreign'] ?? "",
     );
   }
 }

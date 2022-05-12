@@ -5,7 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 class HomeBoxOfficeBox extends StatelessWidget {
   String title;
   String image;
-  HomeBoxOfficeBox({required this.title, required this.image});
+  HomeBoxOfficeBox({Key? key, required this.title, required this.image})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +20,10 @@ class HomeBoxOfficeBox extends StatelessWidget {
       child: Stack(fit: StackFit.expand, children: [
         ShaderMask(
             shaderCallback: (rect) {
-              // ignore: prefer_const_constructors
-              return LinearGradient(
+              return const LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: const [Colors.black, Colors.transparent],
+                colors: [Colors.black, Colors.transparent],
               ).createShader(Rect.fromLTRB(50, 50, rect.width, rect.height));
             },
             blendMode: BlendMode.dstIn,
