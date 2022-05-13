@@ -14,10 +14,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/ErfanRht/MovieLab?style=social)](https://github.com/ErfanRht/MovieLab/issues) 
 [![GitHub license](https://img.shields.io/github/license/ErfanRht/MovieLab?style=social)](https://github.com/ErfanRht/MovieLab/blob/master/LICENSE) 
 
-<p float="center">
-    <img src="./screenshots/mockups/MovieLab_mockup2.jpg" height="400" />
-  &ensp;
-</p>
+[![App preview](./screenshots/mockups/MovieLab_mockup2.jpg)](https://github.com/ErfanRht/MovieLab/)
 
 ## Server
 
