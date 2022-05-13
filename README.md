@@ -3,8 +3,6 @@
 
   <p align="left">
     MovieLab is an open source and a cross-platform mobile app for browsing movies and TV shows, including cast, production crew and personal biographies and plot summaries. It is written in Dart using Flutter.
-  </p>
-  <p align="left">
     With MovieLab, you have movies and series information right at your fingertips.
   </p>
 </p>
