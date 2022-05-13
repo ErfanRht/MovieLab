@@ -7,7 +7,7 @@
   </p>
 </p>
 
-![GitHub release (latest)](https://img.shields.io/github/v/release/ErfanRht/MovieLab)
+[![GitHub release (latest)](https://img.shields.io/github/v/release/ErfanRht/MovieLab)]
 ![GitHub repo size](https://img.shields.io/github/repo-size/ErfanRht/MovieLab)
 ![GitHub stars](https://img.shields.io/github/stars/ErfanRht/MovieLab?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/ErfanRht/MovieLab?style=social)
