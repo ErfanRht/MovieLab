@@ -15,7 +15,7 @@
 [![GitHub license](https://img.shields.io/github/license/ErfanRht/MovieLab?style=social)](https://github.com/ErfanRht/MovieLab/blob/master/LICENSE) 
 
 <p float="center">
-    <img src="./screenshots/mockups/MovieLab_mockup.jpg" height="400" />
+    <img src="./screenshots/mockups/MovieLab_mockup2.jpg" height="400" />
   &ensp;
 </p>
 
