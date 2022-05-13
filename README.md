@@ -1,12 +1,10 @@
 <p align="center">
   <h1 align="center">MovieLab</h1>
 
-  <p align="center">
-    MovieLab is an open source and a cross-platform mobile app for browsing movies and TV shows, including cast, production crew and personal biographies and plot summaries. It is written in Dart using Flutter.
+  <p align="left">
+    MovieLab is an open source and a cross-platform mobile app for browsing movies and TV shows, including cast, production crew and personal biographies and plot summaries. It is written in Dart using Flutter. With MovieLab, you have movies and series information right at your fingertips.
   </p>
 </p>
-
-An open source movie database application.
 
 <p float="center">
     <img src="./screenshots/mockups/MovieLab_mockup.jpg" height="400" />
