@@ -21,9 +21,9 @@
 
 ## Server
 
-MovieLab is using [IMDB APIs](https://imdb-api.com/)
+MovieLab is using [IMDB APIs](https://imdb-api.com/).
 
-IMDB APIs' documentation can be found [here](https://imdb-api.com/api)
+IMDB APIs' documentation can be found [here](https://imdb-api.com/api).
 
 ## Building
 
