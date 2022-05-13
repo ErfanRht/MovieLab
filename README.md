@@ -10,6 +10,8 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/ErfanRht/MovieLab)
 ![GitHub stars](https://img.shields.io/github/stars/ErfanRht/MovieLab?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/ErfanRht/MovieLab?style=social)
+![GitHub issues](https://img.shields.io/github/issues/ErfanRht/MovieLab?style=social)
+![GitHub license](https://img.shields.io/github/license/ErfanRht/MovieLab?style=social)
 
 <p float="center">
     <img src="./screenshots/mockups/MovieLab_mockup.jpg" height="400" />
