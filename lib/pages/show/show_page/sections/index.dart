@@ -1,0 +1,11 @@
+export 'cast.dart';
+export 'episode_guide.dart';
+export 'keywords.dart';
+export 'main_info.dart';
+export 'more_info.dart';
+export 'navbar.dart';
+export 'plot.dart';
+export 'rating.dart';
+export 'similars.dart';
+export 'title.dart';
+export 'box_office.dart';

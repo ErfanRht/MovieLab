@@ -1,21 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get.dart';
-import 'package:movielab/constants/colors.dart';
-import 'package:movielab/modules/preferences_shareholder.dart';
-import 'package:movielab/pages/show/show_page/get_show_info.dart';
-import 'package:movielab/pages/show/show_page/sections/box_office.dart';
-import 'package:movielab/pages/show/show_page/sections/cast.dart';
-import 'package:movielab/pages/show/show_page/sections/episode_guide.dart';
-import 'package:movielab/pages/show/show_page/sections/keywords.dart';
-import 'package:movielab/pages/show/show_page/sections/main_info.dart';
-import 'package:movielab/pages/show/show_page/sections/more_info.dart';
-import 'package:movielab/pages/show/show_page/sections/navbar.dart';
-import 'package:movielab/pages/show/show_page/sections/plot.dart';
-import 'package:movielab/pages/show/show_page/sections/rating.dart';
-import 'package:movielab/pages/show/show_page/sections/similars.dart';
-import 'package:movielab/pages/show/show_page/sections/title.dart';
+import '../../../constants/colors.dart';
+import '../../../modules/preferences_shareholder.dart';
+import 'get_show_info.dart';
+import 'sections/index.dart';
 
 // ignore: must_be_immutable
 class ShowPage extends StatefulWidget {
