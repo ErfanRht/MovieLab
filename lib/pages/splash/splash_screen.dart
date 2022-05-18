@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:movielab/constants/colors.dart';
-import 'package:movielab/constants/types.dart';
-import 'package:movielab/modules/cache/cache_data.dart';
-import 'package:movielab/modules/system_ui_overlay_style.dart';
-import 'package:movielab/pages/main/bookmarks/bookmarks_controller.dart';
-import 'package:movielab/pages/main/home/home_data_controller.dart';
-import 'package:movielab/pages/main/main_controller.dart';
-import 'package:movielab/pages/main/main_page.dart';
-import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
-import 'package:movielab/shared/loading_error.dart';
 import 'package:page_transition/page_transition.dart';
+import '../../constants/colors.dart';
+import '../../constants/types.dart';
+import '../../modules/cache/cache_data.dart';
+import '../../modules/system_ui_overlay_style.dart';
+import '../../pages/main/bookmarks/bookmarks_controller.dart';
+import '../../pages/main/home/home_data_controller.dart';
+import '../../pages/main/main_controller.dart';
+import '../../pages/main/main_page.dart';
+import '../../pages/main/search/search_bar/search_bar_controller.dart';
+import '../../shared/loading_error.dart';
 import 'get_initial_data.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -27,6 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     setSystemUIOverlayStyle(systemUIOverlayStyle: SystemUIOverlayStyle.DARK);
+    // Start the state managments
     Get.put(MainController());
     Get.put(HomeDataController());
     Get.put(SearchBarController());
