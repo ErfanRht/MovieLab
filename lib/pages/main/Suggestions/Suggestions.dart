@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
+import 'package:movielab/shared/loading_error.dart';
 import 'package:ms_undraw/ms_undraw.dart';
 
 class SuggestionsPage extends StatelessWidget {
@@ -42,6 +43,7 @@ class SuggestionsPage extends StatelessWidget {
                   size: 30,
                 ),
               ),
+              errorWidget: LoadingErrorWidget(tryAgain: () {}),
             ),
           ),
         ],

@@ -7,6 +7,7 @@ import 'package:movielab/constants/colors.dart';
 import 'package:movielab/modules/preferences_shareholder.dart';
 import 'package:movielab/pages/main/bookmarks/bookmarks_controller.dart';
 import 'package:movielab/pages/show/show_box/bookmarks_show_box.dart';
+import 'package:movielab/shared/loading_error.dart';
 import 'package:ms_undraw/ms_undraw.dart';
 
 class BookmarksPage extends StatelessWidget {
@@ -78,6 +79,7 @@ class BookmarksPage extends StatelessWidget {
                                 size: 30,
                               ),
                             ),
+                            errorWidget: LoadingErrorWidget(tryAgain: () {}),
                           ),
                         ),
                       ]));

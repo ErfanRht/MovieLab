@@ -46,6 +46,7 @@ class SearchPage extends StatelessWidget {
                 size: 30,
               ),
             ),
+            errorWidget: LoadingErrorWidget(tryAgain: () {}),
           ),
         );
       case RequestResult.LOADING:
