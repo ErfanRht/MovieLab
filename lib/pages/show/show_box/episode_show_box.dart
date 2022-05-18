@@ -2,16 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/models.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
-import 'package:movielab/pages/show/show_page/show_page.dart';
 
 class EpisodeShowBox extends StatelessWidget {
-  Episode show;
-  EpisodeShowBox({Key? key, required this.show}) : super(key: key);
+  final Episode show;
+  const EpisodeShowBox({Key? key, required this.show}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +18,6 @@ class EpisodeShowBox extends StatelessWidget {
     String image = show.image;
     String plot = show.plot;
     String episodeNumber = show.episodeNumber.toString();
-    String year = show.year.toString();
     String released = show.released;
     String imDbRating = show.imDbRating;
     String imDbVotes = show.imDbVotes;

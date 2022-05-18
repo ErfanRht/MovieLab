@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:movielab/constants/types.dart';
@@ -10,8 +11,8 @@ import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart
 class APIRequester {
   // API keys to access the IMDB API:
   //static const String apiKey = "k_6lgd4s89";
-  //static const String apiKey = "k_y9zcdoq3";
-  static const String apiKey = "";
+  static const String apiKey = "k_y9zcdoq3";
+  // static const String apiKey = "";
   // Get recently popular movies from the IMDB API
 
   Future<RequestResult> getPopularMovies() async {
@@ -139,7 +140,6 @@ class APIRequester {
   Future<FullShow?> getShow({required String id}) async {
     final response = await http
         .get(Uri.parse('https://imdb-api.com/en/API/Title/$apiKey/$id'));
-    print(response.statusCode);
     if (response.statusCode == 200) {
       var showJson = jsonDecode(response.body);
       FullShow show = FullShow.fromJson(showJson);
@@ -163,7 +163,9 @@ class APIRequester {
       }
       show.seasons[season - 1] = seasonEpisodes;
       cacheHolder.saveShowInfoInCache(show: show);
-      print("Season $season Episodes has been added");
+      if (kDebugMode) {
+        print("Season $season Episodes has been added");
+      }
       return show;
     } else {
       return null;

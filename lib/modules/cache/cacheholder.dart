@@ -5,7 +5,6 @@ import 'package:movielab/modules/cache/cache_data.dart';
 class CacheHolder {
 // To save a movie or show info to the cache so it can be accessed later without having to make a request to the IMDB API again.
   Future saveShowInfoInCache({required FullShow show}) async {
-    CacheData cacheData = Get.find<CacheData>();
     bool thereIs = false;
     List<FullShow> shows = Get.find<CacheData>().showsData;
     for (FullShow iShow in shows) {
@@ -21,7 +20,6 @@ class CacheHolder {
 
 // To save an actor or actress info to the cache so it can be accessed later without having to make a request to the IMDB API again.
   Future saveActorInfoInCache({required FullActor actor}) async {
-    CacheData cacheData = Get.find<CacheData>();
     bool thereIs = false;
     List<FullActor> actors = Get.find<CacheData>().actorsData;
     for (FullActor iActor in actors) {

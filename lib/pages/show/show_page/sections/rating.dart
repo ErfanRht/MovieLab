@@ -4,9 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 
 class ShowPageRating extends StatelessWidget {
-  String imDbRating;
-  String imDbVotes;
-  ShowPageRating({Key? key, required this.imDbRating, required this.imDbVotes})
+  final String imDbRating;
+  final String imDbVotes;
+  const ShowPageRating(
+      {Key? key, required this.imDbRating, required this.imDbVotes})
       : super(key: key);
 
   @override

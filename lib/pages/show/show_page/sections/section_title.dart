@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SectionTitle extends StatelessWidget {
-  String title;
-  EdgeInsets padding;
-  SectionTitle(
+  final String title;
+  final EdgeInsets padding;
+  const SectionTitle(
       {Key? key,
       required this.title,
       this.padding = const EdgeInsets.only(left: 10, right: 10, bottom: 12.5)})

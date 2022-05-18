@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ShowPageMainInfo extends StatelessWidget {
-  String year;
-  String genres;
-  String runTime;
-  String contentRating;
-  String countries;
-  ShowPageMainInfo(
+  final String year;
+  final String genres;
+  final String runTime;
+  final String contentRating;
+  final String countries;
+  const ShowPageMainInfo(
       {Key? key,
       required this.year,
       required this.genres,

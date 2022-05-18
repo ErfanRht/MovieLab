@@ -3,9 +3,10 @@ import 'package:movielab/models/models.dart';
 import 'package:movielab/modules/preferences_shareholder.dart';
 
 class ShowPageNavBar extends StatefulWidget {
-  FullShow show;
-  bool isBookmarked;
-  ShowPageNavBar({Key? key, required this.show, required this.isBookmarked})
+  final FullShow show;
+  final bool isBookmarked;
+  const ShowPageNavBar(
+      {Key? key, required this.show, required this.isBookmarked})
       : super(key: key);
 
   @override

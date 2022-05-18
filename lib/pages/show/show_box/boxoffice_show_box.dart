@@ -57,7 +57,7 @@ class BoxOfficeShowBox extends StatelessWidget {
                                     ),
                                   )),
                         ))
-                    : Empty(),
+                    : emptyWidget(),
                 Container(
                   alignment: Alignment.bottomLeft,
                   width: image != null || image != 'null' || image != ''
@@ -110,7 +110,7 @@ class BoxOfficeShowBox extends StatelessWidget {
         ));
   }
 
-  Widget Empty() {
+  Widget emptyWidget() {
     return const SizedBox();
   }
 
@@ -131,6 +131,6 @@ class BoxOfficeShowBox extends StatelessWidget {
               ),
             ],
           )
-        : Empty();
+        : emptyWidget();
   }
 }

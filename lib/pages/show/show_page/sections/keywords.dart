@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movielab/models/models.dart';
 import 'section_title.dart';
 
 class ShowPageKeywords extends StatelessWidget {
-  late dynamic show;
-  ShowPageKeywords({Key? key, required this.show}) : super(key: key);
+  final FullShow show;
+  const ShowPageKeywords({Key? key, required this.show}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SectionTitle(title: "Keywords"),
+        const SectionTitle(title: "Keywords"),
         Column(
           children: [
-            show.tagline.length > 0
+            show.tagline.isNotEmpty
                 ? Row(
                     children: [
                       Flexible(

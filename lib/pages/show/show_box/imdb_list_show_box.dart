@@ -8,8 +8,9 @@ import 'package:movielab/models/models.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
 
 class IMDBListShowBox extends StatelessWidget {
-  ShowPreview showPreview;
-  IMDBListShowBox({Key? key, required this.showPreview}) : super(key: key);
+  final ShowPreview showPreview;
+  const IMDBListShowBox({Key? key, required this.showPreview})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

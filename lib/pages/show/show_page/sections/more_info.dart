@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movielab/models/models.dart';
 import 'section_title.dart';
 
 class ShowPageMoreInfo extends StatelessWidget {
-  late dynamic show;
-  ShowPageMoreInfo({Key? key, required this.show}) : super(key: key);
+  final FullShow show;
+  const ShowPageMoreInfo({Key? key, required this.show}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class ShowPageMoreInfo extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 10),
       child: Column(
         children: [
-          SectionTitle(title: "More Information"),
+          const SectionTitle(title: "More Information"),
           show.releaseDate != ""
               ? info(infoName: "Release Date", infoValue: show.releaseDate)
               : nothing(),

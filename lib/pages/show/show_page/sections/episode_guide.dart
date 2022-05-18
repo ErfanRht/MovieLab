@@ -2,20 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
+import 'package:movielab/models/models.dart';
 import 'package:movielab/pages/show/show_page/sections/episode_guide/episode_guide_page.dart';
 import 'package:page_transition/page_transition.dart';
 import 'section_title.dart';
 
 class ShowPageEpisodeGuide extends StatelessWidget {
-  late dynamic show;
-  ShowPageEpisodeGuide({Key? key, required this.show}) : super(key: key);
+  final FullShow show;
+  const ShowPageEpisodeGuide({Key? key, required this.show}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return show.seasons.length > 0
+    return show.seasons.isNotEmpty
         ? Column(
             children: [
-              SectionTitle(title: "Episode Guide"),
+              const SectionTitle(title: "Episode Guide"),
               Padding(
                 padding: const EdgeInsets.only(bottom: 25, top: 5),
                 child: SizedBox(

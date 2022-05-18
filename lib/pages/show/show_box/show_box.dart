@@ -6,8 +6,8 @@ import 'package:movielab/models/models.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
 
 class ShowBox extends StatelessWidget {
-  ShowPreview showPreview;
-  ShowBox({required this.showPreview});
+  final ShowPreview showPreview;
+  const ShowBox({Key? key, required this.showPreview}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

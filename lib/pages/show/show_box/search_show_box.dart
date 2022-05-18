@@ -6,11 +6,10 @@ import 'package:movielab/pages/actor/actor_page/actor_page.dart';
 import 'package:movielab/pages/show/show_page/show_page.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../models/models.dart';
-import '../../../pages/show/show_box/show_box_common.dart';
 
 class SearchShowBox extends StatelessWidget {
-  SearchResult show;
-  SearchShowBox({Key? key, required this.show}) : super(key: key);
+  final SearchResult show;
+  const SearchShowBox({Key? key, required this.show}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

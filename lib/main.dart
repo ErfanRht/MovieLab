@@ -6,10 +6,11 @@ import 'constants/colors.dart';
 import 'constants/routes.dart';
 
 void main() {
-  runApp(App());
+  runApp(const App());
 }
 
 class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
   final String initRoute = splashScreenRoute;
   @override
   Widget build(BuildContext context) {
