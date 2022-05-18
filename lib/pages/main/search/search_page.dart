@@ -46,7 +46,10 @@ class SearchPage extends StatelessWidget {
                 size: 30,
               ),
             ),
-            errorWidget: LoadingErrorWidget(tryAgain: () {}),
+            errorWidget: LoadingErrorWidget(
+                errorText:
+                    "An unexpected error occurred while loading the illustration.",
+                tryAgain: () {}),
           ),
         );
       case RequestResult.LOADING:
