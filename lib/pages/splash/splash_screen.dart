@@ -11,6 +11,7 @@ import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/main/main_controller.dart';
 import 'package:movielab/pages/main/main_page.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
+import 'package:movielab/shared/loading_error.dart';
 import 'package:page_transition/page_transition.dart';
 import 'get_initial_data.dart';
 
@@ -77,51 +78,16 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
         );
       default:
-        return Padding(
-          padding: const EdgeInsets.only(top: 25, bottom: 25),
-          child: InkWell(
-              onTap: () {
-                setState(() {
-                  _loadingStatus = RequestResult.LOADING;
-                });
-                _loadData();
-              },
-              borderRadius: BorderRadius.circular(10),
-              child: Container(
-                padding: const EdgeInsets.all(10.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: kPrimaryColor.withOpacity(0.2),
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      _loadingStatus == RequestResult.FAILURE_SERVER_PROBLEM
-                          ? 'An unexpected error occurred while loading data.'
-                          : 'Your internet connection is not working.',
-                      style: GoogleFonts.ubuntu(
-                          color: Colors.white,
-                          fontSize: 12.5,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    const SizedBox(height: 5),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Text(
-                        'Try again',
-                        style: GoogleFonts.ubuntu(
-                            color: Colors.white,
-                            fontSize: 12.5,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      const Icon(
-                        Icons.refresh,
-                        color: Colors.white,
-                        size: 15,
-                      )
-                    ])
-                  ],
-                ),
-              )),
+        return LoadingErrorWidget(
+          tryAgain: () {
+            setState(() {
+              _loadingStatus = RequestResult.LOADING;
+            });
+            _loadData();
+          },
+          errorText: _loadingStatus == RequestResult.FAILURE_SERVER_PROBLEM
+              ? 'An unexpected error occurred while loading data.'
+              : 'Your internet connection is not working.',
         );
     }
   }

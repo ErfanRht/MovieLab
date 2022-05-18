@@ -9,10 +9,11 @@ import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart
 
 class APIRequester {
   // API keys to access the IMDB API:
-  // const String apiKey = "k_6lgd4s89";
-  static const String apiKey = "k_y9zcdoq3";
-  // static const String apiKey = "";
+  //static const String apiKey = "k_6lgd4s89";
+  //static const String apiKey = "k_y9zcdoq3";
+  static const String apiKey = "";
   // Get recently popular movies from the IMDB API
+
   Future<RequestResult> getPopularMovies() async {
     final response = await http
         .get(Uri.parse('https://imdb-api.com/en/API/MostPopularMovies/$apiKey'))
@@ -138,6 +139,7 @@ class APIRequester {
   Future<FullShow?> getShow({required String id}) async {
     final response = await http
         .get(Uri.parse('https://imdb-api.com/en/API/Title/$apiKey/$id'));
+    print(response.statusCode);
     if (response.statusCode == 200) {
       var showJson = jsonDecode(response.body);
       FullShow show = FullShow.fromJson(showJson);

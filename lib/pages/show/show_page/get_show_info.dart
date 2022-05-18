@@ -13,13 +13,15 @@ Future<FullShow?> getShowInfo({required String id}) async {
       print("GET SHOW INFO FROM CACHE");
       await Future.delayed(const Duration(seconds: 1));
       show = response;
-    } else if (response == null) {
+    } else {
       await apiRequester.getShow(id: id).then((response) {
         if (response != null) {
           print("GET SHOW INFO FROM API");
           print("SAVE SHOW INFO IN CACHE");
           cacheHolder.saveShowInfoInCache(show: response);
           show = response;
+        } else {
+          show = null;
         }
       });
     }
