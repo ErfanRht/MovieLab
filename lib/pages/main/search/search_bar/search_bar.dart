@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:movielab/constants/types.dart';
+import 'package:movielab/pages/main/search/search.dart';
 import '../../../../constants/colors.dart';
 import '../../../../modules/api_requester.dart';
 import 'voice_search.dart';
@@ -11,16 +13,9 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final apiRequester = APIRequester();
-
     TextEditingController controller =
         Get.find<SearchBarController>().controller;
     return GetBuilder<SearchBarController>(builder: (_) {
-      doSearch({required final String text}) {
-        _.updateResult(result: []);
-        apiRequester.search(expression: text);
-      }
-
       return Container(
         width: MediaQuery.of(context).size.width,
         height: 60,
@@ -33,7 +28,7 @@ class SearchBar extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                apiRequester.search(expression: null);
+                doSearch();
               },
               child: const Padding(
                 padding: EdgeInsets.only(left: 15, right: 10),
@@ -63,9 +58,7 @@ class SearchBar extends StatelessWidget {
                 cursorHeight: 20,
                 enabled: true,
                 enableSuggestions: true,
-                onSubmitted: (text) {
-                  doSearch(text: text);
-                },
+                onSubmitted: (text) => doSearch(),
                 onChanged: (value) => _.updateFieldState(text: value),
                 textInputAction: TextInputAction.search,
                 onTap: () {
@@ -108,7 +101,8 @@ class SearchBar extends StatelessWidget {
                     highlightColor: Colors.transparent,
                     onPressed: () {
                       _.updateFieldState(tapped: false, text: "");
-                      _.updateResult(result: null);
+                      _.updateResult(result: []);
+                      _.setLoadingStatus(status: RequestResult.NOT_STARTED);
                       _.controller.clear();
                     },
                     icon: const Padding(

@@ -117,7 +117,7 @@ class APIRequester {
   }
 
   // Get results of a search query from the IMDB API
-  Future<bool> search({required expression}) async {
+  Future<bool> search({expression}) async {
     expression ??= Get.find<SearchBarController>().fieldText;
     final response = await http.get(
         Uri.parse('https://imdb-api.com/en/API/SearchAll/$apiKey/$expression'));

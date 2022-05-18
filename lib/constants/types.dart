@@ -2,6 +2,7 @@
 enum SystemUIOverlayStyle { DARK, LIGHT, RED }
 enum ImdbList { TOP_250_MOVIES, TOP_250_TVS, BoxOffice, AllTimeBoxOffice }
 enum RequestResult {
+  NOT_STARTED,
   LOADING,
   SUCCESS,
   FAILURE,
