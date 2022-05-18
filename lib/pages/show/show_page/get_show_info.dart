@@ -16,20 +16,25 @@ Future<FullShow?> getShowInfo({required String id}) async {
       await Future.delayed(const Duration(seconds: 1));
       show = response;
     } else {
-      await apiRequester.getShow(id: id).then((response) {
-        if (response != null) {
-          if (kDebugMode) {
-            print("GET SHOW INFO FROM API");
+      try {
+        await apiRequester.getShow(id: id).then((response) {
+          if (response != null) {
+            if (kDebugMode) {
+              print("GET SHOW INFO FROM API");
+            }
+            if (kDebugMode) {
+              print("SAVE SHOW INFO IN CACHE");
+            }
+            cacheHolder.saveShowInfoInCache(show: response);
+            show = response;
+          } else {
+            show = null;
           }
-          if (kDebugMode) {
-            print("SAVE SHOW INFO IN CACHE");
-          }
-          cacheHolder.saveShowInfoInCache(show: response);
-          show = response;
-        } else {
-          show = null;
-        }
-      });
+        });
+      } catch (e) {
+        await Future.delayed(const Duration(seconds: 1));
+        show = null;
+      }
     }
   });
   return show;
