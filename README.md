@@ -24,6 +24,11 @@ MovieLab is using [IMDB APIs](https://imdb-api.com/).
 
 IMDB APIs' documentation can be found [here](https://imdb-api.com/api).
 
+## Requirements
+* Any Operating System (ie. MacOS X, Linux, Windows)
+* Any IDE with Flutter SDK installed (ie. IntelliJ, Android Studio, VSCode etc)
+* A little knowledge of Dart and Flutter
+
 ## Building
 Android (armeabi-v7a): `flutter build apk`
 Android (arm64-v8a): `flutter build apk --target=android-arm64`
