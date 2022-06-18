@@ -16,14 +16,15 @@
 
 [![App preview](./screenshots/mockups/MovieLab_mockup2.jpg)](https://github.com/ErfanRht/MovieLab/)
 
-## Server
+## Download
+  You can simply download it for Android from [Here](https://ErfanRht.github.io/MovieLab-Intro).
 
+## Server
 MovieLab is using [IMDB APIs](https://imdb-api.com/).
 
 IMDB APIs' documentation can be found [here](https://imdb-api.com/api).
 
 ## Building
-
 Android (armeabi-v7a): `flutter build apk`
 Android (arm64-v8a): `flutter build apk --target=android-arm64`
 iOS: `flutter build ios`
@@ -31,15 +32,12 @@ iOS: `flutter build ios`
 If you have a connected device or emulator you can run and deploy the app with `flutter run`
 
 ## Issues
-
 Please file any issues, bugs or feature request [here](https://github.com/ErfanRht/MovieLab/issues).
 
 ## License
-
 This project is licensed under the [Apache-2.0 License](https://github.com/ErfanRht/MovieLab/blob/master/LICENSE).
 
 ## Author
-
 This Flutter project is developed by [Erfan Rahmati](https://github.com/ErfanRht).
 
 ---
