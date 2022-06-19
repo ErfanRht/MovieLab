@@ -36,6 +36,9 @@ iOS: `flutter build ios`
 
 If you have a connected device or emulator you can run and deploy the app with `flutter run`
 
+### Screenshots
+<img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_01.jpg?raw=true" height="300em" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_02.jpg?raw=true" height="300em" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_03.jpg?raw=true" height="300em" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_04.jpg?raw=true" height="300em" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_05.jpg?raw=true" height="300em" /><img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_06.jpg?raw=true" height="300em" /><img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_07.jpg?raw=true" height="300em" />
+
 ## Issues
 Please file any issues, bugs or feature request [here](https://github.com/ErfanRht/MovieLab/issues).
 
