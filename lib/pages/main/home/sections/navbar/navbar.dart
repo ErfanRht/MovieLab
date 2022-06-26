@@ -10,21 +10,34 @@ class HomeNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 20, top: 10, right: 10),
+    return Container(
+      padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 15),
+      width: double.infinity,
+      height: 62.5,
+      color: kBackgroundColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          RichText(
-            text: TextSpan(
-              text: 'Movie',
-              style: GoogleFonts.ubuntu(
-                  color: Colors.white,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold),
-              children: const <TextSpan>[
-                TextSpan(text: 'Lab', style: TextStyle(color: kPrimaryColor)),
-              ],
+          InkWell(
+            onTap: () async {
+              print("object");
+            },
+            borderRadius: BorderRadius.circular(12.5),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              child: RichText(
+                text: TextSpan(
+                  text: 'Movie',
+                  style: GoogleFonts.ubuntu(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold),
+                  children: const <TextSpan>[
+                    TextSpan(
+                        text: 'Lab', style: TextStyle(color: kPrimaryColor)),
+                  ],
+                ),
+              ),
             ),
           ),
           IconButton(

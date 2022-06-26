@@ -21,131 +21,146 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: SafeArea(
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
+        child: Stack(
           children: [
-            const HomeNavbar(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ListView(
+              physics: const BouncingScrollPhysics(),
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 30, bottom: 5),
-                  child: Text(
-                    'Popular Movies',
-                    style: GoogleFonts.ubuntu(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500),
-                  ),
+                const SizedBox(
+                  height: 40,
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        PageTransition(
-                            type: PageTransitionType.fade,
-                            duration: const Duration(milliseconds: 500),
-                            child: const AllPopularMovies()));
-                  },
-                  highlightColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(right: 20, top: 30, bottom: 5),
-                    child: Text(
-                      'Show All',
-                      style: GoogleFonts.ubuntu(
-                          color: Colors.white.withOpacity(0.75),
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 20, top: 30, bottom: 5),
+                      child: Text(
+                        'Popular Movies',
+                        style: GoogleFonts.ubuntu(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500),
+                      ),
                     ),
-                  ),
-                ),
-              ],
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: HomePopularMovies(),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 15, bottom: 5),
-                  child: Text(
-                    'Popular TV Shows',
-                    style: GoogleFonts.ubuntu(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        PageTransition(
-                            type: PageTransitionType.fade,
-                            duration: const Duration(milliseconds: 500),
-                            child: const AllPopularTVs()));
-                  },
-                  highlightColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(right: 20, top: 15, bottom: 5),
-                    child: Text(
-                      'Show All',
-                      style: GoogleFonts.ubuntu(
-                          color: Colors.white.withOpacity(0.75),
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.fade,
+                                duration: const Duration(milliseconds: 500),
+                                child: const AllPopularMovies()));
+                      },
+                      highlightColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            right: 20, top: 30, bottom: 5),
+                        child: Text(
+                          'Show All',
+                          style: GoogleFonts.ubuntu(
+                              color: Colors.white.withOpacity(0.75),
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-            // ignore: prefer_const_constructors
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: const HomePopularTVShows(),
-            ),
-            Row(
-              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: HomePopularMovies(),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 20, top: 15, bottom: 5),
+                      child: Text(
+                        'Popular TV Shows',
+                        style: GoogleFonts.ubuntu(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.fade,
+                                duration: const Duration(milliseconds: 500),
+                                child: const AllPopularTVs()));
+                      },
+                      highlightColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            right: 20, top: 15, bottom: 5),
+                        child: Text(
+                          'Show All',
+                          style: GoogleFonts.ubuntu(
+                              color: Colors.white.withOpacity(0.75),
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                // ignore: prefer_const_constructors
                 Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 15, bottom: 5),
-                  child: Text(
-                    'IMDb Lists',
-                    style: GoogleFonts.ubuntu(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500),
-                  ),
+                  padding: const EdgeInsets.only(left: 10),
+                  child: const HomePopularTVShows(),
                 ),
+                Row(
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 20, top: 15, bottom: 5),
+                      child: Text(
+                        'IMDb Lists',
+                        style: GoogleFonts.ubuntu(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ],
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: HomeIMDbLists(),
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 20, top: 15, bottom: 5),
+                      child: Text(
+                        'Box Office',
+                        style: GoogleFonts.ubuntu(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ],
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: HomeBoxOffice(),
+                )
               ],
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: HomeIMDbLists(),
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 15, bottom: 5),
-                  child: Text(
-                    'Box Office',
-                    style: GoogleFonts.ubuntu(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
+            Column(
+              children: const [
+                HomeNavbar(),
               ],
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: HomeBoxOffice(),
-            )
           ],
         ),
       ),
