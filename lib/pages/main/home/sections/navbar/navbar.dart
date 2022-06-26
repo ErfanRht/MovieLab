@@ -13,8 +13,17 @@ class HomeNavbar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 15),
       width: double.infinity,
-      height: 62.5,
-      color: kBackgroundColor,
+      height: 60,
+      decoration: BoxDecoration(
+        color: kBackgroundColor,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.25),
+            blurRadius: 2.5,
+            offset: const Offset(0, 7.5),
+          ),
+        ],
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -22,6 +31,10 @@ class HomeNavbar extends StatelessWidget {
             onTap: () async {
               print("object");
             },
+            hoverColor: Colors.blue,
+            splashColor: Colors.blue,
+            highlightColor: Colors.blue,
+            focusColor: Colors.blue,
             borderRadius: BorderRadius.circular(12.5),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -40,16 +53,19 @@ class HomeNavbar extends StatelessWidget {
               ),
             ),
           ),
-          IconButton(
-            icon: const Icon(
-              FontAwesomeIcons.search,
-              color: Colors.white,
-              size: 22.5,
+          Padding(
+            padding: const EdgeInsets.only(top: 2.5),
+            child: IconButton(
+              icon: const Icon(
+                FontAwesomeIcons.search,
+                color: Colors.white,
+                size: 22.5,
+              ),
+              onPressed: () async {
+                await Future.delayed(const Duration(milliseconds: 250));
+                Get.find<MainController>().changeIndex(1);
+              },
             ),
-            onPressed: () async {
-              await Future.delayed(const Duration(milliseconds: 250));
-              Get.find<MainController>().changeIndex(1);
-            },
           ),
         ],
       ),

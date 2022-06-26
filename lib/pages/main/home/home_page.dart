@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               children: [
                 const SizedBox(
-                  height: 40,
+                  height: 45,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
