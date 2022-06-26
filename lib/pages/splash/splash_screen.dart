@@ -11,7 +11,7 @@ import '../../pages/main/home/home_data_controller.dart';
 import '../../pages/main/main_controller.dart';
 import '../../pages/main/main_page.dart';
 import '../../pages/main/search/search_bar/search_bar_controller.dart';
-import '../../shared/loading_error.dart';
+import '../../widgets/loading_error.dart';
 import 'get_initial_data.dart';
 
 class SplashScreen extends StatefulWidget {

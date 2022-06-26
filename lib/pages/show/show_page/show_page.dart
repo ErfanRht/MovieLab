@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:movielab/constants/types.dart';
-import 'package:movielab/shared/loading_error.dart';
+import 'package:movielab/widgets/loading_error.dart';
 import '../../../constants/colors.dart';
 import '../../../modules/preferences_shareholder.dart';
 import 'get_show_info.dart';
