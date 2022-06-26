@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:movielab/constants/types.dart';
-import 'package:movielab/models/models.dart';
-import 'package:speech_to_text/speech_to_text.dart';
 
 class SearchBarController extends GetxController {
   RequestResult loadingStatus = RequestResult.NOT_STARTED;

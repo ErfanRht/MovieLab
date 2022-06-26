@@ -21,7 +21,7 @@ dependencies:
   cached_network_image: ^3.2.0
   flutter_rating_bar: ^4.0.0
   google_nav_bar: ^5.0.5
-  speech_to_text: ^5.4.3
+  speech_to_text: ^5.6.0
   page_transition: ^2.0.5
   flutter_slidable: ^1.2.0
   avatar_glow: ^2.0.2

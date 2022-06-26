@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/pages/main/search/search.dart';
 import '../../../../constants/colors.dart';
-import '../../../../modules/api_requester.dart';
 import 'voice_search.dart';
 import 'search_bar_controller.dart';
 
