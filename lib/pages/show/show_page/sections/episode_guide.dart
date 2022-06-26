@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/models.dart';
 import 'package:movielab/pages/show/show_page/sections/episode_guide/episode_guide_page.dart';
-import 'package:page_transition/page_transition.dart';
+import '../../../../modules/navigate.dart';
 import 'section_title.dart';
 
 class ShowPageEpisodeGuide extends StatelessWidget {
@@ -32,16 +32,12 @@ class ShowPageEpisodeGuide extends StatelessWidget {
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: () {
-                                  Navigator.push(
+                                  Navigate.pushTo(
                                       context,
-                                      PageTransition(
-                                          type: PageTransitionType.fade,
-                                          duration:
-                                              const Duration(milliseconds: 500),
-                                          child: EpisodeGuidePage(
-                                            show: show,
-                                            initialIndex: index,
-                                          )));
+                                      EpisodeGuidePage(
+                                        show: show,
+                                        initialIndex: index,
+                                      ));
                                 },
                                 borderRadius: BorderRadius.circular(10),
                                 child: Container(

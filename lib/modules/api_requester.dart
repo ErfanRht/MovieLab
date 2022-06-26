@@ -10,8 +10,8 @@ import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart
 
 class APIRequester {
   // API keys to access the IMDB API:
-  //static const String apiKey = "k_6lgd4s89";
-  static const String apiKey = "k_y9zcdoq3";
+  static const String apiKey = "k_6lgd4s89";
+  // static const String apiKey = "k_y9zcdoq3";
   // static const String apiKey = "";
   // Get recently popular movies from the IMDB API
 

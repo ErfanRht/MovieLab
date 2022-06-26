@@ -6,6 +6,7 @@ import 'package:movielab/modules/system_ui_overlay_style.dart';
 import 'package:movielab/pages/main/home/sections/populars/popular_movies/all_popular_movies.dart';
 import 'package:movielab/pages/main/home/sections/populars/popular_tvs/all_popular_tvs.dart';
 import 'package:page_transition/page_transition.dart';
+import '../../../modules/navigate.dart';
 import 'sections/box_office/box_office.dart';
 import 'sections/imdb_lists/lists.dart';
 import 'sections/navbar/navbar.dart';
@@ -45,12 +46,7 @@ class HomePage extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            PageTransition(
-                                type: PageTransitionType.fade,
-                                duration: const Duration(milliseconds: 500),
-                                child: const AllPopularMovies()));
+                        Navigate.pushTo(context, const AllPopularMovies());
                       },
                       highlightColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -88,12 +84,7 @@ class HomePage extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            PageTransition(
-                                type: PageTransitionType.fade,
-                                duration: const Duration(milliseconds: 500),
-                                child: const AllPopularTVs()));
+                        Navigate.pushTo(context, const AllPopularTVs());
                       },
                       highlightColor: Colors.transparent,
                       focusColor: Colors.transparent,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:movielab/modules/navigate.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../constants/colors.dart';
 import '../../constants/types.dart';
@@ -95,12 +96,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future _loadData() async {
     getInitialData().then((result) {
       if (result == RequestResult.SUCCESS) {
-        Navigator.pushReplacement(
-            context,
-            PageTransition(
-                type: PageTransitionType.fade,
-                duration: const Duration(milliseconds: 500),
-                child: const MainPage()));
+        Navigate.replaceTo(context, const MainPage());
       } else {
         setState(() {
           _loadingStatus = result;

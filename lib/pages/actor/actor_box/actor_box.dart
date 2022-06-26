@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/models/models.dart';
+import 'package:movielab/modules/navigate.dart';
 import 'package:movielab/pages/actor/actor_page/actor_page.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
 import 'package:page_transition/page_transition.dart';
@@ -15,12 +16,7 @@ class ShowActorBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context,
-            PageTransition(
-                type: PageTransitionType.fade,
-                duration: const Duration(milliseconds: 500),
-                child: ActorPage(id: actor.id)));
+        Navigate.pushTo(context, ActorPage(id: actor.id));
       },
       borderRadius: BorderRadius.circular(15),
       child: Container(

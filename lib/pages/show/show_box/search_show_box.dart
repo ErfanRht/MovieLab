@@ -6,6 +6,7 @@ import 'package:movielab/pages/actor/actor_page/actor_page.dart';
 import 'package:movielab/pages/show/show_page/show_page.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../models/models.dart';
+import '../../../modules/navigate.dart';
 
 class SearchShowBox extends StatelessWidget {
   final SearchResult show;
@@ -22,14 +23,8 @@ class SearchShowBox extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
       child: InkWell(
         onTap: () async {
-          Navigator.push(
-              context,
-              PageTransition(
-                  type: PageTransitionType.fade,
-                  duration: const Duration(milliseconds: 500),
-                  child: resultType == "Name"
-                      ? ActorPage(id: id)
-                      : ShowPage(id: id)));
+          Navigate.pushTo(context,
+              resultType == "Name" ? ActorPage(id: id) : ShowPage(id: id));
         },
         borderRadius: BorderRadius.circular(15),
         child: Container(
