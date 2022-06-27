@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
+import 'package:movielab/pages/main/main_controller.dart';
 import 'package:movielab/pages/main/search/search.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
@@ -64,11 +65,16 @@ class SearchPage extends StatelessWidget {
           doSearch();
         });
       default:
-        return ListView.builder(
-          itemCount: result?.length,
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: (context, index) {
-            return SearchShowBox(show: result![index]);
+        return GetBuilder<MainController>(
+          builder: (_) {
+            return ListView.builder(
+              itemCount: result?.length,
+              physics: const BouncingScrollPhysics(),
+              controller: _.searchScrollController,
+              itemBuilder: (context, index) {
+                return SearchShowBox(show: result![index]);
+              },
+            );
           },
         );
     }
