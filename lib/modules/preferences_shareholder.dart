@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:movielab/models/models.dart';
 import 'package:movielab/pages/main/bookmarks/bookmarks_controller.dart';
@@ -22,7 +23,9 @@ class PreferencesShareholder {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('bookmarks');
     Get.find<BookmarksPageController>().updateBookmarksList(bookmarks: []);
-    print("All bookmarks deleted");
+    if (kDebugMode) {
+      print("All bookmarks deleted");
+    }
     return true;
   }
 
@@ -63,7 +66,9 @@ class PreferencesShareholder {
     prefs.setString("bookmarks", encodedData);
     Get.find<BookmarksPageController>()
         .updateBookmarksList(bookmarks: bookmarks);
-    print("Item added to bookmarks");
+    if (kDebugMode) {
+      print("Item added to bookmarks");
+    }
 
     return true;
   }
@@ -76,15 +81,23 @@ class PreferencesShareholder {
     for (int i = 0; i < bookmarks.length; i++) {
       if (fullShow != null) {
         if (bookmarks[i].id == fullShow.id) {
-          print(bookmarks.length);
+          if (kDebugMode) {
+            print(bookmarks.length);
+          }
           bookmarks.remove(bookmarks[i]);
-          print(bookmarks.length);
+          if (kDebugMode) {
+            print(bookmarks.length);
+          }
         }
       } else if (show != null) {
         if (bookmarks[i].id == show.id) {
-          print(bookmarks.length);
+          if (kDebugMode) {
+            print(bookmarks.length);
+          }
           bookmarks.remove(bookmarks[i]);
-          print(bookmarks.length);
+          if (kDebugMode) {
+            print(bookmarks.length);
+          }
         }
       }
     }
@@ -92,7 +105,9 @@ class PreferencesShareholder {
     prefs.setString("bookmarks", encodedData);
     Get.find<BookmarksPageController>()
         .updateBookmarksList(bookmarks: bookmarks);
-    print("Item deleted from bookmarks");
+    if (kDebugMode) {
+      print("Item deleted from bookmarks");
+    }
 
     return true;
   }

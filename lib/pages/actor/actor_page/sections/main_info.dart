@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ActorPageMainInfo extends StatelessWidget {
-  String role;
-  ActorPageMainInfo({Key? key, required this.role}) : super(key: key);
+  final String role;
+  const ActorPageMainInfo({Key? key, required this.role}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 
 class HomeIMDbBox extends StatelessWidget {
-  String title;
-  HomeIMDbBox({required this.title});
+  final String title;
+  const HomeIMDbBox({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

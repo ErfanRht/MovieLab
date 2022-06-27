@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/show/show_box/boxoffice_show_box.dart';
-import 'package:movielab/pages/show/show_box/imdb_list_show_box.dart';
 
 class BoxOfficePAge extends StatelessWidget {
   const BoxOfficePAge({Key? key}) : super(key: key);

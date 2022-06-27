@@ -5,7 +5,6 @@ import 'package:movielab/constants/types.dart';
 import 'package:movielab/modules/system_ui_overlay_style.dart';
 import 'package:movielab/pages/main/home/sections/populars/popular_movies/all_popular_movies.dart';
 import 'package:movielab/pages/main/home/sections/populars/popular_tvs/all_popular_tvs.dart';
-import 'package:page_transition/page_transition.dart';
 import '../../../modules/navigate.dart';
 import 'sections/box_office/box_office.dart';
 import 'sections/imdb_lists/lists.dart';

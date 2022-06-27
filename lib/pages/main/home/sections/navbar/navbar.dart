@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -29,7 +30,9 @@ class HomeNavbar extends StatelessWidget {
         children: [
           InkWell(
             onTap: () async {
-              print("object");
+              if (kDebugMode) {
+                print("object");
+              }
             },
             hoverColor: Colors.blue,
             splashColor: Colors.blue,

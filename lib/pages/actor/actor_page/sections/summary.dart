@@ -4,14 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'section_title.dart';
 
 class ActorPageSummary extends StatelessWidget {
-  String summary;
-  ActorPageSummary({Key? key, required this.summary}) : super(key: key);
+  final String summary;
+  const ActorPageSummary({Key? key, required this.summary}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SectionTitle(title: "Summary"),
+        const SectionTitle(title: "Summary"),
         Padding(
           padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
           child: Text(summary,

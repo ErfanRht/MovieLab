@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeBoxOfficeBox extends StatelessWidget {
-  String title;
-  String image;
-  HomeBoxOfficeBox({Key? key, required this.title, required this.image})
+  final String title;
+  final String image;
+  const HomeBoxOfficeBox({Key? key, required this.title, required this.image})
       : super(key: key);
 
   @override

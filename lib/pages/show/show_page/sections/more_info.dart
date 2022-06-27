@@ -55,7 +55,7 @@ info({required final String infoName, required final String infoValue}) {
     padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
     child: Row(
       children: [
-        Text(infoName + ":",
+        Text("$infoName:",
             softWrap: true,
             style: GoogleFonts.ubuntu(
                 color: Colors.white.withOpacity(0.8),

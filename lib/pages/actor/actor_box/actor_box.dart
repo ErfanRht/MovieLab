@@ -5,12 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/models/models.dart';
 import 'package:movielab/modules/navigate.dart';
 import 'package:movielab/pages/actor/actor_page/actor_page.dart';
-import 'package:movielab/pages/show/show_box/show_box_common.dart';
-import 'package:page_transition/page_transition.dart';
 
 class ShowActorBox extends StatelessWidget {
-  ActorPreview actor;
-  ShowActorBox({required this.actor});
+  final ActorPreview actor;
+  const ShowActorBox({Key? key, required this.actor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -4,8 +4,8 @@ import 'package:movielab/pages/show/show_box/show_box.dart';
 import 'section_title.dart';
 
 class ActorPageKnownFor extends StatelessWidget {
-  FullActor? actor;
-  ActorPageKnownFor({Key? key, required this.actor}) : super(key: key);
+  final FullActor? actor;
+  const ActorPageKnownFor({Key? key, required this.actor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class ActorPageKnownFor extends StatelessWidget {
       default:
         return Column(
           children: [
-            SectionTitle(title: "Known For"),
+            const SectionTitle(title: "Known For"),
             knownFor(knownFor: actor?.knownFor ?? []),
           ],
         );

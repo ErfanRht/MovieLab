@@ -24,9 +24,9 @@ class HomeBoxOffice extends StatelessWidget {
               Navigate.pushTo(context, const BoxOfficePAge());
             },
             borderRadius: BorderRadius.circular(27.5),
-            child: Padding(
-              padding: const EdgeInsets.only(
-                  top: 10, bottom: 10, left: 10, right: 10),
+            child: const Padding(
+              padding:
+                  EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
               child: HomeBoxOfficeBox(
                 title: "Box Office",
                 image:
@@ -40,9 +40,9 @@ class HomeBoxOffice extends StatelessWidget {
               Navigate.pushTo(context, const AllTimeBoxOfficePage());
             },
             borderRadius: BorderRadius.circular(27.5),
-            child: Padding(
-              padding: const EdgeInsets.only(
-                  top: 10, bottom: 10, left: 10, right: 10),
+            child: const Padding(
+              padding:
+                  EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
               child: HomeBoxOfficeBox(
                 title: "Box Office\nOf\nAll Time",
                 image:

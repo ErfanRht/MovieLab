@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/pages/main/bookmarks/bookmarks_page.dart';
 import 'package:movielab/pages/main/main_controller.dart';
-import 'Suggestions/Suggestions.dart';
+import 'Suggestions/suggestions.dart';
 import 'home/home_page.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'search/search_page.dart';

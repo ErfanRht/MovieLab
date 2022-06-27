@@ -4,8 +4,8 @@ import 'package:movielab/models/models.dart';
 import 'section_title.dart';
 
 class ActorPageMoreInfo extends StatelessWidget {
-  FullActor? actor;
-  ActorPageMoreInfo({Key? key, required this.actor}) : super(key: key);
+  final FullActor? actor;
+  const ActorPageMoreInfo({Key? key, required this.actor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class ActorPageMoreInfo extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 10),
       child: Column(
         children: [
-          SectionTitle(title: "More Information"),
+          const SectionTitle(title: "More Information"),
           actor?.birthDate != ""
               ? info(infoName: "Birth Date", infoValue: actor?.birthDate ?? "")
               : nothing(),
@@ -37,7 +37,7 @@ info({required final String infoName, required final String infoValue}) {
     padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
     child: Row(
       children: [
-        Text(infoName + ":",
+        Text("$infoName:",
             softWrap: true,
             style: GoogleFonts.ubuntu(
                 color: Colors.white.withOpacity(0.8),

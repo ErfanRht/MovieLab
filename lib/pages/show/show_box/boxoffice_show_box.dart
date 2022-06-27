@@ -5,8 +5,9 @@ import 'package:movielab/models/models.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
 
 class BoxOfficeShowBox extends StatelessWidget {
-  ShowPreview showPreview;
-  BoxOfficeShowBox({Key? key, required this.showPreview}) : super(key: key);
+  final ShowPreview showPreview;
+  const BoxOfficeShowBox({Key? key, required this.showPreview})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,6 @@ class BoxOfficeShowBox extends StatelessWidget {
     String rank = showPreview.rank;
     String image = showPreview.image;
     String title = showPreview.title;
-    String year = showPreview.year;
     String weekend = showPreview.crew;
     String gross = showPreview.gross;
     String weeks = showPreview.weeks;
@@ -23,7 +23,6 @@ class BoxOfficeShowBox extends StatelessWidget {
     final String domestic = showPreview.domestic;
     final String foreignLifetimeGross = showPreview.foreignLifetimeGross;
     final String foreign = showPreview.foreign;
-    print(image);
     return Padding(
         padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
         child: InkWell(

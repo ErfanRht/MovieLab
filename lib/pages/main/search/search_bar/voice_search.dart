@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -26,11 +27,6 @@ class _VoiceSearchAlertDialogState extends State<VoiceSearchAlertDialog> {
 
   @override
   Widget build(BuildContext context) {
-    initState() {
-      super.initState();
-      _listen();
-    }
-
     double halfScreen =
         ((MediaQuery.of(context).size.width.round().toDouble()) / 2) - 150;
     return Padding(
@@ -90,13 +86,23 @@ class _VoiceSearchAlertDialogState extends State<VoiceSearchAlertDialog> {
   void _listen() async {
     if (!_isListening) {
       bool available = await _speech.initialize(
-        onStatus: (val) => print('onStatus: $val'),
-        onError: (val) => print('onError: $val'),
+        onStatus: (val) {
+          if (kDebugMode) {
+            print('onStatus: $val');
+          }
+        },
+        onError: (val) {
+          if (kDebugMode) {
+            print('onError: $val');
+          }
+        },
       );
       if (available) {
         setState(() => _isListening = true);
         setState(() => _text = "Listening...");
-        print('>>> Listening started...');
+        if (kDebugMode) {
+          print('>>> Listening started...');
+        }
 
         _speech.listen(
           onResult: (val) => setState(() async {
@@ -104,10 +110,12 @@ class _VoiceSearchAlertDialogState extends State<VoiceSearchAlertDialog> {
             _confidence = val.confidence;
 
             if (val.hasConfidenceRating && val.confidence > 0) {
-              SearchBarController _ = Get.find<SearchBarController>();
-              print('Word: $_text, Confidence: $_confidence');
-              _.controller.text = _text;
-              _.fieldText = _text;
+              SearchBarController state = Get.find<SearchBarController>();
+              if (kDebugMode) {
+                print('Word: $_text, Confidence: $_confidence');
+              }
+              state.controller.text = _text;
+              state.fieldText = _text;
               await Future.delayed(const Duration(seconds: 1));
               Navigator.pop(context);
               doSearch();
@@ -119,7 +127,9 @@ class _VoiceSearchAlertDialogState extends State<VoiceSearchAlertDialog> {
       setState(() => _isListening = false);
       setState(() => _text = "Tap to talk!");
       _speech.stop();
-      print('>>> Listening stopped.');
+      if (kDebugMode) {
+        print('>>> Listening stopped.');
+      }
     }
   }
 }
