@@ -13,7 +13,7 @@ Future<FullShow?> getShowInfo({required String id}) async {
       if (kDebugMode) {
         print("GET SHOW INFO FROM CACHE");
       }
-      await Future.delayed(const Duration(seconds: 1));
+      //await Future.delayed(const Duration(seconds: 1));
       show = response;
     } else {
       try {

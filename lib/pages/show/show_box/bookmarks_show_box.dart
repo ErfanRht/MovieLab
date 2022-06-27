@@ -1,18 +1,17 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/models.dart';
 import 'package:movielab/modules/preferences_shareholder.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
 
 class BookmarksShowBox extends StatelessWidget {
-  ShowPreview showPreview;
-  BookmarksShowBox({Key? key, required this.showPreview}) : super(key: key);
+  final ShowPreview showPreview;
+  const BookmarksShowBox({Key? key, required this.showPreview})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,23 +66,16 @@ class BookmarksShowBox extends StatelessWidget {
               height: 150,
               child: Row(
                 children: [
-                  SizedBox(
-                      width: 100,
+                  showBoxImage(
+                      image: image,
+                      tag: "show_$id",
                       height: 150,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(7.5),
-                        child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: image,
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
-                            placeholder: (context, url) => const Center(
-                                  child: SpinKitThreeBounce(
-                                    color: Colors.white,
-                                    size: 20.0,
-                                  ),
-                                )),
-                      )),
+                      width: 100,
+                      placeholder: const SpinKitThreeBounce(
+                        color: Colors.white,
+                        size: 20.0,
+                      ),
+                      radius: 7.5),
                   Container(
                     alignment: Alignment.bottomLeft,
                     width: MediaQuery.of(context).size.width - 155,

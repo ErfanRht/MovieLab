@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:movielab/models/models.dart';
 import 'show_box_common.dart';
 
-class ShowBox extends StatelessWidget {
+class SimilarShowBox extends StatelessWidget {
   final ShowPreview showPreview;
-  const ShowBox({Key? key, required this.showPreview}) : super(key: key);
+  const SimilarShowBox({Key? key, required this.showPreview}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class ShowBox extends StatelessWidget {
           children: [
             showBoxImage(
                 image: showPreview.image,
-                tag: "show_$id",
+                tag: "similar_$id",
                 height: 210,
                 width: 145,
                 radius: 17.5),

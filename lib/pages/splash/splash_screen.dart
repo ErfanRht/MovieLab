@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:movielab/modules/navigate.dart';
-import 'package:page_transition/page_transition.dart';
 import '../../constants/colors.dart';
 import '../../constants/types.dart';
 import '../../modules/cache/cache_data.dart';

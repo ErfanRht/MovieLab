@@ -19,4 +19,12 @@ class Navigate {
             duration: const Duration(milliseconds: 250),
             child: page));
   }
+
+  static void pushHeroicTo(context, Widget page) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => page,
+        ));
+  }
 }

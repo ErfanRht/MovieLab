@@ -69,19 +69,22 @@ class _ShowPageState extends State<ShowPage> {
                                 100, 250, rect.width, rect.height));
                           },
                           blendMode: BlendMode.dstIn,
-                          child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            height:
-                                MediaQuery.of(context).size.height * (2 / 3) -
-                                    35,
-                            width: MediaQuery.of(context).size.width,
-                            imageUrl: show.image,
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
-                            placeholder: (context, url) => const Center(
-                              child: SpinKitThreeBounce(
-                                color: Colors.white,
-                                size: 30.0,
+                          child: Hero(
+                            tag: "show_${widget.id}",
+                            child: CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              height:
+                                  MediaQuery.of(context).size.height * (2 / 3) -
+                                      35,
+                              width: MediaQuery.of(context).size.width,
+                              imageUrl: show.image,
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                              placeholder: (context, url) => const Center(
+                                child: SpinKitThreeBounce(
+                                  color: Colors.white,
+                                  size: 30.0,
+                                ),
                               ),
                             ),
                           )),
