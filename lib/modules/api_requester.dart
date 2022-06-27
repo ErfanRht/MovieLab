@@ -9,15 +9,16 @@ import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
 
 class APIRequester {
+  static const String imdbBaseUrl = 'https://imdb-api.com/en/API';
   // API keys to access the IMDB API:
   static const String apiKey = "k_6lgd4s89";
   // static const String apiKey = "k_y9zcdoq3";
   // static const String apiKey = "";
-  // Get recently popular movies from the IMDB API
 
+  // Get recently popular movies from the IMDB API
   Future<RequestResult> getPopularMovies() async {
     final response = await http
-        .get(Uri.parse('https://imdb-api.com/en/API/MostPopularMovies/$apiKey'))
+        .get(Uri.parse('$imdbBaseUrl/MostPopularMovies/$apiKey'))
         .timeout(
           const Duration(seconds: 10),
         );
@@ -42,7 +43,7 @@ class APIRequester {
   // Get recently popular TV shows from the IMDB API
   Future<RequestResult> getPopularTVShows() async {
     final response = await http
-        .get(Uri.parse('https://imdb-api.com/en/API/MostPopularTVs/$apiKey'))
+        .get(Uri.parse('$imdbBaseUrl/MostPopularTVs/$apiKey'))
         .timeout(const Duration(seconds: 10));
 
     if (response.statusCode == 200) {
@@ -70,23 +71,22 @@ class APIRequester {
     switch (listName) {
       case ImdbList.TOP_250_MOVIES:
         response = await http
-            .get(Uri.parse('https://imdb-api.com/en/API/Top250Movies/$apiKey'))
+            .get(Uri.parse('$imdbBaseUrl/Top250Movies/$apiKey'))
             .timeout(const Duration(seconds: 10));
         break;
       case ImdbList.TOP_250_TVS:
         response = await http
-            .get(Uri.parse('https://imdb-api.com/en/API/Top250TVs/$apiKey'))
+            .get(Uri.parse('$imdbBaseUrl/Top250TVs/$apiKey'))
             .timeout(const Duration(seconds: 10));
         break;
       case ImdbList.BoxOffice:
         response = await http
-            .get(Uri.parse('https://imdb-api.com/en/API/BoxOffice/$apiKey'))
+            .get(Uri.parse('$imdbBaseUrl/BoxOffice/$apiKey'))
             .timeout(const Duration(seconds: 10));
         break;
       case ImdbList.AllTimeBoxOffice:
         response = await http
-            .get(Uri.parse(
-                'https://imdb-api.com/en/API/BoxOfficeAllTime/$apiKey'))
+            .get(Uri.parse('$imdbBaseUrl/BoxOfficeAllTime/$apiKey'))
             .timeout(const Duration(seconds: 10));
         break;
     }
@@ -120,8 +120,8 @@ class APIRequester {
   // Get results of a search query from the IMDB API
   Future<bool> search({expression}) async {
     expression ??= Get.find<SearchBarController>().fieldText;
-    final response = await http.get(
-        Uri.parse('https://imdb-api.com/en/API/SearchAll/$apiKey/$expression'));
+    final response =
+        await http.get(Uri.parse('$imdbBaseUrl/SearchAll/$apiKey/$expression'));
 
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body)["results"];
@@ -138,8 +138,8 @@ class APIRequester {
 
   // Get full details of a show from the IMDB API
   Future<FullShow?> getShow({required String id}) async {
-    final response = await http
-        .get(Uri.parse('https://imdb-api.com/en/API/Title/$apiKey/$id'));
+    final response =
+        await http.get(Uri.parse('$imdbBaseUrl/Title/$apiKey/$id'));
     if (response.statusCode == 200) {
       var showJson = jsonDecode(response.body);
       FullShow show = FullShow.fromJson(showJson);
@@ -153,8 +153,8 @@ class APIRequester {
   Future<FullShow?> getShowEpisodes(
       {required dynamic show, required int season}) async {
     final cacheHolder = CacheHolder();
-    final response = await http.get(Uri.parse(
-        'https://imdb-api.com/en/API/SeasonEpisodes/$apiKey/${show.id}/$season'));
+    final response = await http.get(
+        Uri.parse('$imdbBaseUrl/SeasonEpisodes/$apiKey/${show.id}/$season'));
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body)["episodes"];
       List<Episode> seasonEpisodes = [];
@@ -174,8 +174,7 @@ class APIRequester {
 
   // Get full details of a show from the IMDB API
   Future<FullActor?> getActor({required String id}) async {
-    final response = await http
-        .get(Uri.parse('https://imdb-api.com/en/API/Name/$apiKey/$id'));
+    final response = await http.get(Uri.parse('$imdbBaseUrl/Name/$apiKey/$id'));
     if (response.statusCode == 200) {
       var actorJson = jsonDecode(response.body);
       FullActor actor = FullActor.fromJson(actorJson);
