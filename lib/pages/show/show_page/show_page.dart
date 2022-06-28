@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:movielab/constants/types.dart';
+import 'package:movielab/pages/show/show_page/sections/media.dart';
 import 'package:movielab/widgets/loading_error.dart';
 import '../../../constants/colors.dart';
 import '../../../modules/preferences_shareholder.dart';
@@ -119,6 +120,7 @@ class _ShowPageState extends State<ShowPage> {
                   actorList: show.actorList,
                 ),
                 ShowPageEpisodeGuide(show: show),
+                ShowPageMedia(images: show.images),
                 ShowPageMoreInfo(show: show),
                 ShowPageBoxOffice(show: show),
                 ShowPageSimilars(

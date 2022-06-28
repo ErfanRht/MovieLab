@@ -139,7 +139,7 @@ class APIRequester {
   // Get full details of a show from the IMDB API
   Future<FullShow?> getShow({required String id}) async {
     final response =
-        await http.get(Uri.parse('$imdbBaseUrl/Title/$apiKey/$id'));
+        await http.get(Uri.parse('$imdbBaseUrl/Title/$apiKey/$id/Images,'));
     if (response.statusCode == 200) {
       var showJson = jsonDecode(response.body);
       FullShow show = FullShow.fromJson(showJson);

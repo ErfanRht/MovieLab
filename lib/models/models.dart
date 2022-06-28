@@ -85,6 +85,7 @@ class FullShow {
   final String id;
   final String title;
   final String image;
+  final List images;
   final String year;
   final String genres;
   final String releaseDate;
@@ -123,6 +124,7 @@ class FullShow {
     required this.id,
     required this.title,
     required this.image,
+    required this.images,
     required this.year,
     required this.genres,
     required this.releaseDate,
@@ -164,6 +166,7 @@ class FullShow {
       title: json['title'] ?? "",
       image: json['image'].toString().replaceAll(
           "._V1_UX128_CR0,3,128,176_AL_.jpg", "._V1_Ratio0.6716_AL_.jpg"),
+      images: ImageData.getImages(json['images']) ?? [],
       year: json['year'] ?? "",
       genres: json['genres'] ?? "",
       releaseDate: json['releaseDate'] ?? "",
@@ -367,8 +370,32 @@ class FullActor {
   }
 }
 
+// An image data model class
+class ImageData {
+  final String title;
+  final String imageUrl;
+
+  const ImageData({
+    required this.title,
+    required this.imageUrl,
+  });
+
+  factory ImageData.fromJson(Map<String, dynamic> json) {
+    return ImageData(
+      title: json['title'] ?? "",
+      imageUrl: json['imageUrl'] ?? "",
+    );
+  }
+
+  static List<ImageData>? getImages(Map<String, dynamic> json) {
+    return (json['items'] as List<dynamic>)
+        .map<ImageData>((item) => ImageData.fromJson(item))
+        .toList();
+  }
+}
+
 // Get similar movies or TV shows to a movie or TV show from the API
-getSimilars({required json}) {
+List<ShowPreview> getSimilars({required json}) {
   List<ShowPreview> similars = [];
   for (int i = 0; i < json.length; i++) {
     json[i]["rank"] = i.toString();
@@ -378,7 +405,7 @@ getSimilars({required json}) {
 }
 
 // Get known for movies or TV shows to an actor or actress from the API
-getKnownFor({required json}) {
+List<ShowPreview> getKnownFor({required json}) {
   List<ShowPreview> knownFor = [];
   for (int i = 0; i < json.length; i++) {
     json[i]["rank"] = i.toString();
