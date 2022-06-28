@@ -39,7 +39,7 @@ class ShowPreview {
   factory ShowPreview.fromJson(Map<String, dynamic> json) {
     return ShowPreview(
       id: json['id'],
-      rank: json['rank'],
+      rank: json['rank'] ?? "",
       title: json['title'],
       crew: json['crew'] ?? "",
       image: json['image'].toString().replaceAll(

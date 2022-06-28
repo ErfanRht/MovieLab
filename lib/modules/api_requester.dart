@@ -117,6 +117,26 @@ class APIRequester {
     }
   }
 
+  // Get a company's movies from the IMDB API
+  Future<Map?> getCompany({required String id}) async {
+    final response = await http
+        .get(Uri.parse('$imdbBaseUrl/Company/$apiKey/$id'))
+        .timeout(const Duration(seconds: 10));
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body)["items"];
+      List<ShowPreview> companyMovies = [];
+      for (int i = 0; i < json.length; i++) {
+        companyMovies.add(ShowPreview.fromJson(json[i]));
+      }
+      return {
+        "name": jsonDecode(response.body)["name"],
+        "movies": companyMovies,
+      };
+    } else {
+      return null;
+    }
+  }
+
   // Get results of a search query from the IMDB API
   Future<bool> search({expression}) async {
     expression ??= Get.find<SearchBarController>().fieldText;

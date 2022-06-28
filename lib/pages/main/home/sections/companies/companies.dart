@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:movielab/modules/api_requester.dart';
+import 'package:movielab/modules/navigate.dart';
 import 'package:movielab/pages/main/home/sections/companies/box.dart';
+import 'company_page.dart';
 
 class HomePopularCompanies extends StatelessWidget {
   const HomePopularCompanies({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final apiRequester = APIRequester();
     List<Map> companiesData = [
       {
         'id': 'co0051941',
@@ -46,7 +46,13 @@ class HomePopularCompanies extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             return InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigate.pushTo(
+                      context,
+                      CompanyPage(
+                        company: companiesData[index],
+                      ));
+                },
                 borderRadius: BorderRadius.circular(27.5),
                 child: Padding(
                     padding: const EdgeInsets.only(

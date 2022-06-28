@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
                 controller: _.homeScrollController,
                 children: [
                   const SizedBox(
-                    height: 45,
+                    height: 55,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
