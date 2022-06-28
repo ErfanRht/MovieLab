@@ -9,7 +9,7 @@ openShowPage(BuildContext context, String id) {
   Navigate.pushHeroicTo(context, ShowPage(id: id));
 }
 
-Widget showBoxImage(
+Widget boxImage(
     {required String image,
     required String tag,
     required double width,

@@ -34,7 +34,7 @@ class EpisodeShowBox extends StatelessWidget {
           height: 150,
           child: Row(
             children: [
-              showBoxImage(
+              boxImage(
                   image: image,
                   tag: "show_$id",
                   height: 150,

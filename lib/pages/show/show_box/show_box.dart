@@ -23,7 +23,7 @@ class ShowBox extends StatelessWidget {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
         child: Column(
           children: [
-            showBoxImage(
+            boxImage(
                 image: showPreview.image,
                 tag: "show_$id",
                 height: 210,

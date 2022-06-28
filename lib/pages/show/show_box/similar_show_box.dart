@@ -23,7 +23,7 @@ class SimilarShowBox extends StatelessWidget {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
         child: Column(
           children: [
-            showBoxImage(
+            boxImage(
                 image: showPreview.image,
                 tag: "similar_$id",
                 height: 210,

@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/models/models.dart';
 import 'package:movielab/modules/navigate.dart';
 import 'package:movielab/pages/actor/actor_page/actor_page.dart';
+import 'package:movielab/pages/show/show_box/show_box_common.dart';
 
 class ShowActorBox extends StatelessWidget {
   final ActorPreview actor;
@@ -14,7 +15,7 @@ class ShowActorBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigate.pushTo(context, ActorPage(id: actor.id));
+        Navigate.pushHeroicTo(context, ActorPage(id: actor.id));
       },
       borderRadius: BorderRadius.circular(15),
       child: Container(
@@ -22,22 +23,15 @@ class ShowActorBox extends StatelessWidget {
         width: 90,
         child: Column(
           children: [
-            SizedBox(
+            boxImage(
+              image: actor.image,
+              tag: "actor_${actor.id}",
               width: 70,
               height: 70,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: CachedNetworkImage(
-                    fit: BoxFit.cover,
-                    imageUrl: actor.image,
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
-                    placeholder: (context, url) => const Center(
-                          child: SpinKitThreeBounce(
-                            color: Colors.white,
-                            size: 15.0,
-                          ),
-                        )),
+              radius: 100,
+              placeholder: const SpinKitThreeBounce(
+                color: Colors.white,
+                size: 15.0,
               ),
             ),
             Padding(

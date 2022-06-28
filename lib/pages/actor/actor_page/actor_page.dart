@@ -34,6 +34,11 @@ class _ShowPageState extends State<ActorPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     switch (actor) {
       case null:
@@ -72,19 +77,22 @@ class _ShowPageState extends State<ActorPage> {
                                   100, 250, rect.width, rect.height));
                             },
                             blendMode: BlendMode.dstIn,
-                            child: CachedNetworkImage(
-                              fit: BoxFit.cover,
-                              height:
-                                  MediaQuery.of(context).size.height * (2 / 3) -
-                                      35,
-                              width: MediaQuery.of(context).size.width,
-                              imageUrl: actor?.image ?? '',
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                              placeholder: (context, url) => const Center(
-                                child: SpinKitThreeBounce(
-                                  color: Colors.white,
-                                  size: 30.0,
+                            child: Hero(
+                              tag: "actor_${widget.id}",
+                              child: CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                height: MediaQuery.of(context).size.height *
+                                        (2 / 3) -
+                                    35,
+                                width: MediaQuery.of(context).size.width,
+                                imageUrl: actor?.image ?? '',
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                                placeholder: (context, url) => const Center(
+                                  child: SpinKitThreeBounce(
+                                    color: Colors.white,
+                                    size: 30.0,
+                                  ),
                                 ),
                               ),
                             )),

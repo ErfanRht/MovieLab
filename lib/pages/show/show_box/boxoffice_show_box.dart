@@ -37,7 +37,7 @@ class BoxOfficeShowBox extends StatelessWidget {
             child: Row(
               children: [
                 image != 'null'
-                    ? showBoxImage(
+                    ? boxImage(
                         image: image,
                         tag: "show_$id",
                         height: 150,
