@@ -9,6 +9,7 @@ import 'package:movielab/pages/main/home/sections/populars/popular_tvs/all_popul
 import 'package:movielab/pages/main/main_controller.dart';
 import '../../../modules/navigate.dart';
 import 'sections/box_office/box_office.dart';
+import 'sections/companies/companies.dart';
 import 'sections/imdb_lists/lists.dart';
 import 'sections/navbar/navbar.dart';
 import 'sections/populars/popular_movies/home_popular_movies.dart';
@@ -105,10 +106,28 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  // ignore: prefer_const_constructors
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: const HomePopularTVShows(),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: HomePopularTVShows(),
+                  ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 20, top: 15, bottom: 5),
+                        child: Text(
+                          'Popular Companies',
+                          style: GoogleFonts.ubuntu(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: HomePopularCompanies(),
                   ),
                   Row(
                     children: [
