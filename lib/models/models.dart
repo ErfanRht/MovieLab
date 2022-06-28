@@ -395,7 +395,7 @@ class ImageData {
 }
 
 // Get similar movies or TV shows to a movie or TV show from the API
-List<ShowPreview> getSimilars({required json}) {
+List<ShowPreview>? getSimilars({required json}) {
   List<ShowPreview> similars = [];
   for (int i = 0; i < json.length; i++) {
     json[i]["rank"] = i.toString();
@@ -405,7 +405,7 @@ List<ShowPreview> getSimilars({required json}) {
 }
 
 // Get known for movies or TV shows to an actor or actress from the API
-List<ShowPreview> getKnownFor({required json}) {
+List<ShowPreview>? getKnownFor({required json}) {
   List<ShowPreview> knownFor = [];
   for (int i = 0; i < json.length; i++) {
     json[i]["rank"] = i.toString();
