@@ -11,6 +11,13 @@ class OtherRatingsBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String ratingStr;
+
+    if (max == 100) {
+      ratingStr = rating.toString().replaceAll(".0", "");
+    } else {
+      ratingStr = rating.toString();
+    }
     return Container(
       margin: const EdgeInsets.only(right: 10),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -33,7 +40,7 @@ class OtherRatingsBox extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Flexible(
-            child: Text("$rating $name",
+            child: Text("$ratingStr $name",
                 style: GoogleFonts.ubuntu(
                     color: Colors.white,
                     fontSize: 14,
