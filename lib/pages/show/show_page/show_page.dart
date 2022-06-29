@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/pages/show/show_page/sections/media.dart';
+import 'package:movielab/pages/show/show_page/sections/other_ratings/other_ratings.dart';
 import 'package:movielab/widgets/loading_error.dart';
 import '../../../constants/colors.dart';
 import '../../../modules/preferences_shareholder.dart';
@@ -103,8 +104,9 @@ class _ShowPageState extends State<ShowPage> {
                               countries: show.countries,
                             ),
                             ShowPageRating(
-                                imDbRating: show.imDbRating,
-                                imDbVotes: show.imDbVotes),
+                              imDbRating: show.imDbRating,
+                              imDbVotes: show.imDbVotes,
+                            ),
                           ],
                         ),
                       ),
@@ -123,6 +125,7 @@ class _ShowPageState extends State<ShowPage> {
                 ShowPageMedia(images: show.images),
                 ShowPageMoreInfo(show: show),
                 ShowPageBoxOffice(show: show),
+                ShowPageOtherRatings(show: show),
                 ShowPageSimilars(
                   show: show,
                 ),

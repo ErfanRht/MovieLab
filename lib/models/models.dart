@@ -104,6 +104,7 @@ class FullShow {
   final String imDbRating;
   final String imDbVotes;
   final String contentRating;
+  final Map<String, dynamic> otherRatings;
   final String budget;
   final String openingWeekendUSA;
   final String grossUSA;
@@ -143,6 +144,7 @@ class FullShow {
     required this.imDbRating,
     required this.imDbVotes,
     required this.contentRating,
+    required this.otherRatings,
     required this.budget,
     required this.openingWeekendUSA,
     required this.grossUSA,
@@ -191,6 +193,7 @@ class FullShow {
       imDbRating: json['imDbRating'] ?? "0.0",
       imDbVotes: json['imDbRatingVotes'] ?? "0",
       contentRating: json['contentRating'] ?? "",
+      otherRatings: json['ratings'] ?? {},
       budget: json["boxOffice"]?['budget'] ?? "",
       openingWeekendUSA: json["boxOffice"]?['openingWeekendUSA'] ?? "",
       grossUSA: json["boxOffice"]?['gtossUSA'] ?? "",
