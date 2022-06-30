@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/models/models.dart';
-import 'section_title.dart';
+import '../../../../widgets/section_title.dart';
 
 class ShowPageMoreInfo extends StatelessWidget {
   final FullShow show;

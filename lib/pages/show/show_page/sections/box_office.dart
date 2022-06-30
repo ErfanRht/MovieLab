@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movielab/models/models.dart';
 import 'more_info.dart';
-import 'section_title.dart';
+import '../../../../widgets/section_title.dart';
 
 class ShowPageBoxOffice extends StatelessWidget {
   final FullShow show;

@@ -4,7 +4,7 @@ import 'package:movielab/models/models.dart';
 import 'package:movielab/pages/show/show_page/sections/episode_guide/episode_guide_page.dart';
 import 'package:movielab/widgets/buttons/glassmorphism_button.dart';
 import '../../../../modules/navigate.dart';
-import 'section_title.dart';
+import '../../../../widgets/section_title.dart';
 
 class ShowPageEpisodeGuide extends StatelessWidget {
   final FullShow show;

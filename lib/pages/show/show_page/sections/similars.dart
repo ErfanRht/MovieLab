@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movielab/models/models.dart';
 
 import '../../show_box/similar_show_box.dart';
-import 'section_title.dart';
+import '../../../../widgets/section_title.dart';
 
 class ShowPageSimilars extends StatelessWidget {
   final FullShow show;

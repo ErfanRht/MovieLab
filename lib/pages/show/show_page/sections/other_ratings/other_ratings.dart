@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movielab/models/models.dart';
 import 'package:movielab/pages/show/show_page/sections/other_ratings/other_ratings_box.dart';
-import '../../../../actor/actor_page/sections/section_title.dart';
+import '../../../../../widgets/section_title.dart';
 
 class ShowPageOtherRatings extends StatelessWidget {
   const ShowPageOtherRatings({Key? key, required this.show}) : super(key: key);

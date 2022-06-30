@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movielab/pages/actor/actor_box/actor_box.dart';
 
-import 'section_title.dart';
+import '../../../../widgets/section_title.dart';
 
 class ShowPageCast extends StatelessWidget {
   final List actorList;
