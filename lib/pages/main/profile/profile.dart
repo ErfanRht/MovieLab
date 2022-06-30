@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/pages/main/profile/sections/lists.dart';
 
+import 'sections/settings.dart';
+
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -21,10 +23,14 @@ class ProfilePage extends StatelessWidget {
                 fontWeight: FontWeight.bold)),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: const [ProfilePageLists()],
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: ListView(
+          physics: const BouncingScrollPhysics(),
+          children: const [
+            ProfilePageLists(),
+            SizedBox(height: 40),
+            ProfilePageSettings()
+          ],
         ),
       ),
     );
