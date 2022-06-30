@@ -62,7 +62,7 @@ class MainPage extends StatelessWidget {
                   ),
                   GButton(
                     icon: Icons.podcasts_rounded,
-                    text: 'Suggestions',
+                    text: 'Profile',
                   ),
                 ],
                 selectedIndex: _.selectedIndex,

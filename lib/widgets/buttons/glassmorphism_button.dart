@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,7 +16,7 @@ class GmButton extends StatelessWidget {
 
   final String text;
   final IconData? icon;
-  final Void? Function() onTap;
+  final VoidCallback onTap;
   final double radius;
   final Color color;
   final Color? backgroundColor;
