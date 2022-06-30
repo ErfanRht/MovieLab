@@ -4,6 +4,7 @@ import 'package:movielab/constants/colors.dart';
 import 'package:movielab/pages/main/profile/sections/lists.dart';
 
 import 'sections/settings.dart';
+import 'sections/socials.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -27,9 +28,13 @@ class ProfilePage extends StatelessWidget {
         child: ListView(
           physics: const BouncingScrollPhysics(),
           children: const [
+            SizedBox(height: 40),
             ProfilePageLists(),
             SizedBox(height: 40),
-            ProfilePageSettings()
+            ProfilePageSettings(),
+            SizedBox(height: 40),
+            ProfilePageSocials(),
+            SizedBox(height: 40),
           ],
         ),
       ),
