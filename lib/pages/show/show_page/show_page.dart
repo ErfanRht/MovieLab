@@ -1,7 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movielab/constants/types.dart';
+import 'package:movielab/modules/system_ui_overlay_style.dart';
 import 'package:movielab/pages/show/show_page/sections/media.dart';
 import 'package:movielab/pages/show/show_page/sections/other_ratings/other_ratings.dart';
 import 'package:movielab/widgets/loading_error.dart';
@@ -23,12 +26,43 @@ class _ShowPageState extends State<ShowPage> {
   RequestResult _loadingStatus = RequestResult.LOADING;
   dynamic show;
   bool isBookmarked = false;
+  ScrollController _scrollController = ScrollController();
+  bool _isBottomAppBarVisible = true;
   final preferencesShareholder = PreferencesShareholder();
 
   @override
   void initState() {
     super.initState();
+    setSystemUIOverlayStyle(
+        systemUIOverlayStyle: SystemUIOverlayStyle.DARK,
+        color: const Color(0xff132D4E));
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      if (_scrollController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        if (_isBottomAppBarVisible) {
+          setState(() {
+            _isBottomAppBarVisible = false;
+          });
+        }
+      }
+      if (_scrollController.position.userScrollDirection ==
+          ScrollDirection.forward) {
+        if (!_isBottomAppBarVisible) {
+          setState(() {
+            _isBottomAppBarVisible = true;
+          });
+        }
+      }
+    });
     _loadData();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    setSystemUIOverlayStyle(systemUIOverlayStyle: SystemUIOverlayStyle.DARK);
+    _scrollController.removeListener(() {});
   }
 
   @override
@@ -50,7 +84,104 @@ class _ShowPageState extends State<ShowPage> {
         return Scaffold(
           resizeToAvoidBottomInset: true,
           backgroundColor: kBackgroundColor,
+          extendBody: true,
+          bottomNavigationBar: AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+            height: _isBottomAppBarVisible ? 60 : 0.0,
+            child: BottomAppBar(
+              shape: const CircularNotchedRectangle(),
+              clipBehavior: Clip.antiAlias,
+              notchMargin: 7.5,
+              color: const Color(0xff132d4e),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 60,
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 7.5,
+                        ),
+                        InkWell(
+                          borderRadius: BorderRadius.circular(30),
+                          child: const SizedBox(
+                            height: 45,
+                            width: 45,
+                            child: Icon(
+                              FontAwesomeIcons.alignLeft,
+                              size: 22.5,
+                              color: Colors.white,
+                            ),
+                          ),
+                          onTap: () {},
+                        ),
+                        const SizedBox(
+                          width: 7.5,
+                        ),
+                        InkWell(
+                          borderRadius: BorderRadius.circular(30),
+                          child: const SizedBox(
+                            height: 45,
+                            width: 45,
+                            child: Icon(
+                              FontAwesomeIcons.arrowUpRightFromSquare,
+                              size: 22.5,
+                              color: Colors.white,
+                            ),
+                          ),
+                          onTap: () {},
+                        ),
+                        const SizedBox(
+                          width: 7.5,
+                        ),
+                        InkWell(
+                          borderRadius: BorderRadius.circular(30),
+                          child: const SizedBox(
+                            height: 45,
+                            width: 45,
+                            child: Icon(
+                              FontAwesomeIcons.clapperboard,
+                              size: 22.5,
+                              color: Colors.white,
+                            ),
+                          ),
+                          onTap: () {},
+                        ),
+                        const SizedBox(
+                          width: 7.5,
+                        ),
+                        InkWell(
+                          borderRadius: BorderRadius.circular(30),
+                          child: const SizedBox(
+                            height: 45,
+                            width: 45,
+                            child: Icon(
+                              FontAwesomeIcons.ellipsisVertical,
+                              size: 22.5,
+                              color: Colors.white,
+                            ),
+                          ),
+                          onTap: () {},
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: kPrimaryColor,
+            child: const Icon(Icons.add),
+          ),
+          floatingActionButtonLocation: _isBottomAppBarVisible
+              ? FloatingActionButtonLocation.endDocked
+              : FloatingActionButtonLocation.endFloat,
           body: SingleChildScrollView(
+            controller: _scrollController,
             physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
