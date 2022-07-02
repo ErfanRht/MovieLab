@@ -1,11 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movielab/models/models.dart';
 import 'package:movielab/modules/navigate.dart';
 import 'package:movielab/pages/actor/actor_page/actor_page.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
+
+import '../../../models/actor_models/actor_preview_model.dart';
 
 class ShowActorBox extends StatelessWidget {
   final ActorPreview actor;

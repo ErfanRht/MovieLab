@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movielab/models/models.dart';
+import '../../../../models/actor_models/full_actor_model.dart';
 import '../../../../widgets/section_title.dart';
 
 class ActorPageMoreInfo extends StatelessWidget {

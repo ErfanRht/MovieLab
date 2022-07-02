@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
-import 'package:movielab/models/models.dart';
 import 'package:movielab/modules/cache/cache_data.dart';
+import '../../models/actor_models/full_actor_model.dart';
+import '../../models/show_models/full_show_model.dart';
 
 class CacheHolder {
   // To save a movie or show info to the cache so it can be accessed later without having to make a request to the IMDB API again.

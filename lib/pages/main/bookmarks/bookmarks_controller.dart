@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:movielab/models/models.dart';
+import '../../../models/show_models/show_preview_model.dart';
 
 class BookmarksPageController extends GetxController {
   List<ShowPreview> bookmarks = [];

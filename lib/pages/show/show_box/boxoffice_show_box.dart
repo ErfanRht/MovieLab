@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movielab/models/models.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
+import '../../../models/show_models/show_preview_model.dart';
 
 class BoxOfficeShowBox extends StatelessWidget {
   final ShowPreview showPreview;

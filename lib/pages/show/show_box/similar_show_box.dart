@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movielab/models/models.dart';
+import '../../../models/show_models/show_preview_model.dart';
 import 'show_box_common.dart';
 
 class SimilarShowBox extends StatelessWidget {

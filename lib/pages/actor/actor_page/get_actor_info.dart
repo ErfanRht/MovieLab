@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
-import 'package:movielab/models/models.dart';
 import 'package:movielab/modules/api_requester.dart';
 import 'package:movielab/modules/cache/cacheholder.dart';
+
+import '../../../models/actor_models/full_actor_model.dart';
 
 Future<FullActor?> getActorInfo({required String id}) async {
   FullActor? actor;

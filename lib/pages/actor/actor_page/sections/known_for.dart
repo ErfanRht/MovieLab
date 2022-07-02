@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movielab/models/models.dart';
 import 'package:movielab/pages/show/show_box/show_box.dart';
+import '../../../../models/actor_models/full_actor_model.dart';
+import '../../../../models/show_models/show_preview_model.dart';
 import '../../../../widgets/section_title.dart';
 
 class ActorPageKnownFor extends StatelessWidget {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movielab/constants/colors.dart';
-import 'package:movielab/models/models.dart';
+
+import '../../../../models/actor_models/full_actor_model.dart';
 
 class ActorPageNavBar extends StatefulWidget {
   final FullActor? actor;

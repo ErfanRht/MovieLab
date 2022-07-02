@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:movielab/models/models.dart';
 import 'package:movielab/pages/main/bookmarks/bookmarks_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../models/show_models/full_show_model.dart';
+import '../models/show_models/show_preview_model.dart';
 
 class PreferencesShareholder {
   // Get all bookmarks from the shared preferences
@@ -127,12 +128,10 @@ class PreferencesShareholder {
   Future<String> getShowCrew({required FullShow fullShow}) async {
     List<String> crewList = [];
     String crew = "";
-    if (fullShow.actorList != null) {
-      for (int i = 0; i < 3; i++) {
-        crewList.add(fullShow.actorList[i].name);
-      }
-      crew = crewList.join(", ");
+    for (int i = 0; i < 3; i++) {
+      crewList.add(fullShow.actorList[i].name);
     }
+    crew = crewList.join(", ");
     return crew;
   }
 }

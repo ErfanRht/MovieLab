@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movielab/models/models.dart';
+import '../../../../models/show_models/full_show_model.dart';
 import '../../../../widgets/section_title.dart';
 
 class ShowPageMoreInfo extends StatelessWidget {

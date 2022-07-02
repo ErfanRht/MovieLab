@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:movielab/constants/colors.dart';
-import 'package:movielab/models/models.dart';
+import '../../../models/actor_models/full_actor_model.dart';
 import 'get_actor_info.dart';
 import 'sections/summary.dart';
 import 'sections/title.dart';

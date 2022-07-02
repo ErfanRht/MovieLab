@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movielab/models/models.dart';
+import '../../../../models/show_models/full_show_model.dart';
 import 'more_info.dart';
 import '../../../../widgets/section_title.dart';
 

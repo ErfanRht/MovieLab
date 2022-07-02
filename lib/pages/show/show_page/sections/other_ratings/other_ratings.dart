@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movielab/models/models.dart';
 import 'package:movielab/pages/show/show_page/sections/other_ratings/other_ratings_box.dart';
+import '../../../../../models/show_models/full_show_model.dart';
 import '../../../../../widgets/section_title.dart';
 
 class ShowPageOtherRatings extends StatelessWidget {
