@@ -11,20 +11,30 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+
+  # GetX is used as the state management library for the app.
   get: ^4.6.1
+
+  # Some ui library used in the app.
   font_awesome_flutter: ^10.1.0
   google_fonts: ^3.0.1
   ms_undraw: ^3.0.1+1
   flutter_spinkit: ^5.1.0
-  shared_preferences: ^2.0.12
-  http: ^0.13.4
-  cached_network_image: ^3.2.0
   flutter_rating_bar: ^4.0.0
   google_nav_bar: ^5.0.5
-  speech_to_text: ^5.6.0
   page_transition: ^2.0.5
   flutter_slidable: ^1.2.0
   avatar_glow: ^2.0.2
+
+  # Used for saving and loading preferences from the device.
+  shared_preferences: ^2.0.12  
+  hive_flutter: ^1.1.0
+  hive: ^2.2.3
+
+  # Some useful libraries for some parts of the app.
+  http: ^0.13.4
+  cached_network_image: ^3.2.0
+  speech_to_text: ^5.6.0
 
 dev_dependencies:
   flutter_test:
