@@ -49,6 +49,10 @@ This project is licensed under the [Apache-2.0 License](https://github.com/Erfan
 ## Author
 This Flutter project is developed by [Erfan Rahmati](https://github.com/ErfanRht).
 
+## Supporters
+[![Stargazers repo roster for @ErfanRht/MovieLab](https://reporoster.com/stars/ErfanRht/MovieLab)](https://github.com/ErfanRht/MovieLab/stargazers)
+[![Forkers repo roster for @ErfanRht/MovieLab](https://reporoster.com/forks/ErfanRht/MovieLab)](https://github.com/ErfanRht/MovieLab/network/members)
+
 ---
 
 <div align="center">
