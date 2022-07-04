@@ -14,7 +14,8 @@
 [![GitHub issues](https://img.shields.io/github/issues/ErfanRht/MovieLab?style=social)](https://github.com/ErfanRht/MovieLab/issues) 
 [![GitHub license](https://img.shields.io/github/license/ErfanRht/MovieLab?style=social)](https://github.com/ErfanRht/MovieLab/blob/master/LICENSE) 
 
-[![App preview](./screenshots/mockups/MovieLab_mockup2.jpg)](https://github.com/ErfanRht/MovieLab/)
+<p align="center"><a href="https://github.com/ErfanRht/MovieLab/"><img src="./screenshots/mockups/MovieLab_mockup2.jpg" width="100%"/></a><a href="#nastyox"><img src="http://randojs.com/images/dropShadow.png" width="100%"/></a></p><br/>
+<!-- This effect image is from https://github.com/nastyox/Rando.js#nastyox project -->
 
 ## Download
   You can simply download it for Android from [Here](https://ErfanRht.github.io/MovieLab-Intro).
@@ -47,6 +48,10 @@ This project is licensed under the [Apache-2.0 License](https://github.com/Erfan
 
 ## Author
 This Flutter project is developed by [Erfan Rahmati](https://github.com/ErfanRht).
+
+## Supporters
+[![Stargazers repo roster for @ErfanRht/MovieLab](https://reporoster.com/stars/ErfanRht/MovieLab)](https://github.com/ErfanRht/MovieLab/stargazers)
+[![Forkers repo roster for @ErfanRht/MovieLab](https://reporoster.com/forks/ErfanRht/MovieLab)](https://github.com/ErfanRht/MovieLab/network/members)
 
 ---
 
