@@ -7,11 +7,9 @@ import '../../modules/api_requester.dart';
 Future<RequestResult> getInitialData() async {
   final apiRequester = APIRequester();
   final preferencesShareholder = PreferencesShareholder();
-
   try {
     await apiRequester.getPopularMovies();
     await apiRequester.getPopularTVShows();
-    await preferencesShareholder.getBookmarks();
   } catch (e) {
     await Future.delayed(const Duration(seconds: 1));
     return RequestResult.FAILURE_USER_PROBLEM;

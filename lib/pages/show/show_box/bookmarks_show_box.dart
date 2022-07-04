@@ -169,5 +169,5 @@ class BookmarksShowBox extends StatelessWidget {
 
 void delete(BuildContext context, ShowPreview showPreview) {
   final preferencesShareholder = PreferencesShareholder();
-  preferencesShareholder.deleteBookmark(show: showPreview);
+  preferencesShareholder.deleteBookmark(showId: showPreview.id);
 }

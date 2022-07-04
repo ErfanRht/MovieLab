@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 class MainController extends GetxController {
   // Main page bottom navigation bar page index controller
   int selectedIndex = 0;
+
   changeIndex(int index) {
     // If user select a page that is already selected, page should be scroll to top
     if (index == selectedIndex) {

@@ -47,7 +47,7 @@ class _ShowPageNavBarState extends State<ShowPageNavBar> {
                 isBookmarked
                     ? {
                         preferencesShareholder.deleteBookmark(
-                            fullShow: widget.show),
+                            showId: widget.show.id),
                         setState(() {
                           isBookmarked = false;
                         })
