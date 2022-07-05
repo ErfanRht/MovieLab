@@ -5,35 +5,37 @@ import '../models/hive/models/show_preview.dart';
 import '../models/show_models/full_show_model.dart';
 
 class PreferencesShareholder {
-  // Delete all bookmarks from the shared preferences
-  Future<bool> deleteBookmarks() async {
-    Hive.deleteBoxFromDisk("bookmarks");
+  // Delete all items of a list in the shared preferences
+  Future<bool> deleteList(String listName) async {
+    Hive.deleteBoxFromDisk(listName);
     if (kDebugMode) {
-      print("All bookmarks deleted");
+      print("All items of $listName deleted");
     }
     return true;
   }
 
-  // Add a movie to the bookmarks list in the shared preferences
-  Future<bool> addBookmark({required FullShow fullShow}) async {
-    Box<HiveShowPreview> bookmarks = Hive.box<HiveShowPreview>('bookmarks');
-    HiveShowPreview hiveShow = await convertFullShowToHive(
-        fullShow, (bookmarks.length + 1).toString());
-    bookmarks.put(bookmarks.length + 1, hiveShow);
+  // Add an item to a list in the shared preferences
+  Future<bool> addShowToList(
+      {required FullShow fullShow, required String listName}) async {
+    Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
+    HiveShowPreview hiveShow =
+        await convertFullShowToHive(fullShow, (list.length + 1).toString());
+    list.put(list.length + 1, hiveShow);
     if (kDebugMode) {
-      print("Item added to bookmarks");
+      print("The item added to $listName");
     }
     return true;
   }
 
-  // Delete a movie or tv show from the bookmarks list in the shared preferences
-  Future<bool> deleteBookmark({required String showId}) async {
-    Box<HiveShowPreview> bookmarks = Hive.box<HiveShowPreview>('bookmarks');
-    for (int i = 0; i < bookmarks.length; i++) {
-      if (bookmarks.getAt(i)?.id == showId) {
-        bookmarks.deleteAt(i);
+  // Delete an item from a list in the shared preferences
+  Future<bool> deleteFromList(
+      {required String showId, required String listName}) async {
+    Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
+    for (int i = 0; i < list.length; i++) {
+      if (list.getAt(i)?.id == showId) {
+        list.deleteAt(i);
         if (kDebugMode) {
-          print("Item deleted from bookmarks");
+          print("The item deleted from $listName");
         }
         return true;
       }
@@ -41,20 +43,23 @@ class PreferencesShareholder {
     return false;
   }
 
-  // Get a bool value that is there any bookmarks in the shared preferences or not
-  Future<bool> isThereInBookmarks({required String showId}) async {
-    Box<HiveShowPreview> bookmarks = Hive.box<HiveShowPreview>('bookmarks');
-    for (int i = 0; i < bookmarks.length; i++) {
-      if (bookmarks.getAt(i)?.id == showId) {
-        if (kDebugMode) {
-          print("Item is in bookmarks");
+  // Get a map value that the item has been already added to which lists
+  Future<Map<String, bool>> isThereInLists({required String showId}) async {
+    List<String> listNames = ["collection", "watchlist", "history"];
+    Map<String, bool> result = {};
+    for (String listName in listNames) {
+      Box<HiveShowPreview> collection = Hive.box<HiveShowPreview>(listName);
+      for (int i = 0; i < collection.length; i++) {
+        if (collection.getAt(i)?.id == showId) {
+          if (kDebugMode) {
+            print("Item is in $listName");
+          }
+          result[listName] = true;
+          break;
         }
-        return true;
       }
+      result[listName] = false;
     }
-    if (kDebugMode) {
-      print("Item is not in bookmarks");
-    }
-    return false;
+    return result;
   }
 }

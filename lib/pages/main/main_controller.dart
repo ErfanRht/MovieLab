@@ -23,9 +23,9 @@ class MainController extends GetxController {
         } catch (e) {}
       }
       if (index == 2) {
-        // Bookmarks page may sometimes doesn't have a scroll controller, so we need to check it
+        // collection page may sometimes doesn't have a scroll controller, so we need to check it
         try {
-          bookmarksScrollController.animateTo(0,
+          collectionScrollController.animateTo(0,
               duration: const Duration(milliseconds: 200),
               curve: Curves.easeInOut);
           // ignore: empty_catches
@@ -40,6 +40,6 @@ class MainController extends GetxController {
   // Main pages scroll controller
   ScrollController homeScrollController = ScrollController();
   ScrollController searchScrollController = ScrollController();
-  ScrollController bookmarksScrollController = ScrollController();
+  ScrollController collectionScrollController = ScrollController();
   ScrollController profileScrollController = ScrollController();
 }

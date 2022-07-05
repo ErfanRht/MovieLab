@@ -24,7 +24,7 @@ class ShowPageRating extends StatelessWidget {
                 child: Text(imDbRating,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.ubuntu(
-                        color: kSecondaryColor,
+                        color: kImdbColor,
                         fontSize: 18,
                         fontWeight: FontWeight.w700)),
               ),
@@ -32,7 +32,7 @@ class ShowPageRating extends StatelessWidget {
                 rating: double.parse(imDbRating) / 2,
                 itemBuilder: (context, index) => const Icon(
                   Icons.star,
-                  color: kSecondaryColor,
+                  color: kImdbColor,
                 ),
                 unratedColor: kGreyColor,
                 itemCount: 5,

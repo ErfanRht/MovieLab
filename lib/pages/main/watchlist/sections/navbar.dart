@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class BookmarksNavbar extends StatelessWidget {
-  const BookmarksNavbar({Key? key}) : super(key: key);
+class WhatchlistNavbar extends StatelessWidget {
+  const WhatchlistNavbar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class BookmarksNavbar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text("Bookmarks",
+          Text("collection",
               style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontSize: 30,

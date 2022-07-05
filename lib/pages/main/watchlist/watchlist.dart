@@ -9,10 +9,10 @@ import 'package:movielab/modules/preferences_shareholder.dart';
 import 'package:ms_undraw/ms_undraw.dart';
 import '../../../models/hive/convertor.dart';
 import '../../../widgets/loading_error.dart';
-import '../../show/show_box/bookmarks_show_box.dart';
+import '../../show/show_box/lists_show_box.dart';
 
-class BookmarksPage extends StatelessWidget {
-  const BookmarksPage({Key? key}) : super(key: key);
+class WhatchlistPage extends StatelessWidget {
+  const WhatchlistPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class BookmarksPage extends StatelessWidget {
           child: FittedBox(
             child: FloatingActionButton(
                 onPressed: () {
-                  preferencesShareholder.deleteBookmarks();
+                  // preferencesShareholder.deletecollection();
                 },
                 tooltip: "Delete all",
                 backgroundColor: Colors.white,
@@ -41,25 +41,25 @@ class BookmarksPage extends StatelessWidget {
           centerTitle: true,
           automaticallyImplyLeading: false,
           backgroundColor: kBackgroundColor,
-          title: Text("Bookmarks",
+          title: Text("collection",
               style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontSize: 25,
                   fontWeight: FontWeight.bold)),
         ),
         body: ValueListenableBuilder<Box<HiveShowPreview>>(
-          valueListenable: Hive.box<HiveShowPreview>('bookmarks').listenable(),
+          valueListenable: Hive.box<HiveShowPreview>('collection').listenable(),
           builder: (context, box, _) {
-            final bookmarks = box.values.toList().cast<HiveShowPreview>();
-            print(bookmarks.toString());
-            return bookmarks.isNotEmpty
+            final collection = box.values.toList().cast<HiveShowPreview>();
+            print(collection.toString());
+            return collection.isNotEmpty
                 ? ListView.builder(
-                    itemCount: bookmarks.length,
+                    itemCount: collection.length,
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
-                      return BookmarksShowBox(
+                      return ListShowBox(
                           showPreview: convertHiveToShowPreview(
-                              bookmarks[bookmarks.length - index - 1]));
+                              collection[collection.length - index - 1]));
                     },
                   )
                 : Column(

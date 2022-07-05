@@ -102,7 +102,7 @@ class IMDBListShowBox extends StatelessWidget {
                               imDbRating,
                               softWrap: true,
                               style: GoogleFonts.ubuntu(
-                                  color: kSecondaryColor,
+                                  color: kImdbColor,
                                   fontSize: 13.5,
                                   fontWeight: FontWeight.w500),
                             ),
@@ -113,7 +113,7 @@ class IMDBListShowBox extends StatelessWidget {
                               rating: double.parse(imDbRating) / 2,
                               itemBuilder: (context, index) => const Icon(
                                 Icons.star,
-                                color: kSecondaryColor,
+                                color: kImdbColor,
                               ),
                               unratedColor: kGreyColor,
                               itemCount: 5,

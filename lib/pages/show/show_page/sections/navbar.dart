@@ -46,18 +46,18 @@ class _ShowPageNavBarState extends State<ShowPageNavBar> {
               onPressed: () {
                 isBookmarked
                     ? {
-                        preferencesShareholder.deleteBookmark(
-                            showId: widget.show.id),
-                        setState(() {
-                          isBookmarked = false;
-                        })
+                        // preferencesShareholder.deleteBookmark(
+                        //     showId: widget.show.id),
+                        // setState(() {
+                        //   isBookmarked = false;
+                        // })
                       }
                     : {
-                        preferencesShareholder.addBookmark(
-                            fullShow: widget.show),
-                        setState(() {
-                          isBookmarked = true;
-                        })
+                        // preferencesShareholder.addBookmark(
+                        //     fullShow: widget.show),
+                        // setState(() {
+                        //   isBookmarked = true;
+                        // })
                       };
               },
               icon: Icon(

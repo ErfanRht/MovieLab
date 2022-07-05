@@ -6,7 +6,6 @@ import 'package:movielab/constants/types.dart';
 import 'package:movielab/modules/cache/cacheholder.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
-
 import '../models/actor_models/full_actor_model.dart';
 import '../models/episode_model.dart';
 import '../models/search_result_model.dart';
@@ -16,8 +15,8 @@ import '../models/show_models/show_preview_model.dart';
 class APIRequester {
   static const String imdbBaseUrl = 'https://imdb-api.com/en/API';
   // API keys to access the IMDB API:
-  static const String apiKey = "k_6lgd4s89";
-  // static const String apiKey = "k_y9zcdoq3";
+  // static const String apiKey = "k_6lgd4s89";
+  static const String apiKey = "k_y9zcdoq3";
   // static const String apiKey = "";
 
   // Get recently popular movies from the IMDB API

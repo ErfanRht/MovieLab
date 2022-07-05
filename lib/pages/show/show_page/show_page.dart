@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/modules/system_ui_overlay_style.dart';
 import 'package:movielab/pages/show/show_page/sections/media.dart';
@@ -11,7 +10,9 @@ import 'package:movielab/widgets/loading_error.dart';
 import '../../../constants/colors.dart';
 import '../../../modules/preferences_shareholder.dart';
 import 'get_show_info.dart';
+import 'sections/bottom_bar/bottom_bar.dart';
 import 'sections/index.dart';
+import 'sections/watchtime.dart';
 
 // ignore: must_be_immutable
 class ShowPage extends StatefulWidget {
@@ -22,10 +23,10 @@ class ShowPage extends StatefulWidget {
   State<ShowPage> createState() => _ShowPageState();
 }
 
-class _ShowPageState extends State<ShowPage> {
+class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
   RequestResult _loadingStatus = RequestResult.LOADING;
   dynamic show;
-  bool isBookmarked = false;
+  Map<String, bool> _isThereInLists = {};
   ScrollController _scrollController = ScrollController();
   bool _isBottomAppBarVisible = true;
   final preferencesShareholder = PreferencesShareholder();
@@ -89,93 +90,38 @@ class _ShowPageState extends State<ShowPage> {
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
             height: _isBottomAppBarVisible ? 60 : 0.0,
-            child: BottomAppBar(
-              shape: const CircularNotchedRectangle(),
-              clipBehavior: Clip.antiAlias,
-              notchMargin: 7.5,
-              color: const Color(0xff132d4e),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 60,
-                    child: Row(
-                      children: [
-                        const SizedBox(
-                          width: 7.5,
-                        ),
-                        InkWell(
-                          borderRadius: BorderRadius.circular(30),
-                          child: const SizedBox(
-                            height: 45,
-                            width: 45,
-                            child: Icon(
-                              FontAwesomeIcons.alignLeft,
-                              size: 22.5,
-                              color: Colors.white,
-                            ),
-                          ),
-                          onTap: () {},
-                        ),
-                        const SizedBox(
-                          width: 7.5,
-                        ),
-                        InkWell(
-                          borderRadius: BorderRadius.circular(30),
-                          child: const SizedBox(
-                            height: 45,
-                            width: 45,
-                            child: Icon(
-                              FontAwesomeIcons.arrowUpRightFromSquare,
-                              size: 22.5,
-                              color: Colors.white,
-                            ),
-                          ),
-                          onTap: () {},
-                        ),
-                        const SizedBox(
-                          width: 7.5,
-                        ),
-                        InkWell(
-                          borderRadius: BorderRadius.circular(30),
-                          child: const SizedBox(
-                            height: 45,
-                            width: 45,
-                            child: Icon(
-                              FontAwesomeIcons.clapperboard,
-                              size: 22.5,
-                              color: Colors.white,
-                            ),
-                          ),
-                          onTap: () {},
-                        ),
-                        const SizedBox(
-                          width: 7.5,
-                        ),
-                        InkWell(
-                          borderRadius: BorderRadius.circular(30),
-                          child: const SizedBox(
-                            height: 45,
-                            width: 45,
-                            child: Icon(
-                              FontAwesomeIcons.ellipsisVertical,
-                              size: 22.5,
-                              color: Colors.white,
-                            ),
-                          ),
-                          onTap: () {},
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            child: const BottomAppBar(
+                shape: CircularNotchedRectangle(),
+                clipBehavior: Clip.antiAlias,
+                notchMargin: 7.5,
+                color: kSecondaryColor,
+                child: ShowPageBottonBar()),
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              _isThereInLists["history"] != true
+                  ? showModalBottomSheet(
+                      context: context,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(20),
+                      )),
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      backgroundColor: kSecondaryColor,
+                      transitionAnimationController: AnimationController(
+                          duration: const Duration(milliseconds: 225),
+                          vsync: this),
+                      builder: (context) {
+                        return ShowPageAddWatchTime(
+                          show: show,
+                        );
+                      })
+                  : null;
+            },
             backgroundColor: kPrimaryColor,
-            child: const Icon(Icons.add),
+            child: _isThereInLists["history"] != true
+                ? const Icon(Icons.add)
+                : const Icon(Icons.check),
           ),
           floatingActionButtonLocation: _isBottomAppBarVisible
               ? FloatingActionButtonLocation.endDocked
@@ -241,10 +187,10 @@ class _ShowPageState extends State<ShowPage> {
                           ],
                         ),
                       ),
-                      ShowPageNavBar(
-                        show: show,
-                        isBookmarked: isBookmarked,
-                      )
+                      // ShowPageNavBar(
+                      //   show: show,
+                      //   isBookmarked: isBookmarked,
+                      // )
                     ],
                   ),
                 ),
@@ -303,10 +249,12 @@ class _ShowPageState extends State<ShowPage> {
           _loadingStatus = RequestResult.SUCCESS;
         });
         preferencesShareholder
-            .isThereInBookmarks(showId: show.id)
-            .then((value) {
-          isBookmarked = value;
-        });
+            .isThereInLists(showId: widget.id)
+            .then((value) => {
+                  setState(() {
+                    _isThereInLists = value;
+                  })
+                });
       } else {
         setState(() {
           _loadingStatus = RequestResult.FAILURE;

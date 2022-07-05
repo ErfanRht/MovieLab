@@ -20,9 +20,9 @@ class ShowPageMedia extends StatelessWidget {
               GmButton(
                   text: "Posters",
                   onTap: () {
-                    return null;
+                    return;
                   },
-                  color: kSecondaryColor,
+                  color: kImdbColor,
                   icon: FontAwesomeIcons.blog),
               const SizedBox(
                 width: 10,
@@ -30,7 +30,7 @@ class ShowPageMedia extends StatelessWidget {
               GmButton(
                   text: "Images",
                   onTap: () {
-                    return null;
+                    return;
                   },
                   color: kPrimaryColor,
                   icon: FontAwesomeIcons.solidImages),
@@ -40,7 +40,7 @@ class ShowPageMedia extends StatelessWidget {
               GmButton(
                   text: "Trailers",
                   onTap: () {
-                    return null;
+                    return;
                   },
                   color: kGreyColor,
                   icon: FontAwesomeIcons.compactDisc)

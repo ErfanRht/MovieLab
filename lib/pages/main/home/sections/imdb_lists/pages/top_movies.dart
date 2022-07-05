@@ -28,7 +28,7 @@ class Top250MoviesPage extends StatelessWidget {
                     color: kBackgroundColor,
                     size: 22.5,
                   )),
-              backgroundColor: kSecondaryColor,
+              backgroundColor: kImdbColor,
               title: Text("IMDB Top 250 Movies",
                   style: GoogleFonts.poppins(
                       color: kBackgroundColor,

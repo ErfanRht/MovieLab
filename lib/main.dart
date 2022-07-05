@@ -19,7 +19,13 @@ void main() async {
   // Initialize Hive and Hive Flutter
   await Hive.initFlutter();
   registerAdapters();
-  Hive.openBox<HiveShowPreview>('bookmarks');
+  Hive.openBox<HiveShowPreview>('collection');
+  Hive.openBox<HiveShowPreview>('watchlist');
+  Hive.openBox<HiveShowPreview>('history');
+  Hive.openBox<HiveShowPreview>('collection');
+  Hive.openBox<HiveShowPreview>('favorite_artists');
+  Hive.openBox<HiveShowPreview>('favorite_trailers');
+  Hive.openBox<HiveShowPreview>('personal_lists');
 
   // Initialize the controllers
   Get.put(MainController());

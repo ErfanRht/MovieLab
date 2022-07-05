@@ -8,10 +8,9 @@ import 'package:movielab/modules/preferences_shareholder.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
 import '../../../models/show_models/show_preview_model.dart';
 
-class BookmarksShowBox extends StatelessWidget {
+class ListShowBox extends StatelessWidget {
   final ShowPreview showPreview;
-  const BookmarksShowBox({Key? key, required this.showPreview})
-      : super(key: key);
+  const ListShowBox({Key? key, required this.showPreview}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +134,7 @@ class BookmarksShowBox extends StatelessWidget {
                                 imDbRating,
                                 softWrap: true,
                                 style: GoogleFonts.ubuntu(
-                                    color: kSecondaryColor,
+                                    color: kImdbColor,
                                     fontSize: 13.5,
                                     fontWeight: FontWeight.w500),
                               ),
@@ -146,7 +145,7 @@ class BookmarksShowBox extends StatelessWidget {
                                 rating: double.parse(imDbRating) / 2,
                                 itemBuilder: (context, index) => const Icon(
                                   Icons.star,
-                                  color: kSecondaryColor,
+                                  color: kImdbColor,
                                 ),
                                 unratedColor: kGreyColor,
                                 itemCount: 5,
@@ -169,5 +168,5 @@ class BookmarksShowBox extends StatelessWidget {
 
 void delete(BuildContext context, ShowPreview showPreview) {
   final preferencesShareholder = PreferencesShareholder();
-  preferencesShareholder.deleteBookmark(showId: showPreview.id);
+  // ToDo: preferencesShareholder.deleteBookmark(showId: showPreview.id);
 }
