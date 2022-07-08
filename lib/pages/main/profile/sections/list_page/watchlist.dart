@@ -5,14 +5,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
+import 'package:movielab/modules/capitalizer.dart';
 import 'package:movielab/modules/preferences_shareholder.dart';
+import 'package:movielab/pages/main/profile/sections/list_page/sections/navbar.dart';
 import 'package:ms_undraw/ms_undraw.dart';
-import '../../../models/hive/convertor.dart';
-import '../../../widgets/loading_error.dart';
-import '../../show/show_box/lists_show_box.dart';
+import '../../../../../models/hive/convertor.dart';
+import '../../../../../widgets/loading_error.dart';
+import '../../../../show/show_box/lists_show_box.dart';
 
-class WhatchlistPage extends StatelessWidget {
-  const WhatchlistPage({Key? key}) : super(key: key);
+class ListPage extends StatelessWidget {
+  final String listName;
+  const ListPage({Key? key, required this.listName}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class WhatchlistPage extends StatelessWidget {
           child: FittedBox(
             child: FloatingActionButton(
                 onPressed: () {
-                  // preferencesShareholder.deletecollection();
+                  // preferencesShareholder.delete();
                 },
                 tooltip: "Delete all",
                 backgroundColor: Colors.white,
@@ -37,37 +40,28 @@ class WhatchlistPage extends StatelessWidget {
                 )),
           ),
         ),
-        appBar: AppBar(
-          centerTitle: true,
-          automaticallyImplyLeading: false,
-          backgroundColor: kBackgroundColor,
-          title: Text("collection",
-              style: GoogleFonts.poppins(
-                  color: Colors.white,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold)),
-        ),
+        appBar: listPageNavbar(context, listName: listName),
         body: ValueListenableBuilder<Box<HiveShowPreview>>(
-          valueListenable: Hive.box<HiveShowPreview>('collection').listenable(),
+          valueListenable: Hive.box<HiveShowPreview>(listName).listenable(),
           builder: (context, box, _) {
-            final collection = box.values.toList().cast<HiveShowPreview>();
-            print(collection.toString());
-            return collection.isNotEmpty
+            final list = box.values.toList().cast<HiveShowPreview>();
+            return list.isNotEmpty
                 ? ListView.builder(
-                    itemCount: collection.length,
+                    itemCount: list.length,
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
                       return ListShowBox(
-                          listName: "watchlist",
+                          listName: listName,
                           showPreview: convertHiveToShowPreview(
-                              collection[collection.length - index - 1]));
+                              list[list.length - index - 1]));
                     },
                   )
                 : Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                         const SizedBox(height: 100),
-                        Text("You haven't bookmarked anything yet!",
+                        Text(
+                            "You haven't saved anything in your ${listName.capitalize()} yet!",
                             style: GoogleFonts.poppins(
                                 color: Colors.white,
                                 fontSize: 15,

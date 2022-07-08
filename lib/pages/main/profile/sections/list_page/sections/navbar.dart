@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:movielab/constants/colors.dart';
+import 'package:movielab/modules/capitalizer.dart';
+
+AppBar listPageNavbar(context, {required final String listName}) {
+  return AppBar(
+    centerTitle: false,
+    backgroundColor: kBackgroundColor,
+    leading: IconButton(
+      icon: const Icon(
+        FontAwesomeIcons.arrowLeft,
+        color: Colors.white,
+        size: 22.5,
+      ),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    ),
+    title: Text(listName.capitalize(),
+        style: GoogleFonts.ubuntu(
+            color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+    actions: [
+      IconButton(
+        icon: const Icon(
+          FontAwesomeIcons.squarePollVertical,
+          color: Colors.white,
+        ),
+        onPressed: () {
+          // preferencesShareholder.delete();
+        },
+      ),
+    ],
+  );
+}

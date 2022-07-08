@@ -10,7 +10,10 @@ import '../../../models/show_models/show_preview_model.dart';
 
 class ListShowBox extends StatelessWidget {
   final ShowPreview showPreview;
-  const ListShowBox({Key? key, required this.showPreview}) : super(key: key);
+  final String listName;
+  const ListShowBox(
+      {Key? key, required this.showPreview, required this.listName})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +35,11 @@ class ListShowBox extends StatelessWidget {
             startActionPane: ActionPane(
               motion: const ScrollMotion(),
               dismissible: DismissiblePane(
-                onDismissed: () => delete(context, showPreview),
+                onDismissed: () => delete(),
               ),
               children: [
                 SlidableAction(
-                  onPressed: (context) => delete(context, showPreview),
+                  onPressed: (context) => delete(),
                   autoClose: true,
                   backgroundColor: Colors.transparent,
                   foregroundColor: Colors.white,
@@ -47,10 +50,12 @@ class ListShowBox extends StatelessWidget {
             ),
             endActionPane: ActionPane(
               motion: const ScrollMotion(),
-              dismissible: DismissiblePane(onDismissed: () {}),
+              dismissible: DismissiblePane(
+                onDismissed: () => delete(),
+              ),
               children: [
                 SlidableAction(
-                  onPressed: (context) => delete(context, showPreview),
+                  onPressed: (context) => delete(),
                   autoClose: true,
                   backgroundColor: Colors.transparent,
                   foregroundColor: Colors.white,
@@ -164,9 +169,10 @@ class ListShowBox extends StatelessWidget {
           )),
     );
   }
-}
 
-void delete(BuildContext context, ShowPreview showPreview) {
-  final preferencesShareholder = PreferencesShareholder();
-  // ToDo: preferencesShareholder.deleteBookmark(showId: showPreview.id);
+  void delete() {
+    final preferencesShareholder = PreferencesShareholder();
+    preferencesShareholder.deleteFromList(
+        showId: showPreview.id, listName: listName);
+  }
 }
