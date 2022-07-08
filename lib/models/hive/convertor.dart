@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
 
@@ -43,7 +44,10 @@ HiveShowPreview convertShowPreviewToHive(ShowPreview showPreview) {
 }
 
 Future<HiveShowPreview> convertFullShowToHive(
-    FullShow fullShow, String rank) async {
+    {required FullShow fullShow,
+    required String rank,
+    DateTime? date,
+    TimeOfDay? time}) async {
   String crew = "";
   await getShowCrew(fullShow: fullShow).then((value) => crew = value);
   return HiveShowPreview()
@@ -61,7 +65,9 @@ Future<HiveShowPreview> convertFullShowToHive(
     ..domestic = fullShow.domestic
     ..domesticLifetimeGross = fullShow.domesticLifetimeGross
     ..foreign = fullShow.foreign
-    ..foreignLifetimeGross = fullShow.foreignLifetimeGross;
+    ..foreignLifetimeGross = fullShow.foreignLifetimeGross
+    ..watchDate = date
+    ..watchTime = time;
 }
 
 Future<String> getShowCrew({required FullShow fullShow}) async {

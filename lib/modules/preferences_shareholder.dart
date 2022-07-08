@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import '../models/hive/convertor.dart';
 import '../models/hive/models/show_preview.dart';
@@ -16,10 +17,16 @@ class PreferencesShareholder {
 
   // Add an item to a list in the shared preferences
   Future<bool> addShowToList(
-      {required FullShow fullShow, required String listName}) async {
+      {required FullShow fullShow,
+      required String listName,
+      DateTime? date,
+      TimeOfDay? time}) async {
     Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
-    HiveShowPreview hiveShow =
-        await convertFullShowToHive(fullShow, (list.length + 1).toString());
+    HiveShowPreview hiveShow = await convertFullShowToHive(
+        fullShow: fullShow,
+        rank: (list.length + 1).toString(),
+        date: date,
+        time: time);
     list.put(list.length + 1, hiveShow);
     if (kDebugMode) {
       print("The item added to $listName");
@@ -48,17 +55,21 @@ class PreferencesShareholder {
     List<String> listNames = ["collection", "watchlist", "history"];
     Map<String, bool> result = {};
     for (String listName in listNames) {
-      Box<HiveShowPreview> collection = Hive.box<HiveShowPreview>(listName);
-      for (int i = 0; i < collection.length; i++) {
-        if (collection.getAt(i)?.id == showId) {
+      Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
+      for (int i = 0; i < list.length; i++) {
+        if (list.getAt(i)?.id == showId) {
           if (kDebugMode) {
             print("Item is in $listName");
           }
           result[listName] = true;
           break;
+        } else {
+          result[listName] = false;
         }
       }
-      result[listName] = false;
+      if (result[listName] != true) {
+        result[listName] = false;
+      }
     }
     return result;
   }

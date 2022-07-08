@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import '../hive_helper/fields/show_preview_fields.dart';
 import '../hive_helper/hive_adapters.dart';
@@ -37,4 +38,8 @@ class HiveShowPreview extends HiveObject {
   late String foreignLifetimeGross;
   @HiveField(ShowPreviewFields.foreign)
   late String foreign;
+  @HiveField(ShowPreviewFields.watchDate)
+  late DateTime? watchDate;
+  @HiveField(ShowPreviewFields.watchTime)
+  late TimeOfDay? watchTime;
 }

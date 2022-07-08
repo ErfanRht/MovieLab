@@ -1,101 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/show_models/full_show_model.dart';
 import 'package:movielab/widgets/buttons/glassmorphism_button.dart';
+import '../../../../../modules/preferences_shareholder.dart';
+import '../../../../../widgets/toast.dart';
 
-// ignore: must_be_immutable
-class ShowPageAddWatchTime extends StatefulWidget {
+class ShowPageAddWatchDate extends ConsumerStatefulWidget {
   final FullShow show;
-  const ShowPageAddWatchTime({Key? key, required this.show}) : super(key: key);
+  const ShowPageAddWatchDate({Key? key, required this.show}) : super(key: key);
 
   @override
-  State<ShowPageAddWatchTime> createState() => _ShowPageAddWatchTimeState();
+  ShowPageAddWatchDateState createState() => ShowPageAddWatchDateState();
 }
 
-class _ShowPageAddWatchTimeState extends State<ShowPageAddWatchTime> {
-  bool isOtherDateSectionOpen = false;
-  bool showDateSelector = false;
-  DateTime selectedDate = DateTime.now();
-  TimeOfDay selectedTime = TimeOfDay.now();
-  List<String> months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ];
+class ShowPageAddWatchDateState extends ConsumerState<ShowPageAddWatchDate> {
+  final PreferencesShareholder _preferencesShareholder =
+      PreferencesShareholder();
+  late bool isOtherDateSectionOpen, showDateSelector;
+  late TimeOfDay selectedTime;
+  late DateTime selectedDate;
+  late List<String> months;
+  late FToast fToast;
 
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        builder: (BuildContext context, child) {
-          return Theme(
-              data: Theme.of(context).copyWith(
-                dialogBackgroundColor: kSecondaryColor,
-                primaryColor: kPrimaryColor,
-                colorScheme: const ColorScheme.light(
-                  primary: kPrimaryColor,
-                  onPrimary: Colors.white,
-                  onSurface: Colors.white,
-                ),
-                textButtonTheme: TextButtonThemeData(
-                  style: TextButton.styleFrom(
-                    primary: kPrimaryColor,
-                  ),
-                ),
-              ),
-              child: child!);
-        },
-        initialDate: selectedDate,
-        currentDate: DateTime.now(),
-        selectableDayPredicate: (DateTime date) =>
-            date.isAfter(DateTime.now()) ? false : true,
-        firstDate: DateTime(1901),
-        lastDate: DateTime(2101));
-    if (picked != null && picked != selectedDate) {
-      setState(() {
-        selectedDate = picked;
-        print(selectedDate);
-      });
-    }
-  }
+  @override
+  void initState() {
+    super.initState();
+    isOtherDateSectionOpen = false;
+    showDateSelector = false;
 
-  Future<void> _selectTime(BuildContext context) async {
-    final TimeOfDay? timeOfDay = await showTimePicker(
-      context: context,
-      builder: (BuildContext context, child) {
-        return Theme(
-            data: ThemeData.dark().copyWith(
-              primaryColor: kPrimaryColor,
-              timePickerTheme: const TimePickerThemeData(
-                backgroundColor: kSecondaryColor,
-                dialTextColor: Colors.white,
-              ),
-              textButtonTheme: TextButtonThemeData(
-                style: TextButton.styleFrom(
-                  primary: Colors.white,
-                ),
-              ),
-            ),
-            child: child!);
-      },
-      initialTime: selectedTime,
-      initialEntryMode: TimePickerEntryMode.dial,
-    );
-    if (timeOfDay != null && timeOfDay != selectedTime) {
-      setState(() {
-        selectedTime = timeOfDay;
-      });
-    }
+    selectedTime = TimeOfDay.now();
+    selectedDate = DateTime.now();
+
+    months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
+
+    fToast = FToast();
+    fToast.init(context);
   }
 
   @override
@@ -121,7 +77,9 @@ class _ShowPageAddWatchTimeState extends State<ShowPageAddWatchTime> {
             ],
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              markAsWatched(date: DateTime.now(), time: TimeOfDay.now());
+            },
             style: TextButton.styleFrom(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 10)),
@@ -145,7 +103,11 @@ class _ShowPageAddWatchTimeState extends State<ShowPageAddWatchTime> {
             ),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              markAsWatched(
+                  date: DateTime.parse(widget.show.releaseDate),
+                  time: TimeOfDay.fromDateTime(DateTime.parse("00:00")));
+            },
             style: TextButton.styleFrom(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 10)),
@@ -330,6 +292,88 @@ class _ShowPageAddWatchTimeState extends State<ShowPageAddWatchTime> {
               : const SizedBox.shrink(),
         ],
       ),
+    );
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        builder: (BuildContext context, child) {
+          return Theme(
+              data: Theme.of(context).copyWith(
+                dialogBackgroundColor: kSecondaryColor,
+                primaryColor: kPrimaryColor,
+                colorScheme: const ColorScheme.light(
+                  primary: kPrimaryColor,
+                  onPrimary: Colors.white,
+                  onSurface: Colors.white,
+                ),
+                textButtonTheme: TextButtonThemeData(
+                  style: TextButton.styleFrom(
+                    primary: kPrimaryColor,
+                  ),
+                ),
+              ),
+              child: child!);
+        },
+        initialDate: selectedDate,
+        currentDate: DateTime.now(),
+        selectableDayPredicate: (DateTime date) =>
+            date.isAfter(DateTime.now()) ? false : true,
+        firstDate: DateTime(1901),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay? timeOfDay = await showTimePicker(
+      context: context,
+      builder: (BuildContext context, child) {
+        return Theme(
+            data: ThemeData.dark().copyWith(
+              primaryColor: kPrimaryColor,
+              timePickerTheme: const TimePickerThemeData(
+                backgroundColor: kSecondaryColor,
+                dialTextColor: Colors.white,
+              ),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
+                ),
+              ),
+            ),
+            child: child!);
+      },
+      initialTime: selectedTime,
+      initialEntryMode: TimePickerEntryMode.dial,
+    );
+    if (timeOfDay != null && timeOfDay != selectedTime) {
+      setState(() {
+        selectedTime = timeOfDay;
+      });
+    }
+  }
+
+  markAsWatched({required DateTime date, required TimeOfDay time}) async {
+    _preferencesShareholder.addShowToList(
+        fullShow: widget.show, listName: "history", date: date, time: time);
+    await Future.delayed(const Duration(milliseconds: 200));
+    // ignore: use_build_context_synchronously
+    Navigator.pop(context);
+    await Future.delayed(const Duration(milliseconds: 200));
+    fToast.showToast(
+      child: ToastWidget(
+        mainText: "Saved to History}",
+        buttonText: "See list",
+        buttonColor: kAccentColor,
+        buttonOnTap: () {},
+      ),
+      gravity: ToastGravity.BOTTOM,
+      toastDuration: const Duration(seconds: 3),
     );
   }
 }

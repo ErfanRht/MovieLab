@@ -14,4 +14,6 @@ class ShowPreviewFields {
   static const int domestic = 12;
   static const int foreignLifetimeGross = 13;
   static const int foreign = 14;
+  static const int watchDate = 15;
+  static const int watchTime = 16;
 }

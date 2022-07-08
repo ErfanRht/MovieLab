@@ -19,6 +19,7 @@ dependencies:
   font_awesome_flutter: ^10.1.0
   google_fonts: ^3.0.1
   ms_undraw: ^3.0.1+1
+  fluttertoast: ^8.0.9
   flutter_spinkit: ^5.1.0
   flutter_rating_bar: ^4.0.0
   google_nav_bar: ^5.0.5
@@ -35,6 +36,9 @@ dependencies:
   http: ^0.13.4
   cached_network_image: ^3.2.0
   speech_to_text: ^5.6.0
+  flutter_riverpod: ^1.0.4
+
+  
 
 dev_dependencies:
   flutter_test:
@@ -43,6 +47,7 @@ dev_dependencies:
   test: ^1.17.12
   build_runner: ^2.1.7
   hive_generator: ^1.1.2
+  ansicolor: ^2.0.1
 
 flutter:
   uses-material-design: true

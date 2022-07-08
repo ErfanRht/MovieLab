@@ -12,7 +12,7 @@ import '../../../modules/preferences_shareholder.dart';
 import 'get_show_info.dart';
 import 'sections/bottom_bar/bottom_bar.dart';
 import 'sections/index.dart';
-import 'sections/watchtime.dart';
+import 'sections/bottom_bar/watchtime.dart';
 
 // ignore: must_be_immutable
 class ShowPage extends StatefulWidget {
@@ -90,12 +90,15 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
             height: _isBottomAppBarVisible ? 60 : 0.0,
-            child: const BottomAppBar(
-                shape: CircularNotchedRectangle(),
+            child: BottomAppBar(
+                shape: const CircularNotchedRectangle(),
                 clipBehavior: Clip.antiAlias,
                 notchMargin: 7.5,
                 color: kSecondaryColor,
-                child: ShowPageBottonBar()),
+                child: ShowPageBottonBar(
+                  show: show,
+                  isThereInLists: _isThereInLists,
+                )),
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
@@ -112,7 +115,7 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
                           duration: const Duration(milliseconds: 225),
                           vsync: this),
                       builder: (context) {
-                        return ShowPageAddWatchTime(
+                        return ShowPageAddWatchDate(
                           show: show,
                         );
                       })
