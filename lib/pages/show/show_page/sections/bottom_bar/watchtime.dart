@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,15 +8,18 @@ import 'package:movielab/widgets/buttons/glassmorphism_button.dart';
 import '../../../../../modules/preferences_shareholder.dart';
 import '../../../../../widgets/toast.dart';
 
-class ShowPageAddWatchDate extends ConsumerStatefulWidget {
+class ShowPageAddWatchDate extends StatefulWidget {
   final FullShow show;
-  const ShowPageAddWatchDate({Key? key, required this.show}) : super(key: key);
+  final Future<dynamic> Function() updateShowData;
+  const ShowPageAddWatchDate(
+      {Key? key, required this.show, required this.updateShowData})
+      : super(key: key);
 
   @override
-  ShowPageAddWatchDateState createState() => ShowPageAddWatchDateState();
+  _ShowPageAddWatchDateState createState() => _ShowPageAddWatchDateState();
 }
 
-class ShowPageAddWatchDateState extends ConsumerState<ShowPageAddWatchDate> {
+class _ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
   final PreferencesShareholder _preferencesShareholder =
       PreferencesShareholder();
   late bool isOtherDateSectionOpen, showDateSelector;
@@ -375,5 +377,6 @@ class ShowPageAddWatchDateState extends ConsumerState<ShowPageAddWatchDate> {
       gravity: ToastGravity.BOTTOM,
       toastDuration: const Duration(seconds: 3),
     );
+    widget.updateShowData();
   }
 }

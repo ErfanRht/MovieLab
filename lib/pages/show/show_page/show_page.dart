@@ -56,7 +56,7 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
         }
       }
     });
-    _loadData();
+    loadShowData();
   }
 
   @override
@@ -98,6 +98,7 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
                 child: ShowPageBottonBar(
                   show: show,
                   isThereInLists: _isThereInLists,
+                  updateShowData: loadShowData,
                 )),
           ),
           floatingActionButton: FloatingActionButton(
@@ -117,6 +118,7 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
                       builder: (context) {
                         return ShowPageAddWatchDate(
                           show: show,
+                          updateShowData: loadShowData,
                         );
                       })
                   : null;
@@ -230,7 +232,7 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
                   setState(() {
                     _loadingStatus = RequestResult.LOADING;
                   });
-                  _loadData();
+                  loadShowData();
                 }),
               ],
             ),
@@ -244,25 +246,33 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
     }
   }
 
-  Future _loadData() async {
-    await getShowInfo(id: widget.id).then((response) {
-      if (response != null) {
-        setState(() {
-          show = response;
-          _loadingStatus = RequestResult.SUCCESS;
-        });
-        preferencesShareholder
-            .isThereInLists(showId: widget.id)
-            .then((value) => {
-                  setState(() {
-                    _isThereInLists = value;
-                  })
-                });
-      } else {
-        setState(() {
-          _loadingStatus = RequestResult.FAILURE;
-        });
-      }
-    });
+  Future loadShowData() async {
+    if (show == null) {
+      await getShowInfo(id: widget.id).then((response) {
+        if (response != null) {
+          setState(() {
+            show = response;
+            _loadingStatus = RequestResult.SUCCESS;
+          });
+          preferencesShareholder
+              .isThereInLists(showId: widget.id)
+              .then((value) => {
+                    setState(() {
+                      _isThereInLists = value;
+                    })
+                  });
+        } else {
+          setState(() {
+            _loadingStatus = RequestResult.FAILURE;
+          });
+        }
+      });
+    } else {
+      preferencesShareholder.isThereInLists(showId: widget.id).then((value) => {
+            setState(() {
+              _isThereInLists = value;
+            })
+          });
+    }
   }
 }

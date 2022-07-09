@@ -10,8 +10,12 @@ import 'sections/lists_info/lists_info.dart';
 class ShowPageBottonBar extends StatefulWidget {
   final FullShow show;
   final Map<String, bool> isThereInLists;
+  final Future<dynamic> Function() updateShowData;
   const ShowPageBottonBar(
-      {Key? key, required this.show, required this.isThereInLists})
+      {Key? key,
+      required this.show,
+      required this.isThereInLists,
+      required this.updateShowData})
       : super(key: key);
 
   @override
@@ -68,6 +72,7 @@ class _ShowPageBottonBarState extends State<ShowPageBottonBar>
                   return ShowPageListsInfo(
                     show: widget.show,
                     isThereInLists: widget.isThereInLists,
+                    updateShowData: widget.updateShowData,
                   );
                 },
               );

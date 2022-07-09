@@ -12,8 +12,12 @@ import '../../watchtime.dart';
 class ShowPageListsInfo extends StatefulWidget {
   final FullShow show;
   final Map<String, bool> isThereInLists;
+  final Future<dynamic> Function() updateShowData;
   const ShowPageListsInfo(
-      {Key? key, required this.show, required this.isThereInLists})
+      {Key? key,
+      required this.show,
+      required this.isThereInLists,
+      required this.updateShowData})
       : super(key: key);
 
   @override
@@ -64,6 +68,7 @@ class _ShowPageListsInfoState extends State<ShowPageListsInfo>
                       builder: (context) {
                         return ShowPageAddWatchDate(
                           show: widget.show,
+                          updateShowData: widget.updateShowData,
                         );
                       });
                 } else {
@@ -138,5 +143,6 @@ class _ShowPageListsInfoState extends State<ShowPageListsInfo>
         toastDuration: const Duration(seconds: 3),
       );
     }
+    widget.updateShowData();
   }
 }
