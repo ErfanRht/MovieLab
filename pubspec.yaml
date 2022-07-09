@@ -53,5 +53,6 @@ flutter:
   uses-material-design: true
 
   assets:
-     - assets/logo/logo.png
-     - assets/logo/IMDb.png
+     - assets/images/logos/logo.png
+     - assets/images/logos/IMDb.png
+     - assets/images/erfan_rahmati_profile.jpg

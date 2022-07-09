@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:movielab/modules/navigate.dart';
+import 'package:movielab/pages/shared/about_page/about_page.dart';
 import 'package:movielab/widgets/buttons_section.dart';
 import '../../../../widgets/section_title.dart';
 
@@ -32,7 +34,9 @@ class ProfilePageSettings extends StatelessWidget {
               onPressed: () {},
             ),
             ButtonSectionItem(
-                onPressed: () {},
+                onPressed: () {
+                  Navigate.pushTo(context, const AboutPage());
+                },
                 title: "About",
                 icon: FontAwesomeIcons.circleInfo,
                 iconColor: Colors.deepOrange),

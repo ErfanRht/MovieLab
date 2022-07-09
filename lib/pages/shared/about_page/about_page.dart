@@ -1,0 +1,156 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:movielab/constants/colors.dart';
+import 'package:movielab/pages/shared/app_name.dart';
+import 'package:movielab/widgets/buttons/social_media_button.dart';
+
+class AboutPage extends StatelessWidget {
+  const AboutPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: kBackgroundColor,
+      appBar: AppBar(
+        backgroundColor: kBackgroundColor,
+        title: const Text(
+          "About",
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+        ),
+        centerTitle: true,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              FontAwesomeIcons.x,
+              color: Colors.white,
+              size: 17.5,
+            )),
+      ),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 75.0),
+                  child: Image.asset(
+                    "assets/images/logos/logo.png",
+                    color: kPrimaryColor,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const Positioned(
+                  bottom: 5,
+                  child: AppName(),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              "Version 1.0.7",
+              style: TextStyle(
+                  fontSize: 17.5,
+                  color: Colors.white.withOpacity(0.5),
+                  fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            // Text(
+            //   "© 2022 Erfan Rahmati",
+            //   style: TextStyle(
+            //       fontSize: 17.5,
+            //       color: Colors.white.withOpacity(0.5),
+            //       fontWeight: FontWeight.w700),
+            // )
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 225,
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 50),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: kSecondaryColor),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 75,
+                      ),
+                      Text(
+                        "Developed and designed by",
+                        style: TextStyle(
+                            fontSize: 14.5,
+                            color: Colors.white.withOpacity(0.5),
+                            fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      const Text(
+                        "Erfan Rahmati",
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700),
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          SocialMediaButton(
+                            icon: FontAwesomeIcons.github,
+                            url: "https://github.com/ErfanRht",
+                          ),
+                          SocialMediaButton(
+                            icon: FontAwesomeIcons.linkedin,
+                            url: "https://www.linkedin.com/in/erfanrahmati",
+                          ),
+                          SocialMediaButton(
+                            icon: Icons.email_rounded,
+                            url: "erfanrht2005@gmail.com",
+                          ),
+                          SocialMediaButton(
+                            icon: FontAwesomeIcons.chrome,
+                            url: "https://erfanrht.github.io/",
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                Positioned(
+                  top: 0,
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    padding: const EdgeInsets.all(0.75),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: Colors.white),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.asset(
+                          "assets/images/erfan_rahmati_profile.jpg",
+                          fit: BoxFit.cover),
+                    ),
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

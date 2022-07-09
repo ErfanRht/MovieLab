@@ -28,7 +28,7 @@ class HomeIMDbBox extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Image.asset("assets/logo/IMDb.png"),
+          child: Image.asset("assets/images/logos/IMDb.png"),
         )
       ]),
     );

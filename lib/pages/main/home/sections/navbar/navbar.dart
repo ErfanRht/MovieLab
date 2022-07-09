@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/pages/main/main_controller.dart';
+import 'package:movielab/pages/shared/app_name.dart';
 
 class HomeNavbar extends StatelessWidget {
   const HomeNavbar({Key? key}) : super(key: key);
@@ -39,22 +40,9 @@ class HomeNavbar extends StatelessWidget {
             highlightColor: Colors.blue,
             focusColor: Colors.blue,
             borderRadius: BorderRadius.circular(12.5),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: RichText(
-                text: TextSpan(
-                  text: 'Movie',
-                  style: GoogleFonts.ubuntu(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold),
-                  children: const <TextSpan>[
-                    TextSpan(
-                        text: 'Lab', style: TextStyle(color: kPrimaryColor)),
-                  ],
-                ),
-              ),
-            ),
+            child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                child: AppName()),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 2.5),
