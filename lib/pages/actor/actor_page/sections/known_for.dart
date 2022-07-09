@@ -26,7 +26,7 @@ class ActorPageKnownFor extends StatelessWidget {
 
   knownFor({required List<ShowPreview> knownFor}) {
     return SizedBox(
-      height: 265,
+      height: 275,
       child: Row(
         children: [
           Expanded(

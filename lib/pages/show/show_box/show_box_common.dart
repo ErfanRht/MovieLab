@@ -42,13 +42,13 @@ Widget showBoxText(
     {required String text,
     required double fontSize,
     required FontWeight fontWeight,
+    bool isItTitle = false,
     Color color = Colors.white}) {
-  return RichText(
+  return Text(
+    text,
     overflow: TextOverflow.ellipsis,
-    text: TextSpan(
-      style: GoogleFonts.ubuntu(
-          color: color, fontSize: fontSize, fontWeight: fontWeight),
-      text: text,
-    ),
+    maxLines: isItTitle ? 1 : 2,
+    style: GoogleFonts.ubuntu(
+        color: color, fontSize: fontSize, fontWeight: fontWeight),
   );
 }

@@ -24,7 +24,11 @@ ShowPreview convertHiveToShowPreview(HiveShowPreview hive) {
   );
 }
 
-HiveShowPreview convertShowPreviewToHive(ShowPreview showPreview) {
+HiveShowPreview convertShowPreviewToHive(
+    {required ShowPreview showPreview,
+    required String rank,
+    DateTime? date,
+    TimeOfDay? time}) {
   return HiveShowPreview()
     ..id = showPreview.id
     ..rank = showPreview.rank
@@ -40,7 +44,9 @@ HiveShowPreview convertShowPreviewToHive(ShowPreview showPreview) {
     ..domestic = showPreview.domestic
     ..domesticLifetimeGross = showPreview.domesticLifetimeGross
     ..foreign = showPreview.foreign
-    ..foreignLifetimeGross = showPreview.foreignLifetimeGross;
+    ..foreignLifetimeGross = showPreview.foreignLifetimeGross
+    ..watchDate = date
+    ..watchTime = time;
 }
 
 Future<HiveShowPreview> convertFullShowToHive(
@@ -68,6 +74,29 @@ Future<HiveShowPreview> convertFullShowToHive(
     ..foreignLifetimeGross = fullShow.foreignLifetimeGross
     ..watchDate = date
     ..watchTime = time;
+}
+
+Future<ShowPreview> convertFullShowToShowPreview(
+    {required FullShow fullShow}) async {
+  String crew = "";
+  await getShowCrew(fullShow: fullShow).then((value) => crew = value);
+  return ShowPreview(
+    id: fullShow.id,
+    title: fullShow.title,
+    crew: crew,
+    image: fullShow.image,
+    year: fullShow.year,
+    rank: '',
+    imDbRating: fullShow.imDbRating,
+    weekend: fullShow.weekend,
+    gross: fullShow.gross,
+    weeks: fullShow.weeks,
+    worldwideLifetimeGross: fullShow.worldwideLifetimeGross,
+    domestic: fullShow.domestic,
+    domesticLifetimeGross: fullShow.domesticLifetimeGross,
+    foreign: fullShow.foreign,
+    foreignLifetimeGross: fullShow.foreignLifetimeGross,
+  );
 }
 
 Future<String> getShowCrew({required FullShow fullShow}) async {

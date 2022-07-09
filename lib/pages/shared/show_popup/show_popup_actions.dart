@@ -1,40 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:movielab/models/hive/convertor.dart';
+import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/capitalizer.dart';
 import '../../../../../../../constants/colors.dart';
-import '../../../../../../../models/show_models/full_show_model.dart';
 import '../../../../../../../modules/preferences_shareholder.dart';
 import '../../../../../../../widgets/buttons/activeable_button.dart';
 import '../../../../../../../widgets/toast.dart';
-import '../../watchtime.dart';
+import 'add_watchtime.dart';
 
-class ShowPageListsInfo extends StatefulWidget {
-  final FullShow show;
-  final Map<String, bool> isThereInLists;
-  final Future<dynamic> Function() updateShowData;
-  const ShowPageListsInfo(
-      {Key? key,
-      required this.show,
-      required this.isThereInLists,
-      required this.updateShowData})
-      : super(key: key);
+class ShowPopupActions extends StatefulWidget {
+  final ShowPreview show;
+
+  const ShowPopupActions({Key? key, required this.show}) : super(key: key);
 
   @override
-  State<ShowPageListsInfo> createState() => _ShowPageListsInfoState();
+  State<ShowPopupActions> createState() => _ShowPopupActionsState();
 }
 
-class _ShowPageListsInfoState extends State<ShowPageListsInfo>
+class _ShowPopupActionsState extends State<ShowPopupActions>
     with TickerProviderStateMixin {
   final PreferencesShareholder _preferencesShareholder =
       PreferencesShareholder();
   late FToast fToast;
+  Map<String, bool> _isThereInLists = {};
   @override
   void initState() {
     super.initState();
     fToast = FToast();
     fToast.init(context);
+    getShowListsInformation();
   }
 
   @override
@@ -50,9 +45,9 @@ class _ShowPageListsInfoState extends State<ShowPageListsInfo>
               text: 'Mark as watched',
               activeText: 'Watched',
               activeColor: kPrimaryColor,
-              isActive: widget.isThereInLists['history'] ?? false,
+              isActive: _isThereInLists['history'] ?? false,
               onTap: () async {
-                if (widget.isThereInLists["history"] == false) {
+                if (_isThereInLists["history"] == false) {
                   Navigator.pop(context);
                   await Future.delayed(const Duration(milliseconds: 200));
                   showModalBottomSheet(
@@ -64,12 +59,11 @@ class _ShowPageListsInfoState extends State<ShowPageListsInfo>
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       backgroundColor: kSecondaryColor,
                       transitionAnimationController: AnimationController(
-                          duration: const Duration(milliseconds: 225),
+                          duration: const Duration(milliseconds: 175),
                           vsync: this),
                       builder: (context) {
-                        return ShowPageAddWatchDate(
+                        return AddWatchTime(
                           show: widget.show,
-                          updateShowData: widget.updateShowData,
                         );
                       });
                 } else {
@@ -82,7 +76,7 @@ class _ShowPageListsInfoState extends State<ShowPageListsInfo>
               text: 'Add to watchlist',
               activeText: 'Listed on watchlist',
               activeColor: kAccentColor,
-              isActive: widget.isThereInLists['watchlist'] ?? false,
+              isActive: _isThereInLists['watchlist'] ?? false,
               onTap: () {
                 handleOnTap(listName: "watchlist");
               }),
@@ -92,7 +86,7 @@ class _ShowPageListsInfoState extends State<ShowPageListsInfo>
               text: 'Add to collection',
               activeText: 'Collected',
               activeColor: kImdbColor,
-              isActive: widget.isThereInLists['collection'] ?? false,
+              isActive: _isThereInLists['collection'] ?? false,
               onTap: () {
                 handleOnTap(listName: "collection");
               }),
@@ -104,13 +98,11 @@ class _ShowPageListsInfoState extends State<ShowPageListsInfo>
   void handleOnTap({
     required String listName,
   }) async {
-    if (widget.isThereInLists[listName] == false) {
+    if (_isThereInLists[listName] == false) {
       _preferencesShareholder.addShowToList(
-          showPreview:
-              await convertFullShowToShowPreview(fullShow: widget.show),
-          listName: listName);
+          showPreview: widget.show, listName: listName);
       setState(() {
-        widget.isThereInLists[listName] = true;
+        _isThereInLists[listName] = true;
       });
       await Future.delayed(const Duration(milliseconds: 200));
       // ignore: use_build_context_synchronously
@@ -130,7 +122,7 @@ class _ShowPageListsInfoState extends State<ShowPageListsInfo>
       _preferencesShareholder.deleteFromList(
           showId: widget.show.id, listName: listName);
       setState(() {
-        widget.isThereInLists[listName] = false;
+        _isThereInLists[listName] = false;
       });
       await Future.delayed(const Duration(milliseconds: 200));
       // ignore: use_build_context_synchronously
@@ -146,6 +138,16 @@ class _ShowPageListsInfoState extends State<ShowPageListsInfo>
         toastDuration: const Duration(seconds: 3),
       );
     }
-    widget.updateShowData();
+  }
+
+  getShowListsInformation() async {
+    PreferencesShareholder preferencesShareholder = PreferencesShareholder();
+    preferencesShareholder
+        .isThereInLists(showId: widget.show.id)
+        .then((value) => {
+              setState(() {
+                _isThereInLists = value;
+              })
+            });
   }
 }

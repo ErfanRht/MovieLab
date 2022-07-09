@@ -1,20 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:movielab/constants/colors.dart';
+import 'package:movielab/pages/shared/show_popup/show_popup_actions.dart';
 import '../../../models/show_models/show_preview_model.dart';
 import 'show_box_common.dart';
 
-class ShowBox extends StatelessWidget {
+class ShowBox extends StatefulWidget {
   final ShowPreview showPreview;
   const ShowBox({Key? key, required this.showPreview}) : super(key: key);
 
   @override
+  State<ShowBox> createState() => _ShowBoxState();
+}
+
+class _ShowBoxState extends State<ShowBox> with TickerProviderStateMixin {
+  @override
   Widget build(BuildContext context) {
-    String title = showPreview.title;
-    String year = showPreview.year;
-    String crew = showPreview.crew;
-    String id = showPreview.id;
+    String title = widget.showPreview.title;
+    String year = widget.showPreview.year;
+    String crew = widget.showPreview.crew;
+    String id = widget.showPreview.id;
     return InkWell(
       onTap: () {
         openShowPage(context, id);
+      },
+      onLongPress: () async {
+        await Future.delayed(const Duration(milliseconds: 250));
+        showModalBottomSheet(
+          context: context,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20),
+          )),
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          backgroundColor: kSecondaryColor,
+          transitionAnimationController: AnimationController(
+              duration: const Duration(milliseconds: 235), vsync: this),
+          builder: (context) {
+            return ShowPopupActions(
+              show: widget.showPreview,
+            );
+          },
+        );
       },
       borderRadius: BorderRadius.circular(20),
       child: Container(
@@ -23,12 +50,36 @@ class ShowBox extends StatelessWidget {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
         child: Column(
           children: [
-            boxImage(
-                image: showPreview.image,
-                tag: "show_$id",
-                height: 210,
-                width: 145,
-                radius: 17.5),
+            Stack(
+              children: [
+                boxImage(
+                    image: widget.showPreview.image,
+                    tag: "show_$id",
+                    height: 210,
+                    width: 145,
+                    radius: 17.5),
+                Positioned(
+                  right: 7.5,
+                  top: 7.5,
+                  child: Container(
+                    width: 30,
+                    height: 17.5,
+                    decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(5.5)),
+                    child: Center(
+                      child: Text(
+                        widget.showPreview.imDbRating,
+                        style: GoogleFonts.ubuntu(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
             Container(
               width: 155,
               alignment: Alignment.bottomLeft,
@@ -39,6 +90,7 @@ class ShowBox extends StatelessWidget {
                     flex: 2,
                     child: showBoxText(
                         text: title,
+                        isItTitle: true,
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                         color: Colors.white),
@@ -48,7 +100,7 @@ class ShowBox extends StatelessWidget {
                           flex: 1,
                           child: showBoxText(
                               text: " ($year)",
-                              fontSize: 14,
+                              fontSize: 12,
                               fontWeight: FontWeight.w500,
                               color: Colors.white),
                         )

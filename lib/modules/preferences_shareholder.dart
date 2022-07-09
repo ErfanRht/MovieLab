@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:movielab/models/show_models/show_preview_model.dart';
 import '../models/hive/convertor.dart';
 import '../models/hive/models/show_preview.dart';
 import '../models/show_models/full_show_model.dart';
@@ -17,13 +18,13 @@ class PreferencesShareholder {
 
   // Add an item to a list in the shared preferences
   Future<bool> addShowToList(
-      {required FullShow fullShow,
+      {required ShowPreview showPreview,
       required String listName,
       DateTime? date,
       TimeOfDay? time}) async {
     Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
-    HiveShowPreview hiveShow = await convertFullShowToHive(
-        fullShow: fullShow,
+    HiveShowPreview hiveShow = convertShowPreviewToHive(
+        showPreview: showPreview,
         rank: (list.length + 1).toString(),
         date: date,
         time: time);

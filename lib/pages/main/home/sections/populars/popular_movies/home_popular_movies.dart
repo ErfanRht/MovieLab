@@ -9,7 +9,7 @@ class HomePopularMovies extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 265,
+      height: 275,
       child: Row(
         children: [
           Expanded(

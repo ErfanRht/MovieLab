@@ -3,24 +3,23 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
-import 'package:movielab/models/hive/convertor.dart';
-import 'package:movielab/models/show_models/full_show_model.dart';
+import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/widgets/buttons/glassmorphism_button.dart';
 import '../../../../../modules/preferences_shareholder.dart';
 import '../../../../../widgets/toast.dart';
 
-class ShowPageAddWatchDate extends StatefulWidget {
-  final FullShow show;
-  final Future<dynamic> Function() updateShowData;
-  const ShowPageAddWatchDate(
-      {Key? key, required this.show, required this.updateShowData})
-      : super(key: key);
+class AddWatchTime extends StatefulWidget {
+  final ShowPreview show;
+  const AddWatchTime({
+    Key? key,
+    required this.show,
+  }) : super(key: key);
 
   @override
-  _ShowPageAddWatchDateState createState() => _ShowPageAddWatchDateState();
+  _AddWatchTimeState createState() => _AddWatchTimeState();
 }
 
-class _ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
+class _AddWatchTimeState extends State<AddWatchTime> {
   final PreferencesShareholder _preferencesShareholder =
       PreferencesShareholder();
   late bool isOtherDateSectionOpen, showDateSelector;
@@ -61,7 +60,7 @@ class _ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 125),
-      height: !isOtherDateSectionOpen ? 225 : 350,
+      height: !isOtherDateSectionOpen ? 175 : 300,
       child: Column(
         children: [
           Row(
@@ -105,46 +104,46 @@ class _ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
               ],
             ),
           ),
-          TextButton(
-            onPressed: () {
-              markAsWatched(
-                  date: DateTime.parse(widget.show.releaseDate),
-                  time: TimeOfDay.fromDateTime(DateTime.parse("00:00")));
-            },
-            style: TextButton.styleFrom(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 10)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: const [
-                    Icon(
-                      FontAwesomeIcons.film,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Text(
-                      "Release date",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 13.5,
-                          fontWeight: FontWeight.w700),
-                    )
-                  ],
-                ),
-                Text(
-                  widget.show.releaseDate,
-                  style: TextStyle(
-                      color: Colors.white.withOpacity(0.5),
-                      fontSize: 10,
-                      fontWeight: FontWeight.w700),
-                )
-              ],
-            ),
-          ),
+          // TextButton(
+          //   onPressed: () {
+          //     markAsWatched(
+          //         date: DateTime.parse(widget.show.releaseDate),
+          //         time: TimeOfDay.fromDateTime(DateTime.parse("00:00")));
+          //   },
+          //   style: TextButton.styleFrom(
+          //       padding:
+          //           const EdgeInsets.symmetric(horizontal: 25, vertical: 10)),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       Row(
+          //         children: const [
+          //           Icon(
+          //             FontAwesomeIcons.film,
+          //             color: Colors.white,
+          //           ),
+          //           SizedBox(
+          //             width: 15,
+          //           ),
+          //           Text(
+          //             "Release date",
+          //             style: TextStyle(
+          //                 color: Colors.white,
+          //                 fontSize: 13.5,
+          //                 fontWeight: FontWeight.w700),
+          //           )
+          //         ],
+          //       ),
+          //       Text(
+          //         widget.show.releaseDate,
+          //         style: TextStyle(
+          //             color: Colors.white.withOpacity(0.5),
+          //             fontSize: 10,
+          //             fontWeight: FontWeight.w700),
+          //       )
+          //     ],
+          //   ),
+          // ),
           TextButton(
             onPressed: () async {
               if (!isOtherDateSectionOpen) {
@@ -363,10 +362,7 @@ class _ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
 
   markAsWatched({required DateTime date, required TimeOfDay time}) async {
     _preferencesShareholder.addShowToList(
-        showPreview: await convertFullShowToShowPreview(fullShow: widget.show),
-        listName: "history",
-        date: date,
-        time: time);
+        showPreview: widget.show, listName: "history", date: date, time: time);
     await Future.delayed(const Duration(milliseconds: 200));
     // ignore: use_build_context_synchronously
     Navigator.pop(context);
@@ -381,6 +377,5 @@ class _ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
       gravity: ToastGravity.BOTTOM,
       toastDuration: const Duration(seconds: 3),
     );
-    widget.updateShowData();
   }
 }
