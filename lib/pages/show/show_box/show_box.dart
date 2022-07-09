@@ -33,7 +33,7 @@ class _ShowBoxState extends State<ShowBox> with TickerProviderStateMixin {
             top: Radius.circular(20),
           )),
           clipBehavior: Clip.antiAliasWithSaveLayer,
-          backgroundColor: kSecondaryColor,
+          backgroundColor: kBackgroundColor,
           transitionAnimationController: AnimationController(
               duration: const Duration(milliseconds: 235), vsync: this),
           builder: (context) {

@@ -19,7 +19,7 @@ class WhatchlistNavbar extends StatelessWidget {
                   fontWeight: FontWeight.bold)),
           IconButton(
             icon: const Icon(
-              FontAwesomeIcons.trashAlt,
+              FontAwesomeIcons.trashCan,
               color: Colors.white,
               size: 22.5,
             ),

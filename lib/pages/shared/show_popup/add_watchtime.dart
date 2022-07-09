@@ -16,10 +16,10 @@ class AddWatchTime extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _AddWatchTimeState createState() => _AddWatchTimeState();
+  AddWatchTimeState createState() => AddWatchTimeState();
 }
 
-class _AddWatchTimeState extends State<AddWatchTime> {
+class AddWatchTimeState extends State<AddWatchTime> {
   final PreferencesShareholder _preferencesShareholder =
       PreferencesShareholder();
   late bool isOtherDateSectionOpen, showDateSelector;

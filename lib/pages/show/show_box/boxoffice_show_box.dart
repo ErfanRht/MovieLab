@@ -51,6 +51,7 @@ class BoxOfficeShowBox extends StatelessWidget {
                     : emptyWidget(),
                 Container(
                   alignment: Alignment.bottomLeft,
+                  // ignore: unnecessary_null_comparison
                   width: image != null || image != 'null' || image != ''
                       ? MediaQuery.of(context).size.width - 140
                       : MediaQuery.of(context).size.width,

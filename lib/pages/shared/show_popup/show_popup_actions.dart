@@ -57,7 +57,7 @@ class _ShowPopupActionsState extends State<ShowPopupActions>
                         top: Radius.circular(20),
                       )),
                       clipBehavior: Clip.antiAliasWithSaveLayer,
-                      backgroundColor: kSecondaryColor,
+                      backgroundColor: kBackgroundColor,
                       transitionAnimationController: AnimationController(
                           duration: const Duration(milliseconds: 175),
                           vsync: this),

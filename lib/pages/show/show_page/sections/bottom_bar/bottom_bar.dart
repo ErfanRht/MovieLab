@@ -2,9 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../../../constants/colors.dart';
-import '../../../../../models/show_models/full_show_model.dart';
-import '../../../../../modules/preferences_shareholder.dart';
+import 'package:movielab/constants/colors.dart';
+import 'package:movielab/models/show_models/full_show_model.dart';
 import 'sections/lists_info/lists_info.dart';
 
 class ShowPageBottonBar extends StatefulWidget {
@@ -24,8 +23,6 @@ class ShowPageBottonBar extends StatefulWidget {
 
 class _ShowPageBottonBarState extends State<ShowPageBottonBar>
     with TickerProviderStateMixin {
-  final PreferencesShareholder _preferencesShareholder =
-      PreferencesShareholder();
   late FToast fToast;
   @override
   void initState() {

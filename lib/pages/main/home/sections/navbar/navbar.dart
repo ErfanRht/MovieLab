@@ -60,7 +60,7 @@ class HomeNavbar extends StatelessWidget {
             padding: const EdgeInsets.only(top: 2.5),
             child: IconButton(
               icon: const Icon(
-                FontAwesomeIcons.search,
+                FontAwesomeIcons.magnifyingGlass,
                 color: Colors.white,
                 size: 22.5,
               ),

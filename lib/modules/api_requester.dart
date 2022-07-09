@@ -19,8 +19,8 @@ class APIRequester {
   // static const String apiKey = "k_y9zcdoq3";
   // static const String apiKey = "";
 
-  // Get recently popular movies from the IMDB API
-  Future<RequestResult> getPopularMovies() async {
+  // Get recently trending movies from the IMDB API
+  Future<RequestResult> getTrendingMovies() async {
     final response = await http
         .get(Uri.parse('$imdbBaseUrl/MostPopularMovies/$apiKey'))
         .timeout(
@@ -32,20 +32,20 @@ class APIRequester {
         return RequestResult.FAILURE_SERVER_PROBLEM;
       }
       var json = jsonDecode(response.body)["items"];
-      List<ShowPreview> popularMovies = [];
+      List<ShowPreview> trendingMovies = [];
       for (int i = 0; i < json.length; i++) {
-        popularMovies.add(ShowPreview.fromJson(json[i]));
+        trendingMovies.add(ShowPreview.fromJson(json[i]));
       }
       Get.find<HomeDataController>()
-          .updatePopularMovies(popularMovies: popularMovies);
+          .updateTrendingMovies(trendingMovies: trendingMovies);
       return RequestResult.SUCCESS;
     } else {
       return RequestResult.FAILURE_SERVER_PROBLEM;
     }
   }
 
-  // Get recently popular TV shows from the IMDB API
-  Future<RequestResult> getPopularTVShows() async {
+  // Get recently trending TV shows from the IMDB API
+  Future<RequestResult> getTrendingTVShows() async {
     final response = await http
         .get(Uri.parse('$imdbBaseUrl/MostPopularTVs/$apiKey'))
         .timeout(const Duration(seconds: 10));
@@ -56,19 +56,19 @@ class APIRequester {
       }
       var json = jsonDecode(response.body)["items"];
 
-      List<ShowPreview> popularShows = [];
+      List<ShowPreview> trendingShows = [];
       for (int i = 0; i < json.length; i++) {
-        popularShows.add(ShowPreview.fromJson(json[i]));
+        trendingShows.add(ShowPreview.fromJson(json[i]));
       }
       Get.find<HomeDataController>()
-          .updatePopularShows(popularShows: popularShows);
+          .updateTrendingShows(trendingShows: trendingShows);
       return RequestResult.SUCCESS;
     } else {
       return RequestResult.FAILURE_SERVER_PROBLEM;
     }
   }
 
-  // Get IMDB 250 most popular movies or TV shows from the IMDB API
+  // Get IMDB 250 most trending movies or TV shows from the IMDB API
   Future<bool> getIMDBlists({required ImdbList listName}) async {
     HomeDataController homeDataController = Get.find<HomeDataController>();
     http.Response response;

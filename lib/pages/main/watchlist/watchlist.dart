@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/hive/convertor.dart';
-import 'package:movielab/modules/preferences_shareholder.dart';
 import 'package:movielab/widgets/loading_error.dart';
 import 'package:ms_undraw/ms_undraw.dart';
 
@@ -16,8 +15,6 @@ class WhatchlistPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final preferencesShareholder = PreferencesShareholder();
-
     return MaterialApp(
         home: DefaultTabController(
       length: 2,
@@ -59,7 +56,6 @@ class WhatchlistPage extends StatelessWidget {
                   Hive.box<HiveShowPreview>('watchlist').listenable(),
               builder: (context, box, _) {
                 final collection = box.values.toList().cast<HiveShowPreview>();
-                print(collection.toString());
                 return collection.isNotEmpty
                     ? ListView.builder(
                         itemCount: collection.length,
@@ -106,7 +102,6 @@ class WhatchlistPage extends StatelessWidget {
                   Hive.box<HiveShowPreview>('collection').listenable(),
               builder: (context, box, _) {
                 final collection = box.values.toList().cast<HiveShowPreview>();
-                print(collection.toString());
                 return collection.isNotEmpty
                     ? ListView.builder(
                         itemCount: collection.length,

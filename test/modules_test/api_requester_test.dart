@@ -5,24 +5,24 @@ import 'package:test/test.dart';
 import 'package:movielab/modules/api_requester.dart';
 
 void main() {
-  test('getPopularMovies', () async {
+  test('getTrendingMovies', () async {
     APIRequester apiRequester = APIRequester();
     Get.put(HomeDataController());
 
-    var result = await apiRequester.getPopularMovies();
+    var result = await apiRequester.getTrendingMovies();
     expect(result, isNotNull);
     if (result == RequestResult.SUCCESS) {
-      expect(Get.find<HomeDataController>().popularMovies, isNotEmpty);
+      expect(Get.find<HomeDataController>().trendingMovies, isNotEmpty);
     }
   });
-  test('getPopularTVShows', () async {
+  test('getTrendingTVShows', () async {
     APIRequester apiRequester = APIRequester();
     Get.put(HomeDataController());
 
-    var result = await apiRequester.getPopularTVShows();
+    var result = await apiRequester.getTrendingTVShows();
     expect(result, isNotNull);
     if (result == RequestResult.SUCCESS) {
-      expect(Get.find<HomeDataController>().popularShows, isNotEmpty);
+      expect(Get.find<HomeDataController>().trendingShows, isNotEmpty);
     }
   });
 }

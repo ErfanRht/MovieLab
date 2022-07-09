@@ -3,11 +3,10 @@ import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/show/show_box/imdb_list_show_box.dart';
-
 import '../commons.dart';
 
-class AllPopularMovies extends StatelessWidget {
-  const AllPopularMovies({Key? key}) : super(key: key);
+class AllTrendingTVs extends StatelessWidget {
+  const AllTrendingTVs({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ class AllPopularMovies extends StatelessWidget {
       builder: (_) {
         return Scaffold(
             backgroundColor: kBackgroundColor,
-            appBar: AllPopularsNavbar(context, "Popular Movies"),
+            appBar: allTrendingsNavbar(context, "Trending TV Shows"),
             body: SafeArea(
               child: ListView(
                 children: [
@@ -23,11 +22,11 @@ class AllPopularMovies extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,
                       child: ListView.builder(
-                        itemCount: _.popularMovies.length,
+                        itemCount: _.trendingShows.length,
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           return IMDBListShowBox(
-                              showPreview: _.popularMovies[index]);
+                              showPreview: _.trendingShows[index]);
                         },
                       ))
                 ],

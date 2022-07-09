@@ -4,16 +4,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/modules/system_ui_overlay_style.dart';
-import 'package:movielab/pages/main/home/sections/populars/popular_movies/all_popular_movies.dart';
-import 'package:movielab/pages/main/home/sections/populars/popular_tvs/all_popular_tvs.dart';
+import 'package:movielab/pages/main/home/sections/trendings/trending_movies/all_trending_movies.dart';
+import 'package:movielab/pages/main/home/sections/trendings/trending_tvs/all_trending_tvs.dart';
 import 'package:movielab/pages/main/main_controller.dart';
 import '../../../modules/navigate.dart';
 import 'sections/box_office/box_office.dart';
 import 'sections/companies/companies.dart';
 import 'sections/imdb_lists/lists.dart';
 import 'sections/navbar/navbar.dart';
-import 'sections/populars/popular_movies/home_popular_movies.dart';
-import 'sections/populars/popular_tvs/popular_tvs.dart';
+import 'sections/trendings/trending_movies/home_trending_movies.dart';
+import 'sections/trendings/trending_tvs/trending_tvs.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
                         padding:
                             const EdgeInsets.only(left: 20, top: 30, bottom: 5),
                         child: Text(
-                          'Popular Movies',
+                          'Trending Movies',
                           style: GoogleFonts.ubuntu(
                               color: Colors.white,
                               fontSize: 20,
@@ -50,7 +50,7 @@ class HomePage extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigate.pushTo(context, const AllPopularMovies());
+                          Navigate.pushTo(context, const AllTrendingMovies());
                         },
                         highlightColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -70,7 +70,7 @@ class HomePage extends StatelessWidget {
                   ),
                   const Padding(
                     padding: EdgeInsets.only(left: 10),
-                    child: HomePopularMovies(),
+                    child: HomeTrendingMovies(),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,7 +79,7 @@ class HomePage extends StatelessWidget {
                         padding:
                             const EdgeInsets.only(left: 20, top: 15, bottom: 5),
                         child: Text(
-                          'Popular TV Shows',
+                          'Trending TV Shows',
                           style: GoogleFonts.ubuntu(
                               color: Colors.white,
                               fontSize: 20,
@@ -88,7 +88,7 @@ class HomePage extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigate.pushTo(context, const AllPopularTVs());
+                          Navigate.pushTo(context, const AllTrendingTVs());
                         },
                         highlightColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -108,7 +108,7 @@ class HomePage extends StatelessWidget {
                   ),
                   const Padding(
                     padding: EdgeInsets.only(left: 10),
-                    child: HomePopularTVShows(),
+                    child: HomeTrendingTVShows(),
                   ),
                   Row(
                     children: [

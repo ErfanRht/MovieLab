@@ -32,7 +32,7 @@ class SearchBar extends StatelessWidget {
               child: const Padding(
                 padding: EdgeInsets.only(left: 15, right: 10),
                 child: Icon(
-                  FontAwesomeIcons.search,
+                  FontAwesomeIcons.magnifyingGlass,
                   color: Colors.white,
                   size: 20,
                 ),
@@ -89,7 +89,7 @@ class SearchBar extends StatelessWidget {
                     icon: const Padding(
                       padding: EdgeInsets.only(right: 15, left: 5),
                       child: Icon(
-                        FontAwesomeIcons.microphoneAlt,
+                        FontAwesomeIcons.microphoneLines,
                         color: Colors.white,
                         size: 22.5,
                       ),

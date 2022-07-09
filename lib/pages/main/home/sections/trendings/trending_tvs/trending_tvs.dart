@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import '../../../home_data_controller.dart';
 import 'package:movielab/pages/show/show_box/show_box.dart';
 
-class HomePopularTVShows extends StatelessWidget {
-  const HomePopularTVShows({Key? key}) : super(key: key);
+class HomeTrendingTVShows extends StatelessWidget {
+  const HomeTrendingTVShows({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class HomePopularTVShows extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return ShowBox(
                       showPreview:
-                          Get.find<HomeDataController>().popularShows[index]);
+                          Get.find<HomeDataController>().trendingShows[index]);
                 }),
           ),
         ],

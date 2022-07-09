@@ -60,7 +60,7 @@ class _VoiceSearchAlertDialogState extends State<VoiceSearchAlertDialog> {
                           !_isListening ? Colors.white : kBlueColor,
                       radius: 35,
                       child: Icon(
-                        FontAwesomeIcons.microphoneAlt,
+                        FontAwesomeIcons.microphoneLines,
                         color: _isListening ? Colors.white : kBlueColor,
                         size: 25,
                       ),
@@ -117,6 +117,7 @@ class _VoiceSearchAlertDialogState extends State<VoiceSearchAlertDialog> {
               state.controller.text = _text;
               state.fieldText = _text;
               await Future.delayed(const Duration(seconds: 1));
+              // ignore: use_build_context_synchronously
               Navigator.pop(context);
               doSearch();
             }

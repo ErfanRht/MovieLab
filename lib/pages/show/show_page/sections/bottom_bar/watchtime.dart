@@ -17,10 +17,10 @@ class ShowPageAddWatchDate extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ShowPageAddWatchDateState createState() => _ShowPageAddWatchDateState();
+  ShowPageAddWatchDateState createState() => ShowPageAddWatchDateState();
 }
 
-class _ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
+class ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
   final PreferencesShareholder _preferencesShareholder =
       PreferencesShareholder();
   late bool isOtherDateSectionOpen, showDateSelector;

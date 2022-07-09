@@ -2,15 +2,15 @@ import 'package:get/get.dart';
 import '../../../models/show_models/show_preview_model.dart';
 
 class HomeDataController extends GetxController {
-  List<ShowPreview> popularMovies = [];
-  updatePopularMovies({required List<ShowPreview> popularMovies}) {
-    this.popularMovies = popularMovies;
+  List<ShowPreview> trendingMovies = [];
+  updateTrendingMovies({required List<ShowPreview> trendingMovies}) {
+    this.trendingMovies = trendingMovies;
     update();
   }
 
-  List<ShowPreview> popularShows = [];
-  updatePopularShows({required List<ShowPreview> popularShows}) {
-    this.popularShows = popularShows;
+  List<ShowPreview> trendingShows = [];
+  updateTrendingShows({required List<ShowPreview> trendingShows}) {
+    this.trendingShows = trendingShows;
     update();
   }
 

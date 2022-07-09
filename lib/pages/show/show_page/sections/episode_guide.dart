@@ -39,7 +39,6 @@ class ShowPageEpisodeGuide extends StatelessWidget {
                                           show: show,
                                           initialIndex: index,
                                         ));
-                                    return null;
                                   },
                                   color: CupertinoColors.activeBlue,
                                   backgroundColor: kBlueColor,
