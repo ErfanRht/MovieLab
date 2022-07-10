@@ -11,6 +11,8 @@
             <action android:name="android.speech.RecognitionService" />
         </intent>
     </queries>
+    <queries>
+</queries>
    <application
         android:label="MovieLab"
         android:name="${applicationName}"

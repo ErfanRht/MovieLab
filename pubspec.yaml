@@ -37,6 +37,8 @@ dependencies:
   cached_network_image: ^3.2.0
   speech_to_text: ^5.6.0
   flutter_riverpod: ^1.0.4
+  url_launcher: ^6.1.4
+  fl_chart: ^0.55.0
 
   
 

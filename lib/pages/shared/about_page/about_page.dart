@@ -118,7 +118,7 @@ class AboutPage extends StatelessWidget {
                           ),
                           SocialMediaButton(
                             icon: Icons.email_rounded,
-                            url: "erfanrht2005@gmail.com",
+                            url: "mailto:erfanrht2005@gmail.com",
                           ),
                           SocialMediaButton(
                             icon: FontAwesomeIcons.chrome,

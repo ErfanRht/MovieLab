@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SocialMediaButton extends StatelessWidget {
   final IconData icon;
   final String url;
   const SocialMediaButton({Key? key, required this.icon, required this.url})
       : super(key: key);
+  void _launchUrl() async {
+    if (!await launchUrl(Uri.parse(url))) throw 'Could not launch $url';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +16,9 @@ class SocialMediaButton extends StatelessWidget {
       width: 35,
       margin: const EdgeInsets.symmetric(horizontal: 7.5),
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          _launchUrl();
+        },
         style: TextButton.styleFrom(
           padding: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
