@@ -21,6 +21,7 @@ class ShowPreview {
   final String foreign;
   final DateTime? watchDate;
   final TimeOfDay? watchTime;
+  final String? genres;
 
   const ShowPreview({
     required this.id,
@@ -40,6 +41,7 @@ class ShowPreview {
     required this.foreign,
     this.watchDate,
     this.watchTime,
+    this.genres,
   });
 
   factory ShowPreview.fromJson(Map<String, dynamic> json) {

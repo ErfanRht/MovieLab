@@ -21,6 +21,9 @@ ShowPreview convertHiveToShowPreview(HiveShowPreview hive) {
     domesticLifetimeGross: hive.domesticLifetimeGross,
     foreign: hive.foreign,
     foreignLifetimeGross: hive.foreignLifetimeGross,
+    genres: hive.genres,
+    watchDate: hive.watchDate,
+    watchTime: hive.watchTime,
   );
 }
 
@@ -28,7 +31,8 @@ HiveShowPreview convertShowPreviewToHive(
     {required ShowPreview showPreview,
     required String rank,
     DateTime? date,
-    TimeOfDay? time}) {
+    TimeOfDay? time,
+    required String genres}) {
   return HiveShowPreview()
     ..id = showPreview.id
     ..rank = showPreview.rank
@@ -46,7 +50,8 @@ HiveShowPreview convertShowPreviewToHive(
     ..foreign = showPreview.foreign
     ..foreignLifetimeGross = showPreview.foreignLifetimeGross
     ..watchDate = date
-    ..watchTime = time;
+    ..watchTime = time
+    ..genres = genres;
 }
 
 Future<HiveShowPreview> convertFullShowToHive(

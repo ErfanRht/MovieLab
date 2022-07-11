@@ -366,7 +366,8 @@ class ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
         showPreview: await convertFullShowToShowPreview(fullShow: widget.show),
         listName: "history",
         date: date,
-        time: time);
+        time: time,
+        genres: widget.show.genres);
     await Future.delayed(const Duration(milliseconds: 200));
     // ignore: use_build_context_synchronously
     Navigator.pop(context);

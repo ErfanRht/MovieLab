@@ -16,4 +16,5 @@ class ShowPreviewFields {
   static const int foreign = 14;
   static const int watchDate = 15;
   static const int watchTime = 16;
+  static const int genres = 17;
 }

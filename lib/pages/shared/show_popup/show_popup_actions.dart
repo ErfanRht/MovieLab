@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:movielab/models/show_models/full_show_model.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/capitalizer.dart';
+import 'package:movielab/modules/get_show_info.dart';
 import '../../../../../../../constants/colors.dart';
 import '../../../../../../../modules/preferences_shareholder.dart';
 import '../../../../../../../widgets/buttons/activeable_button.dart';
@@ -23,6 +25,7 @@ class _ShowPopupActionsState extends State<ShowPopupActions>
   final PreferencesShareholder _preferencesShareholder =
       PreferencesShareholder();
   late FToast fToast;
+  FullShow? _fullShow;
   Map<String, bool> _isThereInLists = {};
   @override
   void initState() {
@@ -30,6 +33,7 @@ class _ShowPopupActionsState extends State<ShowPopupActions>
     fToast = FToast();
     fToast.init(context);
     getShowListsInformation();
+    _loadShowInfo();
   }
 
   @override
@@ -48,24 +52,48 @@ class _ShowPopupActionsState extends State<ShowPopupActions>
               isActive: _isThereInLists['history'] ?? false,
               onTap: () async {
                 if (_isThereInLists["history"] == false) {
-                  Navigator.pop(context);
-                  await Future.delayed(const Duration(milliseconds: 200));
-                  showModalBottomSheet(
-                      context: context,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(20),
-                      )),
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      backgroundColor: kBackgroundColor,
-                      transitionAnimationController: AnimationController(
-                          duration: const Duration(milliseconds: 175),
-                          vsync: this),
-                      builder: (context) {
-                        return AddWatchTime(
-                          show: widget.show,
-                        );
-                      });
+                  if (_fullShow == null) {
+                    await _loadShowInfo();
+                    Navigator.pop(context);
+                    await Future.delayed(const Duration(milliseconds: 200));
+                    showModalBottomSheet(
+                        context: context,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(20),
+                        )),
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        backgroundColor: kBackgroundColor,
+                        transitionAnimationController: AnimationController(
+                            duration: const Duration(milliseconds: 225),
+                            vsync: this),
+                        builder: (context) {
+                          return AddWatchTime(
+                            show: widget.show,
+                            fullShow: _fullShow,
+                          );
+                        });
+                  } else {
+                    Navigator.pop(context);
+                    await Future.delayed(const Duration(milliseconds: 200));
+                    showModalBottomSheet(
+                        context: context,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(20),
+                        )),
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        backgroundColor: kBackgroundColor,
+                        transitionAnimationController: AnimationController(
+                            duration: const Duration(milliseconds: 175),
+                            vsync: this),
+                        builder: (context) {
+                          return AddWatchTime(
+                            show: widget.show,
+                            fullShow: _fullShow,
+                          );
+                        });
+                  }
                 } else {
                   handleOnTap(listName: "history");
                 }
@@ -99,8 +127,12 @@ class _ShowPopupActionsState extends State<ShowPopupActions>
     required String listName,
   }) async {
     if (_isThereInLists[listName] == false) {
+      FullShow? fullShow = await getShowInfo(id: widget.show.id);
       _preferencesShareholder.addShowToList(
-          showPreview: widget.show, listName: listName);
+        showPreview: widget.show,
+        listName: listName,
+        genres: fullShow!.genres,
+      );
       setState(() {
         _isThereInLists[listName] = true;
       });
@@ -149,5 +181,13 @@ class _ShowPopupActionsState extends State<ShowPopupActions>
                 _isThereInLists = value;
               })
             });
+  }
+
+  _loadShowInfo() async {
+    await getShowInfo(id: widget.show.id).then((value) {
+      setState(() {
+        _fullShow = value;
+      });
+    });
   }
 }

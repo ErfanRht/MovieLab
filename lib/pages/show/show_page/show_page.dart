@@ -9,7 +9,7 @@ import 'package:movielab/pages/show/show_page/sections/other_ratings/other_ratin
 import 'package:movielab/widgets/loading_error.dart';
 import '../../../constants/colors.dart';
 import '../../../modules/preferences_shareholder.dart';
-import 'get_show_info.dart';
+import '../../../modules/get_show_info.dart';
 import 'sections/bottom_bar/bottom_bar.dart';
 import 'sections/index.dart';
 import 'sections/bottom_bar/watchtime.dart';

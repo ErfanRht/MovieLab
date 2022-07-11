@@ -108,7 +108,8 @@ class _ShowPageListsInfoState extends State<ShowPageListsInfo>
       _preferencesShareholder.addShowToList(
           showPreview:
               await convertFullShowToShowPreview(fullShow: widget.show),
-          listName: listName);
+          listName: listName,
+          genres: widget.show.genres);
       setState(() {
         widget.isThereInLists[listName] = true;
       });

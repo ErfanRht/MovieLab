@@ -20,13 +20,15 @@ class PreferencesShareholder {
       {required ShowPreview showPreview,
       required String listName,
       DateTime? date,
-      TimeOfDay? time}) async {
+      TimeOfDay? time,
+      required String genres}) async {
     Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
     HiveShowPreview hiveShow = convertShowPreviewToHive(
         showPreview: showPreview,
         rank: (list.length + 1).toString(),
         date: date,
-        time: time);
+        time: time,
+        genres: genres);
     list.put(list.length + 1, hiveShow);
     if (kDebugMode) {
       print("The item added to $listName");
@@ -70,6 +72,16 @@ class PreferencesShareholder {
       if (result[listName] != true) {
         result[listName] = false;
       }
+    }
+    return result;
+  }
+
+  Future<List<ShowPreview>> getList({required String listName}) async {
+    Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
+    List<HiveShowPreview> listItems = list.values.toList();
+    List<ShowPreview> result = [];
+    for (HiveShowPreview item in listItems) {
+      result.add(convertHiveToShowPreview(item));
     }
     return result;
   }

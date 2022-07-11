@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/modules/capitalizer.dart';
+import 'package:movielab/modules/navigate.dart';
+import 'package:movielab/pages/main/profile/sections/list_page/sections/stats_page/stats.dart';
 
 AppBar listPageNavbar(context, {required final String listName}) {
   return AppBar(
@@ -28,7 +30,11 @@ AppBar listPageNavbar(context, {required final String listName}) {
           color: Colors.white,
         ),
         onPressed: () {
-          // preferencesShareholder.delete();
+          Navigate.pushTo(
+              context,
+              ListStatsPage(
+                listName: listName,
+              ));
         },
       ),
     ],

@@ -39,7 +39,9 @@ class HiveShowPreview extends HiveObject {
   @HiveField(ShowPreviewFields.foreign)
   late String foreign;
   @HiveField(ShowPreviewFields.watchDate)
-  late DateTime? watchDate;
+  DateTime? watchDate;
   @HiveField(ShowPreviewFields.watchTime)
-  late TimeOfDay? watchTime;
+  TimeOfDay? watchTime;
+  @HiveField(ShowPreviewFields.genres)
+  String? genres;
 }

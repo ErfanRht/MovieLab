@@ -15,8 +15,8 @@ import '../models/show_models/show_preview_model.dart';
 class APIRequester {
   static const String imdbBaseUrl = 'https://imdb-api.com/en/API';
   // API keys to access the IMDB API:
-  static const String apiKey = "k_6lgd4s89";
-  // static const String apiKey = "k_y9zcdoq3";
+  // static const String apiKey = "k_6lgd4s89";
+  static const String apiKey = "k_y9zcdoq3";
   // static const String apiKey = "";
 
   // Get recently trending movies from the IMDB API
