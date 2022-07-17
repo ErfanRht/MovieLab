@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 
-class LoadingErrorWidget extends StatelessWidget {
+class ConnectionErrorWidget extends StatelessWidget {
   final String errorText;
   final VoidCallback tryAgain;
-  const LoadingErrorWidget(
+  const ConnectionErrorWidget(
       {this.errorText = 'An unexpected error occurred while loading data.',
       required this.tryAgain,
       Key? key})

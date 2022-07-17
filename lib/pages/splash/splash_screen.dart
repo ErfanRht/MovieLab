@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:movielab/modules/navigate.dart';
+import 'package:movielab/widgets/error.dart';
 import '../../constants/colors.dart';
 import '../../constants/types.dart';
 import '../../modules/system_ui_overlay_style.dart';
 import '../../pages/main/main_page.dart';
-import '../../widgets/loading_error.dart';
 import 'get_initial_data.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -67,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
         );
       default:
-        return LoadingErrorWidget(
+        return ConnectionErrorWidget(
           tryAgain: () {
             setState(() {
               _loadingStatus = RequestResult.LOADING;

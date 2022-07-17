@@ -6,7 +6,7 @@ import 'package:movielab/constants/types.dart';
 import 'package:movielab/modules/system_ui_overlay_style.dart';
 import 'package:movielab/pages/show/show_page/sections/media.dart';
 import 'package:movielab/pages/show/show_page/sections/other_ratings/other_ratings.dart';
-import 'package:movielab/widgets/loading_error.dart';
+import 'package:movielab/widgets/error.dart';
 import '../../../constants/colors.dart';
 import '../../../modules/preferences_shareholder.dart';
 import '../../../modules/get_show_info.dart';
@@ -228,7 +228,7 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                LoadingErrorWidget(tryAgain: () {
+                ConnectionErrorWidget(tryAgain: () {
                   setState(() {
                     _loadingStatus = RequestResult.LOADING;
                   });

@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/hive/convertor.dart';
-import 'package:movielab/widgets/loading_error.dart';
+import 'package:movielab/widgets/error.dart';
 import 'package:ms_undraw/ms_undraw.dart';
 
 import '../../../models/hive/models/show_preview.dart';
@@ -88,7 +88,7 @@ class WhatchlistPage extends StatelessWidget {
                                     size: 30,
                                   ),
                                 ),
-                                errorWidget: LoadingErrorWidget(
+                                errorWidget: ConnectionErrorWidget(
                                     errorText:
                                         "An unexpected error occurred while loading the illustration.",
                                     tryAgain: () {}),
@@ -102,45 +102,47 @@ class WhatchlistPage extends StatelessWidget {
                   Hive.box<HiveShowPreview>('collection').listenable(),
               builder: (context, box, _) {
                 final collection = box.values.toList().cast<HiveShowPreview>();
-                return collection.isNotEmpty
-                    ? ListView.builder(
-                        itemCount: collection.length,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return ListShowBox(
-                              listName: "watchlist",
-                              showPreview: convertHiveToShowPreview(
-                                  collection[collection.length - index - 1]));
-                        },
-                      )
-                    : Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                            const SizedBox(height: 100),
-                            Text("You haven't bookmarked anything yet!",
-                                style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600)),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.width,
-                              child: UnDraw(
-                                color: kGreyColor,
-                                illustration: UnDrawIllustration.empty,
-                                padding: const EdgeInsets.all(65),
-                                placeholder: const Center(
-                                  child: SpinKitThreeBounce(
-                                    color: Colors.white,
-                                    size: 30,
-                                  ),
-                                ),
-                                errorWidget: LoadingErrorWidget(
-                                    errorText:
-                                        "An unexpected error occurred while loading the illustration.",
-                                    tryAgain: () {}),
+                if (collection.isNotEmpty) {
+                  return ListView.builder(
+                    itemCount: collection.length,
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return ListShowBox(
+                          listName: "watchlist",
+                          showPreview: convertHiveToShowPreview(
+                              collection[collection.length - index - 1]));
+                    },
+                  );
+                } else {
+                  return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(height: 100),
+                        Text("You haven't bookmarked anything yet!",
+                            style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600)),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.width,
+                          child: UnDraw(
+                            color: kGreyColor,
+                            illustration: UnDrawIllustration.empty,
+                            padding: const EdgeInsets.all(65),
+                            placeholder: const Center(
+                              child: SpinKitThreeBounce(
+                                color: Colors.white,
+                                size: 30,
                               ),
                             ),
-                          ]);
+                            errorWidget: ConnectionErrorWidget(
+                                errorText:
+                                    "An unexpected error occurred while loading the illustration.",
+                                tryAgain: () {}),
+                          ),
+                        ),
+                      ]);
+                }
               },
             )
           ],

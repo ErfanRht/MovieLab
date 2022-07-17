@@ -9,7 +9,7 @@ import 'package:movielab/modules/capitalizer.dart';
 import 'package:movielab/pages/main/profile/sections/list_page/sections/navbar.dart';
 import 'package:ms_undraw/ms_undraw.dart';
 import '../../../../../models/hive/convertor.dart';
-import '../../../../../widgets/loading_error.dart';
+import '../../../../../widgets/error.dart';
 import '../../../../show/show_box/lists_show_box.dart';
 
 class ListPage extends StatelessWidget {
@@ -76,7 +76,7 @@ class ListPage extends StatelessWidget {
                                 size: 30,
                               ),
                             ),
-                            errorWidget: LoadingErrorWidget(
+                            errorWidget: ConnectionErrorWidget(
                                 errorText:
                                     "An unexpected error occurred while loading the illustration.",
                                 tryAgain: () {}),

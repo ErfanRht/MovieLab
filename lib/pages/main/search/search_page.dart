@@ -8,7 +8,7 @@ import 'package:movielab/pages/main/search/search.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
 import 'package:movielab/pages/show/show_box/search_show_box.dart';
-import 'package:movielab/widgets/loading_error.dart';
+import 'package:movielab/widgets/error.dart';
 import 'package:ms_undraw/ms_undraw.dart';
 
 class SearchPage extends StatelessWidget {
@@ -47,7 +47,7 @@ class SearchPage extends StatelessWidget {
                 size: 30,
               ),
             ),
-            errorWidget: LoadingErrorWidget(
+            errorWidget: ConnectionErrorWidget(
                 errorText:
                     "An unexpected error occurred while loading the illustration.",
                 tryAgain: () {}),
@@ -59,7 +59,7 @@ class SearchPage extends StatelessWidget {
           size: 35,
         );
       case RequestResult.FAILURE:
-        return LoadingErrorWidget(tryAgain: () {
+        return ConnectionErrorWidget(tryAgain: () {
           Get.find<SearchBarController>()
               .setLoadingStatus(status: RequestResult.LOADING);
           doSearch();
