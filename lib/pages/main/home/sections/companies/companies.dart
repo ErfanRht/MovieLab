@@ -10,6 +10,21 @@ class HomePopularCompanies extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Map> companiesData = [
       {
+        'id': 'co0144901',
+        'name': 'Netflix',
+        'image':
+            'https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png',
+        'color': null
+      },
+      {
+        'id': 'co0008693',
+        'name': 'HBO',
+        'image':
+            'https://cdn.freebiesupply.com/logos/large/2x/hbo-logo-png-transparent.png',
+        'color': null
+        //  const Color(0xff000000)
+      },
+      {
         'id': 'co0051941',
         'name': 'Marvel Studios',
         'image':

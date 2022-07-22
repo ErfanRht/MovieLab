@@ -10,8 +10,8 @@ class CompanyBox extends StatelessWidget {
     return Container(
         width: 250,
         height: 100,
-        padding: company['id'] == 'co0026545'
-            ? const EdgeInsets.symmetric(horizontal: 50)
+        padding: company['id'] == 'co0026545' || company['id'] == 'co0008693'
+            ? const EdgeInsets.symmetric(horizontal: 40)
             : const EdgeInsets.all(15),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -26,20 +26,6 @@ class CompanyBox extends StatelessWidget {
               width: 250,
               color: company['color'],
               useOldImageOnUrlChange: true),
-        )
-        // Column(children: [
-        //   Padding(
-        //     padding: const EdgeInsets.only(top: 20),
-        //     child: Text(
-        //       company['name'],
-        //       style: GoogleFonts.ubuntu(
-        //           color: const Color(0xff000000),
-        //           fontSize: 25,
-        //           fontWeight: FontWeight.bold),
-        //     ),
-        //   )
-        // ]),
-
-        );
+        ));
   }
 }
