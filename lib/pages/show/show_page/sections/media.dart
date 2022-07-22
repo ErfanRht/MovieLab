@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movielab/constants/colors.dart';
+import 'package:movielab/models/show_models/full_show_model.dart';
+import 'package:movielab/modules/navigate.dart';
+import 'package:movielab/pages/show/show_page/sections/posters.dart';
 import '../../../../widgets/buttons/glassmorphism_button.dart';
 import '../../../../widgets/section_title.dart';
 
 class ShowPageMedia extends StatelessWidget {
   final List images;
-  const ShowPageMedia({Key? key, required this.images}) : super(key: key);
+  final List<PosterData> posters;
+  const ShowPageMedia({Key? key, required this.images, required this.posters})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,11 @@ class ShowPageMedia extends StatelessWidget {
               GmButton(
                   text: "Posters",
                   onTap: () {
-                    return;
+                    Navigate.pushTo(
+                        context,
+                        ShowPagePosters(
+                          posters: posters,
+                        ));
                   },
                   color: kImdbColor,
                   icon: FontAwesomeIcons.blog),
@@ -29,9 +38,7 @@ class ShowPageMedia extends StatelessWidget {
               ),
               GmButton(
                   text: "Images",
-                  onTap: () {
-                    return;
-                  },
+                  onTap: () {},
                   color: kPrimaryColor,
                   icon: FontAwesomeIcons.solidImages),
               const SizedBox(

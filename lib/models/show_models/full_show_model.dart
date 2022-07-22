@@ -7,6 +7,7 @@ class FullShow {
   final String title;
   final String image;
   final List images;
+  final List posters;
   final String year;
   final String genres;
   final String releaseDate;
@@ -47,6 +48,7 @@ class FullShow {
     required this.title,
     required this.image,
     required this.images,
+    required this.posters,
     required this.year,
     required this.genres,
     required this.releaseDate,
@@ -90,6 +92,7 @@ class FullShow {
       image: json['image'].toString().replaceAll(
           "._V1_UX128_CR0,3,128,176_AL_.jpg", "._V1_Ratio0.6716_AL_.jpg"),
       images: ImageData.getImages(json['images']) ?? [],
+      posters: PosterData.getPosters(json['posters']) ?? [],
       year: json['year'] ?? "",
       genres: json['genres'] ?? "",
       releaseDate: json['releaseDate'] ?? "",
@@ -165,6 +168,30 @@ class ImageData {
   static List<ImageData>? getImages(Map<String, dynamic> json) {
     return (json['items'] as List<dynamic>)
         .map<ImageData>((item) => ImageData.fromJson(item))
+        .toList();
+  }
+}
+
+// An image data model class
+class PosterData {
+  final String id;
+  final String link;
+
+  const PosterData({
+    required this.id,
+    required this.link,
+  });
+
+  factory PosterData.fromJson(Map<String, dynamic> json) {
+    return PosterData(
+      id: json['id'] ?? "",
+      link: json['link'] ?? "",
+    );
+  }
+
+  static List<PosterData>? getPosters(Map<String, dynamic> json) {
+    return (json['posters'] as List<dynamic>)
+        .map<PosterData>((item) => PosterData.fromJson(item))
         .toList();
   }
 }

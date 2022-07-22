@@ -204,7 +204,10 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
                   actorList: show.actorList,
                 ),
                 ShowPageEpisodeGuide(show: show),
-                ShowPageMedia(images: show.images),
+                ShowPageMedia(
+                  images: show.images,
+                  posters: show.posters,
+                ),
                 ShowPageMoreInfo(show: show),
                 ShowPageBoxOffice(show: show),
                 ShowPageOtherRatings(show: show),
