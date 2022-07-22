@@ -5,6 +5,7 @@ import 'show_preview_model.dart';
 class FullShow {
   final String id;
   final String title;
+  final String type;
   final String image;
   final List images;
   final List posters;
@@ -46,6 +47,7 @@ class FullShow {
   const FullShow({
     required this.id,
     required this.title,
+    required this.type,
     required this.image,
     required this.images,
     required this.posters,
@@ -89,6 +91,7 @@ class FullShow {
     return FullShow(
       id: json['id'],
       title: json['title'] ?? "",
+      type: json['type'] ?? "",
       image: json['image'].toString().replaceAll(
           "._V1_UX128_CR0,3,128,176_AL_.jpg", "._V1_Ratio0.6716_AL_.jpg"),
       images: ImageData.getImages(json['images']) ?? [],
