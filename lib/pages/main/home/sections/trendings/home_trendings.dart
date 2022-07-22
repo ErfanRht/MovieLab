@@ -26,7 +26,7 @@ class HomeTrendingsBuilder extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 10, top: 30, bottom: 5),
                 child: Text(
-                  'Trending Movies',
+                  title,
                   style: GoogleFonts.ubuntu(
                       color: Colors.white,
                       fontSize: 20,
