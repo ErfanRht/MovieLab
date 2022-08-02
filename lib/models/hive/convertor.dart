@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
-
 import '../show_models/full_show_model.dart';
 
 ShowPreview convertHiveToShowPreview(HiveShowPreview hive) {
@@ -22,6 +21,10 @@ ShowPreview convertHiveToShowPreview(HiveShowPreview hive) {
     foreign: "",
     foreignLifetimeGross: "",
     genres: hive.genres,
+    countries: hive.countries,
+    languages: hive.languages,
+    companies: hive.companies,
+    contentRating: hive.contentRating,
     watchDate: hive.watchDate,
     watchTime: hive.watchTime,
   );
@@ -32,7 +35,11 @@ HiveShowPreview convertShowPreviewToHive(
     required String rank,
     DateTime? date,
     TimeOfDay? time,
-    required String genres}) {
+    required String genres,
+    required String countries,
+    required String languages,
+    required String companies,
+    required String contentRating}) {
   return HiveShowPreview()
     ..id = showPreview.id
     ..rank = showPreview.rank
@@ -42,6 +49,10 @@ HiveShowPreview convertShowPreviewToHive(
     ..year = showPreview.year
     ..imDbRating = showPreview.imDbRating
     ..genres = genres
+    ..countries = countries
+    ..languages = languages
+    ..companies = companies
+    ..contentRating = contentRating
     ..watchDate = date
     ..watchTime = time;
 }
@@ -62,6 +73,10 @@ Future<HiveShowPreview> convertFullShowToHive(
     ..year = fullShow.year
     ..imDbRating = fullShow.imDbRating
     ..genres = fullShow.genres
+    ..countries = fullShow.countries
+    ..languages = fullShow.languages
+    ..companies = fullShow.companies
+    ..contentRating = fullShow.contentRating
     ..watchDate = date
     ..watchTime = time;
 }

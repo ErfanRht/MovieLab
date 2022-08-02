@@ -132,6 +132,10 @@ class _ShowPopupActionsState extends State<ShowPopupActions>
         showPreview: widget.show,
         listName: listName,
         genres: fullShow!.genres,
+        countries: fullShow.countries,
+        languages: fullShow.languages,
+        companies: fullShow.companies,
+        contentRating: fullShow.contentRating,
       );
       setState(() {
         _isThereInLists[listName] = true;

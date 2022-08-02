@@ -23,7 +23,15 @@ class HiveShowPreview extends HiveObject {
   @HiveField(ShowPreviewFields.imDbRating)
   late String imDbRating;
   @HiveField(ShowPreviewFields.genres)
-  String? genres;
+  late String genres;
+  @HiveField(ShowPreviewFields.countries)
+  late String countries;
+  @HiveField(ShowPreviewFields.languages)
+  late String languages;
+  @HiveField(ShowPreviewFields.companies)
+  late String companies;
+  @HiveField(ShowPreviewFields.contentRating)
+  late String contentRating;
   @HiveField(ShowPreviewFields.watchDate)
   DateTime? watchDate;
   @HiveField(ShowPreviewFields.watchTime)

@@ -363,11 +363,16 @@ class ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
 
   markAsWatched({required DateTime date, required TimeOfDay time}) async {
     _preferencesShareholder.addShowToList(
-        showPreview: await convertFullShowToShowPreview(fullShow: widget.show),
-        listName: "history",
-        date: date,
-        time: time,
-        genres: widget.show.genres);
+      showPreview: await convertFullShowToShowPreview(fullShow: widget.show),
+      listName: "history",
+      date: date,
+      time: time,
+      genres: widget.show.genres,
+      countries: widget.show.countries,
+      languages: widget.show.languages,
+      companies: widget.show.companies,
+      contentRating: widget.show.contentRating,
+    );
     await Future.delayed(const Duration(milliseconds: 200));
     // ignore: use_build_context_synchronously
     Navigator.pop(context);

@@ -106,10 +106,14 @@ class _ShowPageListsInfoState extends State<ShowPageListsInfo>
   }) async {
     if (widget.isThereInLists[listName] == false) {
       _preferencesShareholder.addShowToList(
-          showPreview:
-              await convertFullShowToShowPreview(fullShow: widget.show),
-          listName: listName,
-          genres: widget.show.genres);
+        showPreview: await convertFullShowToShowPreview(fullShow: widget.show),
+        listName: listName,
+        genres: widget.show.genres,
+        countries: widget.show.countries,
+        languages: widget.show.languages,
+        companies: widget.show.companies,
+        contentRating: widget.show.contentRating,
+      );
       setState(() {
         widget.isThereInLists[listName] = true;
       });

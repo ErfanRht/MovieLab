@@ -19,9 +19,13 @@ class ShowPreview {
   final String domestic;
   final String foreignLifetimeGross;
   final String foreign;
+  final String? genres;
+  final String? countries;
+  final String? languages;
+  final String? companies;
+  final String? contentRating;
   final DateTime? watchDate;
   final TimeOfDay? watchTime;
-  final String? genres;
 
   const ShowPreview({
     required this.id,
@@ -39,9 +43,13 @@ class ShowPreview {
     required this.domestic,
     required this.foreignLifetimeGross,
     required this.foreign,
+    this.genres,
+    this.countries,
+    this.languages,
+    this.companies,
+    this.contentRating,
     this.watchDate,
     this.watchTime,
-    this.genres,
   });
 
   factory ShowPreview.fromJson(Map<String, dynamic> json) {

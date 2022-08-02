@@ -370,6 +370,10 @@ class AddWatchTimeState extends State<AddWatchTime> {
       date: date,
       time: time,
       genres: widget.fullShow!.genres,
+      countries: widget.fullShow!.countries,
+      languages: widget.fullShow!.languages,
+      companies: widget.fullShow!.companies,
+      contentRating: widget.fullShow!.contentRating,
     );
     await Future.delayed(const Duration(milliseconds: 200));
     // ignore: use_build_context_synchronously

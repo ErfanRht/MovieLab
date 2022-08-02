@@ -7,6 +7,10 @@ class ShowPreviewFields {
   static const int year = 5;
   static const int imDbRating = 6;
   static const int genres = 7;
-  static const int watchDate = 8;
-  static const int watchTime = 9;
+  static const int countries = 8;
+  static const int languages = 9;
+  static const int companies = 10;
+  static const int contentRating = 11;
+  static const int watchDate = 12;
+  static const int watchTime = 13;
 }

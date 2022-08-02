@@ -20,9 +20,15 @@ AppBar listPageNavbar(context, {required final String listName}) {
         Navigator.pop(context);
       },
     ),
-    title: Text(listName.capitalize(),
-        style: GoogleFonts.ubuntu(
-            color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+    title: Row(
+      children: [
+        Text(listName.capitalize(),
+            style: GoogleFonts.ubuntu(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold)),
+      ],
+    ),
     actions: [
       IconButton(
         icon: const Icon(

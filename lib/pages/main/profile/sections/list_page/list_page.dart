@@ -47,7 +47,6 @@ class ListPage extends StatelessWidget {
                     itemCount: list.length,
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
-                      print(list[list.length - index - 1].genres);
                       return ListShowBox(
                           listName: listName,
                           showPreview: convertHiveToShowPreview(

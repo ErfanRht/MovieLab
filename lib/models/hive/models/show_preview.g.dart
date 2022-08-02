@@ -24,15 +24,19 @@ class HiveShowPreviewAdapter extends TypeAdapter<HiveShowPreview> {
       ..image = fields[4] as String
       ..year = fields[5] as String
       ..imDbRating = fields[6] as String
-      ..genres = fields[7] as String?
-      ..watchDate = fields[8] as DateTime?
-      ..watchTime = fields[9] as TimeOfDay?;
+      ..genres = fields[7] as String
+      ..countries = fields[8] as String
+      ..languages = fields[9] as String
+      ..companies = fields[10] as String
+      ..contentRating = fields[11] as String
+      ..watchDate = fields[12] as DateTime?
+      ..watchTime = fields[13] as TimeOfDay?;
   }
 
   @override
   void write(BinaryWriter writer, HiveShowPreview obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(14)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -50,8 +54,16 @@ class HiveShowPreviewAdapter extends TypeAdapter<HiveShowPreview> {
       ..writeByte(7)
       ..write(obj.genres)
       ..writeByte(8)
-      ..write(obj.watchDate)
+      ..write(obj.countries)
       ..writeByte(9)
+      ..write(obj.languages)
+      ..writeByte(10)
+      ..write(obj.companies)
+      ..writeByte(11)
+      ..write(obj.contentRating)
+      ..writeByte(12)
+      ..write(obj.watchDate)
+      ..writeByte(13)
       ..write(obj.watchTime);
   }
 
