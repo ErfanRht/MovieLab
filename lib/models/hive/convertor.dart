@@ -13,14 +13,14 @@ ShowPreview convertHiveToShowPreview(HiveShowPreview hive) {
     image: hive.image,
     year: hive.year,
     imDbRating: hive.imDbRating,
-    weekend: hive.weekend,
-    gross: hive.gross,
-    weeks: hive.weeks,
-    worldwideLifetimeGross: hive.worldwideLifetimeGross,
-    domestic: hive.domestic,
-    domesticLifetimeGross: hive.domesticLifetimeGross,
-    foreign: hive.foreign,
-    foreignLifetimeGross: hive.foreignLifetimeGross,
+    weekend: "",
+    gross: "",
+    weeks: "",
+    worldwideLifetimeGross: "",
+    domestic: "",
+    domesticLifetimeGross: "",
+    foreign: "",
+    foreignLifetimeGross: "",
     genres: hive.genres,
     watchDate: hive.watchDate,
     watchTime: hive.watchTime,
@@ -41,17 +41,9 @@ HiveShowPreview convertShowPreviewToHive(
     ..image = showPreview.image
     ..year = showPreview.year
     ..imDbRating = showPreview.imDbRating
-    ..weekend = showPreview.weekend
-    ..gross = showPreview.gross
-    ..weeks = showPreview.weeks
-    ..worldwideLifetimeGross = showPreview.worldwideLifetimeGross
-    ..domestic = showPreview.domestic
-    ..domesticLifetimeGross = showPreview.domesticLifetimeGross
-    ..foreign = showPreview.foreign
-    ..foreignLifetimeGross = showPreview.foreignLifetimeGross
+    ..genres = genres
     ..watchDate = date
-    ..watchTime = time
-    ..genres = genres;
+    ..watchTime = time;
 }
 
 Future<HiveShowPreview> convertFullShowToHive(
@@ -69,14 +61,7 @@ Future<HiveShowPreview> convertFullShowToHive(
     ..image = fullShow.image
     ..year = fullShow.year
     ..imDbRating = fullShow.imDbRating
-    ..weekend = fullShow.weekend
-    ..gross = fullShow.gross
-    ..weeks = fullShow.weeks
-    ..worldwideLifetimeGross = fullShow.worldwideLifetimeGross
-    ..domestic = fullShow.domestic
-    ..domesticLifetimeGross = fullShow.domesticLifetimeGross
-    ..foreign = fullShow.foreign
-    ..foreignLifetimeGross = fullShow.foreignLifetimeGross
+    ..genres = fullShow.genres
     ..watchDate = date
     ..watchTime = time;
 }

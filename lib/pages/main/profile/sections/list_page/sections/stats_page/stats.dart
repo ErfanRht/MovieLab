@@ -52,13 +52,13 @@ class _ListStatsPageState extends State<ListStatsPage> {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
-          children: [
-            ListStatsPageGenresChart(
-              imdbRatingAverage: imdbRatingAverage,
-              listName: widget.listName,
-              sortedGenres: sortedGenres,
-              itemsGenres: itemsGenres,
-            )
+          children: const [
+            // ListStatsPageGenresChart(
+            //   imdbRatingAverage: imdbRatingAverage,
+            //   listName: widget.listName,
+            //   sortedGenres: sortedGenres,
+            //   itemsGenres: itemsGenres,
+            // )
           ],
         ),
       ),

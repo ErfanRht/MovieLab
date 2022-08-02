@@ -8,7 +8,7 @@ part of 'show_preview.dart';
 
 class HiveShowPreviewAdapter extends TypeAdapter<HiveShowPreview> {
   @override
-  final int typeId = 1;
+  final int typeId = 0;
 
   @override
   HiveShowPreview read(BinaryReader reader) {
@@ -24,20 +24,15 @@ class HiveShowPreviewAdapter extends TypeAdapter<HiveShowPreview> {
       ..image = fields[4] as String
       ..year = fields[5] as String
       ..imDbRating = fields[6] as String
-      ..weekend = fields[7] as String
-      ..gross = fields[8] as String
-      ..weeks = fields[9] as String
-      ..worldwideLifetimeGross = fields[10] as String
-      ..domesticLifetimeGross = fields[11] as String
-      ..domestic = fields[12] as String
-      ..foreignLifetimeGross = fields[13] as String
-      ..foreign = fields[14] as String;
+      ..genres = fields[7] as String?
+      ..watchDate = fields[8] as DateTime?
+      ..watchTime = fields[9] as TimeOfDay?;
   }
 
   @override
   void write(BinaryWriter writer, HiveShowPreview obj) {
     writer
-      ..writeByte(15)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -53,21 +48,11 @@ class HiveShowPreviewAdapter extends TypeAdapter<HiveShowPreview> {
       ..writeByte(6)
       ..write(obj.imDbRating)
       ..writeByte(7)
-      ..write(obj.weekend)
+      ..write(obj.genres)
       ..writeByte(8)
-      ..write(obj.gross)
+      ..write(obj.watchDate)
       ..writeByte(9)
-      ..write(obj.weeks)
-      ..writeByte(10)
-      ..write(obj.worldwideLifetimeGross)
-      ..writeByte(11)
-      ..write(obj.domesticLifetimeGross)
-      ..writeByte(12)
-      ..write(obj.domestic)
-      ..writeByte(13)
-      ..write(obj.foreignLifetimeGross)
-      ..writeByte(14)
-      ..write(obj.foreign);
+      ..write(obj.watchTime);
   }
 
   @override

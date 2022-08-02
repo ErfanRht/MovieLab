@@ -6,15 +6,7 @@ class ShowPreviewFields {
   static const int image = 4;
   static const int year = 5;
   static const int imDbRating = 6;
-  static const int weekend = 7;
-  static const int gross = 8;
-  static const int weeks = 9;
-  static const int worldwideLifetimeGross = 10;
-  static const int domesticLifetimeGross = 11;
-  static const int domestic = 12;
-  static const int foreignLifetimeGross = 13;
-  static const int foreign = 14;
-  static const int watchDate = 15;
-  static const int watchTime = 16;
-  static const int genres = 17;
+  static const int genres = 7;
+  static const int watchDate = 8;
+  static const int watchTime = 9;
 }

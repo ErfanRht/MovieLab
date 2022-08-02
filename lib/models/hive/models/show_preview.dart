@@ -22,26 +22,10 @@ class HiveShowPreview extends HiveObject {
   late String year;
   @HiveField(ShowPreviewFields.imDbRating)
   late String imDbRating;
-  @HiveField(ShowPreviewFields.weekend)
-  late String weekend;
-  @HiveField(ShowPreviewFields.gross)
-  late String gross;
-  @HiveField(ShowPreviewFields.weeks)
-  late String weeks;
-  @HiveField(ShowPreviewFields.worldwideLifetimeGross)
-  late String worldwideLifetimeGross;
-  @HiveField(ShowPreviewFields.domesticLifetimeGross)
-  late String domesticLifetimeGross;
-  @HiveField(ShowPreviewFields.domestic)
-  late String domestic;
-  @HiveField(ShowPreviewFields.foreignLifetimeGross)
-  late String foreignLifetimeGross;
-  @HiveField(ShowPreviewFields.foreign)
-  late String foreign;
+  @HiveField(ShowPreviewFields.genres)
+  String? genres;
   @HiveField(ShowPreviewFields.watchDate)
   DateTime? watchDate;
   @HiveField(ShowPreviewFields.watchTime)
   TimeOfDay? watchTime;
-  @HiveField(ShowPreviewFields.genres)
-  String? genres;
 }
