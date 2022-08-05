@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
-import '../../modules/api_requester.dart';
+import '../../modules/api/api_requester.dart';
 
 Future<RequestResult> getInitialData() async {
   final apiRequester = APIRequester();

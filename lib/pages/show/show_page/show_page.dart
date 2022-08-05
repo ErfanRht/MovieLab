@@ -2,15 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
+import 'package:movielab/modules/get_show_info.dart';
+import 'package:movielab/modules/preferences_shareholder.dart';
 import 'package:movielab/modules/system_ui_overlay_style.dart';
 import 'package:movielab/pages/show/show_page/sections/media.dart';
 import 'package:movielab/pages/show/show_page/sections/other_ratings/other_ratings.dart';
 import 'package:movielab/widgets/error.dart';
-import '../../../constants/colors.dart';
-import '../../../modules/preferences_shareholder.dart';
-import '../../../modules/get_show_info.dart';
 import 'sections/bottom_bar/bottom_bar.dart';
+import 'sections/bottom_bar/sections/external_sites/external_sites.dart';
 import 'sections/index.dart';
 import 'sections/bottom_bar/watchtime.dart';
 
@@ -131,6 +132,12 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
           floatingActionButtonLocation: _isBottomAppBarVisible
               ? FloatingActionButtonLocation.endDocked
               : FloatingActionButtonLocation.endFloat,
+          endDrawerEnableOpenDragGesture: false,
+          endDrawer: Drawer(
+            backgroundColor: kSecondaryColor,
+            width: MediaQuery.of(context).size.width * 0.66,
+            child: ShowPageExternalSites(show: show),
+          ),
           body: SingleChildScrollView(
             controller: _scrollController,
             physics: const BouncingScrollPhysics(),

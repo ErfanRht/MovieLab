@@ -5,7 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/show_models/full_show_model.dart';
 import 'package:share_plus/share_plus.dart';
-import 'sections/external_sites/external_sites.dart';
 import 'sections/lists_info/lists_info.dart';
 
 class ShowPageBottonBar extends StatefulWidget {
@@ -92,22 +91,7 @@ class _ShowPageBottonBarState extends State<ShowPageBottonBar>
               ),
             ),
             onTap: () {
-              showModalBottomSheet(
-                context: context,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(20),
-                )),
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                backgroundColor: kSecondaryColor,
-                transitionAnimationController: AnimationController(
-                    duration: const Duration(milliseconds: 300), vsync: this),
-                builder: (context) {
-                  return ShowPageExternalSites(
-                    show: widget.show,
-                  );
-                },
-              );
+              Scaffold.of(context).openEndDrawer();
             },
           ),
           const SizedBox(

@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:movielab/modules/api_requester.dart';
+import 'package:movielab/modules/api/api_requester.dart';
 import 'package:movielab/modules/cache/cacheholder.dart';
 import '../models/show_models/full_show_model.dart';
 

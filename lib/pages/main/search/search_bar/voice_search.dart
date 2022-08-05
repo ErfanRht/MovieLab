@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
-import 'package:movielab/modules/api_requester.dart';
+import 'package:movielab/modules/api/api_requester.dart';
 import 'package:movielab/pages/main/search/search.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;

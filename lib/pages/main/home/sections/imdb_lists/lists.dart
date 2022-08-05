@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movielab/constants/types.dart';
-import 'package:movielab/modules/api_requester.dart';
+import 'package:movielab/modules/api/api_requester.dart';
 import 'package:movielab/pages/main/home/sections/imdb_lists/pages/top_tvs.dart';
 import 'package:movielab/pages/main/home/sections/imdb_lists/pages/top_movies.dart';
 import '../../../../../modules/navigate.dart';

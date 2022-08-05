@@ -42,4 +42,12 @@ class MainController extends GetxController {
   ScrollController searchScrollController = ScrollController();
   ScrollController collectionScrollController = ScrollController();
   ScrollController profileScrollController = ScrollController();
+
+  // Active API key controller
+  int activeApiKey = 0;
+
+  changeActiveApiKey(int index) {
+    activeApiKey = index;
+    update();
+  }
 }

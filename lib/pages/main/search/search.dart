@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:movielab/constants/types.dart';
-import 'package:movielab/modules/api_requester.dart';
+import 'package:movielab/modules/api/api_requester.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
 
 doSearch() async {

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/hive/convertor.dart';
+import 'package:movielab/models/show_models/full_show_model.dart';
 import 'package:movielab/modules/capitalizer.dart';
-import '../../../../../../../constants/colors.dart';
-import '../../../../../../../models/show_models/full_show_model.dart';
-import '../../../../../../../modules/preferences_shareholder.dart';
-import '../../../../../../../widgets/buttons/activeable_button.dart';
-import '../../../../../../../widgets/toast.dart';
-import '../../watchtime.dart';
+import 'package:movielab/modules/preferences_shareholder.dart';
+import 'package:movielab/pages/show/show_page/sections/bottom_bar/watchtime.dart';
+import 'package:movielab/widgets/buttons/activeable_button.dart';
+import 'package:movielab/widgets/toast.dart';
 
 class ShowPageListsInfo extends StatefulWidget {
   final FullShow show;
