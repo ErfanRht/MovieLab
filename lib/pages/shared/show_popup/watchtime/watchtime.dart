@@ -3,30 +3,32 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
+import 'package:movielab/constants/general.dart';
 import 'package:movielab/models/hive/convertor.dart';
 import 'package:movielab/models/show_models/full_show_model.dart';
+import 'package:movielab/modules/preferences_shareholder.dart';
 import 'package:movielab/widgets/buttons/glassmorphism_button.dart';
-import '../../../../../modules/preferences_shareholder.dart';
-import '../../../../../widgets/toast.dart';
+import 'package:movielab/widgets/toast.dart';
 
-class ShowPageAddWatchDate extends StatefulWidget {
-  final FullShow show;
-  final Future<dynamic> Function() updateShowData;
-  const ShowPageAddWatchDate(
-      {Key? key, required this.show, required this.updateShowData})
-      : super(key: key);
+class AddWatchTime extends StatefulWidget {
+  final FullShow? fullShow;
+  final Future<dynamic> Function()? updateShowData;
+  const AddWatchTime({
+    Key? key,
+    this.fullShow,
+    this.updateShowData,
+  }) : super(key: key);
 
   @override
-  ShowPageAddWatchDateState createState() => ShowPageAddWatchDateState();
+  AddWatchTimeState createState() => AddWatchTimeState();
 }
 
-class ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
+class AddWatchTimeState extends State<AddWatchTime> {
   final PreferencesShareholder _preferencesShareholder =
       PreferencesShareholder();
   late bool isOtherDateSectionOpen, showDateSelector;
   late TimeOfDay selectedTime;
   late DateTime selectedDate;
-  late List<String> months;
   late FToast fToast;
 
   @override
@@ -34,25 +36,8 @@ class ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
     super.initState();
     isOtherDateSectionOpen = false;
     showDateSelector = false;
-
     selectedTime = TimeOfDay.now();
     selectedDate = DateTime.now();
-
-    months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December'
-    ];
-
     fToast = FToast();
     fToast.init(context);
   }
@@ -108,7 +93,7 @@ class ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
           TextButton(
             onPressed: () {
               markAsWatched(
-                  date: DateTime.parse(widget.show.releaseDate),
+                  date: DateTime.parse(widget.fullShow!.releaseDate),
                   time: TimeOfDay.fromDateTime(DateTime.parse("00:00")));
             },
             style: TextButton.styleFrom(
@@ -136,7 +121,7 @@ class ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
                   ],
                 ),
                 Text(
-                  widget.show.releaseDate,
+                  widget.fullShow!.releaseDate,
                   style: TextStyle(
                       color: Colors.white.withOpacity(0.5),
                       fontSize: 10,
@@ -285,7 +270,14 @@ class ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
                       children: [
                         GmButton(
                             text: "Apply",
-                            onTap: () {},
+                            onTap: () {
+                              markAsWatched(
+                                  date: selectedDate, time: selectedTime);
+                              setState(() {
+                                isOtherDateSectionOpen = false;
+                                showDateSelector = false;
+                              });
+                            },
                             backgroundColor: kAccentColor.withOpacity(0.75),
                             color: Colors.white)
                       ],
@@ -298,6 +290,7 @@ class ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
     );
   }
 
+  // Select when the user has watched the item
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
@@ -332,6 +325,7 @@ class ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
     }
   }
 
+  // Select what time of the day the user has watched the item
   Future<void> _selectTime(BuildContext context) async {
     final TimeOfDay? timeOfDay = await showTimePicker(
       context: context,
@@ -361,17 +355,19 @@ class ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
     }
   }
 
+  // Add the item to the History list
   markAsWatched({required DateTime date, required TimeOfDay time}) async {
     _preferencesShareholder.addShowToList(
-      showPreview: await convertFullShowToShowPreview(fullShow: widget.show),
+      showPreview:
+          await convertFullShowToShowPreview(fullShow: widget.fullShow!),
       listName: "history",
       date: date,
       time: time,
-      genres: widget.show.genres,
-      countries: widget.show.countries,
-      languages: widget.show.languages,
-      companies: widget.show.companies,
-      contentRating: widget.show.contentRating,
+      genres: widget.fullShow!.genres,
+      countries: widget.fullShow!.countries,
+      languages: widget.fullShow!.languages,
+      companies: widget.fullShow!.companies,
+      contentRating: widget.fullShow!.contentRating,
     );
     await Future.delayed(const Duration(milliseconds: 200));
     // ignore: use_build_context_synchronously
@@ -379,7 +375,7 @@ class ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
     await Future.delayed(const Duration(milliseconds: 200));
     fToast.showToast(
       child: ToastWidget(
-        mainText: "Saved to History}",
+        mainText: "Saved to History",
         buttonText: "See list",
         buttonColor: kAccentColor,
         buttonOnTap: () {},
@@ -387,6 +383,6 @@ class ShowPageAddWatchDateState extends State<ShowPageAddWatchDate> {
       gravity: ToastGravity.BOTTOM,
       toastDuration: const Duration(seconds: 3),
     );
-    widget.updateShowData();
+    widget.updateShowData!();
   }
 }

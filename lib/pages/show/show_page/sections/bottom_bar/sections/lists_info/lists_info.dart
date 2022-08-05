@@ -6,7 +6,7 @@ import 'package:movielab/models/hive/convertor.dart';
 import 'package:movielab/models/show_models/full_show_model.dart';
 import 'package:movielab/modules/capitalizer.dart';
 import 'package:movielab/modules/preferences_shareholder.dart';
-import 'package:movielab/pages/show/show_page/sections/bottom_bar/watchtime.dart';
+import 'package:movielab/pages/shared/show_popup/watchtime/watchtime.dart';
 import 'package:movielab/widgets/buttons/activeable_button.dart';
 import 'package:movielab/widgets/toast.dart';
 
@@ -67,8 +67,8 @@ class _ShowPageListsInfoState extends State<ShowPageListsInfo>
                           duration: const Duration(milliseconds: 225),
                           vsync: this),
                       builder: (context) {
-                        return ShowPageAddWatchDate(
-                          show: widget.show,
+                        return AddWatchTime(
+                          fullShow: widget.show,
                           updateShowData: widget.updateShowData,
                         );
                       });

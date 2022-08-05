@@ -7,13 +7,13 @@ import 'package:movielab/constants/types.dart';
 import 'package:movielab/modules/get_show_info.dart';
 import 'package:movielab/modules/preferences_shareholder.dart';
 import 'package:movielab/modules/system_ui_overlay_style.dart';
+import 'package:movielab/pages/shared/show_popup/watchtime/watchtime.dart';
 import 'package:movielab/pages/show/show_page/sections/media.dart';
 import 'package:movielab/pages/show/show_page/sections/other_ratings/other_ratings.dart';
 import 'package:movielab/widgets/error.dart';
 import 'sections/bottom_bar/bottom_bar.dart';
 import 'sections/bottom_bar/sections/external_sites/external_sites.dart';
 import 'sections/index.dart';
-import 'sections/bottom_bar/watchtime.dart';
 
 // ignore: must_be_immutable
 class ShowPage extends StatefulWidget {
@@ -117,8 +117,8 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
                           duration: const Duration(milliseconds: 225),
                           vsync: this),
                       builder: (context) {
-                        return ShowPageAddWatchDate(
-                          show: show,
+                        return AddWatchTime(
+                          fullShow: show,
                           updateShowData: loadShowData,
                         );
                       })

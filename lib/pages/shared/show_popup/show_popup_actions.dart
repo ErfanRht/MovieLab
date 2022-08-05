@@ -9,7 +9,7 @@ import '../../../../../../../constants/colors.dart';
 import '../../../../../../../modules/preferences_shareholder.dart';
 import '../../../../../../../widgets/buttons/activeable_button.dart';
 import '../../../../../../../widgets/toast.dart';
-import 'add_watchtime.dart';
+import 'watchtime/watchtime.dart';
 
 class ShowPopupActions extends StatefulWidget {
   final ShowPreview show;
@@ -69,7 +69,6 @@ class _ShowPopupActionsState extends State<ShowPopupActions>
                             vsync: this),
                         builder: (context) {
                           return AddWatchTime(
-                            show: widget.show,
                             fullShow: _fullShow,
                           );
                         });
@@ -89,7 +88,6 @@ class _ShowPopupActionsState extends State<ShowPopupActions>
                             vsync: this),
                         builder: (context) {
                           return AddWatchTime(
-                            show: widget.show,
                             fullShow: _fullShow,
                           );
                         });

@@ -3,15 +3,15 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:movielab/constants/types.dart';
+import 'package:movielab/models/actor_models/full_actor_model.dart';
+import 'package:movielab/models/episode_model.dart';
 import 'package:movielab/models/external_sites_model.dart';
+import 'package:movielab/models/search_result_model.dart';
+import 'package:movielab/models/show_models/full_show_model.dart';
+import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/cache/cacheholder.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
-import '../../models/actor_models/full_actor_model.dart';
-import '../../models/episode_model.dart';
-import '../../models/search_result_model.dart';
-import '../../models/show_models/full_show_model.dart';
-import '../../models/show_models/show_preview_model.dart';
 
 class APIRequester {
   static const String imdbBaseUrl = 'https://imdb-api.com/en/API';
@@ -224,7 +224,7 @@ class APIRequester {
         );
     if (jsonDecode(response.body)['errorMessage'] != "" &&
         jsonDecode(response.body)['errorMessage'] != null) {
-      // Here we handle the  IMDb API limit error
+      // Here we handle the IMDb API limit error
       // If the API key is invalid, change it to the next one
       if (kDebugMode) {
         activeApiKey++;
