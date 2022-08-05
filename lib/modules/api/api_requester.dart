@@ -12,12 +12,18 @@ import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/cache/cacheholder.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
+import 'dart:math';
 
 class APIRequester {
   static const String imdbBaseUrl = 'https://imdb-api.com/en/API';
   // API keys to access the IMDB API:
-  static const List<String> apiKey = ["k_zld7q6q3", "k_y9zcdoq3", "k_6lgd4s89"];
-  static int activeApiKey = 0;
+  static const List<String> apiKey = [
+    "k_zld7q6q3",
+    "k_y9zcdoq3",
+    "k_6lgd4s89",
+    "k_kfd12dh1"
+  ];
+  static int activeApiKey = Random().nextInt(apiKey.length);
 
   // Get recently trending movies from the IMDB API
   Future<RequestResult> getTrendingMovies() async {
