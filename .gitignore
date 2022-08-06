@@ -1,4 +1,5 @@
 lib/modules/api/api_keys.dart
+.VSCodeCounter/
 
 # Miscellaneous
 *.class
