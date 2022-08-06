@@ -8,7 +8,9 @@ class StatsChart extends StatefulWidget {
   final String statsName;
   final List<String> sortedSections;
   final Map<String, int> sections;
+  final int total;
   final int length;
+  final int others;
 
   const StatsChart(
       {Key? key,
@@ -16,7 +18,9 @@ class StatsChart extends StatefulWidget {
       required this.statsName,
       required this.sortedSections,
       required this.sections,
-      required this.length})
+      required this.length,
+      required this.total,
+      required this.others})
       : super(key: key);
 
   @override
@@ -28,6 +32,8 @@ class StatsChartState extends State<StatsChart> {
 
   @override
   Widget build(BuildContext context) {
+    print("total: ${widget.total}");
+    print("others: ${widget.others}");
     return AspectRatio(
       aspectRatio: 1.85,
       child: Row(
@@ -101,14 +107,19 @@ class StatsChartState extends State<StatsChart> {
       final double radius = isTouched ? 60.0 : 50.0;
       return PieChartSectionData(
         color: kPrimaryColorSchemes[i],
-        value:
-            widget.sections[widget.sortedSections[i]]! / widget.sections.length,
-        title: ((widget.sections[widget.sortedSections[i]]! /
-                    widget.sections.length) *
-                100)
-            .roundToDouble()
-            .toString()
-            .replaceAll(".0", "%"),
+        value: i != 6
+            ? widget.sections[widget.sortedSections[i]]! / widget.total
+            : widget.others / widget.total,
+        title: i != 6
+            ? ((widget.sections[widget.sortedSections[i]]! / widget.total) *
+                    100)
+                .roundToDouble()
+                .toString()
+                .replaceAll(".0", "%")
+            : ((widget.others / widget.total) * 100)
+                .roundToDouble()
+                .toString()
+                .replaceAll(".0", "%"),
         radius: radius,
         titleStyle: TextStyle(
             fontSize: fontSize,

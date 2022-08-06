@@ -17,20 +17,33 @@ class ListStatsPage extends StatefulWidget {
 
 class _ListStatsPageState extends State<ListStatsPage> {
   double imdbRatingAverage = 0;
+
   Map<String, int> genres = {};
   List<String> sortedGenres = [];
+  int genresLength = 0;
+  int genresOthers = 0;
 
   Map<String, int> countries = {};
   List<String> sortedCountries = [];
+  int countriesLength = 0;
+  int countriesOthers = 0;
 
   Map<String, int> languages = {};
   List<String> sortedLanguages = [];
+  int languagesLength = 0;
+  int languagesOthers = 0;
 
   Map<String, int> companies = {};
   List<String> sortedCompanies = [];
+  int companiesLength = 0;
+  int companiesOthers = 0;
 
   Map<String, int> contentRatings = {};
   List<String> sortedContentRatings = [];
+  int contentRatingsLength = 0;
+  int contentRatingsOthers = 0;
+
+  List<ShowPreview> items = [];
 
   @override
   void initState() {
@@ -125,6 +138,8 @@ class _ListStatsPageState extends State<ListStatsPage> {
                       sortedSections: sortedGenres,
                       sections: genres,
                       length: sortedGenres.length > 7 ? 7 : sortedGenres.length,
+                      total: genresLength,
+                      others: genresOthers,
                     ),
                     StatsChart(
                       index: 1,
@@ -134,6 +149,8 @@ class _ListStatsPageState extends State<ListStatsPage> {
                       length: sortedCountries.length > 7
                           ? 7
                           : sortedCountries.length,
+                      total: countriesLength,
+                      others: countriesOthers,
                     ),
                     StatsChart(
                       index: 2,
@@ -143,6 +160,8 @@ class _ListStatsPageState extends State<ListStatsPage> {
                       length: sortedLanguages.length > 7
                           ? 7
                           : sortedLanguages.length,
+                      total: languagesLength,
+                      others: languagesOthers,
                     ),
                     StatsChart(
                       index: 3,
@@ -152,6 +171,8 @@ class _ListStatsPageState extends State<ListStatsPage> {
                       length: sortedCompanies.length > 7
                           ? 7
                           : sortedCompanies.length,
+                      total: companiesLength,
+                      others: companiesOthers,
                     ),
                     StatsChart(
                       index: 4,
@@ -161,6 +182,8 @@ class _ListStatsPageState extends State<ListStatsPage> {
                       length: sortedContentRatings.length > 7
                           ? 7
                           : sortedContentRatings.length,
+                      total: contentRatingsLength,
+                      others: contentRatingsOthers,
                     ),
                   ],
                 ),
@@ -169,6 +192,14 @@ class _ListStatsPageState extends State<ListStatsPage> {
   }
 
   getListStats() async {
+    PreferencesShareholder preferencesShareholder = PreferencesShareholder();
+    await preferencesShareholder
+        .getList(listName: widget.listName)
+        .then((value) => {
+              setState(() {
+                items = value;
+              })
+            });
     await getImdbRatingAverage().then((value) async {
       //await Future.delayed(const Duration(milliseconds: 250));
       setState(() {
@@ -193,11 +224,6 @@ class _ListStatsPageState extends State<ListStatsPage> {
   }
 
   Future<double> getImdbRatingAverage() async {
-    List<ShowPreview> items = [];
-    PreferencesShareholder preferencesShareholder = PreferencesShareholder();
-    await preferencesShareholder
-        .getList(listName: widget.listName)
-        .then((value) => {items = value});
     List<double> itemsImdbRatings = [];
     for (ShowPreview item in items) {
       try {
@@ -212,14 +238,15 @@ class _ListStatsPageState extends State<ListStatsPage> {
   }
 
   Future<List<String>> getSortedGenres() async {
-    List<ShowPreview> items = [];
-    PreferencesShareholder preferencesShareholder = PreferencesShareholder();
-    await preferencesShareholder
-        .getList(listName: widget.listName)
-        .then((value) => {items = value});
     Map<String, int> itemsGenres = {};
+    int i = 0;
     for (ShowPreview item in items) {
       for (String genre in item.genres!.split(", ")) {
+        genresLength++;
+        if (i > 6) {
+          genresOthers++;
+        }
+        i++;
         if (itemsGenres.containsKey(genre)) {
           itemsGenres[genre] = itemsGenres[genre]! + 1;
         } else {
@@ -232,18 +259,22 @@ class _ListStatsPageState extends State<ListStatsPage> {
     });
     final List<String> sortedGenres = itemsGenres.keys.toList();
     sortedGenres.sort((a, b) => itemsGenres[b]!.compareTo(itemsGenres[a]!));
+    if (sortedGenres.length > 7) {
+      for (int i = 0; i < sortedGenres.length; i++) {}
+    }
     return sortedGenres;
   }
 
   Future<List<String>> getSortedCountries() async {
-    List<ShowPreview> items = [];
-    PreferencesShareholder preferencesShareholder = PreferencesShareholder();
-    await preferencesShareholder
-        .getList(listName: widget.listName)
-        .then((value) => {items = value});
     Map<String, int> itemsCountries = {};
+    int i = 0;
     for (ShowPreview item in items) {
       for (String country in item.countries!.split(", ")) {
+        countriesLength++;
+        if (i > 6) {
+          countriesOthers++;
+        }
+        i++;
         if (itemsCountries.containsKey(country)) {
           itemsCountries[country] = itemsCountries[country]! + 1;
         } else {
@@ -261,14 +292,15 @@ class _ListStatsPageState extends State<ListStatsPage> {
   }
 
   Future<List<String>> getSortedLanguages() async {
-    List<ShowPreview> items = [];
-    PreferencesShareholder preferencesShareholder = PreferencesShareholder();
-    await preferencesShareholder
-        .getList(listName: widget.listName)
-        .then((value) => {items = value});
     Map<String, int> itemsLanguages = {};
+    int i = 0;
     for (ShowPreview item in items) {
       for (String language in item.languages!.split(", ")) {
+        languagesLength++;
+        if (i > 6) {
+          languagesOthers++;
+        }
+        i++;
         if (itemsLanguages.containsKey(language)) {
           itemsLanguages[language] = itemsLanguages[language]! + 1;
         } else {
@@ -282,18 +314,21 @@ class _ListStatsPageState extends State<ListStatsPage> {
     final List<String> sortedLanguages = itemsLanguages.keys.toList();
     sortedLanguages
         .sort((a, b) => itemsLanguages[b]!.compareTo(itemsLanguages[a]!));
+    print(itemsLanguages);
+    print(sortedLanguages);
     return sortedLanguages;
   }
 
   Future<List<String>> getSortedCompanies() async {
-    List<ShowPreview> items = [];
-    PreferencesShareholder preferencesShareholder = PreferencesShareholder();
-    await preferencesShareholder
-        .getList(listName: widget.listName)
-        .then((value) => {items = value});
     Map<String, int> itemsCompanies = {};
+    int i = 0;
     for (ShowPreview item in items) {
       for (String company in item.companies!.split(", ")) {
+        companiesLength++;
+        if (i > 6) {
+          companiesOthers++;
+        }
+        i++;
         if (itemsCompanies.containsKey(company)) {
           itemsCompanies[company] = itemsCompanies[company]! + 1;
         } else {
@@ -311,14 +346,15 @@ class _ListStatsPageState extends State<ListStatsPage> {
   }
 
   Future<List<String>> getSortedContentRatings() async {
-    List<ShowPreview> items = [];
-    PreferencesShareholder preferencesShareholder = PreferencesShareholder();
-    await preferencesShareholder
-        .getList(listName: widget.listName)
-        .then((value) => {items = value});
     Map<String, int> itemsContentRatings = {};
+    int i = 0;
     for (ShowPreview item in items) {
       for (String contentRating in item.contentRating!.split(", ")) {
+        contentRatingsLength++;
+        if (i > 6) {
+          contentRatingsOthers++;
+        }
+        i++;
         if (itemsContentRatings.containsKey(contentRating)) {
           itemsContentRatings[contentRating] =
               itemsContentRatings[contentRating]! + 1;

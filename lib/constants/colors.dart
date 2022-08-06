@@ -4,11 +4,11 @@ const kBackgroundColor = Color(0xff191A32);
 const kPrimaryColor = Color(0xffE11A38);
 const kPrimaryColorSchemes = <Color>[
   Color(0xff9c1227),
-  Color(0xffb3152d),
-  Color(0xffca1732),
-  Color(0xffe11a38),
-  Color(0xffe72e4a),
-  Color(0xffe9455d),
+  Color(0xff003F5C),
+  Color(0xff58508D),
+  Color(0xffBC5090),
+  Color(0xffFF6361),
+  Color(0xffFFA600),
   Color(0xffec5b71),
 ];
 const kSecondaryColor = Color(0xff132d4e);
