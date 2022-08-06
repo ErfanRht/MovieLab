@@ -1,10 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
+import 'package:movielab/modules/navigate.dart';
 import 'package:movielab/pages/main/main_controller.dart';
+import 'package:movielab/pages/shared/about_page/about_page.dart';
 import 'package:movielab/pages/shared/app_name.dart';
 
 class HomeNavbar extends StatelessWidget {
@@ -31,9 +31,8 @@ class HomeNavbar extends StatelessWidget {
         children: [
           InkWell(
             onTap: () async {
-              if (kDebugMode) {
-                print("object");
-              }
+              await Future.delayed(const Duration(milliseconds: 50));
+              Navigate.pushTo(context, const AboutPage());
             },
             hoverColor: Colors.blue,
             splashColor: Colors.blue,
@@ -53,7 +52,7 @@ class HomeNavbar extends StatelessWidget {
                 size: 22.5,
               ),
               onPressed: () async {
-                await Future.delayed(const Duration(milliseconds: 250));
+                await Future.delayed(const Duration(milliseconds: 100));
                 Get.find<MainController>().changeIndex(1);
               },
             ),
