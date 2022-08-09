@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/show_models/full_show_model.dart';
-import 'package:movielab/modules/navigate.dart';
+import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/pages/show/show_page/sections/posters.dart';
 import '../../../../widgets/buttons/glassmorphism_button.dart';
 import '../../../../widgets/section_title.dart';

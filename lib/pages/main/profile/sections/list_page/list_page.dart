@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
-import 'package:movielab/modules/capitalizer.dart';
+import 'package:movielab/modules/tools/capitalizer.dart';
 import 'package:movielab/pages/main/profile/sections/list_page/sections/navbar.dart';
 import 'package:ms_undraw/ms_undraw.dart';
 import '../../../../../models/hive/convertor.dart';

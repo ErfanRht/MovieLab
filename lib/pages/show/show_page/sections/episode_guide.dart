@@ -3,7 +3,7 @@ import 'package:movielab/constants/colors.dart';
 import 'package:movielab/pages/show/show_page/sections/episode_guide/episode_guide_page.dart';
 import 'package:movielab/widgets/buttons/glassmorphism_button.dart';
 import '../../../../models/show_models/full_show_model.dart';
-import '../../../../modules/navigate.dart';
+import '../../../../modules/tools/navigate.dart';
 import '../../../../widgets/section_title.dart';
 
 class ShowPageEpisodeGuide extends StatelessWidget {

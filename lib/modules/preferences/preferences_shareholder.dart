@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
-import '../models/hive/convertor.dart';
-import '../models/hive/models/show_preview.dart';
+import '../../models/hive/convertor.dart';
+import '../../models/hive/models/show_preview.dart';
 
 class PreferencesShareholder {
   // Delete all items of a list in the shared preferences

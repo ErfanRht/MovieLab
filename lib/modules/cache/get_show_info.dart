@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
+import 'package:movielab/models/show_models/full_show_model.dart';
 import 'package:movielab/modules/api/api_requester.dart';
-import 'package:movielab/modules/cache/cacheholder.dart';
-import '../models/show_models/full_show_model.dart';
+import 'cacheholder.dart';
 
 Future<FullShow?> getShowInfo({required String id}) async {
   FullShow? show;

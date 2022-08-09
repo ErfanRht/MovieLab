@@ -3,16 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:movielab/models/hive/hive_helper/register_adapters.dart';
-import 'package:movielab/modules/cache/cache_data.dart';
-import 'package:movielab/pages/main/main_page.dart';
-import 'package:movielab/pages/splash/splash_screen.dart';
 import 'constants/colors.dart';
 import 'constants/routes.dart';
+import 'models/hive/hive_helper/register_adapters.dart';
 import 'models/hive/models/show_preview.dart';
+import 'modules/cache/cache_data.dart';
 import 'pages/main/home/home_data_controller.dart';
 import 'pages/main/main_controller.dart';
+import 'pages/main/main_page.dart';
 import 'pages/main/search/search_bar/search_bar_controller.dart';
+import 'pages/splash/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

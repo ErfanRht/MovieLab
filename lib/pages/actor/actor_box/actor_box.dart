@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movielab/modules/navigate.dart';
+import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/pages/actor/actor_page/actor_page.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
 

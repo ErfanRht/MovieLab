@@ -5,7 +5,7 @@ import 'package:movielab/pages/actor/actor_page/actor_page.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
 import 'package:movielab/pages/show/show_page/show_page.dart';
 import '../../../models/search_result_model.dart';
-import '../../../modules/navigate.dart';
+import '../../../modules/tools/navigate.dart';
 
 class SearchShowBox extends StatelessWidget {
   final SearchResult show;

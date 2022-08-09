@@ -3,7 +3,7 @@ import 'package:movielab/constants/types.dart';
 import 'package:movielab/pages/main/home/sections/box_office/pages/all_time.dart';
 import 'package:movielab/pages/main/home/sections/box_office/pages/box_office.dart';
 import 'package:movielab/modules/api/api_requester.dart';
-import '../../../../../modules/navigate.dart';
+import '../../../../../modules/tools/navigate.dart';
 import 'box.dart';
 
 class HomeBoxOffice extends StatelessWidget {

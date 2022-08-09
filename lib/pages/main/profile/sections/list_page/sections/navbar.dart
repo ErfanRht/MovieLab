@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
-import 'package:movielab/modules/capitalizer.dart';
-import 'package:movielab/modules/navigate.dart';
+import 'package:movielab/modules/tools/capitalizer.dart';
+import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/pages/main/profile/sections/list_page/sections/stats_page/stats.dart';
 
 AppBar listPageNavbar(context, {required final String listName}) {

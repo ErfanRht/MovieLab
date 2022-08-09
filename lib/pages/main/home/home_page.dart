@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
-import 'package:movielab/modules/system_ui_overlay_style.dart';
+import 'package:movielab/modules/tools/system_ui_overlay_style.dart';
 import 'package:movielab/pages/main/home/sections/trendings/home_trendings.dart';
 import 'package:movielab/pages/main/main_controller.dart';
 import 'home_data_controller.dart';

@@ -6,7 +6,7 @@ import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/general.dart';
 import 'package:movielab/models/hive/convertor.dart';
 import 'package:movielab/models/show_models/full_show_model.dart';
-import 'package:movielab/modules/preferences_shareholder.dart';
+import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/widgets/buttons/glassmorphism_button.dart';
 import 'package:movielab/widgets/toast.dart';
 

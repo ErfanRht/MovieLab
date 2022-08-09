@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movielab/modules/navigate.dart';
+import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/pages/main/home/sections/companies/box.dart';
 import 'company_page.dart';
 

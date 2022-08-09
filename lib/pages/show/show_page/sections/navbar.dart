@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movielab/modules/preferences_shareholder.dart';
+import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 
 import '../../../../models/show_models/full_show_model.dart';
 
