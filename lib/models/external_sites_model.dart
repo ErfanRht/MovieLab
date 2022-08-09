@@ -1,4 +1,5 @@
 // Movie or TV show as result of a search model class
+
 class ExternalSites {
   final String officialWebsite;
   final String imDb;
@@ -40,18 +41,71 @@ class ExternalSites {
   }
 }
 
-List<Map<String, String>> externalSitesList = [
-  {'title': "HomePage", 'imgUrl': ""},
-  {'title': "IMDb", 'imgUrl': "assets/images/logos/IMDb.png"},
-  {'title': "TMDb", 'imgUrl': "assets/images/logos/TMDb.png"},
+List<Map> externalSitesList = [
+  {
+    'title': "HomePage",
+    'imgUrl': "assets/images/logos/Chrome.png",
+    'color': 0xffF4F4F4,
+    'padding': 5.0
+  },
+  {
+    'title': "IMDb",
+    'imgUrl': "assets/images/logos/IMDb.png",
+    'color': 0xffE6B91E,
+    'padding': 0.0
+  },
+  {
+    'title': "TMDb",
+    'imgUrl': "assets/images/logos/TMDb.png",
+    'color': 0xff191A32,
+    'padding': 0.0
+  },
   {
     'title': "Rotten Tomatoes",
-    'imgUrl': "assets/images/logos/RottenTomatoes.png"
+    'imgUrl': "assets/images/logos/RottenTomatoes.png",
+    'color': 0xffFE0000,
+    'padding': 0.0
   },
-  {'title': "Metacritic", 'imgUrl': "assets/images/logos/Metacritic.png"},
-  {'title': "Netflix", 'imgUrl': "assets/images/logos/Netflix.png"},
-  {'title': "Google Play", 'imgUrl': "assets/images/logos/GooglePlay.png"},
-  {'title': "Film Affinity", 'imgUrl': "assets/images/logos/FilmAffinity.png"},
-  {'title': "Freebase", 'imgUrl': "assets/images/logos/Freebase.png"},
-  {'title': "Wikipedia", 'imgUrl': "assets/images/logos/Wikipedia.png"},
+  {
+    'title': "Metacritic",
+    'imgUrl': "assets/images/logos/Metacritic.png",
+    'color': 0xffF4F4F4,
+    'padding': 7.5
+  },
+  {
+    'title': "Netflix",
+    'imgUrl': "assets/images/logos/Netflix.png",
+    'color': 0xff000000,
+    'padding': 2.5
+  },
+  {
+    'title': "Film Affinity",
+    'imgUrl': "assets/images/logos/FilmAffinity.png",
+    'color': 0xffF4F4F4,
+    'padding': 0.0
+  },
+  {
+    'title': "Google Play",
+    'imgUrl': "assets/images/logos/GooglePlay.png",
+    'color': 0xffF4F4F4,
+    'padding': 10.0
+  },
+  {
+    'title': "Web Search",
+    'imgUrl': "assets/images/logos/Google.png",
+    'color': 0xffF4F4F4,
+    'padding': 10.0
+  },
+  {
+    'title': "YouTube",
+    'imgUrl': "assets/images/logos/YouTube.png",
+    'color': 0xffF4F4F4,
+    'padding': 10.0
+  },
+  {
+    'title': "Wikipedia",
+    'imgUrl': "assets/images/logos/Wikipedia.png",
+    'color': 0xffF4F4F4,
+    'padding': 7.5
+  },
 ];

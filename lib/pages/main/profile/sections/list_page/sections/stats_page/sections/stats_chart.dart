@@ -32,8 +32,6 @@ class StatsChartState extends State<StatsChart> {
 
   @override
   Widget build(BuildContext context) {
-    print("total: ${widget.total}");
-    print("others: ${widget.others}");
     return AspectRatio(
       aspectRatio: 1.85,
       child: Row(

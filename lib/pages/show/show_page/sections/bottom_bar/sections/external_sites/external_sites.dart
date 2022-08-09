@@ -9,8 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class ShowPageExternalSites extends StatelessWidget {
   final FullShow show;
-  ShowPageExternalSites({Key? key, required this.show}) : super(key: key);
-  late ExternalSites externalSites;
+  const ShowPageExternalSites({Key? key, required this.show}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final APIRequester apiRequester = APIRequester();
@@ -20,8 +19,7 @@ class ShowPageExternalSites extends StatelessWidget {
           if (snapshot.data != null) {
             return SafeArea(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Stack(
                   children: [
                     Row(
@@ -29,13 +27,13 @@ class ShowPageExternalSites extends StatelessWidget {
                       children: const [
                         SectionTitle(
                           title: "Open Width",
-                          padding: EdgeInsets.zero,
+                          padding: EdgeInsets.symmetric(horizontal: 15),
                         ),
                         SectionTitle(
                           title: "Done",
                           color: kPrimaryColor,
                           fontSize: 15,
-                          padding: EdgeInsets.zero,
+                          padding: EdgeInsets.symmetric(horizontal: 15),
                         ),
                       ],
                     ),
@@ -46,8 +44,8 @@ class ShowPageExternalSites extends StatelessWidget {
                         ),
                         Expanded(
                           child: ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: 10,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: 11,
                             itemBuilder: (context, index) {
                               return Column(
                                 children: [
@@ -57,20 +55,54 @@ class ShowPageExternalSites extends StatelessWidget {
                                           fontSize: 15,
                                           color: Colors.white.withOpacity(0.75),
                                           padding: const EdgeInsets.symmetric(
-                                              vertical: 5),
+                                              vertical: 7.5, horizontal: 15),
                                         )
-                                      : const SizedBox.shrink(),
-                                  InkWell(
-                                    onTap: () => _launchUrl(Uri.parse(
-                                        snapshot.data?.freebase ?? "")),
+                                      : index == 7
+                                          ? SectionTitle(
+                                              title: "Search",
+                                              fontSize: 15,
+                                              color: Colors.white
+                                                  .withOpacity(0.75),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 7.5,
+                                                      horizontal: 15),
+                                            )
+                                          : const SizedBox.shrink(),
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                        padding: EdgeInsets.zero),
+                                    onPressed: () =>
+                                        _launchUrl(index, snapshot.data, show),
                                     child: SizedBox(
-                                      height: 50,
+                                      height: 60,
                                       child: Row(
                                         children: [
-                                          SizedBox(
+                                          Container(
                                               width: 50,
-                                              child: Image.asset(
-                                                  "assets/images/logos/IMDb.png")),
+                                              height: 50,
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 5,
+                                                      horizontal: 15),
+                                              padding: EdgeInsets.all(
+                                                  externalSitesList[index]
+                                                      ['padding']),
+                                              decoration: BoxDecoration(
+                                                  color: Color(
+                                                      externalSitesList[index]
+                                                          ['color']),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                child: Image.asset(
+                                                    externalSitesList[index]
+                                                            ['imgUrl'] ??
+                                                        ""),
+                                              )),
                                           const SizedBox(
                                             width: 10,
                                           ),
@@ -108,8 +140,33 @@ class ShowPageExternalSites extends StatelessWidget {
   }
 }
 
-Future<void> _launchUrl(url) async {
-  if (!await launchUrl(url)) {
+Future<void> _launchUrl(
+    final int index, final ExternalSites? externalSites, FullShow show) async {
+  String url = "";
+  if (index == 0) {
+    url = externalSites?.officialWebsite ?? "";
+  } else if (index == 1) {
+    url = externalSites?.imDb ?? "";
+  } else if (index == 2) {
+    url = externalSites?.theMovieDb ?? "";
+  } else if (index == 3) {
+    url = externalSites?.rottenTomatoes ?? "";
+  } else if (index == 4) {
+    url = externalSites?.metacritic ?? "";
+  } else if (index == 5) {
+    url = externalSites?.netflix ?? "";
+  } else if (index == 6) {
+    url = externalSites?.filmAffinity ?? "";
+  } else if (index == 7) {
+    url = externalSites?.googlePlay ?? "";
+  } else if (index == 8) {
+    url = externalSites?.freebase ?? "";
+  } else if (index == 9) {
+    url = "https://www.youtube.com/results?search_query=${show.title}";
+  } else if (index == 10) {
+    url = externalSites?.wikipedia ?? "";
+  }
+  if (!await launchUrl(Uri.parse(url))) {
     throw 'Could not launch $url';
   }
 }
