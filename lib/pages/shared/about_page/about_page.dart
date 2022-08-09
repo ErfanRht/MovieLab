@@ -53,7 +53,7 @@ class AboutPage extends StatelessWidget {
               height: 10,
             ),
             Text(
-              "Version 1.0.7",
+              "Version 2.0.2",
               style: TextStyle(
                   fontSize: 17.5,
                   color: Colors.white.withOpacity(0.5),
