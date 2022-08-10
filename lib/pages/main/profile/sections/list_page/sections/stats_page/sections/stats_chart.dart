@@ -101,23 +101,14 @@ class StatsChartState extends State<StatsChart> {
   List<PieChartSectionData> showingSections() {
     return List.generate(widget.length, (i) {
       final isTouched = i == touchedIndex;
-      final double fontSize = isTouched ? 20 : 12.5;
+      final double fontSize = isTouched ? 25 : 16;
       final double radius = isTouched ? 60.0 : 50.0;
       return PieChartSectionData(
         color: kPrimaryColorSchemes[i],
         value: i != 6
             ? widget.sections[widget.sortedSections[i]]! / widget.total
             : widget.others / widget.total,
-        title: i != 6
-            ? ((widget.sections[widget.sortedSections[i]]! / widget.total) *
-                    100)
-                .roundToDouble()
-                .toString()
-                .replaceAll(".0", "%")
-            : ((widget.others / widget.total) * 100)
-                .roundToDouble()
-                .toString()
-                .replaceAll(".0", "%"),
+        title: (widget.sections[widget.sortedSections[i]]!).toString(),
         radius: radius,
         titleStyle: TextStyle(
             fontSize: fontSize,
