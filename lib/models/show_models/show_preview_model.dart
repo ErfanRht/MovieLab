@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 
 // Movie or TV show preview model class
@@ -26,6 +25,7 @@ class ShowPreview {
   final String? contentRating;
   final DateTime? watchDate;
   final TimeOfDay? watchTime;
+  final List<ShowPreview>? similars;
 
   const ShowPreview({
     required this.id,
@@ -50,6 +50,7 @@ class ShowPreview {
     this.contentRating,
     this.watchDate,
     this.watchTime,
+    this.similars,
   });
 
   factory ShowPreview.fromJson(Map<String, dynamic> json) {

@@ -25,7 +25,8 @@ class PreferencesShareholder {
       required String countries,
       required String languages,
       required String companies,
-      required String contentRating}) async {
+      required String contentRating,
+      required List<ShowPreview> similars}) async {
     Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
     HiveShowPreview hiveShow = convertShowPreviewToHive(
         showPreview: showPreview,
@@ -36,7 +37,8 @@ class PreferencesShareholder {
         countries: countries,
         languages: languages,
         companies: companies,
-        contentRating: contentRating);
+        contentRating: contentRating,
+        similars: similars);
     list.put(list.length + 1, hiveShow);
     if (kDebugMode) {
       print("The item added to $listName");
@@ -90,6 +92,15 @@ class PreferencesShareholder {
     List<ShowPreview> result = [];
     for (HiveShowPreview item in listItems) {
       result.add(convertHiveToShowPreview(item));
+    }
+    return result;
+  }
+
+  Future<List<List<ShowPreview>>> getAllLists() async {
+    List<String> listNames = ["collection", "watchlist", "history"];
+    List<List<ShowPreview>> result = [];
+    for (String listName in listNames) {
+      result.add(await getList(listName: listName));
     }
     return result;
   }

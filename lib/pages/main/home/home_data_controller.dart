@@ -26,6 +26,12 @@ class HomeDataController extends GetxController {
     update();
   }
 
+  List<ShowPreview> recommendations = [];
+  updateRecommendations({required List<ShowPreview> recommendations}) {
+    this.recommendations = recommendations;
+    update();
+  }
+
   List<Map<String, List<ShowPreview>>> companiesinfo = [];
   updateCompaniesInfo(
       {required List<Map<String, List<ShowPreview>>> companiesinfo}) {

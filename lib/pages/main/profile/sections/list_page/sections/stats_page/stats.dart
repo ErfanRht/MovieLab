@@ -314,8 +314,6 @@ class _ListStatsPageState extends State<ListStatsPage> {
     final List<String> sortedLanguages = itemsLanguages.keys.toList();
     sortedLanguages
         .sort((a, b) => itemsLanguages[b]!.compareTo(itemsLanguages[a]!));
-    print(itemsLanguages);
-    print(sortedLanguages);
     return sortedLanguages;
   }
 

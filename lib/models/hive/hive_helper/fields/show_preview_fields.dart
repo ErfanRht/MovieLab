@@ -11,6 +11,7 @@ class ShowPreviewFields {
   static const int languages = 9;
   static const int companies = 10;
   static const int contentRating = 11;
-  static const int watchDate = 12;
-  static const int watchTime = 13;
+  static const int similars = 12;
+  static const int watchDate = 13;
+  static const int watchTime = 14;
 }

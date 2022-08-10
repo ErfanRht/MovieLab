@@ -27,6 +27,7 @@ ShowPreview convertHiveToShowPreview(HiveShowPreview hive) {
     contentRating: hive.contentRating,
     watchDate: hive.watchDate,
     watchTime: hive.watchTime,
+    similars: [for (var hive in hive.similars) convertHiveToShowPreview(hive)],
   );
 }
 
@@ -39,7 +40,8 @@ HiveShowPreview convertShowPreviewToHive(
     required String countries,
     required String languages,
     required String companies,
-    required String contentRating}) {
+    required String contentRating,
+    required List<ShowPreview> similars}) {
   return HiveShowPreview()
     ..id = showPreview.id
     ..rank = showPreview.rank
@@ -53,6 +55,20 @@ HiveShowPreview convertShowPreviewToHive(
     ..languages = languages
     ..companies = companies
     ..contentRating = contentRating
+    ..similars = [
+      for (var hive in similars)
+        convertShowPreviewToHive(
+            showPreview: hive,
+            rank: "",
+            date: null,
+            time: null,
+            genres: "",
+            countries: "",
+            languages: "",
+            companies: "",
+            contentRating: "",
+            similars: [])
+    ]
     ..watchDate = date
     ..watchTime = time;
 }
@@ -77,6 +93,20 @@ Future<HiveShowPreview> convertFullShowToHive(
     ..languages = fullShow.languages
     ..companies = fullShow.companies
     ..contentRating = fullShow.contentRating
+    ..similars = [
+      for (var hive in fullShow.similars)
+        convertShowPreviewToHive(
+            showPreview: hive,
+            rank: "",
+            date: null,
+            time: null,
+            genres: "",
+            countries: "",
+            languages: "",
+            companies: "",
+            contentRating: "",
+            similars: [])
+    ]
     ..watchDate = date
     ..watchTime = time;
 }
@@ -101,6 +131,12 @@ Future<ShowPreview> convertFullShowToShowPreview(
     domesticLifetimeGross: fullShow.domesticLifetimeGross,
     foreign: fullShow.foreign,
     foreignLifetimeGross: fullShow.foreignLifetimeGross,
+    genres: fullShow.genres,
+    countries: fullShow.countries,
+    languages: fullShow.languages,
+    companies: fullShow.companies,
+    contentRating: fullShow.contentRating,
+    similars: fullShow.similars,
   );
 }
 

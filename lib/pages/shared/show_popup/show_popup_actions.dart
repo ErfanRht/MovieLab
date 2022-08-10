@@ -6,7 +6,7 @@ import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/tools/capitalizer.dart';
 import 'package:movielab/modules/cache/get_show_info.dart';
 import '../../../../../../../constants/colors.dart';
-import '../../../../../../../modules/preferences_shareholder.dart';
+import '../../../modules/preferences/preferences_shareholder.dart';
 import '../../../../../../../widgets/buttons/activeable_button.dart';
 import '../../../../../../../widgets/toast.dart';
 import 'watchtime/watchtime.dart';
@@ -127,14 +127,14 @@ class _ShowPopupActionsState extends State<ShowPopupActions>
     if (_isThereInLists[listName] == false) {
       FullShow? fullShow = await getShowInfo(id: widget.show.id);
       _preferencesShareholder.addShowToList(
-        showPreview: widget.show,
-        listName: listName,
-        genres: fullShow!.genres,
-        countries: fullShow.countries,
-        languages: fullShow.languages,
-        companies: fullShow.companies,
-        contentRating: fullShow.contentRating,
-      );
+          showPreview: widget.show,
+          listName: listName,
+          genres: fullShow!.genres,
+          countries: fullShow.countries,
+          languages: fullShow.languages,
+          companies: fullShow.companies,
+          contentRating: fullShow.contentRating,
+          similars: fullShow.similars);
       setState(() {
         _isThereInLists[listName] = true;
       });

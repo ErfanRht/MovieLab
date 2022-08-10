@@ -113,6 +113,7 @@ class _ShowPageListsInfoState extends State<ShowPageListsInfo>
         languages: widget.show.languages,
         companies: widget.show.companies,
         contentRating: widget.show.contentRating,
+        similars: widget.show.similars,
       );
       setState(() {
         widget.isThereInLists[listName] = true;

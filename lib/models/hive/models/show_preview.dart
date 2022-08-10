@@ -32,6 +32,8 @@ class HiveShowPreview extends HiveObject {
   late String companies;
   @HiveField(ShowPreviewFields.contentRating)
   late String contentRating;
+  @HiveField(ShowPreviewFields.similars)
+  late List<HiveShowPreview> similars;
   @HiveField(ShowPreviewFields.watchDate)
   DateTime? watchDate;
   @HiveField(ShowPreviewFields.watchTime)
