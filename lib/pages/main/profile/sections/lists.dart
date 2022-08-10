@@ -48,15 +48,21 @@ class ProfilePageLists extends StatelessWidget {
               },
             ),
             ButtonSectionItem(
-                onPressed: () {},
-                title: "Favorite Artists",
-                icon: Icons.group_outlined,
-                iconColor: kPrimaryColor),
+              title: "Favorite Artists",
+              icon: Icons.group_outlined,
+              iconColor: kPrimaryColor,
+              onPressed: () {
+                Navigate.pushTo(context, const ListPage(listName: "artists"));
+              },
+            ),
             ButtonSectionItem(
-              title: "Peronal Lists",
-              icon: FontAwesomeIcons.alignLeft,
+              title: "Recommendations for you",
+              icon: FontAwesomeIcons.clapperboard,
               iconColor: Colors.deepPurpleAccent,
-              onPressed: () {},
+              onPressed: () {
+                Navigate.pushTo(
+                    context, const ListPage(listName: "recommendations"));
+              },
             ),
           ],
         )

@@ -23,10 +23,7 @@ void main() async {
   Hive.openBox<HiveShowPreview>('collection');
   Hive.openBox<HiveShowPreview>('watchlist');
   Hive.openBox<HiveShowPreview>('history');
-  Hive.openBox<HiveShowPreview>('collection');
-  Hive.openBox<HiveShowPreview>('favorite_artists');
-  Hive.openBox<HiveShowPreview>('favorite_trailers');
-  Hive.openBox<HiveShowPreview>('personal_lists');
+  Hive.openBox<HiveShowPreview>('artists');
 
   // Initialize the controllers
   Get.put(MainController());
