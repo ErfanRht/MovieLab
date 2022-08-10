@@ -8,13 +8,14 @@ import '../../../models/show_models/show_preview_model.dart';
 
 class IMDBListShowBox extends StatelessWidget {
   final ShowPreview showPreview;
-  const IMDBListShowBox({Key? key, required this.showPreview})
+  final String? iRank;
+  const IMDBListShowBox({Key? key, required this.showPreview, this.iRank})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     String id = showPreview.id;
-    String rank = showPreview.rank;
+    String rank = iRank ?? showPreview.rank;
     String image = showPreview.image;
     String title = showPreview.title;
     String year = showPreview.year;

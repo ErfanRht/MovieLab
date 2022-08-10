@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
@@ -26,6 +27,10 @@ Future recommender() async {
           allSimilars.firstWhere((similar) => similar.title == title))
       .toList();
   homeDataController.updateRecommendations(recommendations: recommended);
+  if (kDebugMode) {
+    print("Recommendaions updated");
+  }
+  return true;
 }
 
 Future<List<ShowPreview>> getAllSimilars(

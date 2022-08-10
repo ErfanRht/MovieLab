@@ -24,7 +24,7 @@ class HomeTrendingsBuilder extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 10, top: 30, bottom: 5),
+                padding: const EdgeInsets.only(left: 10, top: 15),
                 child: Text(
                   title,
                   style: GoogleFonts.ubuntu(
@@ -41,7 +41,7 @@ class HomeTrendingsBuilder extends StatelessWidget {
                 highlightColor: Colors.transparent,
                 focusColor: Colors.transparent,
                 child: Padding(
-                  padding: const EdgeInsets.only(right: 20, top: 30, bottom: 5),
+                  padding: const EdgeInsets.only(right: 10, top: 15),
                   child: Text(
                     'Show All',
                     style: GoogleFonts.ubuntu(

@@ -45,7 +45,10 @@ class AllTrendingsPage extends StatelessWidget {
                     itemCount: trendings.length,
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
-                      return IMDBListShowBox(showPreview: trendings[index]);
+                      return IMDBListShowBox(
+                        showPreview: trendings[index],
+                        iRank: (index + 1).toString(),
+                      );
                     },
                   ))
             ],
