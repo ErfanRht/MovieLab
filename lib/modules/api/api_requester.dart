@@ -64,6 +64,28 @@ class APIRequester {
     }
   }
 
+  // Get movies which are currently playing in the theaters from the IMDB API
+  Future<RequestResult> getInTheaters() async {
+    final response = await getUrl(
+        url: '$imdbBaseUrl/InTheaters/${APIKeys.apiKey[activeApiKey]}');
+
+    if (response.statusCode == 200) {
+      if (jsonDecode(response.body)["errorMessage"] != "") {
+        return RequestResult.FAILURE_SERVER_PROBLEM;
+      }
+      var json = jsonDecode(response.body)["items"];
+
+      List<ShowPreview> inTheaters = [];
+      for (int i = 0; i < json.length; i++) {
+        inTheaters.add(ShowPreview.fromJson(json[i]));
+      }
+      Get.find<HomeDataController>().updateInTheaters(inTheaters: inTheaters);
+      return RequestResult.SUCCESS;
+    } else {
+      return RequestResult.FAILURE_SERVER_PROBLEM;
+    }
+  }
+
   // Get IMDB 250 most trending movies or TV shows from the IMDB API
   Future<bool> getIMDBlists({required ImdbList listName}) async {
     HomeDataController homeDataController = Get.find<HomeDataController>();
@@ -158,7 +180,6 @@ class APIRequester {
     final response = await getUrl(
         url:
             '$imdbBaseUrl/Title/${APIKeys.apiKey[activeApiKey]}/$id/Posters,Images,Trailer,Ratings,');
-
     if (response.statusCode == 200) {
       var showJson = jsonDecode(response.body);
       FullShow show = FullShow.fromJson(showJson);

@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
                   controller: _.homeScrollController,
                   children: [
                     const SizedBox(
-                      height: 80,
+                      height: 70,
                     ),
                     HomeTrendingsBuilder(
                         trendings: __.trendingMovies, title: "Trending Movies"),
@@ -42,6 +42,9 @@ class HomePage extends StatelessWidget {
                             trendings: __.recommendations,
                             title: "Recommended For You")
                         : const SizedBox.shrink(),
+                    HomeTrendingsBuilder(
+                        trendings: __.inTheaters,
+                        title: "Currently In Theatres"),
                     Row(
                       children: [
                         Padding(
