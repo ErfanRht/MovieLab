@@ -65,7 +65,10 @@ class HomeTrendingsBuilder extends StatelessWidget {
                               scrollDirection: Axis.horizontal,
                               itemCount: 10,
                               itemBuilder: (context, index) {
-                                return ShowBox(showPreview: trendings[index]);
+                                return ShowBox(
+                                  showPreview: trendings[index],
+                                  preTag: title,
+                                );
                               }),
                         ),
                       ],

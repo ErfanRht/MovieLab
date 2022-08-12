@@ -3,8 +3,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
+import 'package:movielab/models/episode_model.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
-import '../../../models/episode_model.dart';
 
 class EpisodeShowBox extends StatelessWidget {
   final Episode show;
@@ -25,7 +25,7 @@ class EpisodeShowBox extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
       child: InkWell(
         onTap: () async {
-          openShowPage(context, id);
+          openShowPage(context, id: id);
         },
         borderRadius: BorderRadius.circular(15),
         child: Container(

@@ -27,7 +27,7 @@ class ListShowBox extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
       child: InkWell(
           onTap: () async {
-            openShowPage(context, id);
+            openShowPage(context, id: id);
           },
           borderRadius: BorderRadius.circular(15),
           child: Slidable(

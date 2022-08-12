@@ -48,6 +48,7 @@ class AllTrendingsPage extends StatelessWidget {
                       return IMDBListShowBox(
                         showPreview: trendings[index],
                         iRank: (index + 1).toString(),
+                        preTag: title,
                       );
                     },
                   ))

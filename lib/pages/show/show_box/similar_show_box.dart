@@ -14,7 +14,7 @@ class SimilarShowBox extends StatelessWidget {
     String id = showPreview.id;
     return InkWell(
       onTap: () {
-        openShowPage(context, id);
+        openShowPage(context, id: id);
       },
       borderRadius: BorderRadius.circular(20),
       child: Container(

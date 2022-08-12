@@ -9,7 +9,9 @@ import '../../../models/show_models/show_preview_model.dart';
 class IMDBListShowBox extends StatelessWidget {
   final ShowPreview showPreview;
   final String? iRank;
-  const IMDBListShowBox({Key? key, required this.showPreview, this.iRank})
+  final String preTag;
+  const IMDBListShowBox(
+      {Key? key, required this.showPreview, this.iRank, this.preTag = ""})
       : super(key: key);
 
   @override
@@ -25,7 +27,7 @@ class IMDBListShowBox extends StatelessWidget {
         padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
         child: InkWell(
           onTap: () async {
-            openShowPage(context, id);
+            openShowPage(context, id: id, preTag: preTag);
           },
           borderRadius: BorderRadius.circular(15),
           child: Container(
@@ -36,7 +38,7 @@ class IMDBListShowBox extends StatelessWidget {
               children: [
                 boxImage(
                     image: image,
-                    tag: "show_$id",
+                    tag: "${preTag}_show_$id",
                     height: 150,
                     width: 100,
                     placeholder: const SpinKitThreeBounce(

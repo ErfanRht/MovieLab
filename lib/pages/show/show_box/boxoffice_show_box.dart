@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
-import '../../../models/show_models/show_preview_model.dart';
 
 class BoxOfficeShowBox extends StatelessWidget {
   final ShowPreview showPreview;
@@ -27,7 +27,7 @@ class BoxOfficeShowBox extends StatelessWidget {
         padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
         child: InkWell(
           onTap: () async {
-            openShowPage(context, id);
+            openShowPage(context, id: id);
           },
           borderRadius: BorderRadius.circular(15),
           child: Container(

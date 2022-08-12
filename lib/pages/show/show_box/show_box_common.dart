@@ -5,8 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/pages/show/show_page/show_page.dart';
 import '../../../modules/tools/navigate.dart';
 
-openShowPage(BuildContext context, String id) {
-  Navigate.pushHeroicTo(context, ShowPage(id: id));
+openShowPage(BuildContext context,
+    {required final String id, final String preTag = ""}) {
+  Navigate.pushHeroicTo(context, ShowPage(id: id, preTag: preTag));
 }
 
 Widget boxImage(

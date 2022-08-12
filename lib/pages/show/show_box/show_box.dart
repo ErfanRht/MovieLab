@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
+import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/pages/shared/show_popup/show_popup_actions.dart';
-import '../../../models/show_models/show_preview_model.dart';
 import 'show_box_common.dart';
 
 class ShowBox extends StatefulWidget {
   final ShowPreview showPreview;
-  const ShowBox({Key? key, required this.showPreview}) : super(key: key);
+  final String preTag;
+  const ShowBox({Key? key, required this.showPreview, this.preTag = ""})
+      : super(key: key);
 
   @override
   State<ShowBox> createState() => _ShowBoxState();
@@ -22,7 +24,7 @@ class _ShowBoxState extends State<ShowBox> with TickerProviderStateMixin {
     String id = widget.showPreview.id;
     return InkWell(
       onTap: () {
-        openShowPage(context, id);
+        openShowPage(context, id: id, preTag: widget.preTag);
       },
       onLongPress: () async {
         await Future.delayed(const Duration(milliseconds: 250));
@@ -54,7 +56,7 @@ class _ShowBoxState extends State<ShowBox> with TickerProviderStateMixin {
               children: [
                 boxImage(
                     image: widget.showPreview.image,
-                    tag: "show_$id",
+                    tag: "${widget.preTag}_show_$id",
                     height: 210,
                     width: 145,
                     radius: 17.5),

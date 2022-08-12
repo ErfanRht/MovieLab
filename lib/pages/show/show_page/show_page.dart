@@ -15,10 +15,11 @@ import 'sections/index.dart';
 import 'sections/media.dart';
 import 'sections/other_ratings/other_ratings.dart';
 
-// ignore: must_be_immutable
 class ShowPage extends StatefulWidget {
-  String id;
-  ShowPage({Key? key, required this.id}) : super(key: key);
+  final String id;
+  final String preTag;
+  const ShowPage({Key? key, required this.id, this.preTag = ""})
+      : super(key: key);
 
   @override
   State<ShowPage> createState() => _ShowPageState();
@@ -161,7 +162,7 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
                           },
                           blendMode: BlendMode.dstIn,
                           child: Hero(
-                            tag: "show_${widget.id}",
+                            tag: "${widget.preTag}_show_${show.id}",
                             child: CachedNetworkImage(
                               fit: BoxFit.cover,
                               height:
