@@ -40,7 +40,7 @@ class HomePage extends StatelessWidget {
                     __.recommendations.length > 10
                         ? HomeTrendingsBuilder(
                             trendings: __.recommendations,
-                            title: "Recommendations For You")
+                            title: "Recommended For You")
                         : const SizedBox.shrink(),
                     Row(
                       children: [
