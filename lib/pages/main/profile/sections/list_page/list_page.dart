@@ -21,23 +21,25 @@ class ListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: kBackgroundColor,
-        floatingActionButton: Container(
-          height: 55.0,
-          width: 55.0,
-          margin: const EdgeInsets.only(bottom: 7.5, right: 5),
-          child: FittedBox(
-            child: FloatingActionButton(
-                onPressed: () {
-                  // preferencesShareholder.delete();
-                },
-                tooltip: "Delete all",
-                backgroundColor: Colors.white,
-                child: const Icon(
-                  FontAwesomeIcons.trash,
-                  color: kBlueColor,
-                )),
-          ),
-        ),
+        floatingActionButton: listName == "recommendations"
+            ? const SizedBox.shrink()
+            : Container(
+                height: 55.0,
+                width: 55.0,
+                margin: const EdgeInsets.only(bottom: 7.5, right: 5),
+                child: FittedBox(
+                  child: FloatingActionButton(
+                      onPressed: () {
+                        // preferencesShareholder.delete();
+                      },
+                      tooltip: "Delete all",
+                      backgroundColor: Colors.white,
+                      child: const Icon(
+                        FontAwesomeIcons.trash,
+                        color: kBlueColor,
+                      )),
+                ),
+              ),
         appBar: listPageNavbar(context, listName: listName),
         body: listName == "recommendations"
             ? GetBuilder<HomeDataController>(
@@ -103,7 +105,7 @@ class ListPage extends StatelessWidget {
                           children: [
                               const SizedBox(height: 100),
                               Text(
-                                  "You haven't saved anything in your $listName yet!",
+                                  "You haven't add anything in your $listName yet!",
                                   style: GoogleFonts.poppins(
                                       color: Colors.white,
                                       fontSize: 15,

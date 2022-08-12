@@ -4,10 +4,12 @@ import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/pages/main/main_controller.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+
+// Main pages:
 import 'home/home_page.dart';
+import 'lists/lists.dart';
 import 'search/search_page.dart';
 import 'profile/profile.dart';
-import 'watchlist/watchlist.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -58,7 +60,7 @@ class MainPage extends StatelessWidget {
                   ),
                   GButton(
                     icon: Icons.bookmark_outline_rounded,
-                    text: 'Watchlist',
+                    text: 'Lists',
                   ),
                   GButton(
                     icon: Icons.podcasts_rounded,
@@ -81,6 +83,6 @@ class MainPage extends StatelessWidget {
 const List<Widget> pages = <Widget>[
   HomePage(),
   SearchPage(),
-  WhatchlistPage(),
+  UserListsPage(),
   ProfilePage()
 ];

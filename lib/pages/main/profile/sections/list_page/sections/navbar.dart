@@ -5,6 +5,7 @@ import 'package:movielab/constants/colors.dart';
 import 'package:movielab/modules/tools/capitalizer.dart';
 import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/pages/main/profile/sections/list_page/sections/stats_page/stats.dart';
+import 'package:movielab/pages/shared/about_recommendations_page/about_recommendations.dart';
 
 AppBar listPageNavbar(context, {required final String listName}) {
   return AppBar(
@@ -31,16 +32,21 @@ AppBar listPageNavbar(context, {required final String listName}) {
     ),
     actions: [
       IconButton(
-        icon: const Icon(
-          FontAwesomeIcons.squarePollVertical,
+        icon: Icon(
+          listName == "recommendations"
+              ? Icons.more_horiz_rounded
+              : FontAwesomeIcons.squarePollVertical,
           color: Colors.white,
+          size: listName == "recommendations" ? 30 : 24,
         ),
         onPressed: () {
           Navigate.pushTo(
               context,
-              ListStatsPage(
-                listName: listName,
-              ));
+              listName == "recommendations"
+                  ? const AboutRecommendationsPage()
+                  : ListStatsPage(
+                      listName: listName,
+                    ));
         },
       ),
     ],
