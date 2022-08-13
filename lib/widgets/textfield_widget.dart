@@ -62,6 +62,7 @@ class TextFieldWidgetState extends State<TextFieldWidget> {
                         const BorderSide(color: Colors.blue, width: 2.5),
                     borderRadius: BorderRadius.circular(12))),
             maxLines: widget.maxLines,
+            onChanged: widget.onChanged,
           ),
         ],
       );

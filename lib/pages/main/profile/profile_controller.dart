@@ -1,6 +1,26 @@
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
+  // User info
+  late String name;
+  late String username;
+  late String email;
+  late String phone;
+  late String imageUrl;
+  updateUserInfo(
+      {String? name,
+      String? username,
+      String? email,
+      String? phone,
+      String? imageUrl}) {
+    this.name = name ?? this.name;
+    this.username = username ?? this.username;
+    this.email = email ?? this.email;
+    this.phone = phone ?? this.phone;
+    this.imageUrl = imageUrl ?? this.imageUrl;
+    update();
+  }
+
   int watchedMoviesCount = 0;
   int watchedSeriesCount = 0;
   updateWatchedMoviesCount(int count) {

@@ -1,10 +1,27 @@
 import 'package:get/get.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/models/user_model/user_model.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/pages/main/profile/profile_controller.dart';
 
 Future getUserData() async {
+  await getUserInformation();
   await updateUserStats();
+}
+
+Future<bool> getUserInformation() async {
+  PreferencesShareholder preferencesShareholder = PreferencesShareholder();
+  ProfileController controller = Get.find<ProfileController>();
+
+  User user = await preferencesShareholder.getUser();
+  controller.updateUserInfo(
+    name: user.name,
+    username: user.username,
+    email: user.email,
+    phone: user.phone,
+    imageUrl: user.imageUrl,
+  );
+  return true;
 }
 
 Future<bool> updateUserStats() async {

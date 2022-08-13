@@ -6,7 +6,7 @@ part of 'show_preview.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class HiveShowPreviewAdapter extends TypeAdapter<HiveShowPreview> {
+class ShowPreviewAdapter extends TypeAdapter<HiveShowPreview> {
   @override
   final int typeId = 0;
 
@@ -79,7 +79,7 @@ class HiveShowPreviewAdapter extends TypeAdapter<HiveShowPreview> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is HiveShowPreviewAdapter &&
+      other is ShowPreviewAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

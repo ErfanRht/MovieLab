@@ -14,6 +14,7 @@
     <queries>
 </queries>
    <application
+        android:requestLegacyExternalStorage="true"
         android:label="MovieLab"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

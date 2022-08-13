@@ -8,6 +8,7 @@ import 'constants/colors.dart';
 import 'constants/routes.dart';
 import 'models/hive/hive_helper/register_adapters.dart';
 import 'models/hive/models/show_preview.dart';
+import 'models/hive/models/user.dart';
 import 'modules/cache/cache_data.dart';
 import 'pages/main/home/home_data_controller.dart';
 import 'pages/main/main_controller.dart';
@@ -21,6 +22,7 @@ void main() async {
   // Initialize Hive and Hive Flutter
   await Hive.initFlutter();
   registerAdapters();
+  Hive.openBox<HiveUser>('user');
   Hive.openBox<HiveShowPreview>('collection');
   Hive.openBox<HiveShowPreview>('watchlist');
   Hive.openBox<HiveShowPreview>('history');

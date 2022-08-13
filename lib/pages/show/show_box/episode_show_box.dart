@@ -3,7 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
-import 'package:movielab/models/episode_model.dart';
+import 'package:movielab/models/show_models/episode_model.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
 
 class EpisodeShowBox extends StatelessWidget {

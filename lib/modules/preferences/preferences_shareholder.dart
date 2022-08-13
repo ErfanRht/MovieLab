@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:movielab/models/hive/models/user.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/models/user_model/user_model.dart';
 import 'package:movielab/modules/Recommender/Recommender.dart';
 import 'package:movielab/pages/splash/get_user_data.dart';
 import '../../models/hive/convertor.dart';
@@ -109,5 +111,30 @@ class PreferencesShareholder {
       result.add(await getList(listName: listName));
     }
     return result;
+  }
+
+  Future<User> getUser() async {
+    Box<HiveUser> userBox = Hive.box<HiveUser>("user");
+    late HiveUser user;
+    if (userBox.isNotEmpty) {
+      user = userBox.getAt(0)!;
+    } else {
+      user = HiveUser()
+        ..name = "Your name"
+        ..username = "Your username"
+        ..email = "Your email"
+        ..phone = "Your phone"
+        ..imageUrl = "Empty";
+      userBox.put(0, user);
+    }
+
+    return convertHiveToUser(user);
+  }
+
+  Future<bool> updateUser({required User user}) async {
+    Box<HiveUser> userBox = Hive.box<HiveUser>("user");
+    HiveUser hiveUser = convertUserToHive(user);
+    userBox.put(0, hiveUser);
+    return true;
   }
 }

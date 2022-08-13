@@ -29,16 +29,16 @@ class ProfilePageUserProfile extends StatelessWidget {
               duration: const Duration(milliseconds: 150),
               child: Column(
                 children: [
-                  const Text(
-                    "Erfan Rahmati",
-                    style: TextStyle(
+                  Text(
+                    _.name,
+                    style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 24),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    "@ErfanRht",
+                    _.username,
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.5),
                       fontWeight: FontWeight.w600,

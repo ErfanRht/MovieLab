@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/models/user_model/user_model.dart';
 import '../show_models/full_show_model.dart';
+import 'models/user.dart';
 
 ShowPreview convertHiveToShowPreview(HiveShowPreview hive) {
   return ShowPreview(
@@ -152,4 +154,23 @@ Future<String> getShowCrew({required FullShow fullShow}) async {
   }
   crew = crewList.join(", ");
   return crew;
+}
+
+User convertHiveToUser(HiveUser hive) {
+  return User(
+    name: hive.name,
+    username: hive.username,
+    email: hive.email,
+    imageUrl: hive.imageUrl,
+    phone: hive.phone,
+  );
+}
+
+HiveUser convertUserToHive(User user) {
+  return HiveUser()
+    ..name = user.name
+    ..username = user.username
+    ..email = user.email
+    ..imageUrl = user.imageUrl
+    ..phone = user.phone;
 }
