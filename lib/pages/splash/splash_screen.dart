@@ -8,6 +8,7 @@ import '../../constants/colors.dart';
 import '../../constants/types.dart';
 import '../../modules/tools/system_ui_overlay_style.dart';
 import 'get_initial_data.dart';
+import 'get_user_data.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -85,6 +86,7 @@ class _SplashScreenState extends State<SplashScreen> {
     getInitialData().then((result) {
       if (result == RequestResult.SUCCESS) {
         recommender();
+        getUserData();
         Navigate.replaceTo(context, const MainPage());
       } else {
         setState(() {

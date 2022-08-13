@@ -20,24 +20,25 @@ class HiveShowPreviewAdapter extends TypeAdapter<HiveShowPreview> {
       ..id = fields[0] as String
       ..rank = fields[1] as String
       ..title = fields[2] as String
-      ..crew = fields[3] as String
-      ..image = fields[4] as String
-      ..year = fields[5] as String
-      ..imDbRating = fields[6] as String
-      ..genres = fields[7] as String
-      ..countries = fields[8] as String
-      ..languages = fields[9] as String
-      ..companies = fields[10] as String
-      ..contentRating = fields[11] as String
-      ..similars = (fields[12] as List).cast<HiveShowPreview>()
-      ..watchDate = fields[13] as DateTime?
-      ..watchTime = fields[14] as TimeOfDay?;
+      ..type = fields[3] as String
+      ..crew = fields[4] as String
+      ..image = fields[5] as String
+      ..year = fields[6] as String
+      ..imDbRating = fields[7] as String
+      ..genres = fields[8] as String
+      ..countries = fields[9] as String
+      ..languages = fields[10] as String
+      ..companies = fields[11] as String
+      ..contentRating = fields[12] as String
+      ..similars = (fields[13] as List).cast<HiveShowPreview>()
+      ..watchDate = fields[14] as DateTime?
+      ..watchTime = fields[15] as TimeOfDay?;
   }
 
   @override
   void write(BinaryWriter writer, HiveShowPreview obj) {
     writer
-      ..writeByte(15)
+      ..writeByte(16)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -45,28 +46,30 @@ class HiveShowPreviewAdapter extends TypeAdapter<HiveShowPreview> {
       ..writeByte(2)
       ..write(obj.title)
       ..writeByte(3)
-      ..write(obj.crew)
+      ..write(obj.type)
       ..writeByte(4)
-      ..write(obj.image)
+      ..write(obj.crew)
       ..writeByte(5)
-      ..write(obj.year)
+      ..write(obj.image)
       ..writeByte(6)
-      ..write(obj.imDbRating)
+      ..write(obj.year)
       ..writeByte(7)
-      ..write(obj.genres)
+      ..write(obj.imDbRating)
       ..writeByte(8)
-      ..write(obj.countries)
+      ..write(obj.genres)
       ..writeByte(9)
-      ..write(obj.languages)
+      ..write(obj.countries)
       ..writeByte(10)
-      ..write(obj.companies)
+      ..write(obj.languages)
       ..writeByte(11)
-      ..write(obj.contentRating)
+      ..write(obj.companies)
       ..writeByte(12)
-      ..write(obj.similars)
+      ..write(obj.contentRating)
       ..writeByte(13)
-      ..write(obj.watchDate)
+      ..write(obj.similars)
       ..writeByte(14)
+      ..write(obj.watchDate)
+      ..writeByte(15)
       ..write(obj.watchTime);
   }
 

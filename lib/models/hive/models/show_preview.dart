@@ -14,6 +14,8 @@ class HiveShowPreview extends HiveObject {
   late String rank;
   @HiveField(ShowPreviewFields.title)
   late String title;
+  @HiveField(ShowPreviewFields.type)
+  late String type;
   @HiveField(ShowPreviewFields.crew)
   late String crew;
   @HiveField(ShowPreviewFields.image)

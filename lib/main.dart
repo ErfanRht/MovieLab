@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:movielab/pages/main/profile/profile_controller.dart';
 import 'constants/colors.dart';
 import 'constants/routes.dart';
 import 'models/hive/hive_helper/register_adapters.dart';
@@ -29,6 +30,7 @@ void main() async {
   Get.put(MainController());
   Get.put(HomeDataController());
   Get.put(SearchBarController());
+  Get.put(ProfileController());
   Get.put(CacheData());
 
   runApp(const ProviderScope(child: App()));
@@ -43,6 +45,7 @@ class App extends StatelessWidget {
       title: 'MovieLab',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        backgroundColor: kBackgroundColor,
         primaryColor: kPrimaryColor,
         textTheme: GoogleFonts.ubuntuTextTheme(
           Theme.of(context).textTheme,

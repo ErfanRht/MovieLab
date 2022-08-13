@@ -6,6 +6,7 @@ class ShowPreview {
   final String id;
   final String rank;
   final String title;
+  final String type;
   final String crew;
   final String image;
   final String year;
@@ -31,6 +32,7 @@ class ShowPreview {
     required this.id,
     required this.rank,
     required this.title,
+    required this.type,
     required this.crew,
     required this.image,
     required this.year,
@@ -58,6 +60,7 @@ class ShowPreview {
       id: json['id'],
       rank: json['rank'] ?? "",
       title: json['title'],
+      type: json['type'] ?? json['role'] ?? "",
       crew: json['crew'] ?? json['stars'] ?? "",
       image: json['image'].toString().replaceAll(
           "._V1_UX128_CR0,3,128,176_AL_.jpg", "._V1_Ratio0.6716_AL_.jpg"),

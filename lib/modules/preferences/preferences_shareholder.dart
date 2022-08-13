@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/Recommender/Recommender.dart';
+import 'package:movielab/pages/splash/get_user_data.dart';
 import '../../models/hive/convertor.dart';
 import '../../models/hive/models/show_preview.dart';
 
@@ -45,6 +46,7 @@ class PreferencesShareholder {
       print("The item added to $listName");
     }
     recommender();
+    updateUserStats();
     return true;
   }
 
@@ -62,6 +64,7 @@ class PreferencesShareholder {
       }
     }
     recommender();
+    updateUserStats();
     return false;
   }
 

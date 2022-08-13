@@ -20,3 +20,5 @@ enum ListName {
   FAVORITE_TRAILERS,
   PERSONAL_LIST
 }
+
+enum ItemType { MOVIE, TV, ARTIST, OTHER, UNKNOWN }

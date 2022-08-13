@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
-import 'package:movielab/pages/main/profile/sections/lists.dart';
 
+import 'sections/lists.dart';
 import 'sections/settings.dart';
 import 'sections/socials.dart';
+import 'sections/user_profile/user_profile.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -28,6 +29,8 @@ class ProfilePage extends StatelessWidget {
         child: ListView(
           physics: const BouncingScrollPhysics(),
           children: const [
+            SizedBox(height: 40),
+            ProfilePageUserProfile(),
             SizedBox(height: 40),
             ProfilePageLists(),
             SizedBox(height: 40),

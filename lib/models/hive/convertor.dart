@@ -8,6 +8,7 @@ ShowPreview convertHiveToShowPreview(HiveShowPreview hive) {
     id: hive.id,
     rank: hive.rank,
     title: hive.title,
+    type: hive.type,
     crew: hive.crew,
     image: hive.image,
     year: hive.year,
@@ -46,6 +47,7 @@ HiveShowPreview convertShowPreviewToHive(
     ..id = showPreview.id
     ..rank = showPreview.rank
     ..title = showPreview.title
+    ..type = showPreview.type
     ..crew = showPreview.crew
     ..image = showPreview.image
     ..year = showPreview.year
@@ -84,6 +86,7 @@ Future<HiveShowPreview> convertFullShowToHive(
     ..id = fullShow.id
     ..rank = rank
     ..title = fullShow.title
+    ..type = fullShow.type
     ..crew = crew
     ..image = fullShow.image
     ..year = fullShow.year
@@ -118,6 +121,7 @@ Future<ShowPreview> convertFullShowToShowPreview(
   return ShowPreview(
     id: fullShow.id,
     title: fullShow.title,
+    type: fullShow.type,
     crew: crew,
     image: fullShow.image,
     year: fullShow.year,

@@ -123,7 +123,7 @@ class _ListStatsPageState extends State<ListStatsPage> {
                     const SizedBox(
                       height: 7.5,
                     ),
-                    Text("Avarage IMDB rating",
+                    Text("Avarage IMDb rating",
                         style: TextStyle(
                           color: Colors.white.withOpacity(0.75),
                           fontSize: 15,
