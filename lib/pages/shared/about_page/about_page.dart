@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/pages/shared/app_name.dart';
 import 'package:movielab/widgets/buttons/social_media_button.dart';
+import 'package:movielab/widgets/default_appbar.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({Key? key}) : super(key: key);
@@ -11,23 +12,7 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      appBar: AppBar(
-        backgroundColor: kBackgroundColor,
-        title: const Text(
-          "About",
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
-        ),
-        centerTitle: true,
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              FontAwesomeIcons.x,
-              color: Colors.white,
-              size: 17.5,
-            )),
-      ),
+      appBar: defaultAppBar(context, title: "About"),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
