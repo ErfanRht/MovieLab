@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -7,6 +6,8 @@ import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/pages/main/profile/profile_controller.dart';
 
 import 'edit_user_profile.dart';
+import 'stats_box.dart';
+import 'user_profile_image.dart';
 
 class ProfilePageUserProfile extends StatelessWidget {
   const ProfilePageUserProfile({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class ProfilePageUserProfile extends StatelessWidget {
         child: Stack(
           children: [
             AnimatedContainer(
-              height: 350,
+              height: 480,
               margin: const EdgeInsets.only(top: 64),
               padding: const EdgeInsets.only(top: 70),
               width: MediaQuery.of(context).size.width,
@@ -47,19 +48,19 @@ class ProfilePageUserProfile extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 25, vertical: 5),
+                            horizontal: 30, vertical: 5),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            buildButton(
+                            statsBox(
                               context,
-                              _.watchedMoviesCount.toString(),
-                              "Watched\nMovies",
+                              value: _.watchedMoviesCount.toString(),
+                              text: "Watched\nMovies",
                             ),
-                            buildButton(
+                            statsBox(
                               context,
-                              _.watchedSeriesCount.toString(),
-                              "Watched\nSeries",
+                              value: _.watchedSeriesCount.toString(),
+                              text: "Watched\nSeries",
                             ),
                           ],
                         ),
@@ -104,20 +105,47 @@ class ProfilePageUserProfile extends StatelessWidget {
                       )
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 7.5),
-                    child: Divider(
-                      color: Colors.white.withOpacity(0.75),
-                      thickness: 2.5,
-                    ),
+                  bigDivider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      statsBox(context,
+                          value: _.sortedGenres[0],
+                          text: "Favorite\nGenre",
+                          sizeType: 2),
+                      smallDivider(),
+                      statsBox(context,
+                          value: _.sortedCompanies[0],
+                          text: "Favorite\nCompany",
+                          sizeType: 2),
+                      smallDivider(),
+                      statsBox(context,
+                          value: _.sortedCountries[0],
+                          text: "Favorite\nCountry",
+                          sizeType: 2),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 2.5,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      //buildButton(context, "Drama", "Favorite Genre"),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        width: 35,
+                      ),
+                      statsBox(context,
+                          value: _.sortedLanguages[0],
+                          text: "Favorite\nLanguage",
+                          sizeType: 2),
+                      smallDivider(),
+                      statsBox(context,
+                          value: _.sortedContentRatings[0],
+                          text: "Favorite\nContent-Rating",
+                          sizeType: 2),
                     ],
-                  )
+                  ),
+                  bigDivider(),
                 ],
               ),
             ),
@@ -132,82 +160,19 @@ class ProfilePageUserProfile extends StatelessWidget {
   }
 }
 
-Widget buildButton(BuildContext context, String value, String text) =>
-    MaterialButton(
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      onPressed: () {},
-      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            value,
-            style: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24),
-          ),
-          const SizedBox(height: 2),
-          Text(
-            text,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Colors.white.withOpacity(0.75),
-                fontWeight: FontWeight.w600),
-          ),
-        ],
+Widget smallDivider() => Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      height: 24,
+      width: 1,
+      child: VerticalDivider(
+        color: Colors.white.withOpacity(0.75),
+        thickness: 1.5,
       ),
     );
-
-Widget userProfileImage(BuildContext context,
-        {required IconData icon, void Function()? onTap}) =>
-    Center(
-      child: Stack(
-        children: [
-          ClipOval(
-            child: Material(
-              color: Colors.transparent,
-              child: Ink.image(
-                image: const AssetImage("assets/images/no_picture.png"),
-                fit: BoxFit.cover,
-                width: 128,
-                height: 128,
-                child: InkWell(onTap: () {}),
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            right: 4,
-            child: InkWell(
-              onTap: onTap,
-              child: buildCircle(
-                color: kSecondaryColor,
-                all: 3,
-                child: buildCircle(
-                  color: Colors.blue,
-                  all: 8,
-                  child: Icon(
-                    icon,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-
-Widget buildCircle({
-  required Widget child,
-  required double all,
-  required Color color,
-}) =>
-    ClipOval(
-      child: Container(
-        padding: EdgeInsets.all(all),
-        color: color,
-        child: child,
+Widget bigDivider() => Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 7.5),
+      child: Divider(
+        color: Colors.white.withOpacity(0.75),
+        thickness: 2.5,
       ),
     );

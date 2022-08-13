@@ -29,7 +29,7 @@ class ProfilePage extends StatelessWidget {
         child: ListView(
           physics: const BouncingScrollPhysics(),
           children: const [
-            SizedBox(height: 40),
+            SizedBox(height: 25),
             ProfilePageUserProfile(),
             SizedBox(height: 40),
             ProfilePageLists(),

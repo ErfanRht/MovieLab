@@ -3,7 +3,7 @@ import 'package:movielab/constants/colors.dart';
 import 'package:movielab/widgets/buttons/glassmorphism_button.dart';
 import 'package:movielab/widgets/textfield_widget.dart';
 
-import 'user_profile.dart';
+import 'user_profile_image.dart';
 
 class ProfilePageEditUserProfile extends StatelessWidget {
   const ProfilePageEditUserProfile({Key? key}) : super(key: key);
