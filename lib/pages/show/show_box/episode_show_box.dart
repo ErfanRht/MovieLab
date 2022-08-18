@@ -57,10 +57,8 @@ class EpisodeShowBox extends StatelessWidget {
                             "$episodeNumber - $title",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.ubuntu(
-                                color: Colors.white,
-                                fontSize: 17.5,
-                                fontWeight: FontWeight.w500),
+                            style: TextStyle(
+                                fontSize: 17.5, fontWeight: FontWeight.w500),
                           ),
                         ),
                       ],
@@ -72,7 +70,7 @@ class EpisodeShowBox extends StatelessWidget {
                           Text(
                             released,
                             softWrap: true,
-                            style: GoogleFonts.ubuntu(
+                            style: TextStyle(
                                 color: Colors.white.withOpacity(0.8),
                                 fontSize: 13.5,
                                 fontWeight: FontWeight.w500),
@@ -87,7 +85,7 @@ class EpisodeShowBox extends StatelessWidget {
                           Text(
                             imDbRating,
                             softWrap: true,
-                            style: GoogleFonts.ubuntu(
+                            style: TextStyle(
                                 color: kImdbColor,
                                 fontSize: 13.5,
                                 fontWeight: FontWeight.w500),
@@ -112,7 +110,7 @@ class EpisodeShowBox extends StatelessWidget {
                           Text(
                             "$imDbVotes votes",
                             softWrap: true,
-                            style: GoogleFonts.ubuntu(
+                            style: TextStyle(
                                 color: kGreyColor,
                                 fontSize: 10.5,
                                 fontWeight: FontWeight.w700),
@@ -130,7 +128,7 @@ class EpisodeShowBox extends StatelessWidget {
                             maxLines: 4,
                             overflow: TextOverflow.ellipsis,
                             softWrap: true,
-                            style: GoogleFonts.ubuntu(
+                            style: TextStyle(
                                 color: Colors.white.withOpacity(0.8),
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500),

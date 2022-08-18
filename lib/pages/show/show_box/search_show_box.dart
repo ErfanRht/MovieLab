@@ -54,10 +54,8 @@ class SearchShowBox extends StatelessWidget {
                           child: Text(
                             title,
                             softWrap: true,
-                            style: GoogleFonts.ubuntu(
-                                color: Colors.white,
-                                fontSize: 17.5,
-                                fontWeight: FontWeight.w500),
+                            style: TextStyle(
+                                fontSize: 17.5, fontWeight: FontWeight.w500),
                           ),
                         ),
                       ],
@@ -72,7 +70,7 @@ class SearchShowBox extends StatelessWidget {
                               //overflow: TextOverflow.ellipsis,
                               softWrap: true,
                               text: TextSpan(
-                                  style: GoogleFonts.ubuntu(
+                                  style: TextStyle(
                                       color: Colors.white.withOpacity(0.8),
                                       fontSize: 13.5,
                                       fontWeight: FontWeight.w500),

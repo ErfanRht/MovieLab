@@ -15,7 +15,6 @@ class AllTrendingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: kBackgroundColor,
         appBar: AppBar(
           centerTitle: true,
           automaticallyImplyLeading: false,
@@ -25,15 +24,12 @@ class AllTrendingsPage extends StatelessWidget {
               },
               icon: const Icon(
                 FontAwesomeIcons.arrowLeft,
-                color: Colors.white,
                 size: 22.5,
               )),
           backgroundColor: kBlueColor,
           title: Text(title,
-              style: GoogleFonts.poppins(
-                  color: Colors.white,
-                  fontSize: 21,
-                  fontWeight: FontWeight.bold)),
+              style:
+                  const TextStyle(fontSize: 21, fontWeight: FontWeight.bold)),
         ),
         body: SafeArea(
           child: ListView(

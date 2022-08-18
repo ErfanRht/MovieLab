@@ -23,7 +23,7 @@ class ShowPageRating extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 2, right: 5),
                 child: Text(imDbRating,
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.ubuntu(
+                    style: TextStyle(
                         color: kImdbColor,
                         fontSize: 18,
                         fontWeight: FontWeight.w700)),
@@ -45,7 +45,7 @@ class ShowPageRating extends StatelessWidget {
             padding: const EdgeInsets.only(top: 4),
             child: Text("$imDbVotes votes",
                 textAlign: TextAlign.center,
-                style: GoogleFonts.ubuntu(
+                style: TextStyle(
                     color: Colors.white.withOpacity(0.6),
                     fontSize: 14,
                     fontWeight: FontWeight.w600)),

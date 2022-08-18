@@ -33,7 +33,6 @@ class SearchBar extends StatelessWidget {
                 padding: EdgeInsets.only(left: 15, right: 10),
                 child: Icon(
                   FontAwesomeIcons.magnifyingGlass,
-                  color: Colors.white,
                   size: 20,
                 ),
               ),
@@ -64,9 +63,7 @@ class SearchBar extends StatelessWidget {
                   _.updateFieldState(tapped: true);
                 },
                 style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 17.5),
+                    fontWeight: FontWeight.w600, fontSize: 17.5),
               ),
             ),
             const Padding(
@@ -90,7 +87,6 @@ class SearchBar extends StatelessWidget {
                       padding: EdgeInsets.only(right: 15, left: 5),
                       child: Icon(
                         FontAwesomeIcons.microphoneLines,
-                        color: Colors.white,
                         size: 22.5,
                       ),
                     ),
@@ -108,7 +104,6 @@ class SearchBar extends StatelessWidget {
                       padding: EdgeInsets.only(right: 15),
                       child: Icon(
                         Icons.close_rounded,
-                        color: Colors.white,
                         size: 27.5,
                       ),
                     ),

@@ -52,7 +52,6 @@ class _ShowPageBottonBarState extends State<ShowPageBottonBar>
               child: Icon(
                 FontAwesomeIcons.alignLeft,
                 size: 22.5,
-                color: Colors.white,
               ),
             ),
             onTap: () {
@@ -87,7 +86,6 @@ class _ShowPageBottonBarState extends State<ShowPageBottonBar>
               child: Icon(
                 FontAwesomeIcons.arrowUpRightFromSquare,
                 size: 22.5,
-                color: Colors.white,
               ),
             ),
             onTap: () {
@@ -105,7 +103,6 @@ class _ShowPageBottonBarState extends State<ShowPageBottonBar>
               child: Icon(
                 FontAwesomeIcons.clapperboard,
                 size: 22.5,
-                color: Colors.white,
               ),
             ),
             onTap: () {},
@@ -121,7 +118,6 @@ class _ShowPageBottonBarState extends State<ShowPageBottonBar>
               child: Icon(
                 FontAwesomeIcons.share,
                 size: 22.5,
-                color: Colors.white,
               ),
             ),
             onTap: () {

@@ -41,6 +41,7 @@ class _ShowPageListsInfoState extends State<ShowPageListsInfo>
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20),
+      color: kBackgroundColor,
       height: 235,
       child: Column(
         children: [

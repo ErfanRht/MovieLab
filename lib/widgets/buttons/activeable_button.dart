@@ -57,16 +57,13 @@ class ActiveableButton extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Icon(
                         isActive ? activeIcon ?? icon : icon,
-                        color: Colors.white,
                         size: 20,
                       ),
                     ),
                     Text(
                       isActive ? activeText ?? text : text,
                       style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w800),
+                          fontSize: 15, fontWeight: FontWeight.w800),
                     ),
                   ],
                 ))

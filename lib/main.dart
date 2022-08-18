@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:movielab/constants/themes.dart';
 import 'package:movielab/pages/main/profile/profile_controller.dart';
-import 'constants/colors.dart';
 import 'constants/routes.dart';
 import 'models/hive/hive_helper/register_adapters.dart';
 import 'models/hive/models/show_preview.dart';
@@ -46,13 +45,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'MovieLab',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        backgroundColor: kBackgroundColor,
-        primaryColor: kPrimaryColor,
-        textTheme: GoogleFonts.ubuntuTextTheme(
-          Theme.of(context).textTheme,
-        ),
-      ),
+      theme: AppThemes.darkTheme,
       initialRoute: initRoute,
       routes: {
         splashScreenRoute: (context) => const SplashScreen(),

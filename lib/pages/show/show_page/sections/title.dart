@@ -9,8 +9,7 @@ class ShowPageTitle extends StatelessWidget {
     return Center(
       child: Text(title,
           textAlign: TextAlign.center,
-          style: GoogleFonts.ubuntu(
-              color: Colors.white, fontSize: 35, fontWeight: FontWeight.w700)),
+          style: TextStyle(fontSize: 35, fontWeight: FontWeight.w700)),
     );
   }
 }

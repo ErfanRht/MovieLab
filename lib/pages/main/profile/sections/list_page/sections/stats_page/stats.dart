@@ -56,7 +56,6 @@ class _ListStatsPageState extends State<ListStatsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: kBackgroundColor,
         appBar: listPageStatsNavbar(context, listName: widget.listName),
         body: ValueListenableBuilder<Box<HiveShowPreview>>(
             valueListenable:
@@ -73,9 +72,7 @@ class _ListStatsPageState extends State<ListStatsPage> {
                     Text(
                       list.length.toString(),
                       style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 40,
-                          fontWeight: FontWeight.w700),
+                          fontSize: 40, fontWeight: FontWeight.w700),
                     ),
                     Text(
                       "Items",

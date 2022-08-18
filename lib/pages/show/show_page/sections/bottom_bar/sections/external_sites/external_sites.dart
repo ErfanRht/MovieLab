@@ -109,8 +109,6 @@ class ShowPageExternalSites extends StatelessWidget {
                                           Text(
                                             externalSitesList[index]["title"] ??
                                                 "",
-                                            style: const TextStyle(
-                                                color: Colors.white),
                                           ),
                                         ],
                                       ),

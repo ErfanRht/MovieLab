@@ -16,7 +16,7 @@ class ActorPageSummary extends StatelessWidget {
           padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
           child: Text(summary,
               textAlign: TextAlign.justify,
-              style: GoogleFonts.ubuntu(
+              style: TextStyle(
                   color: Colors.white.withOpacity(0.55),
                   fontSize: 15,
                   fontWeight: FontWeight.w400)),

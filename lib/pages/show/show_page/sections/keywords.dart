@@ -22,7 +22,7 @@ class ShowPageKeywords extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 10, right: 10),
                           child: Text(show.tagline,
                               softWrap: true,
-                              style: GoogleFonts.ubuntu(
+                              style: TextStyle(
                                   color: Colors.white.withOpacity(0.6),
                                   fontSize: 12.5,
                                   fontWeight: FontWeight.w500)),
@@ -38,7 +38,7 @@ class ShowPageKeywords extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 10, right: 10),
                     child: Text(show.keywords,
                         softWrap: true,
-                        style: GoogleFonts.ubuntu(
+                        style: TextStyle(
                             color: Colors.white.withOpacity(0.6),
                             fontSize: 12.5,
                             fontWeight: FontWeight.w500)),

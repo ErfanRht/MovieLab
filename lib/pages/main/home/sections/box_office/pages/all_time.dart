@@ -15,7 +15,6 @@ class AllTimeBoxOfficePage extends StatelessWidget {
     return GetBuilder<HomeDataController>(
       builder: (_) {
         return Scaffold(
-            backgroundColor: kBackgroundColor,
             appBar: AppBar(
               centerTitle: true,
               automaticallyImplyLeading: false,
@@ -25,15 +24,11 @@ class AllTimeBoxOfficePage extends StatelessWidget {
                   },
                   icon: const Icon(
                     FontAwesomeIcons.arrowLeft,
-                    color: Colors.white,
                     size: 22.5,
                   )),
               backgroundColor: kPrimaryColor,
-              title: Text("Box Office Of All Time",
-                  style: GoogleFonts.poppins(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold)),
+              title: const Text("Box Office Of All Time",
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
             ),
             body: SafeArea(
               child: ListView(

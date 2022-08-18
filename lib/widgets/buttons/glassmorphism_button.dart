@@ -51,7 +51,7 @@ class GmButton extends StatelessWidget {
                     )
                   : const SizedBox.shrink(),
               Text(text,
-                  style: GoogleFonts.ubuntu(
+                  style: TextStyle(
                       color: color, fontSize: 15, fontWeight: FontWeight.w500)),
             ],
           ),

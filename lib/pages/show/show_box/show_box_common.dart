@@ -49,7 +49,6 @@ Widget showBoxText(
     text,
     overflow: TextOverflow.ellipsis,
     maxLines: isItTitle ? 1 : 2,
-    style: GoogleFonts.ubuntu(
-        color: color, fontSize: fontSize, fontWeight: fontWeight),
+    style: TextStyle(color: color, fontSize: fontSize, fontWeight: fontWeight),
   );
 }

@@ -20,7 +20,7 @@ class HomeIMDbBox extends StatelessWidget {
           padding: const EdgeInsets.only(top: 20),
           child: Text(
             title,
-            style: GoogleFonts.ubuntu(
+            style: TextStyle(
                 color: const Color(0xff000000),
                 fontSize: 25,
                 fontWeight: FontWeight.bold),

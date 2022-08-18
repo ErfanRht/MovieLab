@@ -48,7 +48,6 @@ class HomeNavbar extends StatelessWidget {
             child: IconButton(
               icon: const Icon(
                 FontAwesomeIcons.magnifyingGlass,
-                color: Colors.white,
                 size: 22.5,
               ),
               onPressed: () async {

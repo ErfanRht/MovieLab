@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movielab/constants/colors.dart';
 import 'package:movielab/widgets/section_title.dart';
 
 class ButtonsSection extends StatelessWidget {
@@ -34,6 +35,8 @@ class ButtonsSection extends StatelessWidget {
               itemBuilder: (context, index) {
                 return OutlinedButton(
                   style: OutlinedButton.styleFrom(
+                      side: const BorderSide(
+                          color: kBackgroundColor, width: 0.25),
                       padding: EdgeInsets.zero,
                       shape: RoundedRectangleBorder(
                         borderRadius: index == 0
@@ -66,8 +69,11 @@ class ButtonsSection extends StatelessWidget {
                                 color: items[index].iconColor,
                                 borderRadius: BorderRadius.circular(15)),
                             child: Center(
-                                child: Icon(items[index].icon,
-                                    color: Colors.white, size: 20)),
+                                child: Icon(
+                              items[index].icon,
+                              size: 20,
+                              color: Colors.white,
+                            )),
                           ),
                           Expanded(
                             child: Container(
@@ -78,7 +84,7 @@ class ButtonsSection extends StatelessWidget {
                                       ? const Border(
                                           bottom: BorderSide(
                                             color: Colors.white,
-                                            width: 0.2,
+                                            width: 0.5,
                                           ),
                                         )
                                       : null),
@@ -97,7 +103,6 @@ class ButtonsSection extends StatelessWidget {
                                       const SectionTitle(
                                         title: ">",
                                         fontSize: 20,
-                                        color: Colors.white,
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 20),
                                       )

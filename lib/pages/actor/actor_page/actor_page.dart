@@ -43,7 +43,6 @@ class _ShowPageState extends State<ActorPage> {
     switch (actor) {
       case null:
         return const Scaffold(
-          backgroundColor: kBackgroundColor,
           body: Center(
             child: SpinKitThreeBounce(
               size: 30,
@@ -56,7 +55,6 @@ class _ShowPageState extends State<ActorPage> {
           onWillPop: _willPopCallback, // Empty Function.
           child: Scaffold(
             resizeToAvoidBottomInset: true,
-            backgroundColor: kBackgroundColor,
             body: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Column(

@@ -15,7 +15,6 @@ class EpisodeGuideSeasonPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackgroundColor,
       body: show.seasons[index].length! > 0
           ? EpisodeGuideSeasonEpisodes(season: index, show: show)
           : const Center(

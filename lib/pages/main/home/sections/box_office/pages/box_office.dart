@@ -15,7 +15,6 @@ class BoxOfficePAge extends StatelessWidget {
     return GetBuilder<HomeDataController>(
       builder: (_) {
         return Scaffold(
-            backgroundColor: kBackgroundColor,
             appBar: AppBar(
               centerTitle: true,
               automaticallyImplyLeading: false,
@@ -30,7 +29,7 @@ class BoxOfficePAge extends StatelessWidget {
                   )),
               backgroundColor: kPrimaryColor,
               title: Text("Box Office",
-                  style: GoogleFonts.poppins(
+                  style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
                       fontWeight: FontWeight.bold)),

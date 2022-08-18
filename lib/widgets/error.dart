@@ -34,10 +34,8 @@ class ConnectionErrorWidget extends StatelessWidget {
                       children: [
                         Text(
                           errorText,
-                          style: GoogleFonts.ubuntu(
-                              color: Colors.white,
-                              fontSize: 12.5,
-                              fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                              fontSize: 12.5, fontWeight: FontWeight.w600),
                         ),
                         const SizedBox(height: 5),
                         Row(
@@ -45,14 +43,12 @@ class ConnectionErrorWidget extends StatelessWidget {
                             children: [
                               Text(
                                 'Try again',
-                                style: GoogleFonts.ubuntu(
-                                    color: Colors.white,
+                                style: TextStyle(
                                     fontSize: 12.5,
                                     fontWeight: FontWeight.w600),
                               ),
                               const Icon(
                                 Icons.refresh,
-                                color: Colors.white,
                                 size: 15,
                               )
                             ])

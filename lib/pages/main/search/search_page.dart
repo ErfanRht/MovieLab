@@ -19,9 +19,7 @@ class SearchPage extends StatelessWidget {
     return GetBuilder<SearchBarController>(
       builder: (_) {
         return Scaffold(
-            backgroundColor: kBackgroundColor,
             appBar: AppBar(
-              backgroundColor: kBackgroundColor,
               toolbarHeight: 85,
               elevation: 0.0,
               title: const SearchBar(),

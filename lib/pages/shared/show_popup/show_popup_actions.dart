@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/show_models/full_show_model.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/modules/tools/capitalizer.dart';
 import 'package:movielab/modules/cache/get_show_info.dart';
-import '../../../../../../../constants/colors.dart';
-import '../../../modules/preferences/preferences_shareholder.dart';
-import '../../../../../../../widgets/buttons/activeable_button.dart';
-import '../../../../../../../widgets/toast.dart';
+import 'package:movielab/widgets/buttons/activeable_button.dart';
+import 'package:movielab/widgets/toast.dart';
 import 'watchtime/watchtime.dart';
 
 class ShowPopupActions extends StatefulWidget {
@@ -40,6 +40,7 @@ class _ShowPopupActionsState extends State<ShowPopupActions>
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20),
+      color: kBackgroundColor,
       height: 235,
       child: Column(
         children: [
@@ -63,7 +64,6 @@ class _ShowPopupActionsState extends State<ShowPopupActions>
                           top: Radius.circular(20),
                         )),
                         clipBehavior: Clip.antiAliasWithSaveLayer,
-                        backgroundColor: kBackgroundColor,
                         transitionAnimationController: AnimationController(
                             duration: const Duration(milliseconds: 225),
                             vsync: this),
@@ -82,7 +82,6 @@ class _ShowPopupActionsState extends State<ShowPopupActions>
                           top: Radius.circular(20),
                         )),
                         clipBehavior: Clip.antiAliasWithSaveLayer,
-                        backgroundColor: kBackgroundColor,
                         transitionAnimationController: AnimationController(
                             duration: const Duration(milliseconds: 175),
                             vsync: this),

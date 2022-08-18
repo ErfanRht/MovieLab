@@ -27,7 +27,6 @@ class ShowPageNavBar extends StatelessWidget {
                 },
                 icon: const Icon(
                   Icons.arrow_back_rounded,
-                  color: Colors.white,
                   size: 28,
                 ),
               ),
@@ -43,7 +42,6 @@ class ShowPageNavBar extends StatelessWidget {
                 },
                 icon: const Icon(
                   Icons.more_horiz_rounded,
-                  color: Colors.white,
                   size: 28,
                 ),
               ),

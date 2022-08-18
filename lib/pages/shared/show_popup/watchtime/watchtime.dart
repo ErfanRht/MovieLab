@@ -45,6 +45,7 @@ class AddWatchTimeState extends State<AddWatchTime> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
+      color: kBackgroundColor,
       duration: const Duration(milliseconds: 125),
       height: !isOtherDateSectionOpen ? 225 : 350,
       child: Column(
@@ -114,9 +115,7 @@ class AddWatchTimeState extends State<AddWatchTime> {
                     Text(
                       "Release date",
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 13.5,
-                          fontWeight: FontWeight.w700),
+                          fontSize: 13.5, fontWeight: FontWeight.w700),
                     )
                   ],
                 ),
@@ -216,11 +215,10 @@ class AddWatchTimeState extends State<AddWatchTime> {
                                       "${months[selectedDate.month - 1]} ${selectedDate.day}, ${selectedDate.year}",
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.always,
-                                  labelStyle: GoogleFonts.ubuntu(
+                                  labelStyle: TextStyle(
                                       color: Colors.white.withOpacity(0.5),
                                       fontWeight: FontWeight.w700),
-                                  hintStyle: GoogleFonts.ubuntu(
-                                      color: Colors.white,
+                                  hintStyle: const TextStyle(
                                       fontWeight: FontWeight.w600)),
                             ),
                           ),
@@ -251,11 +249,10 @@ class AddWatchTimeState extends State<AddWatchTime> {
                                       "${selectedTime.hour} : ${selectedTime.minute}",
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.always,
-                                  labelStyle: GoogleFonts.ubuntu(
+                                  labelStyle: TextStyle(
                                       color: Colors.white.withOpacity(0.5),
                                       fontWeight: FontWeight.w700),
-                                  hintStyle: GoogleFonts.ubuntu(
-                                      color: Colors.white,
+                                  hintStyle: const TextStyle(
                                       fontWeight: FontWeight.w600)),
                             ),
                           ),

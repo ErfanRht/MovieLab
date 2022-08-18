@@ -10,7 +10,6 @@ import 'package:movielab/pages/shared/about_recommendations_page/about_recommend
 AppBar listPageNavbar(context, {required final String listName}) {
   return AppBar(
     centerTitle: false,
-    backgroundColor: kBackgroundColor,
     leading: IconButton(
       icon: const Icon(
         FontAwesomeIcons.arrowLeft,
@@ -24,7 +23,7 @@ AppBar listPageNavbar(context, {required final String listName}) {
     title: Row(
       children: [
         Text(listName.capitalize(),
-            style: GoogleFonts.ubuntu(
+            style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
                 fontWeight: FontWeight.bold)),
@@ -36,7 +35,6 @@ AppBar listPageNavbar(context, {required final String listName}) {
           listName == "recommendations"
               ? Icons.more_horiz_rounded
               : FontAwesomeIcons.squarePollVertical,
-          color: Colors.white,
           size: listName == "recommendations" ? 30 : 24,
         ),
         onPressed: () {

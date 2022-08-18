@@ -78,7 +78,6 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
     switch (show) {
       case null:
         return Scaffold(
-          backgroundColor: kBackgroundColor,
           body: AnimatedSwitcher(
               duration: const Duration(milliseconds: 300),
               child: _buildLoadingError()),
@@ -86,7 +85,6 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
       default:
         return Scaffold(
           resizeToAvoidBottomInset: true,
-          backgroundColor: kBackgroundColor,
           extendBody: true,
           bottomNavigationBar: AnimatedContainer(
             duration: const Duration(milliseconds: 300),
@@ -127,8 +125,14 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
             },
             backgroundColor: kPrimaryColor,
             child: _isThereInLists["history"] != true
-                ? const Icon(Icons.add)
-                : const Icon(Icons.check),
+                ? const Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  )
+                : const Icon(
+                    Icons.check,
+                    color: Colors.white,
+                  ),
           ),
           floatingActionButtonLocation: _isBottomAppBarVisible
               ? FloatingActionButtonLocation.endDocked

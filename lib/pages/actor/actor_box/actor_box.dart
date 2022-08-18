@@ -41,7 +41,7 @@ class ShowActorBox extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   softWrap: true,
-                  style: GoogleFonts.ubuntu(
+                  style: TextStyle(
                       color: Colors.white.withOpacity(0.8),
                       fontSize: 11,
                       fontWeight: FontWeight.w600)),
@@ -51,7 +51,7 @@ class ShowActorBox extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 softWrap: true,
-                style: GoogleFonts.ubuntu(
+                style: TextStyle(
                     color: Colors.white.withOpacity(0.5),
                     fontSize: 10,
                     fontWeight: FontWeight.w500)),

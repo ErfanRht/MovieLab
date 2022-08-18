@@ -21,7 +21,6 @@ Widget statsBox(BuildContext context,
             Text(
               value,
               style: TextStyle(
-                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: sizeType == 2 ? 18 : 24),
             ),

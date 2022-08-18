@@ -5,7 +5,6 @@ import 'package:movielab/modules/tools/capitalizer.dart';
 
 AppBar listPageStatsNavbar(context, {required final String listName}) {
   return AppBar(
-    backgroundColor: kBackgroundColor,
     title: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -29,7 +28,6 @@ AppBar listPageStatsNavbar(context, {required final String listName}) {
         },
         icon: const Icon(
           FontAwesomeIcons.x,
-          color: Colors.white,
           size: 17.5,
         )),
   );

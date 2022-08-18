@@ -63,7 +63,6 @@ class _EpisodeGuidePageState extends State<EpisodeGuidePage>
       length: show.seasons.length,
       initialIndex: widget.initialIndex,
       child: Scaffold(
-        backgroundColor: kBackgroundColor,
         appBar: AppBar(
           centerTitle: true,
           automaticallyImplyLeading: false,
@@ -80,10 +79,8 @@ class _EpisodeGuidePageState extends State<EpisodeGuidePage>
           title: Padding(
             padding: const EdgeInsets.only(right: 20, top: 10),
             child: Text("${show.title} Episode Guide",
-                style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold)),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           ),
           toolbarHeight: 30,
           bottom: TabBar(
@@ -100,7 +97,7 @@ class _EpisodeGuidePageState extends State<EpisodeGuidePage>
                   (i) => Padding(
                         padding: const EdgeInsets.only(bottom: 5),
                         child: Text("Season ${i + 1}",
-                            style: GoogleFonts.poppins(
+                            style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w600)),
                       ))),
         ),

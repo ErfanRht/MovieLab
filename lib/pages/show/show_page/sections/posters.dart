@@ -12,7 +12,6 @@ class ShowPagePosters extends StatelessWidget {
   Widget build(BuildContext context) {
     print(posters[0].link);
     return Scaffold(
-      backgroundColor: kBackgroundColor,
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Posters"),

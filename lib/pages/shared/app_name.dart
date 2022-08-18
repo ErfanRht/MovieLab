@@ -8,11 +8,10 @@ class AppName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RichText(
-      text: TextSpan(
+      text: const TextSpan(
         text: 'Movie',
-        style: GoogleFonts.ubuntu(
-            color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
-        children: const <TextSpan>[
+        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        children: <TextSpan>[
           TextSpan(text: 'Lab', style: TextStyle(color: kPrimaryColor)),
         ],
       ),

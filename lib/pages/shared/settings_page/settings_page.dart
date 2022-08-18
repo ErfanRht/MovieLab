@@ -9,7 +9,6 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackgroundColor,
       appBar: defaultAppBar(context, title: "Settings"),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -42,8 +41,7 @@ Widget settingSection(
       padding: const EdgeInsets.only(bottom: 5),
       child: Text(
         title,
-        style: const TextStyle(
-            fontSize: 16, color: Colors.white, fontWeight: FontWeight.w700),
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
       ),
     ),
     subtitle: Text(

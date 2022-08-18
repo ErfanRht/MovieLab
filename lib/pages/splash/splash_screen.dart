@@ -29,32 +29,31 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: kBackgroundColor,
         body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              const SizedBox(),
-              const SizedBox(),
-              const SizedBox(),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(50.0),
-                  child: Image.asset(
-                    "assets/images/logos/logo.png",
-                    color: kPrimaryColor,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          const SizedBox(),
+          const SizedBox(),
+          const SizedBox(),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(50.0),
+              child: Image.asset(
+                "assets/images/logos/logo.png",
+                color: kPrimaryColor,
+                fit: BoxFit.cover,
               ),
-              const SizedBox(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [_loadErrorSwitch()],
-              ),
-            ],
+            ),
           ),
-        ));
+          const SizedBox(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [_loadErrorSwitch()],
+          ),
+        ],
+      ),
+    ));
   }
 
   Widget _loadErrorSwitch() {

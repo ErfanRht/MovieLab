@@ -38,7 +38,6 @@ Widget userProfileImage(BuildContext context,
                           all: 8,
                           child: Icon(
                             icon,
-                            color: Colors.white,
                             size: 20,
                           ),
                         ),

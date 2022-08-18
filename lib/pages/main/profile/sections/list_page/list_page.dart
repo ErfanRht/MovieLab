@@ -20,7 +20,6 @@ class ListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: kBackgroundColor,
         floatingActionButton: listName == "recommendations"
             ? const SizedBox.shrink()
             : Container(
@@ -59,7 +58,7 @@ class ListPage extends StatelessWidget {
                           children: [
                               const SizedBox(height: 100),
                               Text("There is no $listName for you yet!",
-                                  style: GoogleFonts.poppins(
+                                  style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600)),
@@ -106,8 +105,7 @@ class ListPage extends StatelessWidget {
                               const SizedBox(height: 100),
                               Text(
                                   "You haven't add anything in your $listName yet!",
-                                  style: GoogleFonts.poppins(
-                                      color: Colors.white,
+                                  style: const TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600)),
                               SizedBox(

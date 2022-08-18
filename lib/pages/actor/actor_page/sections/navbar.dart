@@ -37,7 +37,6 @@ class _ActorPageNavBarState extends State<ActorPageNavBar> {
               },
               icon: const Icon(
                 Icons.arrow_back_ios_new_outlined,
-                color: Colors.white,
                 size: 25,
               ),
             ),

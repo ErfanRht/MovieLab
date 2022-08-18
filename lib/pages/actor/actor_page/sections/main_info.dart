@@ -12,7 +12,7 @@ class ActorPageMainInfo extends StatelessWidget {
       child: Center(
         child: Text(role,
             textAlign: TextAlign.center,
-            style: GoogleFonts.ubuntu(
+            style: TextStyle(
                 color: Colors.white.withOpacity(0.7),
                 fontSize: 15,
                 fontWeight: FontWeight.w700)),

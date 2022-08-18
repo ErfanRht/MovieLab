@@ -34,7 +34,9 @@ class Indicator extends StatelessWidget {
             text,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
-                fontSize: 15, fontWeight: FontWeight.w600, color: Colors.white),
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       ],

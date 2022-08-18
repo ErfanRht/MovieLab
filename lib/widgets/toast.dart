@@ -30,7 +30,7 @@ class ToastWidget extends StatelessWidget {
         children: [
           Text(
             mainText,
-            style: GoogleFonts.ubuntu(
+            style: const TextStyle(
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -40,8 +40,8 @@ class ToastWidget extends StatelessWidget {
                   TextButton.styleFrom(primary: buttonColor.withOpacity(0.5)),
               child: Text(
                 buttonText,
-                style: GoogleFonts.ubuntu(
-                    fontWeight: FontWeight.w600, color: buttonColor),
+                style:
+                    TextStyle(fontWeight: FontWeight.w600, color: buttonColor),
               ))
         ],
       ),

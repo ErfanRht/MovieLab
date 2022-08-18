@@ -57,7 +57,7 @@ class ShowPageEpisodeGuide extends StatelessWidget {
                               //     child: Center(
                               //       child: Text("season ${index + 1}",
                               //           textAlign: TextAlign.center,
-                              //           style: GoogleFonts.ubuntu(
+                              //           style: TextStyle(
                               //               color: CupertinoColors.activeBlue,
                               //               fontSize: 15,
                               //               fontWeight: FontWeight.w500)),

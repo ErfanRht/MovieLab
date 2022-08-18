@@ -28,7 +28,7 @@ class ShowPageMainInfo extends StatelessWidget {
                     ? "$year • $genres • $contentRating"
                     : "$year • $genres • $countries",
             textAlign: TextAlign.center,
-            style: GoogleFonts.ubuntu(
+            style: TextStyle(
                 color: Colors.white.withOpacity(0.7),
                 fontSize: 15,
                 fontWeight: FontWeight.w700)),

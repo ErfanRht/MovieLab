@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/pages/shared/show_popup/show_popup_actions.dart';
 import 'show_box_common.dart';
@@ -35,7 +33,6 @@ class _ShowBoxState extends State<ShowBox> with TickerProviderStateMixin {
             top: Radius.circular(20),
           )),
           clipBehavior: Clip.antiAliasWithSaveLayer,
-          backgroundColor: kBackgroundColor,
           transitionAnimationController: AnimationController(
               duration: const Duration(milliseconds: 235), vsync: this),
           builder: (context) {
@@ -72,10 +69,8 @@ class _ShowBoxState extends State<ShowBox> with TickerProviderStateMixin {
                     child: Center(
                       child: Text(
                         widget.showPreview.imDbRating,
-                        style: GoogleFonts.ubuntu(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600),
+                        style: const TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.w700),
                       ),
                     ),
                   ),
@@ -91,20 +86,20 @@ class _ShowBoxState extends State<ShowBox> with TickerProviderStateMixin {
                   Flexible(
                     flex: 2,
                     child: showBoxText(
-                        text: title,
-                        isItTitle: true,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white),
+                      text: title,
+                      isItTitle: true,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   year != ""
                       ? Flexible(
                           flex: 1,
                           child: showBoxText(
-                              text: " ($year)",
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white),
+                            text: " ($year)",
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                          ),
                         )
                       : const Text("")
                 ],
@@ -120,7 +115,7 @@ class _ShowBoxState extends State<ShowBox> with TickerProviderStateMixin {
                     child: showBoxText(
                         text: crew,
                         fontSize: 10,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
                         color: Colors.white.withOpacity(0.7)),
                   ),
                 ],

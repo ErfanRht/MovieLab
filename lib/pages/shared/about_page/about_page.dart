@@ -11,7 +11,6 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackgroundColor,
       appBar: defaultAppBar(context, title: "About"),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -83,9 +82,7 @@ class AboutPage extends StatelessWidget {
                       const Text(
                         "Erfan Rahmati",
                         style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700),
+                            fontSize: 16, fontWeight: FontWeight.w700),
                       ),
                       const SizedBox(
                         height: 25,

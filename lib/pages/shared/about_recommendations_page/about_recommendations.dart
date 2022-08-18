@@ -8,9 +8,7 @@ class AboutRecommendationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackgroundColor,
       appBar: AppBar(
-        backgroundColor: kBackgroundColor,
         title: const Text(
           "About Recommendations",
           style: TextStyle(fontSize: 22.5, fontWeight: FontWeight.w700),

@@ -41,10 +41,7 @@ class OtherRatingsBox extends StatelessWidget {
         children: [
           Flexible(
             child: Text("$ratingStr $name",
-                style: GoogleFonts.ubuntu(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700)),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
           ),
         ],
       ),

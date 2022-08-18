@@ -65,10 +65,8 @@ class BoxOfficeShowBox extends StatelessWidget {
                             child: Text(
                               "$rank. $title",
                               softWrap: true,
-                              style: GoogleFonts.ubuntu(
-                                  color: Colors.white,
-                                  fontSize: 16.5,
-                                  fontWeight: FontWeight.w500),
+                              style: TextStyle(
+                                  fontSize: 16.5, fontWeight: FontWeight.w500),
                             ),
                           ),
                         ],
@@ -115,7 +113,7 @@ class BoxOfficeShowBox extends StatelessWidget {
                 child: Text(
                   infoText,
                   softWrap: true,
-                  style: GoogleFonts.ubuntu(
+                  style: TextStyle(
                       color: Colors.white.withOpacity(0.8),
                       fontSize: 13.5,
                       fontWeight: FontWeight.w500),

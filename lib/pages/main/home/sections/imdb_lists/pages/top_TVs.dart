@@ -15,7 +15,6 @@ class Top250TVsPage extends StatelessWidget {
     return GetBuilder<HomeDataController>(
       builder: (_) {
         return Scaffold(
-            backgroundColor: kBackgroundColor,
             appBar: AppBar(
               automaticallyImplyLeading: false,
               centerTitle: true,
@@ -30,7 +29,7 @@ class Top250TVsPage extends StatelessWidget {
                   )),
               backgroundColor: kImdbColor,
               title: Text("IMDB Top 250 TVs",
-                  style: GoogleFonts.poppins(
+                  style: TextStyle(
                       color: kBackgroundColor,
                       fontSize: 25,
                       fontWeight: FontWeight.bold)),

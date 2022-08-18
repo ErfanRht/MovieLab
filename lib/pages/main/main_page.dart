@@ -34,7 +34,6 @@ class MainPage extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 22.5, vertical: 10),
               child: GNav(
-                backgroundColor: kBackgroundColor,
                 rippleColor: kBlueColor,
                 hoverColor: kBlueColor,
                 activeColor: CupertinoColors.activeBlue,

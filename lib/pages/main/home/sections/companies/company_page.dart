@@ -25,7 +25,6 @@ class _CompanyPageState extends State<CompanyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: kBackgroundColor,
         appBar: AppBar(
           centerTitle: true,
           automaticallyImplyLeading: false,
@@ -40,7 +39,7 @@ class _CompanyPageState extends State<CompanyPage> {
               )),
           backgroundColor: Colors.white,
           title: Text(widget.company['name'],
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                   color: widget.company['color'] ?? kPrimaryColor,
                   fontSize: 25,
                   fontWeight: FontWeight.bold)),

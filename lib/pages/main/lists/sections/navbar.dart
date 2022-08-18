@@ -7,7 +7,6 @@ AppBar UserListsNavbar() {
     toolbarHeight: 65,
     centerTitle: true,
     automaticallyImplyLeading: false,
-    backgroundColor: kBackgroundColor,
     title: TabBar(
       unselectedLabelColor: Colors.grey.withOpacity(0.5),
       splashFactory: NoSplash.splashFactory,
@@ -15,21 +14,21 @@ AppBar UserListsNavbar() {
           MaterialStateColor.resolveWith((states) => Colors.transparent),
       physics: const BouncingScrollPhysics(),
       indicatorColor: Colors.transparent,
-      tabs: [
+      tabs: const [
         Tab(
             child: Text(
           "Watchlist",
-          style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         )),
         Tab(
             child: Text(
           "History",
-          style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         )),
         Tab(
             child: Text(
           "Collection",
-          style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         )),
       ],
     ),

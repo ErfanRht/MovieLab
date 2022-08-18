@@ -57,7 +57,7 @@ info({required final String infoName, required final String infoValue}) {
       children: [
         Text("$infoName:",
             softWrap: true,
-            style: GoogleFonts.ubuntu(
+            style: TextStyle(
                 color: Colors.white.withOpacity(0.8),
                 fontSize: 12.5,
                 fontWeight: FontWeight.w600)),
@@ -66,7 +66,7 @@ info({required final String infoName, required final String infoValue}) {
             padding: const EdgeInsets.only(left: 5),
             child: Text(infoValue,
                 softWrap: true,
-                style: GoogleFonts.ubuntu(
+                style: TextStyle(
                     color: Colors.white.withOpacity(0.6),
                     fontSize: 12.5,
                     fontWeight: FontWeight.w500)),

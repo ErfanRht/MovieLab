@@ -23,7 +23,7 @@ class SectionTitle extends StatelessWidget {
         Padding(
           padding: padding,
           child: Text(title,
-              style: GoogleFonts.ubuntu(
+              style: TextStyle(
                   color: color, fontSize: fontSize, fontWeight: fontWeight)),
         ),
       ],
