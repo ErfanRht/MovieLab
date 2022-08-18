@@ -3,7 +3,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:movielab/constants/colors.dart';
-import 'package:movielab/constants/themes.dart';
 import 'package:movielab/models/hive/convertor.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
 import 'package:movielab/modules/tools/capitalizer.dart';
@@ -18,21 +17,13 @@ class UserListsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: AppThemes.darkTheme,
-        home: DefaultTabController(
-          length: 3,
-          child: Scaffold(
-            appBar: UserListsNavbar(),
-            body: TabBarView(
-              physics: const BouncingScrollPhysics(),
-              children: [
-                list("watchlist"),
-                list("history"),
-                list("collection")
-              ],
-            ),
+    return DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: UserListsNavbar(),
+          body: TabBarView(
+            physics: const BouncingScrollPhysics(),
+            children: [list("watchlist"), list("history"), list("collection")],
           ),
         ));
   }
