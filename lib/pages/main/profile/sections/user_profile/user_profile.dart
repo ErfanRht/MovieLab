@@ -140,6 +140,7 @@ class ProfilePageUserProfile extends StatelessWidget {
                       statsBox(context,
                           value: _.sortedContentRatings?[0] ?? "Unknown",
                           text: "Favorite\nContent-Rating",
+                          width: MediaQuery.of(context).size.width * 0.325,
                           sizeType: 2),
                     ],
                   ),
