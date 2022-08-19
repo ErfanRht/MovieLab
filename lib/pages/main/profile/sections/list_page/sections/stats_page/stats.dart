@@ -126,62 +126,65 @@ class _ListStatsPageState extends State<ListStatsPage> {
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
                         )),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    StatsChart(
-                      index: 0,
-                      statsName: "Genres",
-                      sortedSections: sortedGenres,
-                      sections: genres,
-                      length: sortedGenres.length > 7 ? 7 : sortedGenres.length,
-                      total: genresLength,
-                      others: genresOthers,
-                    ),
-                    StatsChart(
-                      index: 1,
-                      statsName: "Countries",
-                      sortedSections: sortedCountries,
-                      sections: countries,
-                      length: sortedCountries.length > 7
-                          ? 7
-                          : sortedCountries.length,
-                      total: countriesLength,
-                      others: countriesOthers,
-                    ),
-                    StatsChart(
-                      index: 2,
-                      statsName: "Languages",
-                      sortedSections: sortedLanguages,
-                      sections: languages,
-                      length: sortedLanguages.length > 7
-                          ? 7
-                          : sortedLanguages.length,
-                      total: languagesLength,
-                      others: languagesOthers,
-                    ),
-                    StatsChart(
-                      index: 3,
-                      statsName: "Companies",
-                      sortedSections: sortedCompanies,
-                      sections: companies,
-                      length: sortedCompanies.length > 7
-                          ? 7
-                          : sortedCompanies.length,
-                      total: companiesLength,
-                      others: companiesOthers,
-                    ),
-                    StatsChart(
-                      index: 4,
-                      statsName: "Contents",
-                      sortedSections: sortedContentRatings,
-                      sections: contentRatings,
-                      length: sortedContentRatings.length > 7
-                          ? 7
-                          : sortedContentRatings.length,
-                      total: contentRatingsLength,
-                      others: contentRatingsOthers,
-                    ),
+                    if (box.isNotEmpty) ...[
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      StatsChart(
+                        index: 0,
+                        statsName: "Genres",
+                        sortedSections: sortedGenres,
+                        sections: genres,
+                        length:
+                            sortedGenres.length > 7 ? 7 : sortedGenres.length,
+                        total: genresLength,
+                        others: genresOthers,
+                      ),
+                      StatsChart(
+                        index: 1,
+                        statsName: "Countries",
+                        sortedSections: sortedCountries,
+                        sections: countries,
+                        length: sortedCountries.length > 7
+                            ? 7
+                            : sortedCountries.length,
+                        total: countriesLength,
+                        others: countriesOthers,
+                      ),
+                      StatsChart(
+                        index: 2,
+                        statsName: "Languages",
+                        sortedSections: sortedLanguages,
+                        sections: languages,
+                        length: sortedLanguages.length > 7
+                            ? 7
+                            : sortedLanguages.length,
+                        total: languagesLength,
+                        others: languagesOthers,
+                      ),
+                      StatsChart(
+                        index: 3,
+                        statsName: "Companies",
+                        sortedSections: sortedCompanies,
+                        sections: companies,
+                        length: sortedCompanies.length > 7
+                            ? 7
+                            : sortedCompanies.length,
+                        total: companiesLength,
+                        others: companiesOthers,
+                      ),
+                      StatsChart(
+                        index: 4,
+                        statsName: "Contents",
+                        sortedSections: sortedContentRatings,
+                        sections: contentRatings,
+                        length: sortedContentRatings.length > 7
+                            ? 7
+                            : sortedContentRatings.length,
+                        total: contentRatingsLength,
+                        others: contentRatingsOthers,
+                      ),
+                    ]
                   ],
                 ),
               );

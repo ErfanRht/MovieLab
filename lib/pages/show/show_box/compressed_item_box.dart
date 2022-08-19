@@ -123,12 +123,11 @@ class _CompressedItemBoxState extends State<CompressedItemBox>
               child: Row(
                 children: [
                   Flexible(
-                    child: showBoxText(
-                        text: crew,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white.withOpacity(0.7)),
-                  ),
+                      child: showBoxText(
+                    text: crew,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600,
+                  )),
                 ],
               ),
             ),

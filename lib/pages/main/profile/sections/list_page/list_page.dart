@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/hive/convertor.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
+import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/main/profile/sections/list_page/sections/navbar.dart';
 import 'package:movielab/pages/show/show_box/lists_show_box.dart';
@@ -29,7 +29,9 @@ class ListPage extends StatelessWidget {
                 child: FittedBox(
                   child: FloatingActionButton(
                       onPressed: () {
-                        // preferencesShareholder.delete();
+                        PreferencesShareholder preferencesShareholder =
+                            PreferencesShareholder();
+                        preferencesShareholder.deleteList(listName);
                       },
                       tooltip: "Delete all",
                       backgroundColor: Colors.white,

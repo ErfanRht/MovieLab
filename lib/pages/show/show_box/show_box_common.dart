@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/pages/show/show_page/show_page.dart';
 import '../../../modules/tools/navigate.dart';
 
@@ -42,13 +41,19 @@ Widget boxImage(
 Widget showBoxText(
     {required String text,
     required double fontSize,
-    required FontWeight fontWeight,
+    FontWeight fontWeight = FontWeight.w600,
     bool isItTitle = false,
-    Color color = Colors.white}) {
+    bool softWrap = false,
+    Color? color}) {
   return Text(
     text,
+    softWrap: softWrap,
     overflow: TextOverflow.ellipsis,
     maxLines: isItTitle ? 1 : 2,
-    style: TextStyle(color: color, fontSize: fontSize, fontWeight: fontWeight),
+    style: TextStyle(
+        color:
+            color ?? (isItTitle ? Colors.white : Colors.white.withOpacity(0.7)),
+        fontSize: fontSize,
+        fontWeight: fontWeight),
   );
 }

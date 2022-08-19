@@ -67,7 +67,7 @@ class ExpandedItemBox extends StatelessWidget {
                 Container(
                   alignment: Alignment.bottomLeft,
                   width: image != 'null'
-                      ? MediaQuery.of(context).size.width - 155
+                      ? MediaQuery.of(context).size.width - 160
                       : MediaQuery.of(context).size.width - 40,
                   padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
                   child: Column(
@@ -75,16 +75,16 @@ class ExpandedItemBox extends StatelessWidget {
                       Row(
                         children: [
                           Flexible(
-                            child: Text(
-                              rank != ""
-                                  ? "$rank. $title"
-                                  : episodeNumber != ""
-                                      ? "$episodeNumber. $title"
-                                      : title,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                              style: const TextStyle(
-                                  fontSize: 15.5, fontWeight: FontWeight.w600),
+                            child: showBoxText(
+                              text: showType == "user_list"
+                                  ? title
+                                  : rank != ""
+                                      ? "$rank. $title"
+                                      : episodeNumber != ""
+                                          ? "$episodeNumber. $title"
+                                          : title,
+                              isItTitle: true,
+                              fontSize: 14,
                             ),
                           ),
                         ],
@@ -93,17 +93,13 @@ class ExpandedItemBox extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 10),
                         child: Row(
                           children: [
-                            Text(
-                              released != ""
+                            showBoxText(
+                              text: released != ""
                                   ? released
                                   : year != ""
                                       ? year
                                       : "",
-                              softWrap: true,
-                              style: TextStyle(
-                                  color: Colors.white.withOpacity(0.8),
-                                  fontSize: 13.5,
-                                  fontWeight: FontWeight.w500),
+                              fontSize: 13.5,
                             ),
                           ],
                         ),
@@ -114,14 +110,10 @@ class ExpandedItemBox extends StatelessWidget {
                           child: Row(
                             children: [
                               Flexible(
-                                  child: Text(
-                                crew,
-                                softWrap: true,
-                                style: TextStyle(
-                                    color: Colors.white.withOpacity(0.8),
-                                    fontSize: 13.5,
-                                    fontWeight: FontWeight.w500),
-                              )),
+                                  child: showBoxText(
+                                      text: crew,
+                                      softWrap: true,
+                                      fontSize: 13.5)),
                             ],
                           ),
                         ),
@@ -136,7 +128,7 @@ class ExpandedItemBox extends StatelessWidget {
                                   style: const TextStyle(
                                       color: kImdbColor,
                                       fontSize: 13.5,
-                                      fontWeight: FontWeight.w500),
+                                      fontWeight: FontWeight.w600),
                                 ),
                                 const SizedBox(
                                   width: 5,
@@ -170,7 +162,7 @@ class ExpandedItemBox extends StatelessWidget {
                                     style: const TextStyle(
                                         color: kImdbColor,
                                         fontSize: 13.5,
-                                        fontWeight: FontWeight.w500),
+                                        fontWeight: FontWeight.w600),
                                   ),
                                   const SizedBox(
                                     width: 5,
@@ -198,7 +190,7 @@ class ExpandedItemBox extends StatelessWidget {
                                 style: TextStyle(
                                     color: Colors.white.withOpacity(0.8),
                                     fontSize: 13.5,
-                                    fontWeight: FontWeight.w500),
+                                    fontWeight: FontWeight.w600),
                               )),
                             ],
                           ),
@@ -236,7 +228,7 @@ class ExpandedItemBox extends StatelessWidget {
                               style: TextStyle(
                                   color: Colors.white.withOpacity(0.8),
                                   fontSize: 12,
-                                  fontWeight: FontWeight.w500),
+                                  fontWeight: FontWeight.w600),
                             ),
                           ],
                         ),
@@ -256,14 +248,8 @@ class ExpandedItemBox extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 10),
-                child: Text(
-                  infoText,
-                  softWrap: true,
-                  style: TextStyle(
-                      color: Colors.white.withOpacity(0.8),
-                      fontSize: 13.5,
-                      fontWeight: FontWeight.w500),
-                ),
+                child:
+                    showBoxText(text: infoText, softWrap: true, fontSize: 13.5),
               ),
             ],
           )

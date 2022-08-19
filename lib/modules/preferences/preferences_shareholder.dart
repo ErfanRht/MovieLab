@@ -12,7 +12,8 @@ import '../../models/hive/models/show_preview.dart';
 class PreferencesShareholder {
   // Delete all items of a list in the shared preferences
   Future<bool> deleteList(String listName) async {
-    Hive.deleteBoxFromDisk(listName);
+    Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
+    list.deleteAll(list.keys.toList());
     if (kDebugMode) {
       print("All items of $listName deleted");
     }
