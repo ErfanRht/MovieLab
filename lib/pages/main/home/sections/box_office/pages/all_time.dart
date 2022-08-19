@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
-import 'package:movielab/pages/show/show_box/boxoffice_show_box.dart';
+import 'package:movielab/pages/show/show_box/expanded_item_box.dart';
 
 class AllTimeBoxOfficePage extends StatelessWidget {
   const AllTimeBoxOfficePage({Key? key}) : super(key: key);
@@ -41,8 +40,10 @@ class AllTimeBoxOfficePage extends StatelessWidget {
                             itemCount: _.allTimeBoxOffice.length,
                             physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
-                              return BoxOfficeShowBox(
-                                  showPreview: _.allTimeBoxOffice[index]);
+                              return ExpandedItemBox(
+                                showPreview: _.allTimeBoxOffice[index],
+                                showType: "box_office",
+                              );
                             },
                           )
                         : const Center(

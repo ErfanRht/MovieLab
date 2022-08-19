@@ -3,23 +3,34 @@ import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/pages/shared/show_popup/show_popup_actions.dart';
 import 'show_box_common.dart';
 
-class ShowBox extends StatefulWidget {
+class CompressedItemBox extends StatefulWidget {
   final ShowPreview showPreview;
   final String preTag;
-  const ShowBox({Key? key, required this.showPreview, this.preTag = ""})
+  const CompressedItemBox(
+      {Key? key, required this.showPreview, this.preTag = ""})
       : super(key: key);
 
   @override
-  State<ShowBox> createState() => _ShowBoxState();
+  State<CompressedItemBox> createState() => _CompressedItemBoxState();
 }
 
-class _ShowBoxState extends State<ShowBox> with TickerProviderStateMixin {
+class _CompressedItemBoxState extends State<CompressedItemBox>
+    with TickerProviderStateMixin {
+  late String title;
+  late String year;
+  late String crew;
+  late String id;
+  @override
+  void initState() {
+    super.initState();
+    title = widget.showPreview.title;
+    year = widget.showPreview.year;
+    crew = widget.showPreview.crew;
+    id = widget.showPreview.id;
+  }
+
   @override
   Widget build(BuildContext context) {
-    String title = widget.showPreview.title;
-    String year = widget.showPreview.year;
-    String crew = widget.showPreview.crew;
-    String id = widget.showPreview.id;
     return InkWell(
       onTap: () {
         openShowPage(context, id: id, preTag: widget.preTag);

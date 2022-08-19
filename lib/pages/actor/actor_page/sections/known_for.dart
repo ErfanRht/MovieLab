@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movielab/pages/show/show_box/show_box.dart';
-import '../../../../models/actor_models/full_actor_model.dart';
-import '../../../../models/show_models/show_preview_model.dart';
-import '../../../../widgets/section_title.dart';
+import 'package:movielab/models/actor_models/full_actor_model.dart';
+import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/pages/show/show_box/compressed_item_box.dart';
+import 'package:movielab/widgets/section_title.dart';
 
 class ActorPageKnownFor extends StatelessWidget {
   final FullActor? actor;
@@ -36,7 +36,7 @@ class ActorPageKnownFor extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: knownFor.length,
                 itemBuilder: (context, index) {
-                  return ShowBox(showPreview: knownFor[index]);
+                  return CompressedItemBox(showPreview: knownFor[index]);
                 }),
           ),
         ],

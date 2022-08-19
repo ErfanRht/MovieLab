@@ -10,7 +10,12 @@ class ShowPreview {
   final String crew;
   final String image;
   final String year;
+  final String? released;
   final String imDbRating;
+  final String? imDbVotes;
+  final String? seasonNumber;
+  final String? episodeNumber;
+  final String? plot;
   final String weekend;
   final String gross;
   final String weeks;
@@ -36,7 +41,12 @@ class ShowPreview {
     required this.crew,
     required this.image,
     required this.year,
+    this.released,
     required this.imDbRating,
+    this.imDbVotes,
+    this.seasonNumber,
+    this.episodeNumber,
+    this.plot,
     required this.weekend,
     required this.gross,
     required this.weeks,
@@ -57,16 +67,29 @@ class ShowPreview {
 
   factory ShowPreview.fromJson(Map<String, dynamic> json) {
     return ShowPreview(
-      id: json['id'],
+      id: json['id'] ?? "",
       rank: json['rank'] ?? "",
-      title: json['title'],
+      title: json['title'] ?? "",
       type: json['type'] ?? json['role'] ?? "",
       crew: json['crew'] ?? json['stars'] ?? "",
       image: json['image'].toString().replaceAll(
           "._V1_UX128_CR0,3,128,176_AL_.jpg", "._V1_Ratio0.6716_AL_.jpg"),
-      year: json['year'] ?? "",
+      year: json['year'] ??
+          (json['description'] != null
+              ? json['description']
+                  .toString()
+                  .replaceAll("(", "")
+                  .replaceAll(")", "\n")
+              : ""),
+      released: json['released'] ?? "",
+
+      // Imdb rating should'nt be null, but sometimes it is.
       imDbRating:
           json['imDbRating'] == "" ? "0.0" : json['imDbRating'] ?? "0.0",
+      imDbVotes: json['imDbRatingCount'] ?? "0.0",
+      seasonNumber: json['seasonNumber'] ?? "",
+      episodeNumber: json['episodeNumber'] ?? "",
+      plot: json['plot'] ?? "",
       weekend: json['weekend'] ?? "",
       gross: json['gross'] ?? "",
       weeks: json['weeks'] ?? "",

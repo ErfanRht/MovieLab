@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:movielab/constants/types.dart';
+import 'package:movielab/models/show_models/show_preview_model.dart';
 
 class SearchBarController extends GetxController {
   RequestResult loadingStatus = RequestResult.NOT_STARTED;
   bool fieldTapped = false;
   String fieldText = "";
   TextEditingController controller = TextEditingController();
-  List? result;
+  List<ShowPreview>? result;
 
   void setLoadingStatus({required RequestResult status}) {
     loadingStatus = status;

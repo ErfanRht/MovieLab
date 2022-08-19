@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movielab/pages/show/show_box/compressed_item_box.dart';
 import '../../../../models/show_models/full_show_model.dart';
-import '../../show_box/similar_show_box.dart';
 import '../../../../widgets/section_title.dart';
 
 class ShowPageSimilars extends StatelessWidget {
@@ -32,7 +32,7 @@ similars({required List similars}) {
               scrollDirection: Axis.horizontal,
               itemCount: similars.length,
               itemBuilder: (context, index) {
-                return SimilarShowBox(showPreview: similars[index]);
+                return CompressedItemBox(showPreview: similars[index]);
               }),
         ),
       ],

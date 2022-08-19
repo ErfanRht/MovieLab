@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
-import 'package:movielab/pages/show/show_box/imdb_list_show_box.dart';
+import 'package:movielab/pages/show/show_box/expanded_item_box.dart';
 
 class Top250TVsPage extends StatelessWidget {
   const Top250TVsPage({Key? key}) : super(key: key);
@@ -28,7 +27,7 @@ class Top250TVsPage extends StatelessWidget {
                     size: 22.5,
                   )),
               backgroundColor: kImdbColor,
-              title: Text("IMDB Top 250 TVs",
+              title: const Text("IMDB Top 250 TVs",
                   style: TextStyle(
                       color: kBackgroundColor,
                       fontSize: 25,
@@ -45,7 +44,7 @@ class Top250TVsPage extends StatelessWidget {
                             itemCount: _.topRatedShows.length,
                             physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
-                              return IMDBListShowBox(
+                              return ExpandedItemBox(
                                   showPreview: _.topRatedShows[index]);
                             },
                           )

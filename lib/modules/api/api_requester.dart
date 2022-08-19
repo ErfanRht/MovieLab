@@ -5,9 +5,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/models/actor_models/full_actor_model.dart';
-import 'package:movielab/models/show_models/episode_model.dart';
 import 'package:movielab/models/show_models/external_sites_model.dart';
-import 'package:movielab/models/show_models/search_result_model.dart';
 import 'package:movielab/models/show_models/full_show_model.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/api/api_keys.dart';
@@ -164,9 +162,9 @@ class APIRequester {
 
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body)["results"];
-      List<SearchResult> result = [];
+      List<ShowPreview> result = [];
       for (int i = 0; i < json.length; i++) {
-        result.add(SearchResult.fromJson(json[i]));
+        result.add(ShowPreview.fromJson(json[i]));
       }
       Get.find<SearchBarController>().updateResult(result: result);
       return true;
@@ -199,9 +197,9 @@ class APIRequester {
 
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body)["episodes"];
-      List<Episode> seasonEpisodes = [];
+      List<ShowPreview> seasonEpisodes = [];
       for (int i = 0; i < json.length; i++) {
-        seasonEpisodes.add(Episode.fromJson(json[i]));
+        seasonEpisodes.add(ShowPreview.fromJson(json[i]));
       }
       show.seasons[season - 1] = seasonEpisodes;
       cacheHolder.saveShowInfoInCache(show: show);

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
-import 'package:movielab/pages/show/show_box/imdb_list_show_box.dart';
+import 'package:movielab/pages/show/show_box/expanded_item_box.dart';
 
 class AllTrendingsPage extends StatelessWidget {
   final List<ShowPreview> trendings;
@@ -41,7 +40,7 @@ class AllTrendingsPage extends StatelessWidget {
                     itemCount: trendings.length,
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
-                      return IMDBListShowBox(
+                      return ExpandedItemBox(
                         showPreview: trendings[index],
                         iRank: (index + 1).toString(),
                         preTag: title,
