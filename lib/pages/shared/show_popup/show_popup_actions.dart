@@ -141,6 +141,7 @@ class _ShowPopupActionsState extends State<ShowPopupActions>
       // ignore: use_build_context_synchronously
       Navigator.pop(context);
       await Future.delayed(const Duration(milliseconds: 200));
+      fToast.removeQueuedCustomToasts();
       fToast.showToast(
         child: ToastWidget(
           mainText: "Saved to ${listName.capitalize()}",
@@ -161,6 +162,7 @@ class _ShowPopupActionsState extends State<ShowPopupActions>
       // ignore: use_build_context_synchronously
       Navigator.pop(context);
       await Future.delayed(const Duration(milliseconds: 200));
+      fToast.removeQueuedCustomToasts();
       fToast.showToast(
         child: ToastWidget(
             mainText: "Ramoved from ${listName.capitalize()}",

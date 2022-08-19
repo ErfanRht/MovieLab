@@ -27,7 +27,7 @@ class ProfilePageSettings extends StatelessWidget {
               icon: FontAwesomeIcons.gear,
               iconColor: Colors.blue,
               onPressed: () {
-                Navigate.pushTo(context, const SettingsPage());
+                Navigate.pushTo(context, SettingsPage());
               },
             ),
             ButtonSectionItem(

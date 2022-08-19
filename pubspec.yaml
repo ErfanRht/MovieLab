@@ -41,6 +41,7 @@ dependencies:
   fl_chart: ^0.55.0
   share_plus: ^4.0.10
   image_picker: ^0.8.5+3
+  flutter_cache_manager: ^3.3.0
 
   
 

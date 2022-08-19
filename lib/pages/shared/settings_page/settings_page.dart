@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/widgets/default_appbar.dart';
+import 'package:movielab/widgets/toast.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
-
+  SettingsPage({Key? key}) : super(key: key);
+  FToast fToast = FToast();
   @override
   Widget build(BuildContext context) {
+    fToast.init(context);
     return Scaffold(
       appBar: defaultAppBar(context, title: "Settings"),
       body: SingleChildScrollView(
@@ -19,7 +23,23 @@ class SettingsPage extends StatelessWidget {
                 title: "Clear media content cache",
                 description:
                     "Remove all cached content, but not your personal data",
-                onPressed: () {}),
+                onPressed: () async {
+                  await DefaultCacheManager().emptyCache();
+                  fToast.removeQueuedCustomToasts();
+                  fToast.showToast(
+                    child: ToastWidget(
+                      mainText: "Cache cleared",
+                      buttonText: "Ok",
+                      buttonColor: kAccentColor,
+                      buttonOnTap: () async {
+                        await Future.delayed(const Duration(milliseconds: 200));
+                        fToast.removeCustomToast();
+                      },
+                    ),
+                    gravity: ToastGravity.BOTTOM,
+                    toastDuration: const Duration(seconds: 2),
+                  );
+                }),
           ],
         ),
       ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/general.dart';
 import 'package:movielab/models/hive/convertor.dart';
@@ -45,7 +44,7 @@ class AddWatchTimeState extends State<AddWatchTime> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      color: kBackgroundColor,
+      color: widget.updateShowData != null ? kSecondaryColor : kBackgroundColor,
       duration: const Duration(milliseconds: 125),
       height: !isOtherDateSectionOpen ? 225 : 350,
       child: Column(
@@ -371,6 +370,7 @@ class AddWatchTimeState extends State<AddWatchTime> {
     // ignore: use_build_context_synchronously
     Navigator.pop(context);
     await Future.delayed(const Duration(milliseconds: 200));
+    fToast.removeQueuedCustomToasts();
     fToast.showToast(
       child: ToastWidget(
         mainText: "Saved to History",

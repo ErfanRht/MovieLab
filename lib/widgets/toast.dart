@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ToastWidget extends StatelessWidget {
   final String mainText;
@@ -32,6 +31,7 @@ class ToastWidget extends StatelessWidget {
             mainText,
             style: const TextStyle(
               fontWeight: FontWeight.w600,
+              color: Colors.black,
             ),
           ),
           TextButton(
