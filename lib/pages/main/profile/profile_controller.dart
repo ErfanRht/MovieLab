@@ -39,8 +39,8 @@ class ProfileController extends GetxController {
     update();
   }
 
-  Map<String, int>? genres;
-  List<String>? sortedGenres;
+  late Map<String, int> genres;
+  late List<String> sortedGenres;
   int genresLength = 0;
   int genresOthers = 0;
   updateGenres(
@@ -55,8 +55,8 @@ class ProfileController extends GetxController {
     update();
   }
 
-  Map<String, int>? countries;
-  List<String>? sortedCountries;
+  late Map<String, int> countries;
+  late List<String> sortedCountries;
   int countriesLength = 0;
   int countriesOthers = 0;
   updateCountries(
@@ -71,8 +71,8 @@ class ProfileController extends GetxController {
     update();
   }
 
-  Map<String, int>? languages;
-  List<String>? sortedLanguages;
+  late Map<String, int> languages;
+  late List<String> sortedLanguages;
   int languagesLength = 0;
   int languagesOthers = 0;
   updateLanguages(
@@ -87,8 +87,8 @@ class ProfileController extends GetxController {
     update();
   }
 
-  Map<String, int>? companies;
-  List<String>? sortedCompanies;
+  late Map<String, int> companies;
+  late List<String> sortedCompanies;
   int companiesLength = 0;
   int companiesOthers = 0;
   updateCompanies(
@@ -103,8 +103,8 @@ class ProfileController extends GetxController {
     update();
   }
 
-  Map<String, int>? contentRatings;
-  List<String>? sortedContentRatings;
+  late Map<String, int> contentRatings;
+  late List<String> sortedContentRatings;
   int contentRatingsLength = 0;
   int contentRatingsOthers = 0;
   updateContentRatings(

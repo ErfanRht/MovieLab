@@ -8,7 +8,7 @@ import 'package:movielab/pages/splash/get_user_data.dart';
 import 'package:movielab/widgets/buttons/glassmorphism_button.dart';
 import 'package:movielab/widgets/textfield_widget.dart';
 
-import 'user_profile_image.dart';
+import 'sections/user_profile_image.dart';
 
 class ProfilePageEditUserProfile extends StatelessWidget {
   const ProfilePageEditUserProfile({Key? key}) : super(key: key);

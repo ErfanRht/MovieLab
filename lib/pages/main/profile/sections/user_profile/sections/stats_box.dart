@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movielab/modules/tools/navigate.dart';
+import 'package:movielab/pages/main/profile/sections/user_stats/user_stats.dart';
 
 Widget statsBox(BuildContext context,
         {required final String value,
@@ -8,7 +10,9 @@ Widget statsBox(BuildContext context,
     SizedBox(
       width: width ?? MediaQuery.of(context).size.width * 0.25,
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigate.pushTo(context, const UserStatsPage());
+        },
         style: TextButton.styleFrom(
           padding: EdgeInsets.zero,
           shape: RoundedRectangleBorder(

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/pages/main/profile/profile_controller.dart';
+import 'package:movielab/pages/main/profile/sections/user_stats/user_stats.dart';
 
 import 'edit_user_profile.dart';
-import 'stats_box.dart';
-import 'user_profile_image.dart';
+import 'sections/dividers.dart';
+import 'sections/imdb_rating.dart';
+import 'sections/stats_box.dart';
+import 'sections/user_profile_image.dart';
 
 class ProfilePageUserProfile extends StatelessWidget {
   const ProfilePageUserProfile({Key? key}) : super(key: key);
@@ -19,7 +21,7 @@ class ProfilePageUserProfile extends StatelessWidget {
         child: Stack(
           children: [
             AnimatedContainer(
-              height: 480,
+              height: 530,
               margin: const EdgeInsets.only(top: 64),
               padding: const EdgeInsets.only(top: 70),
               width: MediaQuery.of(context).size.width,
@@ -63,44 +65,7 @@ class ProfilePageUserProfile extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                RatingBarIndicator(
-                                  rating: (_.imdbRatingAverage / 10) - 0.15,
-                                  itemBuilder: (context, index) => const Icon(
-                                    Icons.star,
-                                    color: kImdbColor,
-                                  ),
-                                  unratedColor: kGreyColor,
-                                  itemCount: 1,
-                                  itemSize: 50,
-                                ),
-                                Text(_.imdbRatingAverage.toString(),
-                                    style: const TextStyle(
-                                      color: kImdbColor,
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w700,
-                                    )),
-                                const SizedBox(height: 3),
-                                Text(
-                                  "Avarage IMDb rating",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white.withOpacity(0.75),
-                                      fontSize: 12.5,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      )
+                      UserIMDbRating(imdbRatingAverage: _.imdbRatingAverage)
                     ],
                   ),
                   bigDivider(),
@@ -108,17 +73,23 @@ class ProfilePageUserProfile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       statsBox(context,
-                          value: _.sortedGenres?[0] ?? "Unknown",
+                          value: _.sortedGenres[0] != ""
+                              ? _.sortedGenres[0]
+                              : "Unknown",
                           text: "Favorite\nGenre",
                           sizeType: 2),
                       smallDivider(),
                       statsBox(context,
-                          value: _.sortedCompanies?[0] ?? "Unknown",
+                          value: _.sortedCompanies[0] != ""
+                              ? _.sortedCompanies[0]
+                              : "Unknown",
                           text: "Favorite\nCompany",
                           sizeType: 2),
                       smallDivider(),
                       statsBox(context,
-                          value: _.sortedCountries?[0] ?? "Unknown",
+                          value: _.sortedCountries[0] != ""
+                              ? _.sortedCountries[0]
+                              : "Unknown",
                           text: "Favorite\nCountry",
                           sizeType: 2),
                     ],
@@ -133,18 +104,52 @@ class ProfilePageUserProfile extends StatelessWidget {
                         width: 35,
                       ),
                       statsBox(context,
-                          value: _.sortedLanguages?[0] ?? "Unknown",
+                          value: _.sortedLanguages[0] != ""
+                              ? _.sortedLanguages[0]
+                              : "Unknown",
                           text: "Favorite\nLanguage",
                           sizeType: 2),
                       smallDivider(),
                       statsBox(context,
-                          value: _.sortedContentRatings?[0] ?? "Unknown",
+                          value: _.sortedContentRatings[0] != ""
+                              ? _.sortedContentRatings[0]
+                              : "Unknown",
                           text: "Favorite\nContent-Rating",
                           width: MediaQuery.of(context).size.width * 0.325,
                           sizeType: 2),
                     ],
                   ),
                   bigDivider(),
+                  TextButton(
+                      style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(7.5))),
+                      onPressed: () {
+                        Navigate.pushTo(context, const UserStatsPage());
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: RichText(
+                          text: TextSpan(
+                            text: '',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white.withOpacity(0.75),
+                            ),
+                            children: <TextSpan>[
+                              const TextSpan(text: 'See ', style: TextStyle()),
+                              TextSpan(
+                                  text: _.name,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.white.withOpacity(0.9))),
+                              const TextSpan(
+                                  text: '\'s stats', style: TextStyle()),
+                            ],
+                          ),
+                        ),
+                      ))
                 ],
               ),
             ),
@@ -158,20 +163,3 @@ class ProfilePageUserProfile extends StatelessWidget {
     });
   }
 }
-
-Widget smallDivider() => Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      height: 24,
-      width: 1,
-      child: VerticalDivider(
-        color: Colors.white.withOpacity(0.75),
-        thickness: 1.5,
-      ),
-    );
-Widget bigDivider() => Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 7.5),
-      child: Divider(
-        color: Colors.white.withOpacity(0.75),
-        thickness: 2.5,
-      ),
-    );
