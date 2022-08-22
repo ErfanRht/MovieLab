@@ -123,8 +123,6 @@ class PreferencesShareholder {
       user = HiveUser()
         ..name = "Your name"
         ..username = "Your username"
-        ..email = "Your email"
-        ..phone = "Your phone"
         ..imageUrl = "Empty";
       userBox.put(0, user);
     }

@@ -73,22 +73,22 @@ class ProfilePageUserProfile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       statsBox(context,
-                          value: _.sortedGenres[0] != ""
-                              ? _.sortedGenres[0]
+                          value: _.genresLength != 0
+                              ? _.sortedGenres![0]
                               : "Unknown",
                           text: "Favorite\nGenre",
                           sizeType: 2),
                       smallDivider(),
                       statsBox(context,
-                          value: _.sortedCompanies[0] != ""
-                              ? _.sortedCompanies[0]
+                          value: _.companiesLength != 0
+                              ? _.sortedCompanies![0]
                               : "Unknown",
                           text: "Favorite\nCompany",
                           sizeType: 2),
                       smallDivider(),
                       statsBox(context,
-                          value: _.sortedCountries[0] != ""
-                              ? _.sortedCountries[0]
+                          value: _.countriesLength != 0
+                              ? _.sortedCountries![0]
                               : "Unknown",
                           text: "Favorite\nCountry",
                           sizeType: 2),
@@ -104,15 +104,15 @@ class ProfilePageUserProfile extends StatelessWidget {
                         width: 35,
                       ),
                       statsBox(context,
-                          value: _.sortedLanguages[0] != ""
-                              ? _.sortedLanguages[0]
+                          value: _.languagesLength != 0
+                              ? _.sortedLanguages![0]
                               : "Unknown",
                           text: "Favorite\nLanguage",
                           sizeType: 2),
                       smallDivider(),
                       statsBox(context,
-                          value: _.sortedContentRatings[0] != ""
-                              ? _.sortedContentRatings[0]
+                          value: _.contentRatingsLength != 0
+                              ? _.sortedContentRatings![0]
                               : "Unknown",
                           text: "Favorite\nContent-Rating",
                           width: MediaQuery.of(context).size.width * 0.325,

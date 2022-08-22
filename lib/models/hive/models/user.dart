@@ -11,10 +11,6 @@ class HiveUser extends HiveObject {
   late String name;
   @HiveField(UserFields.username)
   late String username;
-  @HiveField(UserFields.email)
-  late String email;
-  @HiveField(UserFields.phone)
-  late String phone;
   @HiveField(UserFields.imageUrl)
   late String imageUrl;
 }

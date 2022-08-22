@@ -17,8 +17,6 @@ Future<bool> getUserInformation() async {
   controller.updateUserInfo(
     name: user.name,
     username: user.username,
-    email: user.email,
-    phone: user.phone,
     imageUrl: user.imageUrl,
   );
   return true;

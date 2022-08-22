@@ -65,54 +65,55 @@ class UserStatsPage extends StatelessWidget {
                   StatsChart(
                     index: 0,
                     statsName: "Genres",
-                    sortedSections: _.sortedGenres,
+                    sortedSections: _.sortedGenres!,
                     sections: _.genres,
-                    length:
-                        _.sortedGenres.length > 7 ? 7 : _.sortedGenres.length,
+                    length: (_.sortedGenres?.length)! > 7
+                        ? 7
+                        : (_.sortedGenres?.length)!,
                     total: _.genresLength,
                     others: _.genresOthers,
                   ),
                   StatsChart(
                     index: 1,
                     statsName: "Countries",
-                    sortedSections: _.sortedCountries,
+                    sortedSections: _.sortedCountries!,
                     sections: _.countries,
-                    length: _.sortedCountries.length > 7
+                    length: (_.sortedCountries?.length)! > 7
                         ? 7
-                        : _.sortedCountries.length,
+                        : (_.sortedCountries?.length)!,
                     total: _.countriesLength,
                     others: _.countriesOthers,
                   ),
                   StatsChart(
                     index: 2,
                     statsName: "Languages",
-                    sortedSections: _.sortedLanguages,
+                    sortedSections: _.sortedLanguages!,
                     sections: _.languages,
-                    length: _.sortedLanguages.length > 7
+                    length: (_.sortedLanguages?.length)! > 7
                         ? 7
-                        : _.sortedLanguages.length,
+                        : (_.sortedLanguages?.length)!,
                     total: _.languagesLength,
                     others: _.languagesOthers,
                   ),
                   StatsChart(
                     index: 3,
                     statsName: "Companies",
-                    sortedSections: _.sortedCompanies,
+                    sortedSections: _.sortedCompanies!,
                     sections: _.companies,
-                    length: _.sortedCompanies.length > 7
+                    length: (_.sortedCompanies?.length)! > 7
                         ? 7
-                        : _.sortedCompanies.length,
+                        : (_.sortedCompanies?.length)!,
                     total: _.companiesLength,
                     others: _.companiesOthers,
                   ),
                   StatsChart(
                     index: 4,
                     statsName: "Contents",
-                    sortedSections: _.sortedContentRatings,
+                    sortedSections: _.sortedContentRatings!,
                     sections: _.contentRatings,
-                    length: _.sortedContentRatings.length > 7
+                    length: (_.sortedContentRatings?.length)! > 7
                         ? 7
-                        : _.sortedContentRatings.length,
+                        : (_.sortedContentRatings?.length)!,
                     total: _.contentRatingsLength,
                     others: _.contentRatingsOthers,
                   ),

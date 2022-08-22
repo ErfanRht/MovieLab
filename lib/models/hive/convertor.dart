@@ -158,19 +158,12 @@ Future<String> getShowCrew({required FullShow fullShow}) async {
 
 User convertHiveToUser(HiveUser hive) {
   return User(
-    name: hive.name,
-    username: hive.username,
-    email: hive.email,
-    imageUrl: hive.imageUrl,
-    phone: hive.phone,
-  );
+      name: hive.name, username: hive.username, imageUrl: hive.imageUrl);
 }
 
 HiveUser convertUserToHive(User user) {
   return HiveUser()
     ..name = user.name
     ..username = user.username
-    ..email = user.email
-    ..imageUrl = user.imageUrl
-    ..phone = user.phone;
+    ..imageUrl = user.imageUrl;
 }

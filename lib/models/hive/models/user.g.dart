@@ -19,24 +19,18 @@ class UserAdapter extends TypeAdapter<HiveUser> {
     return HiveUser()
       ..name = fields[0] as String
       ..username = fields[1] as String
-      ..email = fields[2] as String
-      ..phone = fields[3] as String
-      ..imageUrl = fields[4] as String;
+      ..imageUrl = fields[2] as String;
   }
 
   @override
   void write(BinaryWriter writer, HiveUser obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
       ..write(obj.username)
       ..writeByte(2)
-      ..write(obj.email)
-      ..writeByte(3)
-      ..write(obj.phone)
-      ..writeByte(4)
       ..write(obj.imageUrl);
   }
 

@@ -3,7 +3,7 @@ import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/pages/main/profile/sections/user_stats/user_stats.dart';
 
 Widget statsBox(BuildContext context,
-        {required final String value,
+        {required final String? value,
         required final String text,
         final double? width,
         final int sizeType = 1}) =>
@@ -26,7 +26,7 @@ Widget statsBox(BuildContext context,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Text(
-                value,
+                value!,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,

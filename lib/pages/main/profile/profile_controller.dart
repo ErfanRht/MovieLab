@@ -4,19 +4,10 @@ class ProfileController extends GetxController {
   // User info
   late String name;
   late String username;
-  late String email;
-  late String phone;
   late String imageUrl;
-  updateUserInfo(
-      {String? name,
-      String? username,
-      String? email,
-      String? phone,
-      String? imageUrl}) {
+  updateUserInfo({String? name, String? username, String? imageUrl}) {
     this.name = name ?? this.name;
     this.username = username ?? this.username;
-    this.email = email ?? this.email;
-    this.phone = phone ?? this.phone;
     this.imageUrl = imageUrl ?? this.imageUrl;
     update();
   }
@@ -39,8 +30,8 @@ class ProfileController extends GetxController {
     update();
   }
 
-  late Map<String, int> genres;
-  late List<String> sortedGenres;
+  Map<String, int> genres = {};
+  List<String>? sortedGenres = [];
   int genresLength = 0;
   int genresOthers = 0;
   updateGenres(
@@ -55,8 +46,8 @@ class ProfileController extends GetxController {
     update();
   }
 
-  late Map<String, int> countries;
-  late List<String> sortedCountries;
+  Map<String, int> countries = {};
+  List<String>? sortedCountries = [];
   int countriesLength = 0;
   int countriesOthers = 0;
   updateCountries(
@@ -71,8 +62,8 @@ class ProfileController extends GetxController {
     update();
   }
 
-  late Map<String, int> languages;
-  late List<String> sortedLanguages;
+  Map<String, int> languages = {};
+  List<String>? sortedLanguages = [];
   int languagesLength = 0;
   int languagesOthers = 0;
   updateLanguages(
@@ -87,8 +78,8 @@ class ProfileController extends GetxController {
     update();
   }
 
-  late Map<String, int> companies;
-  late List<String> sortedCompanies;
+  Map<String, int> companies = {};
+  List<String>? sortedCompanies = [];
   int companiesLength = 0;
   int companiesOthers = 0;
   updateCompanies(
@@ -103,8 +94,8 @@ class ProfileController extends GetxController {
     update();
   }
 
-  late Map<String, int> contentRatings;
-  late List<String> sortedContentRatings;
+  Map<String, int> contentRatings = {};
+  List<String>? sortedContentRatings = [];
   int contentRatingsLength = 0;
   int contentRatingsOthers = 0;
   updateContentRatings(

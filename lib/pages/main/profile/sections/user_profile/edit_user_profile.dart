@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:movielab/models/user_model/user_model.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
+import 'package:movielab/modules/tools/navigate.dart';
+import 'package:movielab/pages/main/profile/profile.dart';
 import 'package:movielab/pages/main/profile/profile_controller.dart';
 import 'package:movielab/pages/splash/get_user_data.dart';
 import 'package:movielab/widgets/buttons/glassmorphism_button.dart';
@@ -57,22 +59,6 @@ class ProfilePageEditUserProfile extends StatelessWidget {
                   _.username = username;
                 },
               ),
-              const SizedBox(height: 24),
-              TextFieldWidget(
-                label: 'Email',
-                text: _.email,
-                onChanged: (email) {
-                  _.email = email;
-                },
-              ),
-              const SizedBox(height: 24),
-              TextFieldWidget(
-                label: 'Phone number',
-                text: _.phone,
-                onChanged: (email) {
-                  _.phone = email;
-                },
-              ),
               const SizedBox(height: 40),
               GmButton(
                   text: "Save",
@@ -83,16 +69,12 @@ class ProfilePageEditUserProfile extends StatelessWidget {
                         user: User(
                             name: _.name,
                             username: _.username,
-                            email: _.email,
-                            phone: _.phone,
                             imageUrl: _.imageUrl));
                     _.updateUserInfo(
                         name: _.name,
                         username: _.username,
-                        email: _.email,
-                        phone: _.phone,
                         imageUrl: _.imageUrl);
-                    Navigator.pop(context);
+                    Navigate.replaceTo(context, const ProfilePage());
                   },
                   padding: EdgeInsets.symmetric(
                       horizontal: MediaQuery.of(context).size.width / 5),
