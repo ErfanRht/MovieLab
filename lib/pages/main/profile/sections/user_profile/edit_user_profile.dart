@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:movielab/models/user_model/user_model.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
-import 'package:movielab/modules/tools/navigate.dart';
-import 'package:movielab/pages/main/profile/profile.dart';
 import 'package:movielab/pages/main/profile/profile_controller.dart';
 import 'package:movielab/pages/splash/get_user_data.dart';
 import 'package:movielab/widgets/buttons/glassmorphism_button.dart';
@@ -74,7 +72,7 @@ class ProfilePageEditUserProfile extends StatelessWidget {
                         name: _.name,
                         username: _.username,
                         imageUrl: _.imageUrl);
-                    Navigate.replaceTo(context, const ProfilePage());
+                    Navigator.pop(context);
                   },
                   padding: EdgeInsets.symmetric(
                       horizontal: MediaQuery.of(context).size.width / 5),

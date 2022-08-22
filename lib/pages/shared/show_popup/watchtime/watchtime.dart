@@ -94,7 +94,7 @@ class AddWatchTimeState extends State<AddWatchTime> {
             onPressed: () {
               markAsWatched(
                   date: DateTime.parse(widget.fullShow!.releaseDate),
-                  time: TimeOfDay.fromDateTime(DateTime.parse("00:00")));
+                  time: TimeOfDay.now());
             },
             style: TextButton.styleFrom(
                 padding:
