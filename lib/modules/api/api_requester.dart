@@ -8,7 +8,7 @@ import 'package:movielab/models/actor_models/full_actor_model.dart';
 import 'package:movielab/models/show_models/external_sites_model.dart';
 import 'package:movielab/models/show_models/full_show_model.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
-import 'package:movielab/modules/api/api_keys.dart';
+import 'package:movielab/modules/api/private_api_keys.dart';
 import 'package:movielab/modules/cache/cacheholder.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
