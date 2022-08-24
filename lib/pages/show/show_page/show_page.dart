@@ -6,9 +6,11 @@ import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/modules/cache/get_show_info.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
+import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/modules/tools/system_ui_overlay_style.dart';
 import 'package:movielab/pages/shared/show_popup/watchtime/watchtime.dart';
 import 'package:movielab/widgets/error.dart';
+import 'package:movielab/widgets/full_image_page.dart';
 import 'sections/bottom_bar/bottom_bar.dart';
 import 'sections/bottom_bar/sections/external_sites/external_sites.dart';
 import 'sections/index.dart';
@@ -154,36 +156,48 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
                   child: Stack(
                     fit: StackFit.loose,
                     children: [
-                      ShaderMask(
-                          shaderCallback: (rect) {
-                            // ignore: prefer_const_constructors
-                            return LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: const [Colors.black, Colors.transparent],
-                            ).createShader(Rect.fromLTRB(
-                                100, 250, rect.width, rect.height));
-                          },
-                          blendMode: BlendMode.dstIn,
-                          child: Hero(
-                            tag: "${widget.preTag}_show_${show.id}",
-                            child: CachedNetworkImage(
-                              fit: BoxFit.cover,
-                              height:
-                                  MediaQuery.of(context).size.height * (2 / 3) -
-                                      35,
-                              width: MediaQuery.of(context).size.width,
-                              imageUrl: show.image,
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                              placeholder: (context, url) => const Center(
-                                child: SpinKitThreeBounce(
-                                  color: Colors.white,
-                                  size: 30.0,
+                      GestureDetector(
+                        onTap: () {
+                          Navigate.pushHeroicTo(
+                              context,
+                              FullImagePage(
+                                  tag: "${widget.preTag}_show_${show.id}",
+                                  imageUrl: show.image));
+                        },
+                        child: ShaderMask(
+                            shaderCallback: (rect) {
+                              // ignore: prefer_const_constructors
+                              return LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: const [
+                                  Colors.black,
+                                  Colors.transparent
+                                ],
+                              ).createShader(Rect.fromLTRB(
+                                  100, 250, rect.width, rect.height));
+                            },
+                            blendMode: BlendMode.dstIn,
+                            child: Hero(
+                              tag: "${widget.preTag}_show_${show.id}",
+                              child: CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                height: MediaQuery.of(context).size.height *
+                                        (2 / 3) -
+                                    35,
+                                width: MediaQuery.of(context).size.width,
+                                imageUrl: show.image,
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                                placeholder: (context, url) => const Center(
+                                  child: SpinKitThreeBounce(
+                                    color: Colors.white,
+                                    size: 30.0,
+                                  ),
                                 ),
                               ),
-                            ),
-                          )),
+                            )),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 15),
                         child: Column(

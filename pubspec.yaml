@@ -42,6 +42,8 @@ dependencies:
   share_plus: ^4.0.10
   image_picker: ^0.8.5+3
   flutter_cache_manager: ^3.3.0
+  gallery_saver: ^2.3.2
+  external_path: ^1.0.1
 
   
 
