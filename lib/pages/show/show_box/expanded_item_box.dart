@@ -123,7 +123,7 @@ class ExpandedItemBox extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(
-                                  imDbRating,
+                                  imDbRating != "-" ? imDbRating : "0.0",
                                   softWrap: true,
                                   style: const TextStyle(
                                       color: kImdbColor,
@@ -134,7 +134,9 @@ class ExpandedItemBox extends StatelessWidget {
                                   width: 5,
                                 ),
                                 RatingBarIndicator(
-                                  rating: double.parse(imDbRating) / 2,
+                                  rating: imDbRating != "-"
+                                      ? double.parse(imDbRating) / 2
+                                      : 0.0,
                                   itemBuilder: (context, index) => const Icon(
                                     Icons.star,
                                     color: kImdbColor,
@@ -157,7 +159,7 @@ class ExpandedItemBox extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    imDbRating,
+                                    imDbRating != "-" ? imDbRating : "0.0",
                                     softWrap: true,
                                     style: const TextStyle(
                                         color: kImdbColor,
@@ -168,7 +170,9 @@ class ExpandedItemBox extends StatelessWidget {
                                     width: 5,
                                   ),
                                   RatingBarIndicator(
-                                    rating: double.parse(imDbRating) / 2,
+                                    rating: imDbRating != "-"
+                                        ? double.parse(imDbRating) / 2
+                                        : 0.0,
                                     itemBuilder: (context, index) => const Icon(
                                       Icons.star,
                                       color: kImdbColor,
@@ -183,15 +187,17 @@ class ExpandedItemBox extends StatelessWidget {
                               const SizedBox(
                                 width: 10,
                               ),
-                              Flexible(
-                                  child: Text(
-                                "$imDbVotes votes",
-                                softWrap: true,
-                                style: TextStyle(
-                                    color: Colors.white.withOpacity(0.8),
-                                    fontSize: 13.5,
-                                    fontWeight: FontWeight.w600),
-                              )),
+                              imDbVotes != "0.0"
+                                  ? Flexible(
+                                      child: Text(
+                                      "$imDbVotes votes",
+                                      softWrap: true,
+                                      style: TextStyle(
+                                          color: Colors.white.withOpacity(0.8),
+                                          fontSize: 13.5,
+                                          fontWeight: FontWeight.w600),
+                                    ))
+                                  : const SizedBox.shrink(),
                             ],
                           ),
                         ),
