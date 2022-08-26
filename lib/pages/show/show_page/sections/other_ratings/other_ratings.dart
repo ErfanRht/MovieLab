@@ -9,10 +9,14 @@ class ShowPageOtherRatings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (show.otherRatings["metacritic"] != "" ||
-        show.otherRatings["rottenTomatoes"] != "" ||
-        show.otherRatings["theMovieDb"] != "" ||
-        show.otherRatings["filmAffinity"] != "") {
+    if ((show.otherRatings["metacritic"] != "" &&
+            show.otherRatings["metacritic"] != null) ||
+        (show.otherRatings["rottenTomatoes"] != "" &&
+            show.otherRatings["rottenTomatoes"] != null) ||
+        (show.otherRatings["theMovieDb"] != "" &&
+            show.otherRatings["theMovieDb"] != null) ||
+        (show.otherRatings["filmAffinity"] != "" &&
+            show.otherRatings["filmAffinity"] != null)) {
       return Column(
         children: [
           const SectionTitle(title: "Other Ratings"),
@@ -23,14 +27,16 @@ class ShowPageOtherRatings extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    show.otherRatings["metacritic"] != ""
+                    show.otherRatings["metacritic"] != "" &&
+                            show.otherRatings["metacritic"] != null
                         ? OtherRatingsBox(
                             name: 'Metascore',
                             max: 100,
                             rating: double.parse(
                                 show.otherRatings['metacritic'] ?? ""))
                         : const SizedBox.shrink(),
-                    show.otherRatings["rottenTomatoes"] != ""
+                    show.otherRatings["rottenTomatoes"] != "" &&
+                            show.otherRatings["rottenTomatoes"] != null
                         ? OtherRatingsBox(
                             name: "Rotten Tomatoes",
                             max: 100,
@@ -44,14 +50,16 @@ class ShowPageOtherRatings extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    show.otherRatings["theMovieDb"] != ""
+                    show.otherRatings["theMovieDb"] != "" &&
+                            show.otherRatings["theMovieDb"] != null
                         ? OtherRatingsBox(
                             name: "The Movie Database",
                             max: 10,
                             rating: double.parse(
                                 show.otherRatings['theMovieDb'] ?? ""))
                         : const SizedBox.shrink(),
-                    show.otherRatings["filmAffinity"] != ""
+                    show.otherRatings["filmAffinity"] != "" &&
+                            show.otherRatings["Affinity"] != null
                         ? OtherRatingsBox(
                             name: "Film Affinity",
                             max: 10,

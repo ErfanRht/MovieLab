@@ -14,7 +14,10 @@ class EpisodeGuideSeasonEpisodes extends StatelessWidget {
       itemCount: show.seasons[season].length,
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, episode) {
-        return ExpandedItemBox(showPreview: show.seasons[season][episode]);
+        return ExpandedItemBox(
+          showPreview: show.seasons[season][episode],
+          preTag: "episode",
+        );
       },
     );
   }
