@@ -20,8 +20,11 @@ import 'sections/other_ratings/other_ratings.dart';
 class ShowPage extends StatefulWidget {
   final String id;
   final String preTag;
-  const ShowPage({Key? key, required this.id, this.preTag = ""})
-      : super(key: key);
+  const ShowPage({
+    Key? key,
+    required this.id,
+    this.preTag = "",
+  }) : super(key: key);
 
   @override
   State<ShowPage> createState() => _ShowPageState();
@@ -88,54 +91,58 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
         return Scaffold(
           resizeToAvoidBottomInset: true,
           extendBody: true,
-          bottomNavigationBar: AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeInOut,
-            height: _isBottomAppBarVisible ? 60 : 0.0,
-            child: BottomAppBar(
-                shape: const CircularNotchedRectangle(),
-                clipBehavior: Clip.antiAlias,
-                notchMargin: 7.5,
-                color: kSecondaryColor,
-                child: ShowPageBottonBar(
-                  show: show,
-                  isThereInLists: _isThereInLists,
-                  updateShowData: loadShowData,
-                )),
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              _isThereInLists["history"] != true
-                  ? showModalBottomSheet(
-                      context: context,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(20),
+          bottomNavigationBar: widget.preTag != "episode"
+              ? AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  height: _isBottomAppBarVisible ? 60 : 0.0,
+                  child: BottomAppBar(
+                      shape: const CircularNotchedRectangle(),
+                      clipBehavior: Clip.antiAlias,
+                      notchMargin: 7.5,
+                      color: kSecondaryColor,
+                      child: ShowPageBottonBar(
+                        show: show,
+                        isThereInLists: _isThereInLists,
+                        updateShowData: loadShowData,
                       )),
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      backgroundColor: kSecondaryColor,
-                      transitionAnimationController: AnimationController(
-                          duration: const Duration(milliseconds: 225),
-                          vsync: this),
-                      builder: (context) {
-                        return AddWatchTime(
-                          fullShow: show,
-                          updateShowData: loadShowData,
-                        );
-                      })
-                  : null;
-            },
-            backgroundColor: kPrimaryColor,
-            child: _isThereInLists["history"] != true
-                ? const Icon(
-                    Icons.add,
-                    color: Colors.white,
-                  )
-                : const Icon(
-                    Icons.check,
-                    color: Colors.white,
-                  ),
-          ),
+                )
+              : const SizedBox.shrink(),
+          floatingActionButton: widget.preTag != "episode"
+              ? FloatingActionButton(
+                  onPressed: () {
+                    _isThereInLists["history"] != true
+                        ? showModalBottomSheet(
+                            context: context,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(20),
+                            )),
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            backgroundColor: kSecondaryColor,
+                            transitionAnimationController: AnimationController(
+                                duration: const Duration(milliseconds: 225),
+                                vsync: this),
+                            builder: (context) {
+                              return AddWatchTime(
+                                fullShow: show,
+                                updateShowData: loadShowData,
+                              );
+                            })
+                        : null;
+                  },
+                  backgroundColor: kPrimaryColor,
+                  child: _isThereInLists["history"] != true
+                      ? const Icon(
+                          Icons.add,
+                          color: Colors.white,
+                        )
+                      : const Icon(
+                          Icons.check,
+                          color: Colors.white,
+                        ),
+                )
+              : const SizedBox.shrink(),
           floatingActionButtonLocation: _isBottomAppBarVisible
               ? FloatingActionButtonLocation.endDocked
               : FloatingActionButtonLocation.endFloat,

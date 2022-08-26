@@ -3,7 +3,7 @@ import 'package:movielab/models/show_models/full_show_model.dart';
 import 'package:movielab/modules/api/api_requester.dart';
 import 'cacheholder.dart';
 
-Future<FullShow?> getShowInfo({required String id}) async {
+Future<FullShow?> getShowInfo({required final String id}) async {
   FullShow? show;
   final apiRequester = APIRequester();
   final cacheHolder = CacheHolder();

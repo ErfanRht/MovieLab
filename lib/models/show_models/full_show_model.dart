@@ -94,8 +94,12 @@ class FullShow {
       type: json['type'] ?? json['role'] ?? "",
       image: json['image'].toString().replaceAll(
           "._V1_UX128_CR0,3,128,176_AL_.jpg", "._V1_Ratio0.6716_AL_.jpg"),
-      images: ImageData.getImages(json['images']) ?? [],
-      posters: PosterData.getPosters(json['posters']) ?? [],
+      images: json['images'] != null
+          ? ImageData.getImages(json['images']) ?? []
+          : [],
+      posters: json['posters'] != null
+          ? PosterData.getPosters(json['posters']) ?? <PosterData>[]
+          : <PosterData>[],
       year: json['year'] ?? "",
       genres: json['genres'] ?? "",
       releaseDate: json['releaseDate'] ?? "",
@@ -168,8 +172,8 @@ class ImageData {
     );
   }
 
-  static List<ImageData>? getImages(Map<String, dynamic> json) {
-    return (json['items'] as List<dynamic>)
+  static List<ImageData>? getImages(Map<String, dynamic>? json) {
+    return (json!['items'] as List<dynamic>)
         .map<ImageData>((item) => ImageData.fromJson(item))
         .toList();
   }
