@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -17,24 +18,10 @@ import 'pages/splash/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await initializeHive();
+  await initializeGetX();
 
-  // Initialize Hive and Hive Flutter
-  await Hive.initFlutter();
-  registerAdapters();
-  Hive.openBox<HiveUser>('user');
-  Hive.openBox<HiveShowPreview>('collection');
-  Hive.openBox<HiveShowPreview>('watchlist');
-  Hive.openBox<HiveShowPreview>('history');
-  Hive.openBox<HiveShowPreview>('artists');
-
-  // Initialize the controllers
-  Get.put(MainController());
-  Get.put(HomeDataController());
-  Get.put(SearchBarController());
-  Get.put(ProfileController());
-  Get.put(CacheData());
-
-  runApp(const ProviderScope(child: App()));
+  runApp(ProviderScope(child: Phoenix(child: const App())));
 }
 
 class App extends StatelessWidget {
@@ -53,4 +40,25 @@ class App extends StatelessWidget {
       },
     );
   }
+}
+
+Future? initializeHive() async {
+  // Initialize Hive and Hive Flutter
+  await Hive.initFlutter();
+  registerAdapters();
+  Hive.openBox<HiveUser>('user');
+  Hive.openBox<HiveShowPreview>('collection');
+  Hive.openBox<HiveShowPreview>('watchlist');
+  Hive.openBox<HiveShowPreview>('history');
+  Hive.openBox<HiveShowPreview>('artists');
+}
+
+Future? initializeGetX() {
+  // Initialize the controllers
+  Get.put(MainController());
+  Get.put(HomeDataController());
+  Get.put(SearchBarController());
+  Get.put(ProfileController());
+  Get.put(CacheData());
+  return null;
 }

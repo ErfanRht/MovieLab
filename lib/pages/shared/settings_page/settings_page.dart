@@ -3,6 +3,8 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movielab/constants/colors.dart';
+import 'package:movielab/modules/tools/navigate.dart';
+import 'package:movielab/pages/shared/settings_page/sections/backup_page.dart';
 import 'package:movielab/widgets/default_appbar.dart';
 import 'package:movielab/widgets/toast.dart';
 
@@ -18,6 +20,14 @@ class SettingsPage extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
+            settingSection(
+                icon: FontAwesomeIcons.fileImport,
+                title: "Offline import/export database",
+                description:
+                    "Get a backup file of your personal data locally on your phone",
+                onPressed: () async {
+                  Navigate.pushTo(context, BackupPage());
+                }),
             settingSection(
                 icon: FontAwesomeIcons.xmark,
                 title: "Clear media content cache",
@@ -49,6 +59,7 @@ class SettingsPage extends StatelessWidget {
 
 Widget settingSection(
     {required final IconData icon,
+    double iconSize = 24.0,
     required final String title,
     required final String description,
     required final void Function() onPressed}) {
@@ -56,6 +67,7 @@ Widget settingSection(
     leading: Icon(
       icon,
       color: Colors.white,
+      size: iconSize,
     ),
     title: Padding(
       padding: const EdgeInsets.only(bottom: 5),

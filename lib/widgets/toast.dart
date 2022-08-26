@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 
 class ToastWidget extends StatelessWidget {
   final String mainText;
+  final Color mainTextColor;
   final String buttonText;
   final Color buttonColor;
   final VoidCallback buttonOnTap;
+  final double fontSize;
   const ToastWidget(
       {Key? key,
       required this.mainText,
+      this.mainTextColor = Colors.black,
+      this.fontSize = 14,
       required this.buttonText,
       required this.buttonColor,
       required this.buttonOnTap})
@@ -29,10 +33,10 @@ class ToastWidget extends StatelessWidget {
         children: [
           Text(
             mainText,
-            style: const TextStyle(
-              fontWeight: FontWeight.w600,
-              color: Colors.black,
-            ),
+            style: TextStyle(
+                fontWeight: FontWeight.w600,
+                color: mainTextColor,
+                fontSize: fontSize),
           ),
           TextButton(
               onPressed: buttonOnTap,
@@ -40,8 +44,10 @@ class ToastWidget extends StatelessWidget {
                   TextButton.styleFrom(primary: buttonColor.withOpacity(0.5)),
               child: Text(
                 buttonText,
-                style:
-                    TextStyle(fontWeight: FontWeight.w600, color: buttonColor),
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: buttonColor,
+                    fontSize: fontSize),
               ))
         ],
       ),

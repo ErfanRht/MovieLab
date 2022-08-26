@@ -8,6 +8,7 @@ Future recommender() async {
   PreferencesShareholder preferencesShareholder = PreferencesShareholder();
   HomeDataController homeDataController = Get.find<HomeDataController>();
   List<List<ShowPreview>> allLists = await preferencesShareholder.getAllLists();
+  print(allLists);
   List<ShowPreview> allSimilars = await getAllSimilars(allLists: allLists);
   Map<String, int> allSimilarsStats = {};
   int i = 0;

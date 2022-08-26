@@ -13,4 +13,8 @@ class HiveUser extends HiveObject {
   late String username;
   @HiveField(UserFields.imageUrl)
   late String imageUrl;
+
+  // factory HiveUser.fromJson(Map<String, dynamic> json) {
+  //   return HiveUser..name = json['name']..username = json['username']..imageUrl = json['imageUrl'];
+  // }
 }

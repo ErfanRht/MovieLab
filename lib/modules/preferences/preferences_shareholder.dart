@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:movielab/models/hive/convertor.dart';
+import 'package:movielab/models/hive/models/show_preview.dart';
 import 'package:movielab/models/hive/models/user.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/models/user_model/user_model.dart';
 import 'package:movielab/modules/Recommender/Recommender.dart';
 import 'package:movielab/pages/splash/get_user_data.dart';
-import '../../models/hive/convertor.dart';
-import '../../models/hive/models/show_preview.dart';
 
 class PreferencesShareholder {
   // Delete all items of a list in the shared preferences
