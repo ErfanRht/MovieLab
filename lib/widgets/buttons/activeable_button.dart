@@ -4,7 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 class ActiveableButton extends StatelessWidget {
   final String text;
   final String? activeText;
-  final IconData icon;
+  final IconData? icon;
   final IconData? activeIcon;
   final VoidCallback onTap;
   final bool isActive;
@@ -52,14 +52,19 @@ class ActiveableButton extends StatelessWidget {
                   ),
                 ),
                 child: Row(
+                  mainAxisAlignment: icon != null
+                      ? MainAxisAlignment.start
+                      : MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: Icon(
-                        isActive ? activeIcon ?? icon : icon,
-                        size: 20,
-                      ),
-                    ),
+                    icon != null
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 25),
+                            child: Icon(
+                              isActive ? activeIcon ?? icon : icon,
+                              size: 20,
+                            ),
+                          )
+                        : const SizedBox.shrink(),
                     Text(
                       isActive ? activeText ?? text : text,
                       style: const TextStyle(

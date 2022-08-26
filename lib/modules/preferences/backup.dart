@@ -14,49 +14,52 @@ import 'package:movielab/pages/splash/get_user_data.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 Future<bool> createBackup() async {
-  Map<String, dynamic> userData = {};
+  try {
+    Map<String, dynamic> userData = {};
 
-  PreferencesShareholder preferencesShareholder = PreferencesShareholder();
-  User user = await preferencesShareholder.getUser();
-  userData['personal'] = {
-    "name": user.name,
-    "username": user.username,
-    "imageUrl": user.imageUrl
-  };
+    PreferencesShareholder preferencesShareholder = PreferencesShareholder();
+    User user = await preferencesShareholder.getUser();
+    userData['personal'] = {
+      "name": user.name,
+      "username": user.username,
+      "imageUrl": user.imageUrl
+    };
 
-  List<ShowPreview> watchlist =
-      await preferencesShareholder.getList(listName: "watchlist");
-  userData['watchlist'] = [
-    for (ShowPreview show in watchlist) ShowPreview.toMap(show)
-  ];
-  List<ShowPreview> history =
-      await preferencesShareholder.getList(listName: "history");
-  userData['history'] = [
-    for (ShowPreview show in history) ShowPreview.toMap(show)
-  ];
-  List<ShowPreview> collection =
-      await preferencesShareholder.getList(listName: "collection");
-  userData['collection'] = [
-    for (ShowPreview show in collection) ShowPreview.toMap(show)
-  ];
-  List<ShowPreview> artists =
-      await preferencesShareholder.getList(listName: "artists");
-  userData['artists'] = [
-    for (ShowPreview show in artists) ShowPreview.toMap(show)
-  ];
-  String jsonData = jsonEncode(userData);
-  await Permission.storage.request();
-  String formattedDate = DateTime.now()
-      .toString()
-      .replaceAll('.', '-')
-      .replaceAll(' ', '-')
-      .replaceAll(':', '-');
-  String? dir = await FilePicker.platform.getDirectoryPath();
-  String path = '$dir/MovieLab-backup-$formattedDate.db';
-  File backupFile = File(path);
-  await backupFile.writeAsString(jsonData);
-
-  return true;
+    List<ShowPreview> watchlist =
+        await preferencesShareholder.getList(listName: "watchlist");
+    userData['watchlist'] = [
+      for (ShowPreview show in watchlist) ShowPreview.toMap(show)
+    ];
+    List<ShowPreview> history =
+        await preferencesShareholder.getList(listName: "history");
+    userData['history'] = [
+      for (ShowPreview show in history) ShowPreview.toMap(show)
+    ];
+    List<ShowPreview> collection =
+        await preferencesShareholder.getList(listName: "collection");
+    userData['collection'] = [
+      for (ShowPreview show in collection) ShowPreview.toMap(show)
+    ];
+    List<ShowPreview> artists =
+        await preferencesShareholder.getList(listName: "artists");
+    userData['artists'] = [
+      for (ShowPreview show in artists) ShowPreview.toMap(show)
+    ];
+    String jsonData = jsonEncode(userData);
+    await Permission.storage.request();
+    String formattedDate = DateTime.now()
+        .toString()
+        .replaceAll('.', '-')
+        .replaceAll(' ', '-')
+        .replaceAll(':', '-');
+    String? dir = await FilePicker.platform.getDirectoryPath();
+    String path = '$dir/MovieLab-backup-$formattedDate.db';
+    File backupFile = File(path);
+    await backupFile.writeAsString(jsonData);
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 Future<bool> restoreBackup() async {
