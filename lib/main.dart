@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:movielab/constants/themes.dart';
@@ -21,7 +19,7 @@ void main() async {
   await initializeHive();
   await initializeGetX();
 
-  runApp(ProviderScope(child: Phoenix(child: const App())));
+  runApp(const App());
 }
 
 class App extends StatelessWidget {
