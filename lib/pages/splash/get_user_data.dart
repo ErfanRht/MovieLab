@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/models/user_model/user_model.dart';
@@ -202,7 +203,9 @@ Future<bool> updateUserStats() async {
         sortedContentRatings: sortedContentRatings,
         contentRatingsLength: contentRatingsLength,
         contentRatingsOthers: contentRatingsOthers);
-    print("User stats updated");
+    if (kDebugMode) {
+      print("User stats updated");
+    }
     return true;
   }
   return false;

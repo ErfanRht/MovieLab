@@ -98,6 +98,22 @@ class ShowPreview {
       domestic: json['domestic'] ?? "",
       foreignLifetimeGross: json['foreignLifetimeGross'] ?? "",
       foreign: json['foreign'] ?? "",
+      companies: json['companies'] ?? "",
+      contentRating: json['contentRating'] ?? "",
+      countries: json['countries'] ?? "",
+      genres: json['genres'] ?? "",
+      languages: json['languages'] ?? "",
+      similars: json['similars'] == null
+          ? null
+          : [
+              for (var similar in json['similars']!)
+                ShowPreview.fromJson(similar)
+            ],
+      watchDate:
+          json["watchDate"] == null ? null : DateTime.parse(json["watchDate"]),
+      watchTime: json['watchTime'] == null
+          ? null
+          : TimeOfDay.fromDateTime(DateTime.parse(json["watchDate"])),
     );
   }
 
@@ -105,10 +121,26 @@ class ShowPreview {
         'id': show.id,
         'rank': show.rank,
         'title': show.title,
+        'type': show.type,
         'crew': show.crew,
         'image': show.image,
         'year': show.year,
         'imDbRating': show.imDbRating,
+        'imDbVotes': show.imDbVotes,
+        'released': show.released,
+        'seasonNumber': show.seasonNumber,
+        'episodeNumber': show.episodeNumber,
+        'plot': show.plot,
+        'genres': show.genres,
+        'countries': show.countries,
+        'languages': show.languages,
+        'companies': show.companies,
+        'contentRating': show.contentRating,
+        'watchDate': show.watchDate?.toString(),
+        'watchTime': show.watchTime?.toString(),
+        'similars': [
+          for (var similar in show.similars!) ShowPreview.toMap(similar)
+        ]
       };
 
   static String encode(List<ShowPreview> shows) => json.encode(
