@@ -31,21 +31,21 @@ class ShowPageNavBar extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.4),
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(
-                  Icons.more_horiz_rounded,
-                  size: 28,
-                ),
-              ),
-            ),
+            // Container(
+            //   decoration: BoxDecoration(
+            //     color: Colors.black.withOpacity(0.4),
+            //     borderRadius: BorderRadius.circular(25),
+            //   ),
+            //   child: IconButton(
+            //     onPressed: () {
+            //       Navigator.pop(context);
+            //     },
+            //     icon: const Icon(
+            //       Icons.more_horiz_rounded,
+            //       size: 28,
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
