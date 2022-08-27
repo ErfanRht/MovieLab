@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:movielab/constants/colors.dart';
+import 'package:movielab/constants/user_lists.dart';
 import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/pages/main/profile/sections/list_page/list_page.dart';
 import 'package:movielab/widgets/buttons_section.dart';
-import '../../../../widgets/section_title.dart';
+import 'package:movielab/modules/tools/capitalizer.dart';
+import 'package:movielab/widgets/section_title.dart';
 
 class ProfilePageLists extends StatelessWidget {
   const ProfilePageLists({Key? key}) : super(key: key);
@@ -22,48 +22,18 @@ class ProfilePageLists extends StatelessWidget {
         ButtonsSection(
           height: 500,
           items: [
-            ButtonSectionItem(
-              title: "Watchlist",
-              icon: FontAwesomeIcons.bookmark,
-              iconColor: Colors.blue,
-              onPressed: () {
-                Navigate.pushTo(context, const ListPage(listName: "watchlist"));
-              },
-            ),
-            ButtonSectionItem(
-              title: "History",
-              icon: FontAwesomeIcons.check,
-              iconColor: Colors.green,
-              onPressed: () {
-                Navigate.pushTo(context, const ListPage(listName: "history"));
-              },
-            ),
-            ButtonSectionItem(
-              title: "Collection",
-              icon: FontAwesomeIcons.rectangleList,
-              iconColor: Colors.teal,
-              onPressed: () {
-                Navigate.pushTo(
-                    context, const ListPage(listName: "collection"));
-              },
-            ),
-            ButtonSectionItem(
-              title: "Favorite Artists",
-              icon: Icons.group_outlined,
-              iconColor: kPrimaryColor,
-              onPressed: () {
-                Navigate.pushTo(context, const ListPage(listName: "artists"));
-              },
-            ),
-            ButtonSectionItem(
-              title: "Recommendations for you",
-              icon: FontAwesomeIcons.clapperboard,
-              iconColor: Colors.deepPurpleAccent,
-              onPressed: () {
-                Navigate.pushTo(
-                    context, const ListPage(listName: "recommendations"));
-              },
-            ),
+            for (Map<String, dynamic> list in userLists)
+              ButtonSectionItem(
+                title: list["name"] != "recommendations"
+                    ? list["name"].toString().capitalize()
+                    : "${list["name"].toString().capitalize()} for you",
+                icon: list["icon"],
+                iconColor: list["color"],
+                iconPadding: list["padding"],
+                onPressed: () {
+                  Navigate.pushTo(context, ListPage(listName: list["name"]));
+                },
+              ),
           ],
         )
       ],

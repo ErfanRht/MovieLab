@@ -47,7 +47,7 @@ class HomeTrendingsBuilder extends StatelessWidget {
             ],
           ),
           SizedBox(
-              height: trendings[0].crew != "" ? 275 : 265,
+              height: trendings[0].crew != "" ? 280 : 270,
               child: trendings.isNotEmpty
                   ? Row(
                       children: [
