@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:movielab/constants/colors.dart';
+import 'package:movielab/constants/user_lists.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/pages/shared/show_popup/show_popup_actions.dart';
+import 'package:movielab/widgets/buttons_section.dart';
 import 'show_box_common.dart';
 
 class CompressedItemBox extends StatefulWidget {
@@ -20,6 +24,7 @@ class _CompressedItemBoxState extends State<CompressedItemBox>
   late String year;
   late String crew;
   late String id;
+  Map<String, bool> _isThereInLists = {};
   @override
   void initState() {
     super.initState();
@@ -27,6 +32,7 @@ class _CompressedItemBoxState extends State<CompressedItemBox>
     year = widget.showPreview.year;
     crew = widget.showPreview.crew;
     id = widget.showPreview.id;
+    updateData();
   }
 
   @override
@@ -37,7 +43,7 @@ class _CompressedItemBoxState extends State<CompressedItemBox>
       },
       onLongPress: () async {
         await Future.delayed(const Duration(milliseconds: 250));
-        showModalBottomSheet(
+        await showModalBottomSheet(
           context: context,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
@@ -52,6 +58,7 @@ class _CompressedItemBoxState extends State<CompressedItemBox>
             );
           },
         );
+        updateData();
       },
       borderRadius: BorderRadius.circular(20),
       child: Container(
@@ -60,38 +67,101 @@ class _CompressedItemBoxState extends State<CompressedItemBox>
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
         child: Column(
           children: [
-            Stack(
-              children: [
-                boxImage(
-                    image: widget.showPreview.image,
-                    tag: "${widget.preTag}_show_$id",
-                    height: 210,
-                    width: 145,
-                    radius: 17.5),
-                Positioned(
-                  right: 7.5,
-                  top: 7.5,
-                  child: Container(
-                    width: 30,
-                    height: 17.5,
-                    decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(5.5)),
-                    child: Center(
-                      child: Text(
-                        widget.showPreview.imDbRating,
-                        style: const TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.w700),
+            SizedBox(
+              height: 220,
+              width: 145,
+              child: Stack(
+                children: [
+                  boxImage(
+                      image: widget.showPreview.image,
+                      tag: "${widget.preTag}_show_$id",
+                      height: 210,
+                      width: 145,
+                      radius: 17.5),
+                  Positioned(
+                    right: 7.5,
+                    top: 7.5,
+                    child: Container(
+                      width: 30,
+                      height: 17.5,
+                      decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(5.5)),
+                      child: Center(
+                        child: Text(
+                          widget.showPreview.imDbRating,
+                          style: const TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.w700),
+                        ),
                       ),
                     ),
                   ),
-                )
-              ],
+                  Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Stack(
+                              alignment: Alignment.bottomRight,
+                              children: [
+                                for (int i = 0, rightPadd = 0;
+                                    i < userLists.length;
+                                    _isThereInLists[userLists[i]["name"]] ==
+                                            true
+                                        ? rightPadd += 15
+                                        : null,
+                                    i++)
+                                  _isThereInLists[userLists[i]["name"]] == true
+                                      ? Padding(
+                                          padding: EdgeInsets.only(
+                                              right: double.parse(
+                                                  rightPadd.toString())),
+                                          child: Stack(
+                                            alignment: Alignment.center,
+                                            children: [
+                                              Container(
+                                                width: 30,
+                                                height: 30,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                  color: kBackgroundColor,
+                                                ),
+                                              ),
+                                              buttonSectionIcon(
+                                                  item: ButtonSectionItem(
+                                                      onPressed: () {},
+                                                      iconPadding: userLists[i]
+                                                          ["padding"],
+                                                      title: userLists[i]
+                                                          ["name"],
+                                                      icon: userLists[i]
+                                                          ["icon"],
+                                                      iconColor: userLists[i]
+                                                          ["color"]),
+                                                  size: 23.5),
+                                            ],
+                                          ),
+                                        )
+                                      : const SizedBox.shrink(),
+                              ],
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
             Container(
               width: 155,
               alignment: Alignment.bottomLeft,
-              padding: const EdgeInsets.only(left: 5, right: 5, top: 5),
+              padding: const EdgeInsets.only(left: 5, right: 5, top: 0),
               child: Row(
                 children: [
                   Flexible(
@@ -135,5 +205,15 @@ class _CompressedItemBoxState extends State<CompressedItemBox>
         ),
       ),
     );
+  }
+
+  updateData() {
+    PreferencesShareholder shareholder = PreferencesShareholder();
+    shareholder.isThereInLists(showId: id).then((value) => {
+          setState(() {
+            _isThereInLists = value;
+            print(_isThereInLists);
+          })
+        });
   }
 }

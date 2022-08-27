@@ -20,9 +20,9 @@ Widget boxImage(
       size: 30.0,
     )}) {
   return SizedBox(
-      width: width,
-      height: height,
-      child: ClipRRect(
+    width: width,
+    height: height,
+    child: ClipRRect(
         borderRadius: BorderRadius.circular(radius),
         child: Hero(
           transitionOnUserGestures: true,
@@ -34,8 +34,8 @@ Widget boxImage(
               placeholder: (context, url) => Center(
                     child: placeholder,
                   )),
-        ),
-      ));
+        )),
+  );
 }
 
 Widget showBoxText(

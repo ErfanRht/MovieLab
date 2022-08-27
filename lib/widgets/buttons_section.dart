@@ -60,21 +60,7 @@ class ButtonsSection extends StatelessWidget {
                               : EdgeInsets.zero,
                       child: Row(
                         children: [
-                          Container(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 12.5, vertical: 5),
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                                color: items[index].iconColor,
-                                borderRadius: BorderRadius.circular(15)),
-                            child: Center(
-                                child: Icon(
-                              items[index].icon,
-                              size: 20,
-                              color: Colors.white,
-                            )),
-                          ),
+                          buttonSectionIcon(item: items[index], size: 40),
                           Expanded(
                             child: Container(
                               height: itemHeight,
@@ -129,9 +115,28 @@ class ButtonSectionItem {
   final IconData icon;
   final Color iconColor;
   final VoidCallback? onPressed;
+  final EdgeInsets iconPadding;
   const ButtonSectionItem(
       {required this.onPressed,
       required this.title,
       required this.icon,
-      required this.iconColor});
+      required this.iconColor,
+      this.iconPadding = EdgeInsets.zero});
 }
+
+Widget buttonSectionIcon(
+        {required ButtonSectionItem item, required final double size}) =>
+    Container(
+      margin: const EdgeInsets.symmetric(horizontal: 12.5, vertical: 5),
+      width: size,
+      height: size,
+      padding: item.iconPadding,
+      decoration: BoxDecoration(
+          color: item.iconColor, borderRadius: BorderRadius.circular(15)),
+      child: Center(
+          child: Icon(
+        item.icon,
+        size: size / 2,
+        color: Colors.white,
+      )),
+    );
