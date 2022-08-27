@@ -4,9 +4,11 @@ import 'package:movielab/widgets/buttons/activeable_button.dart';
 
 Future<dynamic> guideModalSheet(BuildContext context,
     {required dynamic vsync,
+    final int height = 250,
     final Color backgroundColor = kBackgroundColor,
     required final String title,
     required final String decription,
+    required final String buttonText,
     required final VoidCallback onTap}) {
   return showModalBottomSheet(
     context: context,
@@ -16,12 +18,12 @@ Future<dynamic> guideModalSheet(BuildContext context,
     )),
     clipBehavior: Clip.antiAliasWithSaveLayer,
     transitionAnimationController: AnimationController(
-        duration: const Duration(milliseconds: 250), vsync: vsync),
+        duration: Duration(milliseconds: height), vsync: vsync),
     builder: (context) {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 50),
         color: backgroundColor,
-        height: 250,
+        height: double.parse(height.toString()),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -50,11 +52,14 @@ Future<dynamic> guideModalSheet(BuildContext context,
             ),
             ActiveableButton(
               isActive: true,
-              text: "Select Folder",
+              text: buttonText,
               icon: null,
               onTap: onTap,
               activeColor: kAccentColor,
-            )
+            ),
+            const SizedBox(
+              height: 20,
+            ),
           ],
         ),
       );

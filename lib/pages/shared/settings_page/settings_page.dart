@@ -5,11 +5,20 @@ import 'package:movielab/constants/colors.dart';
 import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/pages/shared/settings_page/sections/backup_page.dart';
 import 'package:movielab/widgets/default_appbar.dart';
+import 'package:movielab/widgets/guide_modal.dart';
 import 'package:movielab/widgets/toast.dart';
 
-class SettingsPage extends StatelessWidget {
-  SettingsPage({Key? key}) : super(key: key);
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({Key? key}) : super(key: key);
+
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage>
+    with TickerProviderStateMixin {
   FToast fToast = FToast();
+
   @override
   Widget build(BuildContext context) {
     fToast.init(context);
@@ -25,7 +34,7 @@ class SettingsPage extends StatelessWidget {
                 description:
                     "Get a backup file of your personal data locally on your phone",
                 onPressed: () async {
-                  Navigate.pushTo(context, BackupPage());
+                  Navigate.pushTo(context, const BackupPage());
                 }),
             settingSection(
                 icon: Icons.cancel_sharp,
@@ -33,21 +42,33 @@ class SettingsPage extends StatelessWidget {
                 description:
                     "Remove all cached content, but not your personal data",
                 onPressed: () async {
-                  await DefaultCacheManager().emptyCache();
-                  fToast.removeQueuedCustomToasts();
-                  fToast.showToast(
-                    child: ToastWidget(
-                      mainText: "Cache cleared",
-                      buttonText: "Ok",
-                      buttonColor: kAccentColor,
-                      buttonOnTap: () async {
-                        await Future.delayed(const Duration(milliseconds: 200));
-                        fToast.removeCustomToast();
-                      },
-                    ),
-                    gravity: ToastGravity.BOTTOM,
-                    toastDuration: const Duration(seconds: 2),
-                  );
+                  guideModalSheet(context,
+                      vsync: this,
+                      height: 275,
+                      title: "Clear media content cache",
+                      decription:
+                          "This will remove all cached content like images, trailers, etc., and wouldn't hurt your personal data.",
+                      buttonText: "Clear cache", onTap: () async {
+                    await DefaultCacheManager().emptyCache();
+                    await Future.delayed(const Duration(milliseconds: 200));
+                    Navigator.pop(context);
+                    await Future.delayed(const Duration(milliseconds: 250));
+                    fToast.removeQueuedCustomToasts();
+                    fToast.showToast(
+                      child: ToastWidget(
+                        mainText: "Cache cleared",
+                        buttonText: "Ok",
+                        buttonColor: kAccentColor,
+                        buttonOnTap: () async {
+                          await Future.delayed(
+                              const Duration(milliseconds: 200));
+                          fToast.removeCustomToast();
+                        },
+                      ),
+                      gravity: ToastGravity.BOTTOM,
+                      toastDuration: const Duration(seconds: 2),
+                    );
+                  });
                 }),
           ],
         ),

@@ -39,7 +39,7 @@ class _BackupPageState extends State<BackupPage> with TickerProviderStateMixin {
                       title: "Select File Location",
                       decription:
                           "Select the directory where you want to save this file.",
-                      onTap: () async {
+                      buttonText: "Select Folder", onTap: () async {
                     await createBackup().then((final bool success) {
                       if (success) {
                         fToast.removeQueuedCustomToasts();
