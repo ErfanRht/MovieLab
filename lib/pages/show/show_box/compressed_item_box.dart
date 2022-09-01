@@ -20,18 +20,10 @@ class CompressedItemBox extends StatefulWidget {
 
 class _CompressedItemBoxState extends State<CompressedItemBox>
     with TickerProviderStateMixin {
-  late String title;
-  late String year;
-  late String crew;
-  late String id;
   Map<String, bool> _isThereInLists = {};
   @override
   void initState() {
     super.initState();
-    title = widget.showPreview.title;
-    year = widget.showPreview.year;
-    crew = widget.showPreview.crew;
-    id = widget.showPreview.id;
     updateData();
   }
 
@@ -39,7 +31,7 @@ class _CompressedItemBoxState extends State<CompressedItemBox>
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        openShowPage(context, id: id, preTag: widget.preTag);
+        openShowPage(context, id: widget.showPreview.id, preTag: widget.preTag);
       },
       onLongPress: () async {
         await Future.delayed(const Duration(milliseconds: 250));
@@ -76,7 +68,7 @@ class _CompressedItemBoxState extends State<CompressedItemBox>
                 children: [
                   boxImage(
                       image: widget.showPreview.image,
-                      tag: "${widget.preTag}_show_$id",
+                      tag: "${widget.preTag}_show_${widget.showPreview.id}",
                       height: 210,
                       width: 145,
                       radius: 17.5),
@@ -169,17 +161,17 @@ class _CompressedItemBoxState extends State<CompressedItemBox>
                   Flexible(
                     flex: 2,
                     child: showBoxText(
-                      text: title,
+                      text: widget.showPreview.title,
                       isItTitle: true,
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  year != ""
+                  widget.showPreview.year != ""
                       ? Flexible(
                           flex: 1,
                           child: showBoxText(
-                            text: " ($year)",
+                            text: " (${widget.showPreview.year})",
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
                           ),
@@ -196,7 +188,7 @@ class _CompressedItemBoxState extends State<CompressedItemBox>
                 children: [
                   Flexible(
                       child: showBoxText(
-                    text: crew,
+                    text: widget.showPreview.crew,
                     fontSize: 10,
                     fontWeight: FontWeight.w600,
                   )),
@@ -211,7 +203,7 @@ class _CompressedItemBoxState extends State<CompressedItemBox>
 
   Future updateData() async {
     PreferencesShareholder shareholder = PreferencesShareholder();
-    shareholder.isThereInLists(showId: id).then((value) => {
+    shareholder.isThereInLists(showId: widget.showPreview.id).then((value) => {
           setState(() {
             _isThereInLists = value;
             print(_isThereInLists);
