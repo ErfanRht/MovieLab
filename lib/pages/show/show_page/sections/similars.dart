@@ -22,7 +22,7 @@ class ShowPageSimilars extends StatelessWidget {
 
 similars({required List similars}) {
   return SizedBox(
-    height: 265,
+    height: 270,
     child: Row(
       children: [
         Expanded(
