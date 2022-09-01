@@ -7,26 +7,25 @@ import 'package:movielab/pages/main/home/home_data_controller.dart';
 Future recommender() async {
   PreferencesShareholder preferencesShareholder = PreferencesShareholder();
   HomeDataController homeDataController = Get.find<HomeDataController>();
-  List<ShowPreview> alreadyWatched =
-      await preferencesShareholder.getList(listName: 'history');
-  List<String> alreadyWatchedIds = [
-    for (ShowPreview show in alreadyWatched) show.id
-  ];
   List<List<ShowPreview>> allLists = await preferencesShareholder.getAllLists();
+  List<String> alreadyWatchedIds = [
+    for (List list in allLists)
+      for (ShowPreview show in list) show.id
+  ];
   List<ShowPreview> allSimilars = await getAllSimilars(allLists: allLists);
   Map<String, int> allSimilarsStats = {};
   int i = 0;
   for (ShowPreview similar in allSimilars) {
     i++;
     if (!alreadyWatchedIds.contains(similar.id)) {
-      // This way, the system is not gonna recommend user the items that they have been already watched.
+      // This way, the system is not gonna recommend user the items that they have been already watched or at least know them.
       if (allSimilarsStats.containsKey(similar.title)) {
         allSimilarsStats[similar.title] = allSimilarsStats[similar.title]! + 1;
       } else {
         allSimilarsStats[similar.title] = 1;
       }
     } else {
-      // similar.title has already been watched
+      // similar.title has already been known by the user.
     }
   }
   final List<String> recommendedTitles = allSimilarsStats.keys.toList();
