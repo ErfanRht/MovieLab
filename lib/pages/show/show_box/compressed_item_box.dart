@@ -55,6 +55,8 @@ class _CompressedItemBoxState extends State<CompressedItemBox>
           builder: (context) {
             return ShowPopupActions(
               show: widget.showPreview,
+              updateStats: updateData,
+              backgroundColor: kBackgroundColor,
             );
           },
         );
@@ -207,7 +209,7 @@ class _CompressedItemBoxState extends State<CompressedItemBox>
     );
   }
 
-  updateData() {
+  Future updateData() async {
     PreferencesShareholder shareholder = PreferencesShareholder();
     shareholder.isThereInLists(showId: id).then((value) => {
           setState(() {
@@ -215,5 +217,6 @@ class _CompressedItemBoxState extends State<CompressedItemBox>
             print(_isThereInLists);
           })
         });
+    return true;
   }
 }

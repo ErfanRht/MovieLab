@@ -13,8 +13,16 @@ import 'watchtime/watchtime.dart';
 
 class ShowPopupActions extends StatefulWidget {
   final ShowPreview show;
-
-  const ShowPopupActions({Key? key, required this.show}) : super(key: key);
+  final FullShow? fullShow;
+  final Future<dynamic> Function() updateStats;
+  final Color backgroundColor;
+  const ShowPopupActions(
+      {Key? key,
+      required this.show,
+      this.fullShow,
+      required this.updateStats,
+      required this.backgroundColor})
+      : super(key: key);
 
   @override
   State<ShowPopupActions> createState() => _ShowPopupActionsState();
@@ -32,18 +40,27 @@ class _ShowPopupActionsState extends State<ShowPopupActions>
     super.initState();
     fToast = FToast();
     fToast.init(context);
+    _fullShow = widget.fullShow;
     getShowListsInformation();
-    _loadShowInfo();
+    if (_fullShow == null) {
+      _loadShowInfo();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 20),
-      color: kBackgroundColor,
-      height: 235,
+      // padding: const EdgeInsets.symmetric(vertical: 20),
+      color: widget.backgroundColor,
+      height: 250,
       child: Column(
         children: [
+          Container(
+            width: MediaQuery.of(context).size.width / 3,
+            margin: const EdgeInsets.only(top: 20, bottom: 15),
+            height: 3,
+            color: Colors.white.withOpacity(0.4),
+          ),
           ActiveableButton(
               icon: FontAwesomeIcons.circle,
               activeIcon: FontAwesomeIcons.solidCircle,
@@ -53,44 +70,25 @@ class _ShowPopupActionsState extends State<ShowPopupActions>
               isActive: _isThereInLists['history'] ?? false,
               onTap: () async {
                 if (_isThereInLists["history"] == false) {
-                  if (_fullShow == null) {
-                    await _loadShowInfo();
-                    Navigator.pop(context);
-                    await Future.delayed(const Duration(milliseconds: 200));
-                    showModalBottomSheet(
-                        context: context,
-                        shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(20),
-                        )),
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        transitionAnimationController: AnimationController(
-                            duration: const Duration(milliseconds: 225),
-                            vsync: this),
-                        builder: (context) {
-                          return AddWatchTime(
-                            fullShow: _fullShow,
-                          );
-                        });
-                  } else {
-                    Navigator.pop(context);
-                    await Future.delayed(const Duration(milliseconds: 200));
-                    showModalBottomSheet(
-                        context: context,
-                        shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(20),
-                        )),
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        transitionAnimationController: AnimationController(
-                            duration: const Duration(milliseconds: 175),
-                            vsync: this),
-                        builder: (context) {
-                          return AddWatchTime(
-                            fullShow: _fullShow,
-                          );
-                        });
-                  }
+                  Navigator.pop(context);
+                  await Future.delayed(const Duration(milliseconds: 200));
+                  showModalBottomSheet(
+                      context: context,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(20),
+                      )),
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      transitionAnimationController: AnimationController(
+                          duration: const Duration(milliseconds: 175),
+                          vsync: this),
+                      builder: (context) {
+                        return AddWatchTime(
+                          fullShow: _fullShow,
+                          updateShowData: widget.updateStats,
+                          backgroundColor: widget.backgroundColor,
+                        );
+                      });
                 } else {
                   handleOnTap(listName: "history");
                 }
@@ -124,16 +122,16 @@ class _ShowPopupActionsState extends State<ShowPopupActions>
     required String listName,
   }) async {
     if (_isThereInLists[listName] == false) {
-      FullShow? fullShow = await getShowInfo(id: widget.show.id);
+      _fullShow = _fullShow ?? await getShowInfo(id: widget.show.id);
       _preferencesShareholder.addShowToList(
           showPreview: widget.show,
           listName: listName,
-          genres: fullShow!.genres,
-          countries: fullShow.countries,
-          languages: fullShow.languages,
-          companies: fullShow.companies,
-          contentRating: fullShow.contentRating,
-          similars: fullShow.similars);
+          genres: _fullShow!.genres,
+          countries: _fullShow!.countries,
+          languages: _fullShow!.languages,
+          companies: _fullShow!.companies,
+          contentRating: _fullShow!.contentRating,
+          similars: _fullShow!.similars);
       setState(() {
         _isThereInLists[listName] = true;
       });
@@ -173,6 +171,7 @@ class _ShowPopupActionsState extends State<ShowPopupActions>
         toastDuration: const Duration(seconds: 3),
       );
     }
+    widget.updateStats();
   }
 
   getShowListsInformation() async {

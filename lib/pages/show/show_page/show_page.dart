@@ -43,7 +43,7 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
     super.initState();
     setSystemUIOverlayStyle(
         systemUIOverlayStyle: SystemUIOverlayStyle.DARK,
-        color: const Color(0xff132D4E));
+        color: kSecondaryColor);
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       if (_scrollController.position.userScrollDirection ==
@@ -127,6 +127,7 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
                               return AddWatchTime(
                                 fullShow: show,
                                 updateShowData: loadShowData,
+                                backgroundColor: kSecondaryColor,
                               );
                             })
                         : null;

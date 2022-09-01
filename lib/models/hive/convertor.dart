@@ -116,10 +116,9 @@ Future<HiveShowPreview> convertFullShowToHive(
     ..watchTime = time;
 }
 
-Future<ShowPreview> convertFullShowToShowPreview(
-    {required FullShow fullShow}) async {
+ShowPreview convertFullShowToShowPreview({required FullShow fullShow}) {
   String crew = "";
-  await getShowCrew(fullShow: fullShow).then((value) => crew = value);
+  getShowCrew(fullShow: fullShow).then((value) => crew = value);
   return ShowPreview(
     id: fullShow.id,
     title: fullShow.title,

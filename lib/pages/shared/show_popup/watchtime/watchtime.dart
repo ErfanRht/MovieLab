@@ -11,13 +11,14 @@ import 'package:movielab/widgets/toast.dart';
 
 class AddWatchTime extends StatefulWidget {
   final FullShow? fullShow;
-  final Future<dynamic> Function()? updateShowData;
+  final Future<dynamic> Function() updateShowData;
+  final Color backgroundColor;
   const AddWatchTime({
     Key? key,
     this.fullShow,
-    this.updateShowData,
+    required this.updateShowData,
+    required this.backgroundColor,
   }) : super(key: key);
-
   @override
   AddWatchTimeState createState() => AddWatchTimeState();
 }
@@ -44,7 +45,7 @@ class AddWatchTimeState extends State<AddWatchTime> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      color: widget.updateShowData != null ? kSecondaryColor : kBackgroundColor,
+      color: widget.backgroundColor,
       duration: const Duration(milliseconds: 125),
       height: !isOtherDateSectionOpen ? 225 : 350,
       child: Column(
@@ -354,8 +355,7 @@ class AddWatchTimeState extends State<AddWatchTime> {
   // Add the item to the History list
   markAsWatched({required DateTime date, required TimeOfDay time}) async {
     _preferencesShareholder.addShowToList(
-      showPreview:
-          await convertFullShowToShowPreview(fullShow: widget.fullShow!),
+      showPreview: convertFullShowToShowPreview(fullShow: widget.fullShow!),
       listName: "history",
       date: date,
       time: time,
@@ -366,10 +366,13 @@ class AddWatchTimeState extends State<AddWatchTime> {
       contentRating: widget.fullShow!.contentRating,
       similars: widget.fullShow!.similars,
     );
+    widget.updateShowData();
+
     await Future.delayed(const Duration(milliseconds: 200));
     // ignore: use_build_context_synchronously
     Navigator.pop(context);
-    await Future.delayed(const Duration(milliseconds: 200));
+    await Future.delayed(const Duration(milliseconds: 50));
+
     fToast.removeQueuedCustomToasts();
     fToast.showToast(
       child: ToastWidget(
@@ -381,6 +384,6 @@ class AddWatchTimeState extends State<AddWatchTime> {
       gravity: ToastGravity.BOTTOM,
       toastDuration: const Duration(seconds: 3),
     );
-    widget.updateShowData!();
+    widget.updateShowData();
   }
 }
