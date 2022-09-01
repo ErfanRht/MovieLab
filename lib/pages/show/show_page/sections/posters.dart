@@ -10,7 +10,6 @@ class ShowPagePosters extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(posters[0].link);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

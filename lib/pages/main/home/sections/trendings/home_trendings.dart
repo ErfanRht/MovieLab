@@ -56,7 +56,8 @@ class HomeTrendingsBuilder extends StatelessWidget {
                               physics: const BouncingScrollPhysics(),
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
-                              itemCount: 10,
+                              itemCount:
+                                  trendings.length > 10 ? 10 : trendings.length,
                               itemBuilder: (context, index) {
                                 return CompressedItemBox(
                                   showPreview: trendings[index],

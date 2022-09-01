@@ -89,20 +89,6 @@ Future<bool> restoreBackup() async {
         shareholder.deleteList("collection");
         shareholder.deleteList("artists");
 
-        // print("history: ${history.length}");
-        // for (int i = 0; i <= history.length + 1; i++) {
-        //   print("history $i deliting");
-        //   history.delete(i);
-        //   print("done");
-        // }
-        // print(collection.length);
-        // for (int i = 0; i <= collection.length + 1; i++) {
-        //   collection.delete(i);
-        // }
-        // print(artists.length);
-        // for (int i = 0; i <= artists.length; i++) {
-        //   artists.delete(i);
-        // }
         user.put(
             0,
             HiveUser()

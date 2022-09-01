@@ -197,7 +197,6 @@ class APIRequester {
 
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body)["episodes"];
-      print("hereee");
       List<ShowPreview> seasonEpisodes = [];
       for (int i = 0; i < json.length; i++) {
         seasonEpisodes.add(ShowPreview.fromJson(json[i]));

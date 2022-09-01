@@ -206,7 +206,6 @@ class _CompressedItemBoxState extends State<CompressedItemBox>
     shareholder.isThereInLists(showId: widget.showPreview.id).then((value) => {
           setState(() {
             _isThereInLists = value;
-            print(_isThereInLists);
           })
         });
     return true;
