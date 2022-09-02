@@ -25,6 +25,24 @@ MovieLab is using [IMDB APIs](https://imdb-api.com/).
 
 IMDB APIs' documentation can be found [here](https://imdb-api.com/api).
 
+### Plugins
+
+* Local storage
+  + hive
+  + hive_flutter
+  + shared_preferences
+* State management
+  + get
+* Internal storage
+  + gallery_saver
+  + external_path
+  + image_picker
+  + file_picker
+  + permission_handler
+
+### Screenshots
+<img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_01.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_02.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_03.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_04.jpg?raw=true" width="23%" /><img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_05.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_06.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_07.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_08.jpg?raw=true" width="23%" /><img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_09.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_10.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_11.jpg?raw=true" width="23%" />
+
 ## Requirements
 * Any Operating System (ie. MacOS X, Linux, Windows)
 * Any IDE with Flutter SDK installed (ie. IntelliJ, Android Studio, VSCode etc)
@@ -40,10 +58,6 @@ If you have a connected device or emulator you can run and deploy the app with `
 To run this app, you must get an IMDb api key and put it in lib\modules\api\api_keys.dart
 
 For more information, checkout [This file](https://github.com/ErfanRht/MovieLab/blob/master/lib/modules/api/api_keys.dart).
-
-
-### Screenshots
-<img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_01.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_02.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_03.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_04.jpg?raw=true" width="23%" /><img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_05.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_06.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_07.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_08.jpg?raw=true" width="23%" /><img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_09.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_10.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_11.jpg?raw=true" width="23%" />
 
 ## Issues
 Please file any issues, bugs or feature request [here](https://github.com/ErfanRht/MovieLab/issues).
