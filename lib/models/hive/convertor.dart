@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movielab/models/actor_models/actor_preview_model.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/models/user_model/user_model.dart';
@@ -143,6 +144,11 @@ ShowPreview convertFullShowToShowPreview({required FullShow fullShow}) {
     contentRating: fullShow.contentRating,
     similars: fullShow.similars,
   );
+}
+
+ActorPreview convertShowPreviewToActorPreview({required ShowPreview show}) {
+  return ActorPreview(
+      id: show.id, name: show.title, image: show.image, asCharacter: "");
 }
 
 Future<String> getShowCrew({required FullShow fullShow}) async {

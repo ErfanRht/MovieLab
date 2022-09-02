@@ -3,6 +3,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
+import 'package:movielab/models/hive/convertor.dart';
+import 'package:movielab/pages/actor/actor_box/expanded_actor_box.dart';
 import 'package:movielab/pages/main/main_controller.dart';
 import 'package:movielab/pages/main/search/search.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar.dart';
@@ -59,13 +61,16 @@ class SearchPage extends StatelessWidget {
               children: [
                 AnimatedSwitcher(
                     duration: const Duration(milliseconds: 200),
-                    child: _buildBody(_.movieResult, _.loadingStatus)),
+                    child:
+                        _buildBody("movies", _.movieResult, _.loadingStatus)),
                 AnimatedSwitcher(
                     duration: const Duration(milliseconds: 200),
-                    child: _buildBody(_.seriesResult, _.loadingStatus)),
+                    child:
+                        _buildBody("series", _.seriesResult, _.loadingStatus)),
                 AnimatedSwitcher(
                     duration: const Duration(milliseconds: 200),
-                    child: _buildBody(_.peopleResult, _.loadingStatus))
+                    child:
+                        _buildBody("people", _.peopleResult, _.loadingStatus))
               ],
             ),
           ),
@@ -74,7 +79,7 @@ class SearchPage extends StatelessWidget {
     );
   }
 
-  Widget _buildBody(result, loadingStatus) {
+  Widget _buildBody(tab, result, loadingStatus) {
     switch (loadingStatus) {
       case RequestResult.NOT_STARTED:
         return Center(
@@ -114,10 +119,16 @@ class SearchPage extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     controller: _.searchScrollController,
                     itemBuilder: (context, index) {
-                      return ExpandedItemBox(
-                        showPreview: result![index],
-                        preTag: "Search_page_",
-                      );
+                      return tab != "people"
+                          ? ExpandedItemBox(
+                              showPreview: result![index],
+                              preTag: "Search_page_",
+                            )
+                          : ExpandedActorBox(
+                              actor: convertShowPreviewToActorPreview(
+                                  show: result![index]),
+                              preTag: "Search_page_",
+                            );
                     },
                   );
                 },
