@@ -154,11 +154,11 @@ class APIRequester {
   }
 
   // Get results of a search query from the IMDB API
-  Future<bool> search({expression}) async {
+  Future<bool> search({expression, required final String searchType}) async {
     expression ??= Get.find<SearchBarController>().fieldText;
     final response = await getUrl(
         url:
-            '$imdbBaseUrl/SearchAll/${APIKeys.apiKey[activeApiKey]}/$expression');
+            '$imdbBaseUrl/$searchType/${APIKeys.apiKey[activeApiKey]}/$expression');
 
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body)["results"];
@@ -166,7 +166,13 @@ class APIRequester {
       for (int i = 0; i < json.length; i++) {
         result.add(ShowPreview.fromJson(json[i]));
       }
-      Get.find<SearchBarController>().updateResult(result: result);
+      if (searchType == "SearchMovie") {
+        Get.find<SearchBarController>().updateResult(movieResult: result);
+      } else if (searchType == "SearchSeries") {
+        Get.find<SearchBarController>().updateResult(seriesResult: result);
+      } else if (searchType == "SearchName") {
+        Get.find<SearchBarController>().updateResult(peopleResult: result);
+      }
       return true;
     } else {
       return false;

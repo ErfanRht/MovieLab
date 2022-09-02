@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:movielab/models/actor_models/actor_preview_model.dart';
 import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/pages/actor/actor_page/actor_page.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
 
-import '../../../models/actor_models/actor_preview_model.dart';
-
-class ShowActorBox extends StatelessWidget {
+class CompressedActorBox extends StatelessWidget {
   final ActorPreview actor;
-  const ShowActorBox({Key? key, required this.actor}) : super(key: key);
+  const CompressedActorBox({Key? key, required this.actor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

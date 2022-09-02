@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movielab/pages/actor/actor_box/actor_box.dart';
+import 'package:movielab/pages/actor/actor_box/compressed_actor_box.dart';
 
 import '../../../../widgets/section_title.dart';
 
@@ -26,7 +26,7 @@ class ShowPageCast extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: actorList.length,
                     itemBuilder: (context, index) {
-                      return ShowActorBox(actor: actorList[index]);
+                      return CompressedActorBox(actor: actorList[index]);
                     },
                   ),
                 ),
