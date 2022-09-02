@@ -8,7 +8,9 @@ class SearchBarController extends GetxController {
   bool fieldTapped = false;
   String fieldText = "";
   TextEditingController controller = TextEditingController();
-  List<ShowPreview>? result;
+  List<ShowPreview>? movieResult;
+  List<ShowPreview>? seriesResult;
+  List<ShowPreview>? peopleResult;
 
   void setLoadingStatus({required RequestResult status}) {
     loadingStatus = status;
@@ -21,8 +23,10 @@ class SearchBarController extends GetxController {
     update();
   }
 
-  void updateResult({required result}) {
-    this.result = result;
+  void updateResult({movieResult, seriesResult, peopleResult}) {
+    this.movieResult = movieResult ?? this.movieResult;
+    this.seriesResult = seriesResult ?? this.seriesResult;
+    this.peopleResult = peopleResult ?? this.peopleResult;
     update();
   }
 }

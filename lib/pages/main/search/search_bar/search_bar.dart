@@ -20,7 +20,7 @@ class SearchBar extends StatelessWidget {
         height: 60,
         margin: const EdgeInsets.only(left: 5, right: 5),
         decoration: BoxDecoration(
-          color: const Color(0xff24243B),
+          color: kBackgroundColor.withOpacity(0.4),
           borderRadius: BorderRadius.circular(30),
         ),
         child: Row(
@@ -41,11 +41,11 @@ class SearchBar extends StatelessWidget {
               child: TextField(
                 decoration: const InputDecoration(
                   border: InputBorder.none,
-                  hintText: 'Search',
+                  hintText: 'Movie, TV Show or Person',
                   hintStyle: TextStyle(
                       color: kGreyColor,
                       fontWeight: FontWeight.w600,
-                      fontSize: 19),
+                      fontSize: 17.5),
                 ),
                 scrollPhysics: const BouncingScrollPhysics(),
                 autocorrect: true,
@@ -96,7 +96,10 @@ class SearchBar extends StatelessWidget {
                     highlightColor: Colors.transparent,
                     onPressed: () {
                       _.updateFieldState(tapped: false, text: "");
-                      _.updateResult(result: []);
+                      _.updateResult(
+                          movieResult: null,
+                          seriesResult: null,
+                          peopleResult: null);
                       _.setLoadingStatus(status: RequestResult.NOT_STARTED);
                       _.controller.clear();
                     },

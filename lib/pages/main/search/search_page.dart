@@ -18,15 +18,58 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<SearchBarController>(
       builder: (_) {
-        return Scaffold(
+        return DefaultTabController(
+          length: 3,
+          child: Scaffold(
             appBar: AppBar(
-              toolbarHeight: 85,
-              elevation: 0.0,
+              backgroundColor: kSecondaryColor,
+              toolbarHeight: 75,
+              elevation: 1.0,
               title: const SearchBar(),
+              bottom: TabBar(
+                unselectedLabelColor: Colors.white.withOpacity(0.4),
+                splashFactory: NoSplash.splashFactory,
+                overlayColor: MaterialStateColor.resolveWith(
+                    (states) => Colors.transparent),
+                physics: const BouncingScrollPhysics(),
+                indicatorColor: Colors.white,
+                indicatorWeight: 2.5,
+                indicatorSize: TabBarIndicatorSize.label,
+                tabs: const [
+                  Tab(
+                      child: Text(
+                    "Movie",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  )),
+                  Tab(
+                      child: Text(
+                    "TV Show",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  )),
+                  Tab(
+                      child: Text(
+                    "People",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  )),
+                ],
+              ),
             ),
-            body: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 200),
-                child: _buildBody(_.result, _.loadingStatus)));
+            body: TabBarView(
+              physics: const BouncingScrollPhysics(),
+              children: [
+                AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 200),
+                    child: _buildBody(_.movieResult, _.loadingStatus)),
+                AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 200),
+                    child: _buildBody(_.seriesResult, _.loadingStatus)),
+                AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 200),
+                    child: _buildBody(_.peopleResult, _.loadingStatus))
+              ],
+            ),
+          ),
+        );
       },
     );
   }
@@ -63,21 +106,62 @@ class SearchPage extends StatelessWidget {
           doSearch();
         });
       default:
-        return GetBuilder<MainController>(
-          builder: (_) {
-            return ListView.builder(
-              itemCount: result?.length,
-              physics: const BouncingScrollPhysics(),
-              controller: _.searchScrollController,
-              itemBuilder: (context, index) {
-                return ExpandedItemBox(
-                  showPreview: result![index],
-                  preTag: "Search_page_",
-                );
-              },
-            );
-          },
-        );
+        return result?.length > 0
+            ? GetBuilder<MainController>(
+                builder: (_) {
+                  return ListView.builder(
+                    itemCount: result?.length,
+                    physics: const BouncingScrollPhysics(),
+                    controller: _.searchScrollController,
+                    itemBuilder: (context, index) {
+                      return ExpandedItemBox(
+                        showPreview: result![index],
+                        preTag: "Search_page_",
+                      );
+                    },
+                  );
+                },
+              )
+            : Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    UnDraw(
+                      height: 250,
+                      color: kGreyColor,
+                      padding: const EdgeInsets.symmetric(horizontal: 35),
+                      illustration: UnDrawIllustration.not_found,
+                      placeholder: const Center(
+                        child: SpinKitThreeBounce(
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                      ),
+                      errorWidget: ConnectionErrorWidget(
+                          errorText:
+                              "An unexpected error occurred while loading the illustration.",
+                          tryAgain: () {}),
+                    ),
+                    Text("No result found",
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white.withOpacity(0.7),
+                            fontWeight: FontWeight.w700)),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                        "Please check you have the right spelling, or try different keywords.",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.white.withOpacity(0.7),
+                            fontWeight: FontWeight.w600))
+                  ],
+                ),
+              );
+        {}
     }
   }
 }
