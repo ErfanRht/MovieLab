@@ -46,6 +46,7 @@ dependencies:
   permission_handler: ^10.0.0
   file_picker: ^5.0.1
   flashy_tab_bar2: ^0.0.4
+  animated_theme_switcher: ^2.0.6
 
   
 

@@ -5,7 +5,7 @@ import 'package:movielab/constants/types.dart';
 
 setSystemUIOverlayStyle(
     {required SystemUIOverlayStyle systemUIOverlayStyle,
-    Color color = kSecondaryColor}) {
+    Color color = kBackgroundColor}) {
   if (systemUIOverlayStyle == SystemUIOverlayStyle.DARK) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,

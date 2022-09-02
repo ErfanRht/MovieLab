@@ -22,10 +22,17 @@ class MainPage extends StatelessWidget {
           selectedIndex: _.selectedIndex,
           animationCurve: Curves.linear,
           showElevation: true,
-          backgroundColor: kSecondaryColor,
+          backgroundColor: kBackgroundColor,
           animationDuration: const Duration(milliseconds: 250),
           iconSize: 27.5,
           height: 70,
+          shadows: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.75),
+              blurRadius: 7.5,
+              offset: const Offset(0, 0),
+            ),
+          ],
           onItemSelected: (index) => _.changeIndex(index),
           items: [
             FlashyTabBarItem(
