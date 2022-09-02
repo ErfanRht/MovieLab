@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/hive/convertor.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
-import 'package:movielab/modules/tools/capitalizer.dart';
+import 'package:movielab/pages/main/main_controller.dart';
 import 'package:movielab/pages/show/show_box/lists_show_box.dart';
 import 'package:movielab/widgets/error.dart';
 import 'package:ms_undraw/ms_undraw.dart';
@@ -35,20 +36,22 @@ Widget list(final String listname) {
     builder: (context, box, _) {
       final list = box.values.toList().cast<HiveShowPreview>();
       return list.isNotEmpty
-          ? ListView.builder(
-              itemCount: list.length,
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) {
-                return ListShowBox(
-                    listName: listname,
-                    showPreview: convertHiveToShowPreview(
-                        list[list.length - index - 1]));
-              },
-            )
+          ? GetBuilder<MainController>(builder: (_) {
+              return ListView.builder(
+                controller: _.listsScrollController,
+                itemCount: list.length,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return ListShowBox(
+                      listName: listname,
+                      showPreview: convertHiveToShowPreview(
+                          list[list.length - index - 1]));
+                },
+              );
+            })
           : Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               const SizedBox(height: 100),
-              Text(
-                  "You haven't saved anything in your ${listname.capitalize()} yet!",
+              Text("You haven't saved anything in your $listname yet!",
                   style: GoogleFonts.poppins(
                       fontSize: 15, fontWeight: FontWeight.w600)),
               SizedBox(

@@ -25,11 +25,16 @@ class MainController extends GetxController {
       if (index == 2) {
         // collection page may sometimes doesn't have a scroll controller, so we need to check it
         try {
-          collectionScrollController.animateTo(0,
+          listsScrollController.animateTo(0,
               duration: const Duration(milliseconds: 200),
               curve: Curves.easeInOut);
           // ignore: empty_catches
         } catch (e) {}
+      }
+      if (index == 3) {
+        profileScrollController.animateTo(0,
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeInOut);
       }
     } else {
       selectedIndex = index;
@@ -40,7 +45,7 @@ class MainController extends GetxController {
   // Main pages scroll controller
   ScrollController homeScrollController = ScrollController();
   ScrollController searchScrollController = ScrollController();
-  ScrollController collectionScrollController = ScrollController();
+  ScrollController listsScrollController = ScrollController();
   ScrollController profileScrollController = ScrollController();
 
   // Active API key controller
