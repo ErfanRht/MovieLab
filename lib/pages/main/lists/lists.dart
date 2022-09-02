@@ -9,6 +9,7 @@ import 'package:movielab/models/hive/models/show_preview.dart';
 import 'package:movielab/pages/main/main_controller.dart';
 import 'package:movielab/pages/show/show_box/lists_show_box.dart';
 import 'package:movielab/widgets/error.dart';
+import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 import 'package:ms_undraw/ms_undraw.dart';
 
 import 'sections/navbar.dart';
@@ -37,16 +38,18 @@ Widget list(final String listname) {
       final list = box.values.toList().cast<HiveShowPreview>();
       return list.isNotEmpty
           ? GetBuilder<MainController>(builder: (_) {
-              return ListView.builder(
-                controller: _.listsScrollController,
-                itemCount: list.length,
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return ListShowBox(
-                      listName: listname,
-                      showPreview: convertHiveToShowPreview(
-                          list[list.length - index - 1]));
-                },
+              return InefficaciousRefreshIndicator(
+                child: ListView.builder(
+                  controller: _.listsScrollController,
+                  itemCount: list.length,
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return ListShowBox(
+                        listName: listname,
+                        showPreview: convertHiveToShowPreview(
+                            list[list.length - index - 1]));
+                  },
+                ),
               );
             })
           : Column(mainAxisAlignment: MainAxisAlignment.center, children: [

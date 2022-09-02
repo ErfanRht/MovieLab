@@ -11,6 +11,7 @@ import 'package:movielab/modules/tools/system_ui_overlay_style.dart';
 import 'package:movielab/pages/shared/show_popup/watchtime/watchtime.dart';
 import 'package:movielab/widgets/error.dart';
 import 'package:movielab/widgets/full_image_page.dart';
+import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 import 'sections/bottom_bar/bottom_bar.dart';
 import 'sections/bottom_bar/sections/external_sites/external_sites.dart';
 import 'sections/index.dart';
@@ -153,102 +154,104 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
             width: MediaQuery.of(context).size.width * 0.66,
             child: ShowPageExternalSites(show: show),
           ),
-          body: SingleChildScrollView(
-            controller: _scrollController,
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * (2 / 3),
-                  width: MediaQuery.of(context).size.width,
-                  child: Stack(
-                    fit: StackFit.loose,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigate.pushHeroicTo(
-                              context,
-                              FullImagePage(
-                                  tag: "${widget.preTag}_show_${show.id}",
-                                  imageUrl: show.image));
-                        },
-                        child: ShaderMask(
-                            shaderCallback: (rect) {
-                              // ignore: prefer_const_constructors
-                              return LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: const [
-                                  Colors.black,
-                                  Colors.transparent
-                                ],
-                              ).createShader(Rect.fromLTRB(
-                                  100, 250, rect.width, rect.height));
-                            },
-                            blendMode: BlendMode.dstIn,
-                            child: Hero(
-                              tag: "${widget.preTag}_show_${show.id}",
-                              child: CachedNetworkImage(
-                                fit: BoxFit.cover,
-                                height: MediaQuery.of(context).size.height *
-                                        (2 / 3) -
-                                    35,
-                                width: MediaQuery.of(context).size.width,
-                                imageUrl: show.image,
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                                placeholder: (context, url) => const Center(
-                                  child: SpinKitThreeBounce(
-                                    color: Colors.white,
-                                    size: 30.0,
+          body: InefficaciousRefreshIndicator(
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * (2 / 3),
+                    width: MediaQuery.of(context).size.width,
+                    child: Stack(
+                      fit: StackFit.loose,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigate.pushHeroicTo(
+                                context,
+                                FullImagePage(
+                                    tag: "${widget.preTag}_show_${show.id}",
+                                    imageUrl: show.image));
+                          },
+                          child: ShaderMask(
+                              shaderCallback: (rect) {
+                                // ignore: prefer_const_constructors
+                                return LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: const [
+                                    Colors.black,
+                                    Colors.transparent
+                                  ],
+                                ).createShader(Rect.fromLTRB(
+                                    100, 250, rect.width, rect.height));
+                              },
+                              blendMode: BlendMode.dstIn,
+                              child: Hero(
+                                tag: "${widget.preTag}_show_${show.id}",
+                                child: CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  height: MediaQuery.of(context).size.height *
+                                          (2 / 3) -
+                                      35,
+                                  width: MediaQuery.of(context).size.width,
+                                  imageUrl: show.image,
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
+                                  placeholder: (context, url) => const Center(
+                                    child: SpinKitThreeBounce(
+                                      color: Colors.white,
+                                      size: 30.0,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 15),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            ShowPageTitle(title: show.title),
-                            ShowPageMainInfo(
-                              year: show.year,
-                              genres: show.genres,
-                              runTime: show.runTime,
-                              contentRating: show.contentRating,
-                              countries: show.countries,
-                            ),
-                            ShowPageRating(
-                              imDbRating: show.imDbRating,
-                              imDbVotes: show.imDbVotes,
-                            ),
-                          ],
+                              )),
                         ),
-                      ),
-                      ShowPageNavBar(
-                        show: show,
-                      )
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 15),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ShowPageTitle(title: show.title),
+                              ShowPageMainInfo(
+                                year: show.year,
+                                genres: show.genres,
+                                runTime: show.runTime,
+                                contentRating: show.contentRating,
+                                countries: show.countries,
+                              ),
+                              ShowPageRating(
+                                imDbRating: show.imDbRating,
+                                imDbVotes: show.imDbVotes,
+                              ),
+                            ],
+                          ),
+                        ),
+                        ShowPageNavBar(
+                          show: show,
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                ShowPagePlot(plot: show.plot),
-                ShowPageCast(
-                  actorList: show.actorList,
-                ),
-                ShowPageEpisodeGuide(show: show),
-                ShowPageMedia(
-                  images: show.images,
-                  posters: show.posters,
-                ),
-                ShowPageMoreInfo(show: show),
-                ShowPageBoxOffice(show: show),
-                ShowPageOtherRatings(show: show),
-                ShowPageSimilars(
-                  show: show,
-                ),
-                ShowPageKeywords(show: show)
-              ],
+                  ShowPagePlot(plot: show.plot),
+                  ShowPageCast(
+                    actorList: show.actorList,
+                  ),
+                  ShowPageEpisodeGuide(show: show),
+                  ShowPageMedia(
+                    images: show.images,
+                    posters: show.posters,
+                  ),
+                  ShowPageMoreInfo(show: show),
+                  ShowPageBoxOffice(show: show),
+                  ShowPageOtherRatings(show: show),
+                  ShowPageSimilars(
+                    show: show,
+                  ),
+                  ShowPageKeywords(show: show)
+                ],
+              ),
             ),
           ),
         );

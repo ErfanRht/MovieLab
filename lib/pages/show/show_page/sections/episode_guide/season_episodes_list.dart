@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movielab/pages/show/show_box/expanded_item_box.dart';
+import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 
 class EpisodeGuideSeasonEpisodes extends StatelessWidget {
   final int season;
@@ -10,15 +11,17 @@ class EpisodeGuideSeasonEpisodes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: show.seasons[season].length,
-      physics: const BouncingScrollPhysics(),
-      itemBuilder: (context, episode) {
-        return ExpandedItemBox(
-          showPreview: show.seasons[season][episode],
-          preTag: "episode",
-        );
-      },
+    return InefficaciousRefreshIndicator(
+      child: ListView.builder(
+        itemCount: show.seasons[season].length,
+        physics: const BouncingScrollPhysics(),
+        itemBuilder: (context, episode) {
+          return ExpandedItemBox(
+            showPreview: show.seasons[season][episode],
+            preTag: "episode",
+          );
+        },
+      ),
     );
   }
 }

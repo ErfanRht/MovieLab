@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/show/show_box/expanded_item_box.dart';
+import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 
 class Top250MoviesPage extends StatelessWidget {
   const Top250MoviesPage({Key? key}) : super(key: key);
@@ -40,13 +41,15 @@ class Top250MoviesPage extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                     child: _.topRatedMovies.isNotEmpty
-                        ? ListView.builder(
-                            itemCount: _.topRatedMovies.length,
-                            physics: const BouncingScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              return ExpandedItemBox(
-                                  showPreview: _.topRatedMovies[index]);
-                            },
+                        ? InefficaciousRefreshIndicator(
+                            child: ListView.builder(
+                              itemCount: _.topRatedMovies.length,
+                              physics: const BouncingScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return ExpandedItemBox(
+                                    showPreview: _.topRatedMovies[index]);
+                              },
+                            ),
                           )
                         : const Center(
                             child: SpinKitThreeBounce(
