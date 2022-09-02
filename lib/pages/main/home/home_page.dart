@@ -35,87 +35,85 @@ class HomePage extends StatelessWidget {
                     final watchlist =
                         watchlistBox.values.toList().cast<HiveShowPreview>();
                     return Scaffold(
-                      body: SafeArea(
-                        child: Stack(
-                          children: [
-                            ListView(
-                              physics: const BouncingScrollPhysics(),
-                              controller: _.homeScrollController,
-                              children: [
-                                const SizedBox(
-                                  height: 70,
-                                ),
-                                HomeTrendingsBuilder(
-                                    trendings: __.trendingMovies,
-                                    title: "Trending Movies"),
-                                HomeTrendingsBuilder(
-                                    trendings: __.trendingShows,
-                                    title: "Trending TV Shows"),
-                                __.recommendations.length > 10
-                                    ? HomeTrendingsBuilder(
-                                        trendings: __.recommendations,
-                                        title: "Recommended For You")
-                                    : const SizedBox.shrink(),
-                                HomeTrendingsBuilder(
-                                    trendings: __.inTheaters,
-                                    title: "Currently In Theatres"),
-                                watchlist.isNotEmpty
-                                    ? HomeTrendingsBuilder(trendings: [
-                                        for (HiveShowPreview hive in watchlist)
-                                          convertHiveToShowPreview(hive)
-                                      ], title: "Your Watchlist")
-                                    : const SizedBox.shrink(),
-                                collection.isNotEmpty
-                                    ? HomeTrendingsBuilder(trendings: [
-                                        for (HiveShowPreview hive in collection)
-                                          convertHiveToShowPreview(hive)
-                                      ], title: "Your Collection")
-                                    : const SizedBox.shrink(),
-                                Row(
-                                  children: [
-                                    Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 20, top: 5, bottom: 5),
-                                        child: homeTitle('Popular Companies')),
-                                  ],
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 10),
-                                  child: HomePopularCompanies(),
-                                ),
-                                Row(
-                                  children: [
-                                    Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 20, top: 15, bottom: 5),
-                                        child: homeTitle('IMDb Lists')),
-                                  ],
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 10),
-                                  child: HomeIMDbLists(),
-                                ),
-                                Row(
-                                  children: [
-                                    Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 20, top: 15, bottom: 5),
-                                        child: homeTitle('Box Office')),
-                                  ],
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 10),
-                                  child: HomeBoxOffice(),
-                                )
-                              ],
-                            ),
-                            Column(
-                              children: const [
-                                HomeNavbar(),
-                              ],
-                            ),
-                          ],
-                        ),
+                      body: Stack(
+                        children: [
+                          ListView(
+                            physics: const BouncingScrollPhysics(),
+                            controller: _.homeScrollController,
+                            children: [
+                              const SizedBox(
+                                height: 70,
+                              ),
+                              HomeTrendingsBuilder(
+                                  trendings: __.trendingMovies,
+                                  title: "Trending Movies"),
+                              HomeTrendingsBuilder(
+                                  trendings: __.trendingShows,
+                                  title: "Trending TV Shows"),
+                              __.recommendations.length > 10
+                                  ? HomeTrendingsBuilder(
+                                      trendings: __.recommendations,
+                                      title: "Recommended For You")
+                                  : const SizedBox.shrink(),
+                              HomeTrendingsBuilder(
+                                  trendings: __.inTheaters,
+                                  title: "Currently In Theatres"),
+                              watchlist.isNotEmpty
+                                  ? HomeTrendingsBuilder(trendings: [
+                                      for (HiveShowPreview hive in watchlist)
+                                        convertHiveToShowPreview(hive)
+                                    ], title: "Your Watchlist")
+                                  : const SizedBox.shrink(),
+                              collection.isNotEmpty
+                                  ? HomeTrendingsBuilder(trendings: [
+                                      for (HiveShowPreview hive in collection)
+                                        convertHiveToShowPreview(hive)
+                                    ], title: "Your Collection")
+                                  : const SizedBox.shrink(),
+                              Row(
+                                children: [
+                                  Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 20, top: 5, bottom: 5),
+                                      child: homeTitle('Popular Companies')),
+                                ],
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(left: 10),
+                                child: HomePopularCompanies(),
+                              ),
+                              Row(
+                                children: [
+                                  Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 20, top: 15, bottom: 5),
+                                      child: homeTitle('IMDb Lists')),
+                                ],
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(left: 10),
+                                child: HomeIMDbLists(),
+                              ),
+                              Row(
+                                children: [
+                                  Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 20, top: 15, bottom: 5),
+                                      child: homeTitle('Box Office')),
+                                ],
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(left: 10),
+                                child: HomeBoxOffice(),
+                              )
+                            ],
+                          ),
+                          Column(
+                            children: const [
+                              HomeNavbar(),
+                            ],
+                          ),
+                        ],
                       ),
                     );
                   });

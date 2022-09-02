@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 
 AppBar UserListsNavbar() {
   return AppBar(
+    backgroundColor: kSecondaryColor,
     toolbarHeight: 65,
     centerTitle: true,
     automaticallyImplyLeading: false,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/user_model/user_model.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/pages/main/main_controller.dart';
@@ -23,6 +24,7 @@ class ProfilePage extends StatelessWidget {
       return GetBuilder<MainController>(builder: (__) {
         return Scaffold(
           appBar: AppBar(
+            backgroundColor: kSecondaryColor,
             centerTitle: true,
             automaticallyImplyLeading: false,
             title: const Text("Profile",
