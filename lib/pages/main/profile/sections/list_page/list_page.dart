@@ -11,6 +11,7 @@ import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/main/profile/sections/list_page/sections/navbar.dart';
 import 'package:movielab/pages/show/show_box/lists_show_box.dart';
 import 'package:movielab/widgets/error.dart';
+import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 import 'package:ms_undraw/ms_undraw.dart';
 
 class ListPage extends StatelessWidget {
@@ -46,14 +47,16 @@ class ListPage extends StatelessWidget {
             ? GetBuilder<HomeDataController>(
                 builder: (_) {
                   return _.recommendations.isNotEmpty
-                      ? ListView.builder(
-                          itemCount: _.recommendations.length,
-                          physics: const BouncingScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return ListShowBox(
-                                listName: listName,
-                                showPreview: _.recommendations[index]);
-                          },
+                      ? InefficaciousRefreshIndicator(
+                          child: ListView.builder(
+                            itemCount: _.recommendations.length,
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return ListShowBox(
+                                  listName: listName,
+                                  showPreview: _.recommendations[index]);
+                            },
+                          ),
                         )
                       : Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -91,15 +94,17 @@ class ListPage extends StatelessWidget {
                 builder: (context, box, _) {
                   final list = box.values.toList().cast<HiveShowPreview>();
                   return list.isNotEmpty
-                      ? ListView.builder(
-                          itemCount: list.length,
-                          physics: const BouncingScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return ListShowBox(
-                                listName: listName,
-                                showPreview: convertHiveToShowPreview(
-                                    list[list.length - index - 1]));
-                          },
+                      ? InefficaciousRefreshIndicator(
+                          child: ListView.builder(
+                            itemCount: list.length,
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return ListShowBox(
+                                  listName: listName,
+                                  showPreview: convertHiveToShowPreview(
+                                      list[list.length - index - 1]));
+                            },
+                          ),
                         )
                       : Column(
                           mainAxisAlignment: MainAxisAlignment.center,

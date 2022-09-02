@@ -4,6 +4,7 @@ import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/show_models/external_sites_model.dart';
 import 'package:movielab/models/show_models/full_show_model.dart';
 import 'package:movielab/modules/api/api_requester.dart';
+import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 import 'package:movielab/widgets/section_title.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -43,80 +44,84 @@ class ShowPageExternalSites extends StatelessWidget {
                           height: 50,
                         ),
                         Expanded(
-                          child: ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            itemCount: 11,
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  index == 0
-                                      ? SectionTitle(
-                                          title: "Discover",
-                                          fontSize: 15,
-                                          color: Colors.white.withOpacity(0.75),
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 7.5, horizontal: 15),
-                                        )
-                                      : index == 7
-                                          ? SectionTitle(
-                                              title: "Search",
-                                              fontSize: 15,
-                                              color: Colors.white
-                                                  .withOpacity(0.75),
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 7.5,
-                                                      horizontal: 15),
-                                            )
-                                          : const SizedBox.shrink(),
-                                  TextButton(
-                                    style: TextButton.styleFrom(
-                                        padding: EdgeInsets.zero),
-                                    onPressed: () =>
-                                        _launchUrl(index, snapshot.data, show),
-                                    child: SizedBox(
-                                      height: 60,
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                              width: 50,
-                                              height: 50,
-                                              margin:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 5,
-                                                      horizontal: 15),
-                                              padding: EdgeInsets.all(
-                                                  externalSitesList[index]
-                                                      ['padding']),
-                                              decoration: BoxDecoration(
-                                                  color: Color(
-                                                      externalSitesList[index]
-                                                          ['color']),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                child: Image.asset(
+                          child: InefficaciousRefreshIndicator(
+                            child: ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: 11,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    index == 0
+                                        ? SectionTitle(
+                                            title: "Discover",
+                                            fontSize: 15,
+                                            color:
+                                                Colors.white.withOpacity(0.75),
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 7.5, horizontal: 15),
+                                          )
+                                        : index == 7
+                                            ? SectionTitle(
+                                                title: "Search",
+                                                fontSize: 15,
+                                                color: Colors.white
+                                                    .withOpacity(0.75),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 7.5,
+                                                        horizontal: 15),
+                                              )
+                                            : const SizedBox.shrink(),
+                                    TextButton(
+                                      style: TextButton.styleFrom(
+                                          padding: EdgeInsets.zero),
+                                      onPressed: () => _launchUrl(
+                                          index, snapshot.data, show),
+                                      child: SizedBox(
+                                        height: 60,
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                                width: 50,
+                                                height: 50,
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 5,
+                                                        horizontal: 15),
+                                                padding: EdgeInsets.all(
                                                     externalSitesList[index]
-                                                            ['imgUrl'] ??
-                                                        ""),
-                                              )),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            externalSitesList[index]["title"] ??
-                                                "",
-                                          ),
-                                        ],
+                                                        ['padding']),
+                                                decoration: BoxDecoration(
+                                                    color: Color(
+                                                        externalSitesList[index]
+                                                            ['color']),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  child: Image.asset(
+                                                      externalSitesList[index]
+                                                              ['imgUrl'] ??
+                                                          ""),
+                                                )),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              externalSitesList[index]
+                                                      ["title"] ??
+                                                  "",
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              );
-                            },
+                                  ],
+                                );
+                              },
+                            ),
                           ),
                         )
                       ],

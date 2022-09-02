@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/show/show_box/expanded_item_box.dart';
+import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 
 class AllTimeBoxOfficePage extends StatelessWidget {
   const AllTimeBoxOfficePage({Key? key}) : super(key: key);
@@ -36,15 +37,17 @@ class AllTimeBoxOfficePage extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                     child: _.allTimeBoxOffice.isNotEmpty
-                        ? ListView.builder(
-                            itemCount: _.allTimeBoxOffice.length,
-                            physics: const BouncingScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              return ExpandedItemBox(
-                                showPreview: _.allTimeBoxOffice[index],
-                                showType: "box_office",
-                              );
-                            },
+                        ? InefficaciousRefreshIndicator(
+                            child: ListView.builder(
+                              itemCount: _.allTimeBoxOffice.length,
+                              physics: const BouncingScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return ExpandedItemBox(
+                                  showPreview: _.allTimeBoxOffice[index],
+                                  showType: "box_office",
+                                );
+                              },
+                            ),
                           )
                         : const Center(
                             child: SpinKitThreeBounce(

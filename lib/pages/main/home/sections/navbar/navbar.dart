@@ -13,40 +13,45 @@ class HomeNavbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 15),
+      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 7.5),
       width: double.infinity,
-      height: 60,
+      height: 100,
       decoration: BoxDecoration(
-        color: kBackgroundColor,
+        color: kSecondaryColor,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.25),
-            blurRadius: 2.5,
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 1,
             offset: const Offset(0, 7.5),
           ),
         ],
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          InkWell(
-            onTap: () async {
-              await Future.delayed(const Duration(milliseconds: 50));
+          TextButton(
+            onPressed: () async {
+              await Future.delayed(const Duration(milliseconds: 100));
               Navigate.pushTo(context, const AboutPage());
             },
-            hoverColor: Colors.blue,
-            splashColor: Colors.blue,
-            highlightColor: Colors.blue,
-            focusColor: Colors.blue,
-            borderRadius: BorderRadius.circular(12.5),
+            style: TextButton.styleFrom(
+                padding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.5))),
             child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: AppName()),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 2.5),
-            child: IconButton(
-              icon: const Icon(
+          SizedBox(
+            width: 50,
+            height: 50,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(1000))),
+              child: const Icon(
                 FontAwesomeIcons.magnifyingGlass,
                 size: 22.5,
               ),

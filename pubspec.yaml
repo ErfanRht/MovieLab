@@ -36,7 +36,6 @@ dependencies:
   http: ^0.13.4
   cached_network_image: ^3.2.0
   speech_to_text: ^5.6.0
-  flutter_riverpod: ^1.0.4
   url_launcher: ^6.1.4
   fl_chart: ^0.55.0
   share_plus: ^4.0.10
@@ -46,7 +45,8 @@ dependencies:
   external_path: ^1.0.1
   permission_handler: ^10.0.0
   file_picker: ^5.0.1
-  flutter_phoenix: ^1.1.0
+  flashy_tab_bar2: ^0.0.4
+  animated_theme_switcher: ^2.0.6
 
   
 

@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/pages/show/show_box/expanded_item_box.dart';
+import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 import 'get_company.dart';
 
 class CompanyPage extends StatefulWidget {
@@ -50,13 +51,15 @@ class _CompanyPageState extends State<CompanyPage> {
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
                 child: companyData != null
-                    ? ListView.builder(
-                        itemCount: companyData['movies'].length,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return ExpandedItemBox(
-                              showPreview: companyData['movies'][index]);
-                        },
+                    ? InefficaciousRefreshIndicator(
+                        child: ListView.builder(
+                          itemCount: companyData['movies'].length,
+                          physics: const BouncingScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return ExpandedItemBox(
+                                showPreview: companyData['movies'][index]);
+                          },
+                        ),
                       )
                     : const Center(
                         child: SpinKitThreeBounce(

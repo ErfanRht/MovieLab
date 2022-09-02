@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/pages/main/main_controller.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 
 // Main pages:
 import 'home/home_page.dart';
@@ -19,60 +18,73 @@ class MainPage extends StatelessWidget {
     return GetBuilder<MainController>(builder: (_) {
       return Scaffold(
         body: pages.elementAt(_.selectedIndex),
-        bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            color: kBackgroundColor,
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 20,
-                color: Colors.black.withOpacity(.1),
-              )
-            ],
-          ),
-          child: SafeArea(
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 22.5, vertical: 10),
-              child: GNav(
-                rippleColor: kBlueColor,
-                hoverColor: kBlueColor,
-                activeColor: CupertinoColors.activeBlue,
-                tabBackgroundColor: kBlueColor,
-                color: CupertinoColors.systemGrey,
-                gap: 5,
-                iconSize: 27,
-                textStyle: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: CupertinoColors.activeBlue),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                duration: const Duration(milliseconds: 400),
-                tabs: const [
-                  GButton(
-                    icon: Icons.home_max_rounded,
-                    text: 'Home',
-                  ),
-                  GButton(
-                    icon: Icons.search_rounded,
-                    text: 'Search',
-                  ),
-                  GButton(
-                    icon: Icons.bookmark_outline_rounded,
-                    text: 'Lists',
-                  ),
-                  GButton(
-                    icon: Icons.podcasts_rounded,
-                    text: 'Profile',
-                  ),
-                ],
-                selectedIndex: _.selectedIndex,
-                onTabChange: (index) {
-                  _.changeIndex(index);
-                },
+        bottomNavigationBar: FlashyTabBar(
+          selectedIndex: _.selectedIndex,
+          animationCurve: Curves.linear,
+          showElevation: true,
+          backgroundColor: kBackgroundColor,
+          animationDuration: const Duration(milliseconds: 250),
+          iconSize: 27.5,
+          height: 70,
+          shadows: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.75),
+              blurRadius: 7.5,
+              offset: const Offset(0, 0),
+            ),
+          ],
+          onItemSelected: (index) => _.changeIndex(index),
+          items: [
+            FlashyTabBarItem(
+              icon: const Icon(
+                Icons.home_max_rounded,
+              ),
+              activeColor: Colors.white,
+              title: const Text(
+                'Home',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
               ),
             ),
-          ),
+            FlashyTabBarItem(
+              icon: const Icon(
+                Icons.search_rounded,
+              ),
+              activeColor: Colors.white,
+              title: const Text(
+                'Search',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+            ),
+            FlashyTabBarItem(
+              icon: const Icon(
+                Icons.bookmark_outline_rounded,
+              ),
+              activeColor: Colors.white,
+              title: const Text(
+                'Lists',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+            ),
+            FlashyTabBarItem(
+              icon: const Icon(
+                Icons.podcasts_rounded,
+              ),
+              activeColor: Colors.white,
+              inactiveColor: const Color(0xff9496c1),
+              title: const Text(
+                'Profile',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+            ),
+          ],
         ),
       );
     });
