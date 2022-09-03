@@ -17,6 +17,7 @@ class APIRequester {
   static const String imdbBaseUrl = 'https://imdb-api.com/en/API';
   // API keys to access the IMDB API:
   static int activeApiKey = Random().nextInt(APIKeys.apiKey.length);
+  static List<int> notWorkingApiKeys = [];
 
   // Get recently trending movies from the IMDB API
   Future<RequestResult> getTrendingMovies() async {
@@ -254,21 +255,40 @@ class APIRequester {
         jsonDecode(response.body)['errorMessage'] != null) {
       // Here we handle the IMDb API limit error
       // If the API key is invalid, change it to the next one
-      activeApiKey++;
       if (kDebugMode) {
         if (jsonDecode(response.body)['errorMessage'] == "Invalid API Key") {
-          print("${APIKeys.apiKey[activeApiKey - 1]} is Invalid");
+          print("${APIKeys.apiKey[activeApiKey]} is Invalid");
+          notWorkingApiKeys.add(activeApiKey);
+          // $activeApiKey has been added to notWorkingApiKeys
         } else {
           print("Server error: ${jsonDecode(response.body)['errorMessage']}");
+          notWorkingApiKeys.add(activeApiKey);
+          // $activeApiKey has been added to notWorkingApiKeys
         }
-        print("activeApiKey changed to: $activeApiKey");
       }
-      await getUrl(
-              url: url.replaceAll(APIKeys.apiKey[activeApiKey - 1],
-                  APIKeys.apiKey[activeApiKey]))
-          .then((value) {
-        response = value;
-      });
+
+      while (true) {
+        if (notWorkingApiKeys.length < APIKeys.apiKey.length) {
+          activeApiKey = Random().nextInt(APIKeys.apiKey.length);
+          if (!notWorkingApiKeys.contains(activeApiKey)) {
+            if (kDebugMode) {
+              print("activeApiKey has been changed to: $activeApiKey");
+            }
+            await getUrl(
+                    url: url.replaceAll(APIKeys.apiKey[notWorkingApiKeys.last],
+                        APIKeys.apiKey[activeApiKey]))
+                .then((value) {
+              response = value;
+            });
+            break;
+          }
+        } else {
+          if (kDebugMode) {
+            print("There is no working api keys available anymore! It's done.");
+          }
+          break;
+        }
+      }
     }
     return response;
   }
