@@ -27,7 +27,7 @@ class ShowPageExternalSites extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: const [
                         SectionTitle(
-                          title: "Open Width",
+                          title: "Open With",
                           padding: EdgeInsets.symmetric(horizontal: 15),
                         ),
                         SectionTitle(

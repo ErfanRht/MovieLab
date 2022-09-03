@@ -4,11 +4,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/constants/user_lists.dart';
+import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
-import 'package:movielab/pages/shared/show_popup/show_popup_actions.dart';
+import 'package:movielab/pages/shared/show_popup/lists_popup/show_list_popup_actions.dart';
+import 'package:movielab/pages/shared/show_popup/show_popup/show_popup_actions.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
 import 'package:movielab/widgets/buttons_section.dart';
-import '../../../models/show_models/show_preview_model.dart';
 
 class ExpandedItemBox extends StatefulWidget {
   final ShowPreview show;
@@ -56,7 +57,7 @@ class _ExpandedItemBoxState extends State<ExpandedItemBox>
               transitionAnimationController: AnimationController(
                   duration: const Duration(milliseconds: 235), vsync: this),
               builder: (context) {
-                return ShowPopupActions(
+                return ShowListPopupActions(
                   show: widget.show,
                   updateStats: updateData,
                   backgroundColor: kBackgroundColor,
@@ -195,7 +196,30 @@ class _ExpandedItemBoxState extends State<ExpandedItemBox>
                             width: 40,
                             height: 40,
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () async {
+                                  await Future.delayed(
+                                      const Duration(milliseconds: 250));
+                                  await showModalBottomSheet(
+                                    context: context,
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(20),
+                                    )),
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    transitionAnimationController:
+                                        AnimationController(
+                                            duration: const Duration(
+                                                milliseconds: 350),
+                                            vsync: this),
+                                    builder: (context) {
+                                      return ShowPopupActions(
+                                        show: widget.show,
+                                        updateStats: updateData,
+                                        backgroundColor: kBackgroundColor,
+                                      );
+                                    },
+                                  );
+                                },
                                 style: TextButton.styleFrom(
                                     padding: EdgeInsets.zero,
                                     shape: RoundedRectangleBorder(

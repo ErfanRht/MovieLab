@@ -8,7 +8,7 @@ import 'package:movielab/modules/cache/get_show_info.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/modules/tools/system_ui_overlay_style.dart';
-import 'package:movielab/pages/shared/show_popup/watchtime/watchtime.dart';
+import 'package:movielab/pages/shared/show_popup/lists_popup/watchtime/watchtime.dart';
 import 'package:movielab/widgets/error.dart';
 import 'package:movielab/widgets/full_image_page.dart';
 import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';

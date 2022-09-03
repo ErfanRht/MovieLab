@@ -3,7 +3,7 @@ import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/user_lists.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
-import 'package:movielab/pages/shared/show_popup/show_popup_actions.dart';
+import 'package:movielab/pages/shared/show_popup/lists_popup/show_list_popup_actions.dart';
 import 'package:movielab/widgets/buttons_section.dart';
 import 'show_box_common.dart';
 
@@ -45,7 +45,7 @@ class _CompressedItemBoxState extends State<CompressedItemBox>
           transitionAnimationController: AnimationController(
               duration: const Duration(milliseconds: 235), vsync: this),
           builder: (context) {
-            return ShowPopupActions(
+            return ShowListPopupActions(
               show: widget.showPreview,
               updateStats: updateData,
               backgroundColor: kBackgroundColor,

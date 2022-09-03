@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SectionTitle extends StatelessWidget {
   final String title;
@@ -11,7 +10,7 @@ class SectionTitle extends StatelessWidget {
       {Key? key,
       required this.title,
       this.fontSize = 19,
-      this.fontWeight = FontWeight.w500,
+      this.fontWeight = FontWeight.w700,
       this.padding = const EdgeInsets.only(left: 10, right: 10, bottom: 12.5),
       this.color = Colors.white})
       : super(key: key);

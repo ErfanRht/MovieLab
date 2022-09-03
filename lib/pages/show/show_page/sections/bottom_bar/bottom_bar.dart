@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/hive/convertor.dart';
 import 'package:movielab/models/show_models/full_show_model.dart';
-import 'package:movielab/pages/shared/show_popup/show_popup_actions.dart';
+import 'package:movielab/pages/shared/show_popup/lists_popup/show_list_popup_actions.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ShowPageBottonBar extends StatefulWidget {
@@ -67,7 +67,7 @@ class _ShowPageBottonBarState extends State<ShowPageBottonBar>
                 transitionAnimationController: AnimationController(
                     duration: const Duration(milliseconds: 235), vsync: this),
                 builder: (context) {
-                  return ShowPopupActions(
+                  return ShowListPopupActions(
                     show: convertFullShowToShowPreview(fullShow: widget.show),
                     fullShow: widget.show,
                     updateStats: widget.updateShowData,
