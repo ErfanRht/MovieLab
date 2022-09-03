@@ -22,3 +22,5 @@ enum ListName {
 }
 
 enum ItemType { MOVIE, TV, ARTIST, OTHER, UNKNOWN }
+
+enum ShowType { SEARCH_PAGE, OFFICIAL_LIST, USER_LIST, EPISODE, BOX_OFFICE }

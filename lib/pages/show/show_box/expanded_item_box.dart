@@ -2,128 +2,256 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:movielab/constants/colors.dart';
+import 'package:movielab/constants/types.dart';
+import 'package:movielab/constants/user_lists.dart';
+import 'package:movielab/modules/preferences/preferences_shareholder.dart';
+import 'package:movielab/pages/shared/show_popup/show_popup_actions.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
+import 'package:movielab/widgets/buttons_section.dart';
 import '../../../models/show_models/show_preview_model.dart';
 
-class ExpandedItemBox extends StatelessWidget {
-  final ShowPreview showPreview;
+class ExpandedItemBox extends StatefulWidget {
+  final ShowPreview show;
   final String? iRank;
   final String preTag;
-  final String showType;
+  final ShowType showType;
   const ExpandedItemBox(
       {Key? key,
-      required this.showPreview,
+      required this.show,
       this.iRank,
       this.preTag = "",
-      this.showType = "normal"})
+      required this.showType})
       : super(key: key);
 
   @override
+  State<ExpandedItemBox> createState() => _ExpandedItemBoxState();
+}
+
+class _ExpandedItemBoxState extends State<ExpandedItemBox>
+    with TickerProviderStateMixin {
+  Map<String, bool> _isThereInLists = {};
+  @override
+  void initState() {
+    super.initState();
+    updateData();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final String id = showPreview.id;
-    final String rank = iRank ?? showPreview.rank;
-    final String image = showPreview.image;
-    final String title = showPreview.title;
-    final String year = showPreview.year;
-    final String crew = showPreview.crew;
-    final String imDbRating = showPreview.imDbRating;
-    final String imDbVotes = showPreview.imDbVotes ?? "0";
-    final String plot = showPreview.plot ?? "";
-    final String released = showPreview.released ?? "";
-    final String episodeNumber = showPreview.episodeNumber ?? "";
-    final String weekend = showPreview.crew;
-    final String gross = showPreview.gross;
-    final String weeks = showPreview.weeks;
-    final String worldwideLifetimeGross = showPreview.worldwideLifetimeGross;
-    final String domesticLifetimeGross = showPreview.domesticLifetimeGross;
-    final String domestic = showPreview.domestic;
-    final String foreignLifetimeGross = showPreview.foreignLifetimeGross;
-    final String foreign = showPreview.foreign;
     return Padding(
-        padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         child: InkWell(
           onTap: () async {
-            openShowPage(context, id: id, preTag: preTag);
+            openShowPage(context, id: widget.show.id, preTag: widget.preTag);
+          },
+          onLongPress: () async {
+            await Future.delayed(const Duration(milliseconds: 250));
+            await showModalBottomSheet(
+              context: context,
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                top: Radius.circular(20),
+              )),
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              transitionAnimationController: AnimationController(
+                  duration: const Duration(milliseconds: 235), vsync: this),
+              builder: (context) {
+                return ShowPopupActions(
+                  show: widget.show,
+                  updateStats: updateData,
+                  backgroundColor: kBackgroundColor,
+                );
+              },
+            );
+            updateData();
           },
           borderRadius: BorderRadius.circular(15),
           child: Container(
-            margin: const EdgeInsets.all(10),
+            margin: const EdgeInsets.only(left: 8.5, top: 10),
             width: MediaQuery.of(context).size.width,
-            height: image != 'null' ? 150 : 205,
+            height: widget.show.image != 'null' ? 160 : 205,
             child: Row(
               children: [
-                image != 'null'
-                    ? boxImage(
-                        image: image,
-                        tag: "${preTag}_show_$id",
-                        height: 150,
-                        width: 100,
-                        placeholder: const SpinKitThreeBounce(
-                          color: Colors.white,
-                          size: 20.0,
+                widget.show.image != 'null'
+                    ? SizedBox(
+                        height: 160,
+                        width: 110,
+                        child: Stack(
+                          children: [
+                            boxImage(
+                                image: widget.show.image,
+                                tag: "${widget.preTag}_show_${widget.show.id}",
+                                height: 150,
+                                width: 100,
+                                placeholder: const SpinKitThreeBounce(
+                                  color: Colors.white,
+                                  size: 20.0,
+                                ),
+                                radius: 7.5),
+                            Positioned(
+                              right: 0,
+                              bottom: 0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Stack(
+                                        alignment: Alignment.bottomRight,
+                                        children: [
+                                          for (int i = 0, rightPadd = 0;
+                                              i < userLists.length;
+                                              _isThereInLists[userLists[i]
+                                                          ["name"]] ==
+                                                      true
+                                                  ? rightPadd += 12
+                                                  : null,
+                                              i++)
+                                            _isThereInLists[userLists[i]
+                                                        ["name"]] ==
+                                                    true
+                                                ? Padding(
+                                                    padding: EdgeInsets.only(
+                                                        right: double.parse(
+                                                            rightPadd
+                                                                .toString())),
+                                                    child: Stack(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      children: [
+                                                        Container(
+                                                          width: 25,
+                                                          height: 25,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15),
+                                                            color:
+                                                                kBackgroundColor,
+                                                          ),
+                                                        ),
+                                                        buttonSectionIcon(
+                                                            item: ButtonSectionItem(
+                                                                onPressed:
+                                                                    () {},
+                                                                iconPadding:
+                                                                    userLists[i]
+                                                                        [
+                                                                        "padding"],
+                                                                title:
+                                                                    userLists[i]
+                                                                        [
+                                                                        "name"],
+                                                                icon: userLists[
+                                                                    i]["icon"],
+                                                                iconColor:
+                                                                    userLists[i]
+                                                                        [
+                                                                        "color"]),
+                                                            size: 20),
+                                                      ],
+                                                    ),
+                                                  )
+                                                : const SizedBox.shrink(),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                        radius: 7.5)
+                      )
                     : const SizedBox.shrink(),
                 Container(
                   alignment: Alignment.bottomLeft,
-                  width: image != 'null'
+                  width: widget.show.image != 'null'
                       ? MediaQuery.of(context).size.width - 160
                       : MediaQuery.of(context).size.width - 40,
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
+                  padding: const EdgeInsets.only(left: 10, top: 5),
                   child: Column(
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Flexible(
                             child: showBoxText(
-                              text: showType == "user_list"
-                                  ? title
-                                  : rank != ""
-                                      ? "$rank. $title"
-                                      : episodeNumber != ""
-                                          ? "$episodeNumber. $title"
-                                          : title,
+                              text: widget.showType == ShowType.USER_LIST
+                                  ? widget.show.title
+                                  : widget.show.rank != ""
+                                      ? "${widget.show.rank}. ${widget.show.title}"
+                                      : widget.show.episodeNumber != ""
+                                          ? "${widget.show.episodeNumber}. ${widget.show.title}"
+                                          : widget.show.title,
                               isItTitle: true,
                               fontSize: 14,
                             ),
                           ),
+                          SizedBox(
+                            width: 40,
+                            height: 40,
+                            child: TextButton(
+                                onPressed: () {},
+                                style: TextButton.styleFrom(
+                                    padding: EdgeInsets.zero,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(50))),
+                                child: const Icon(Icons.more_vert_rounded)),
+                          )
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Row(
-                          children: [
-                            showBoxText(
-                              text: released != ""
-                                  ? released
-                                  : year != ""
-                                      ? year
-                                      : "",
-                              fontSize: 13.5,
-                            ),
-                          ],
-                        ),
-                      ),
-                      if (crew != "") ...[
+                      widget.show.year != "" ||
+                              (widget.show.released != "" &&
+                                  widget.show.released != null)
+                          ? Row(
+                              children: [
+                                SizedBox(
+                                  width: widget.show.image != 'null'
+                                      ? MediaQuery.of(context).size.width - 180
+                                      : MediaQuery.of(context).size.width - 40,
+                                  child: showBoxText(
+                                    text: widget.show.released != ""
+                                        ? widget.show.released ??
+                                            (widget.show.year != ""
+                                                ? widget.show.year
+                                                : "")
+                                        : (widget.show.year != ""
+                                            ? widget.show.year
+                                            : ""),
+                                    softWrap: true,
+                                    fontSize: 13.5,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : const SizedBox.shrink(),
+                      if (widget.show.crew != "") ...[
                         Padding(
                           padding: const EdgeInsets.only(top: 10),
                           child: Row(
                             children: [
                               Flexible(
                                   child: showBoxText(
-                                      text: crew,
+                                      text: widget.show.crew,
                                       softWrap: true,
                                       fontSize: 13.5)),
                             ],
                           ),
                         ),
-                        if (imDbRating != "0.0") ...[
+                        if (widget.show.imDbRating != "0.0") ...[
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: Row(
                               children: [
                                 Text(
-                                  imDbRating != "-" ? imDbRating : "0.0",
+                                  widget.show.imDbRating != "-"
+                                      ? widget.show.imDbRating
+                                      : "0.0",
                                   softWrap: true,
                                   style: const TextStyle(
                                       color: kImdbColor,
@@ -134,8 +262,8 @@ class ExpandedItemBox extends StatelessWidget {
                                   width: 5,
                                 ),
                                 RatingBarIndicator(
-                                  rating: imDbRating != "-"
-                                      ? double.parse(imDbRating) / 2
+                                  rating: widget.show.imDbRating != "-"
+                                      ? double.parse(widget.show.imDbRating) / 2
                                       : 0.0,
                                   itemBuilder: (context, index) => const Icon(
                                     Icons.star,
@@ -151,7 +279,8 @@ class ExpandedItemBox extends StatelessWidget {
                           ),
                         ]
                       ],
-                      if (crew == "" && imDbRating != "0.0") ...[
+                      if (widget.show.crew == "" &&
+                          widget.show.imDbRating != "0.0") ...[
                         Padding(
                           padding: const EdgeInsets.only(top: 10),
                           child: Row(
@@ -159,7 +288,9 @@ class ExpandedItemBox extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    imDbRating != "-" ? imDbRating : "0.0",
+                                    widget.show.imDbRating != "-"
+                                        ? widget.show.imDbRating
+                                        : "0.0",
                                     softWrap: true,
                                     style: const TextStyle(
                                         color: kImdbColor,
@@ -170,8 +301,9 @@ class ExpandedItemBox extends StatelessWidget {
                                     width: 5,
                                   ),
                                   RatingBarIndicator(
-                                    rating: imDbRating != "-"
-                                        ? double.parse(imDbRating) / 2
+                                    rating: widget.show.imDbRating != "-"
+                                        ? double.parse(widget.show.imDbRating) /
+                                            2
                                         : 0.0,
                                     itemBuilder: (context, index) => const Icon(
                                       Icons.star,
@@ -187,10 +319,10 @@ class ExpandedItemBox extends StatelessWidget {
                               const SizedBox(
                                 width: 10,
                               ),
-                              imDbVotes != "0.0"
+                              widget.show.imDbVotes != "0.0"
                                   ? Flexible(
                                       child: Text(
-                                      "$imDbVotes votes",
+                                      "${widget.show.imDbVotes} votes",
                                       softWrap: true,
                                       style: TextStyle(
                                           color: Colors.white.withOpacity(0.8),
@@ -202,43 +334,55 @@ class ExpandedItemBox extends StatelessWidget {
                           ),
                         ),
                       ],
-                      if (showType == "box_office") ...[
-                        info(info: weekend, infoText: 'Weekend: $weekend'),
-                        info(info: gross, infoText: 'Gross: $gross'),
-                        info(info: weeks, infoText: 'Weeks: $weeks'),
+                      if (widget.showType == ShowType.BOX_OFFICE) ...[
                         info(
-                            info: worldwideLifetimeGross,
-                            infoText:
-                                'Worldwide Lifetime Gross: $worldwideLifetimeGross'),
+                            info: widget.show.weekend,
+                            infoText: 'Weekend: ${widget.show.weekend}'),
                         info(
-                            info: domesticLifetimeGross,
-                            infoText:
-                                'Domestic Lifetime Gross: $domesticLifetimeGross'),
-                        info(info: domestic, infoText: 'Domestic: $domestic'),
+                            info: widget.show.gross,
+                            infoText: 'Gross: ${widget.show.gross}'),
                         info(
-                            info: foreignLifetimeGross,
+                            info: widget.show.weeks,
+                            infoText: 'Weeks: ${widget.show.weeks}'),
+                        info(
+                            info: widget.show.worldwideLifetimeGross,
                             infoText:
-                                'Foreign Lifetime Gross: $foreignLifetimeGross'),
-                        info(info: foreign, infoText: 'Foreign: $foreign'),
+                                'Worldwide Lifetime Gross: ${widget.show.worldwideLifetimeGross}'),
+                        info(
+                            info: widget.show.domesticLifetimeGross,
+                            infoText:
+                                'Domestic Lifetime Gross: ${widget.show.domesticLifetimeGross}'),
+                        info(
+                            info: widget.show.domestic,
+                            infoText: 'Domestic: ${widget.show.domestic}'),
+                        info(
+                            info: widget.show.foreignLifetimeGross,
+                            infoText:
+                                'Foreign Lifetime Gross: ${widget.show.foreignLifetimeGross}'),
+                        info(
+                            info: widget.show.foreign,
+                            infoText: 'Foreign: ${widget.show.foreign}'),
                       ],
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Wrap(
-                          direction: Axis.horizontal,
-                          children: [
-                            Text(
-                              plot,
-                              maxLines: 4,
-                              overflow: TextOverflow.ellipsis,
-                              softWrap: true,
-                              style: TextStyle(
-                                  color: Colors.white.withOpacity(0.8),
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ],
-                        ),
-                      ),
+                      widget.showType == ShowType.EPISODE
+                          ? Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: Wrap(
+                                direction: Axis.horizontal,
+                                children: [
+                                  Text(
+                                    widget.show.plot ?? "",
+                                    maxLines: 4,
+                                    overflow: TextOverflow.ellipsis,
+                                    softWrap: true,
+                                    style: TextStyle(
+                                        color: Colors.white.withOpacity(0.8),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : const SizedBox.shrink(),
                     ],
                   ),
                 ),
@@ -260,5 +404,15 @@ class ExpandedItemBox extends StatelessWidget {
             ],
           )
         : const SizedBox.shrink();
+  }
+
+  Future updateData() async {
+    PreferencesShareholder shareholder = PreferencesShareholder();
+    shareholder.isThereInLists(showId: widget.show.id).then((value) => {
+          setState(() {
+            _isThereInLists = value;
+          })
+        });
+    return true;
   }
 }

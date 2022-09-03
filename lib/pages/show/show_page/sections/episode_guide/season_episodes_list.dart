@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movielab/constants/types.dart';
 import 'package:movielab/pages/show/show_box/expanded_item_box.dart';
 import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 
@@ -17,8 +18,9 @@ class EpisodeGuideSeasonEpisodes extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         itemBuilder: (context, episode) {
           return ExpandedItemBox(
-            showPreview: show.seasons[season][episode],
+            show: show.seasons[season][episode],
             preTag: "episode",
+            showType: ShowType.EPISODE,
           );
         },
       ),

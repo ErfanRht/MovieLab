@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:movielab/constants/colors.dart';
+import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 import 'indicator.dart';
 
 class StatsChart extends StatefulWidget {
@@ -77,20 +78,23 @@ class StatsChartState extends State<StatsChart> {
           ),
           Flexible(
             flex: 2,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: widget.length,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return Padding(
-                    padding: EdgeInsets.only(
-                        bottom: 2.5, left: widget.index.isOdd ? 30 : 0),
-                    child: Indicator(
-                      color: kPrimaryColorSchemes[index],
-                      text:
-                          index != 6 ? widget.sortedSections[index] : "Others",
-                    ));
-              },
+            child: InefficaciousRefreshIndicator(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: widget.length,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return Padding(
+                      padding: EdgeInsets.only(
+                          bottom: 2.5, left: widget.index.isOdd ? 30 : 0),
+                      child: Indicator(
+                        color: kPrimaryColorSchemes[index],
+                        text: index != 6
+                            ? widget.sortedSections[index]
+                            : "Others",
+                      ));
+                },
+              ),
             ),
           ),
         ],
