@@ -9,7 +9,7 @@ import 'package:movielab/pages/main/main_controller.dart';
 import 'package:movielab/pages/main/search/search.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
-import 'package:movielab/pages/show/show_box/expanded_item_box.dart';
+import 'package:movielab/pages/show/show_box/expanded_item_box/expanded_item_box.dart';
 import 'package:movielab/widgets/error.dart';
 import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 import 'package:ms_undraw/ms_undraw.dart';

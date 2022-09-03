@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movielab/pages/show/show_box/compressed_item_box.dart';
+import 'package:movielab/pages/show/show_box/compressed_item_box/compressed_item_box.dart';
 import '../../../../models/show_models/full_show_model.dart';
 import '../../../../widgets/section_title.dart';
 

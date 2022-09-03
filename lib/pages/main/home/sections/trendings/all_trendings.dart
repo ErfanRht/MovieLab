@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
-import 'package:movielab/pages/show/show_box/expanded_item_box.dart';
+import 'package:movielab/pages/show/show_box/expanded_item_box/expanded_item_box.dart';
 import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 
 class AllTrendingsPage extends StatelessWidget {

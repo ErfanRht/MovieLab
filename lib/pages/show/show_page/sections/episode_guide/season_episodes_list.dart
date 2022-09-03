@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movielab/constants/types.dart';
-import 'package:movielab/pages/show/show_box/expanded_item_box.dart';
+import 'package:movielab/pages/show/show_box/expanded_item_box/expanded_item_box.dart';
 import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 
 class EpisodeGuideSeasonEpisodes extends StatelessWidget {

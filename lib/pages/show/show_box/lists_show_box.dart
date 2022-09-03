@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
-import 'package:movielab/pages/show/show_box/expanded_item_box.dart';
+import 'package:movielab/pages/show/show_box/expanded_item_box/expanded_item_box.dart';
 import '../../../models/show_models/show_preview_model.dart';
 
 class ListShowBox extends StatelessWidget {
