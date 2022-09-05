@@ -26,24 +26,24 @@ class PreferencesShareholder {
       required String listName,
       DateTime? date,
       TimeOfDay? time,
-      required String genres,
-      required String countries,
-      required String languages,
-      required String companies,
-      required String contentRating,
-      required List<ShowPreview> similars}) async {
+      String? genres,
+      String? countries,
+      String? languages,
+      String? companies,
+      String? contentRating,
+      List<ShowPreview>? similars}) async {
     Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
     HiveShowPreview hiveShow = convertShowPreviewToHive(
         showPreview: showPreview,
         rank: (list.length + 1).toString(),
         date: date,
         time: time,
-        genres: genres,
-        countries: countries,
-        languages: languages,
-        companies: companies,
-        contentRating: contentRating,
-        similars: similars);
+        genres: showPreview.genres ?? genres ?? null!,
+        countries: showPreview.countries ?? countries ?? null!,
+        languages: showPreview.languages ?? languages ?? null!,
+        companies: showPreview.companies ?? companies ?? null!,
+        contentRating: showPreview.contentRating ?? contentRating ?? null!,
+        similars: showPreview.similars ?? similars ?? null!);
     list.put(list.length + 1, hiveShow);
     if (kDebugMode) {
       print("The item added to $listName");

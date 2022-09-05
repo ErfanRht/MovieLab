@@ -146,7 +146,8 @@ class _ShowListPopupActionsState extends State<ShowListPopupActions>
           mainText: "Saved to ${listName.capitalize()}",
           buttonText: "See list",
           buttonColor: kAccentColor,
-          buttonOnTap: () {},
+          pushOnButtonTap: true,
+          listName: listName,
         ),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 3),
@@ -167,7 +168,31 @@ class _ShowListPopupActionsState extends State<ShowListPopupActions>
             mainText: "Ramoved from ${listName.capitalize()}",
             buttonText: "Undo",
             buttonColor: kPrimaryColor,
-            buttonOnTap: () {}),
+            buttonOnTap: () async {
+              await Future.delayed(const Duration(milliseconds: 75));
+              _preferencesShareholder.addShowToList(
+                  showPreview: widget.show,
+                  listName: listName,
+                  genres: _fullShow!.genres,
+                  countries: _fullShow!.countries,
+                  languages: _fullShow!.languages,
+                  companies: _fullShow!.companies,
+                  contentRating: _fullShow!.contentRating,
+                  similars: _fullShow!.similars);
+              fToast.removeQueuedCustomToasts();
+              fToast.showToast(
+                child: ToastWidget(
+                  mainText: "Saved to ${listName.capitalize()}",
+                  buttonText: "See list",
+                  buttonColor: kAccentColor,
+                  pushOnButtonTap: true,
+                  listName: listName,
+                ),
+                gravity: ToastGravity.BOTTOM,
+                toastDuration: const Duration(seconds: 3),
+              );
+              widget.updateStats();
+            }),
         gravity: ToastGravity.BOTTOM,
         toastDuration: const Duration(seconds: 3),
       );

@@ -48,11 +48,7 @@ class _BackupPageState extends State<BackupPage> with TickerProviderStateMixin {
                             mainText: "The backup file successfully created.",
                             buttonText: "Ok",
                             buttonColor: kAccentColor,
-                            buttonOnTap: () async {
-                              await Future.delayed(
-                                  const Duration(milliseconds: 200));
-                              fToast.removeCustomToast();
-                            },
+                            closeOnButtonTap: true,
                           ),
                           gravity: ToastGravity.BOTTOM,
                           toastDuration: const Duration(seconds: 2),
@@ -64,11 +60,7 @@ class _BackupPageState extends State<BackupPage> with TickerProviderStateMixin {
                             mainText: "Something went wrong!",
                             buttonText: "Ok",
                             buttonColor: kPrimaryColor,
-                            buttonOnTap: () async {
-                              await Future.delayed(
-                                  const Duration(milliseconds: 200));
-                              fToast.removeCustomToast();
-                            },
+                            closeOnButtonTap: true,
                           ),
                           gravity: ToastGravity.BOTTOM,
                           toastDuration: const Duration(seconds: 2),
@@ -96,11 +88,7 @@ class _BackupPageState extends State<BackupPage> with TickerProviderStateMixin {
                         buttonText: "Ok",
                         fontSize: 13,
                         buttonColor: Colors.black,
-                        buttonOnTap: () async {
-                          await Future.delayed(
-                              const Duration(milliseconds: 200));
-                          fToast.removeCustomToast();
-                        },
+                        closeOnButtonTap: true,
                       ),
                       gravity: ToastGravity.BOTTOM,
                       toastDuration: const Duration(seconds: 2),
