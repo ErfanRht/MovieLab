@@ -9,14 +9,15 @@ import 'package:movielab/modules/tools/capitalizer.dart';
 import 'package:movielab/modules/cache/get_show_info.dart';
 import 'package:movielab/widgets/buttons/activeable_button.dart';
 import 'package:movielab/widgets/toast.dart';
+
 import 'watchtime/watchtime.dart';
 
-class ShowPopupActions extends StatefulWidget {
+class ShowListPopupActions extends StatefulWidget {
   final ShowPreview show;
   final FullShow? fullShow;
   final Future<dynamic> Function() updateStats;
   final Color backgroundColor;
-  const ShowPopupActions(
+  const ShowListPopupActions(
       {Key? key,
       required this.show,
       this.fullShow,
@@ -25,10 +26,10 @@ class ShowPopupActions extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<ShowPopupActions> createState() => _ShowPopupActionsState();
+  State<ShowListPopupActions> createState() => _ShowListPopupActionsState();
 }
 
-class _ShowPopupActionsState extends State<ShowPopupActions>
+class _ShowListPopupActionsState extends State<ShowListPopupActions>
     with TickerProviderStateMixin {
   final PreferencesShareholder _preferencesShareholder =
       PreferencesShareholder();

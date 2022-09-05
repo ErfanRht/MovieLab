@@ -3,8 +3,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
+import 'package:movielab/constants/types.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
-import 'package:movielab/pages/show/show_box/expanded_item_box.dart';
+import 'package:movielab/pages/show/show_box/expanded_item_box/expanded_item_box.dart';
 import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 
 class Top250TVsPage extends StatelessWidget {
@@ -47,7 +48,9 @@ class Top250TVsPage extends StatelessWidget {
                               physics: const BouncingScrollPhysics(),
                               itemBuilder: (context, index) {
                                 return ExpandedItemBox(
-                                    showPreview: _.topRatedShows[index]);
+                                  show: _.topRatedShows[index],
+                                  showType: ShowType.OFFICIAL_LIST,
+                                );
                               },
                             ),
                           )

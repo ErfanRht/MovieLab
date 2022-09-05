@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:movielab/constants/types.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
-import 'package:movielab/pages/show/show_box/expanded_item_box.dart';
+import 'package:movielab/pages/show/show_box/expanded_item_box/expanded_item_box.dart';
 import '../../../models/show_models/show_preview_model.dart';
 
 class ListShowBox extends StatelessWidget {
@@ -17,7 +18,7 @@ class ListShowBox extends StatelessWidget {
   Widget build(BuildContext context) {
     String id = showPreview.id;
     return Padding(
-      padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+      padding: const EdgeInsets.all(5),
       child: Slidable(
           key: UniqueKey(),
           startActionPane: ActionPane(
@@ -53,9 +54,9 @@ class ListShowBox extends StatelessWidget {
             ],
           ),
           child: ExpandedItemBox(
-            showPreview: showPreview,
+            show: showPreview,
             preTag: "${listName}_",
-            showType: "user_list",
+            showType: ShowType.USER_LIST,
           )),
     );
   }
