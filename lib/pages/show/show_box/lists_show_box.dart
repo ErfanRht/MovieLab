@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
+import 'package:movielab/models/show_models/full_show_model.dart';
+import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/modules/cache/get_show_info.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
+import 'package:movielab/modules/tools/capitalizer.dart';
 import 'package:movielab/pages/show/show_box/expanded_item_box/expanded_item_box.dart';
-import '../../../models/show_models/show_preview_model.dart';
+import 'package:movielab/widgets/toast.dart';
 
 class ListShowBox extends StatelessWidget {
   final ShowPreview showPreview;
   final String listName;
-  const ListShowBox({
+  ListShowBox({
     Key? key,
     required this.showPreview,
     required this.listName,
   }) : super(key: key);
+  late FToast fToast;
 
   @override
   Widget build(BuildContext context) {
+    fToast = FToast();
+    fToast.init(context);
     String id = showPreview.id;
     return Padding(
       padding: const EdgeInsets.all(5),
@@ -61,9 +70,50 @@ class ListShowBox extends StatelessWidget {
     );
   }
 
-  void delete() {
+  Future<void> delete() async {
     final preferencesShareholder = PreferencesShareholder();
     preferencesShareholder.deleteFromList(
         showId: showPreview.id, listName: listName);
+    await Future.delayed(const Duration(milliseconds: 200));
+    fToast.removeQueuedCustomToasts();
+    fToast.showToast(
+      child: ToastWidget(
+          mainText: "Ramoved from ${listName.capitalize()}",
+          buttonText: "Undo",
+          buttonColor: kPrimaryColor,
+          buttonOnTap: () async {
+            await Future.delayed(const Duration(milliseconds: 75));
+            FullShow? fullShow = await getShowInfo(id: showPreview.id);
+            preferencesShareholder.addShowToList(
+                showPreview: showPreview,
+                listName: listName,
+                genres: fullShow!.genres,
+                countries: fullShow.countries,
+                languages: fullShow.languages,
+                companies: fullShow.companies,
+                contentRating: fullShow.contentRating,
+                similars: fullShow.similars);
+            fToast.removeQueuedCustomToasts();
+            fToast.showToast(
+              child: ToastWidget(
+                mainText: "Saved to ${listName.capitalize()}",
+                buttonText: "See list",
+                buttonColor: kAccentColor,
+                pushOnButtonTap: true,
+                listName: listName,
+              ),
+              gravity: ToastGravity.BOTTOM,
+              toastDuration: const Duration(seconds: 3),
+            );
+          }),
+      gravity: ToastGravity.BOTTOM,
+      toastDuration: const Duration(seconds: 3),
+    );
+  }
+
+  _loadShowInfo(final String id) async {
+    await getShowInfo(id: id).then((value) {
+      return value;
+    });
   }
 }

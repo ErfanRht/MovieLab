@@ -59,11 +59,7 @@ class _SettingsPageState extends State<SettingsPage>
                         mainText: "Cache cleared",
                         buttonText: "Ok",
                         buttonColor: kAccentColor,
-                        buttonOnTap: () async {
-                          await Future.delayed(
-                              const Duration(milliseconds: 200));
-                          fToast.removeCustomToast();
-                        },
+                        closeOnButtonTap: true,
                       ),
                       gravity: ToastGravity.BOTTOM,
                       toastDuration: const Duration(seconds: 2),
