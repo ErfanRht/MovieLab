@@ -7,7 +7,6 @@ import 'package:movielab/constants/user_lists.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/pages/shared/show_popup/lists_popup/show_list_popup_actions.dart';
-import 'package:movielab/pages/shared/show_popup/show_popup/show_popup_actions.dart';
 import 'package:movielab/pages/show/show_box/show_box_common.dart';
 import 'package:movielab/widgets/buttons_section.dart';
 
@@ -212,7 +211,7 @@ class _ExpandedItemBoxState extends State<ExpandedItemBox>
                                                 milliseconds: 350),
                                             vsync: this),
                                     builder: (context) {
-                                      return ShowPopupActions(
+                                      return ShowListPopupActions(
                                         show: widget.show,
                                         updateStats: updateData,
                                         backgroundColor: kBackgroundColor,
