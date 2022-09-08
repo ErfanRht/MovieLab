@@ -19,54 +19,46 @@
 
 ## Download
   You can simply download it for Android from [Here](https://ErfanRht.github.io/MovieLab-Intro).
-
-## Server
-MovieLab is using [IMDB APIs](https://imdb-api.com/).
-
-IMDB APIs' documentation can be found [here](https://imdb-api.com/api).
-
-### Plugins
-
-* Local storage
-  + hive
-  + hive_flutter
-  + shared_preferences
-* State management
-  + get
-* Internal storage
-  + gallery_saver
-  + external_path
-  + image_picker
-  + file_picker
-  + permission_handler
-
+  
 ### Screenshots
 <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_01.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_02.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_03.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_04.jpg?raw=true" width="23%" /><img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_05.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_06.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_07.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_08.jpg?raw=true" width="23%" /><img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_09.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_10.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_11.jpg?raw=true" width="23%" />
 
-## Requirements
-* Any Operating System (ie. MacOS X, Linux, Windows)
-* Any IDE with Flutter SDK installed (ie. IntelliJ, Android Studio, VSCode etc)
-* A little knowledge of Dart and Flutter
+## Build
+1. If you don't have Flutter SDK installed; Please visit the official [Flutter](https://docs.flutter.dev/get-started/install) website.
+2. Fetch the latest source code from the master branch.
 
-## Building
-Android (armeabi-v7a): `flutter build apk`
-Android (arm64-v8a): `flutter build apk --target=android-arm64`
-iOS: `flutter build ios`
+``` 
+git clone https://github.com/MovieLab/MovieLab.git
+```
 
-If you have a connected device or emulator you can run and deploy the app with `flutter run`
+3. Add api configure file.
 
-To run this app, you must get an IMDb api key and put it in lib\modules\api\api_keys.dart
+Tsacdop uses the IMDb API to fetch the needed information, which is not limitless, so I can not expose the API key in the repo.
+If you want to build the app, you need to create a new file named `.api.dart` in the lib folder. Add the following code to `.api.dart`, and then add your IMDb api key to the list.
+If you don't have a IMDb api key, should go to [IMDb-API Documentation](https://imdb-api.com/) website and sign up there, then after you creating an account, you can get a free key in your profile section.
 
-For more information, checkout [This file](https://github.com/ErfanRht/MovieLab/blob/master/lib/modules/api/api_keys.dart).
+``` dart
+final List<String> apiKeys = [];
+```
 
-## Issues
-Please file any issues, bugs or feature request [here](https://github.com/ErfanRht/MovieLab/issues).
+4. Run the app with Android Studio or Visual Studio. Or the command line.
+
+``` 
+flutter pub get
+flutter run
+```
+
+## Contribute
+If you have an issue or found a bug, please raise a GitHub issue [here](https://github.com/ErfanRht/MovieLab/issues). Pull requests are also welcome.
 
 ## License
 This project is licensed under the [Apache-2.0 License](https://github.com/ErfanRht/MovieLab/blob/master/LICENSE).
 
 ## Author
 This Flutter project is developed by [Erfan Rahmati](https://github.com/ErfanRht).
+
+## Contact
+You can reach out to me directly at [erfanrht2005@gmail.com](mailto:<erfanrht2005@gmail.com>).
 
 ## Supporters
 [![Stargazers repo roster for @ErfanRht/MovieLab](https://reporoster.com/stars/ErfanRht/MovieLab)](https://github.com/ErfanRht/MovieLab/stargazers)
