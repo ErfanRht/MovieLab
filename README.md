@@ -33,7 +33,7 @@ git clone https://github.com/MovieLab/MovieLab.git
 
 3. Add api configure file.
 
-Tsacdop uses the IMDb API to fetch the needed information, which is not limitless, so I can not expose the API key in the repo.
+MovieLab uses the IMDb API to fetch the needed information, which is not limitless, so I can not expose the API key in the repo.
 If you want to build the app, you need to create a new file named `.api.dart` in the lib folder. Add the following code to `.api.dart`, and then add your IMDb api key to the list.
 If you don't have a IMDb api key, should go to [IMDb-API Documentation](https://imdb-api.com/) website and sign up there, then after you creating an account, you can get a free key in your profile section.
 
