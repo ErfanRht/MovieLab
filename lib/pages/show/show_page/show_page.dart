@@ -89,172 +89,184 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
               child: _buildLoadingError()),
         );
       default:
-        return Scaffold(
-          resizeToAvoidBottomInset: true,
-          extendBody: true,
-          bottomNavigationBar: widget.preTag != "episode"
-              ? AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOut,
-                  height: _isBottomAppBarVisible ? 60 : 0.0,
-                  child: BottomAppBar(
-                      shape: const CircularNotchedRectangle(),
-                      clipBehavior: Clip.antiAlias,
-                      notchMargin: 7.5,
-                      color: kSecondaryColor,
-                      child: ShowPageBottonBar(
-                        show: show,
-                        isThereInLists: _isThereInLists,
-                        updateShowData: loadShowData,
-                      )),
-                )
-              : const SizedBox.shrink(),
-          floatingActionButton: widget.preTag != "episode"
-              ? FloatingActionButton(
-                  onPressed: () {
-                    _isThereInLists["history"] != true
-                        ? showModalBottomSheet(
-                            context: context,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(20),
+        return show.id == ""
+            ? Scaffold(
+                body: ConnectionErrorWidget(
+                    tryAgain: () {},
+                    errorText: "This item is not supported by IMDb."),
+              )
+            : Scaffold(
+                resizeToAvoidBottomInset: true,
+                extendBody: true,
+                bottomNavigationBar: widget.preTag != "episode"
+                    ? AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                        height: _isBottomAppBarVisible ? 60 : 0.0,
+                        child: BottomAppBar(
+                            shape: const CircularNotchedRectangle(),
+                            clipBehavior: Clip.antiAlias,
+                            notchMargin: 7.5,
+                            color: kSecondaryColor,
+                            child: ShowPageBottonBar(
+                              show: show,
+                              isThereInLists: _isThereInLists,
+                              updateShowData: loadShowData,
                             )),
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            backgroundColor: kSecondaryColor,
-                            transitionAnimationController: AnimationController(
-                                duration: const Duration(milliseconds: 225),
-                                vsync: this),
-                            builder: (context) {
-                              return AddWatchTime(
-                                fullShow: show,
-                                updateShowData: loadShowData,
-                                backgroundColor: kSecondaryColor,
-                              );
-                            })
-                        : null;
-                  },
-                  backgroundColor: kPrimaryColor,
-                  child: _isThereInLists["history"] != true
-                      ? const Icon(
-                          Icons.add,
-                          color: Colors.white,
-                        )
-                      : const Icon(
-                          Icons.check,
-                          color: Colors.white,
-                        ),
-                )
-              : const SizedBox.shrink(),
-          floatingActionButtonLocation: _isBottomAppBarVisible
-              ? FloatingActionButtonLocation.endDocked
-              : FloatingActionButtonLocation.endFloat,
-          endDrawerEnableOpenDragGesture: false,
-          endDrawer: Drawer(
-            backgroundColor: kSecondaryColor,
-            width: MediaQuery.of(context).size.width * 0.66,
-            child: ShowPageExternalSites(show: show),
-          ),
-          body: InefficaciousRefreshIndicator(
-            child: SingleChildScrollView(
-              controller: _scrollController,
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * (2 / 3),
-                    width: MediaQuery.of(context).size.width,
-                    child: Stack(
-                      fit: StackFit.loose,
+                      )
+                    : const SizedBox.shrink(),
+                floatingActionButton: widget.preTag != "episode"
+                    ? FloatingActionButton(
+                        onPressed: () {
+                          _isThereInLists["history"] != true
+                              ? showModalBottomSheet(
+                                  context: context,
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(20),
+                                  )),
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  backgroundColor: kSecondaryColor,
+                                  transitionAnimationController:
+                                      AnimationController(
+                                          duration:
+                                              const Duration(milliseconds: 225),
+                                          vsync: this),
+                                  builder: (context) {
+                                    return AddWatchTime(
+                                      fullShow: show,
+                                      updateShowData: loadShowData,
+                                      backgroundColor: kSecondaryColor,
+                                    );
+                                  })
+                              : null;
+                        },
+                        backgroundColor: kPrimaryColor,
+                        child: _isThereInLists["history"] != true
+                            ? const Icon(
+                                Icons.add,
+                                color: Colors.white,
+                              )
+                            : const Icon(
+                                Icons.check,
+                                color: Colors.white,
+                              ),
+                      )
+                    : const SizedBox.shrink(),
+                floatingActionButtonLocation: _isBottomAppBarVisible
+                    ? FloatingActionButtonLocation.endDocked
+                    : FloatingActionButtonLocation.endFloat,
+                endDrawerEnableOpenDragGesture: false,
+                endDrawer: Drawer(
+                  backgroundColor: kSecondaryColor,
+                  width: MediaQuery.of(context).size.width * 0.66,
+                  child: ShowPageExternalSites(show: show),
+                ),
+                body: InefficaciousRefreshIndicator(
+                  child: SingleChildScrollView(
+                    controller: _scrollController,
+                    physics: const BouncingScrollPhysics(),
+                    child: Column(
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigate.pushHeroicTo(
-                                context,
-                                FullImagePage(
-                                    tag: "${widget.preTag}_show_${show.id}",
-                                    imageUrl: show.image));
-                          },
-                          child: ShaderMask(
-                              shaderCallback: (rect) {
-                                // ignore: prefer_const_constructors
-                                return LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: const [
-                                    Colors.black,
-                                    Colors.transparent
-                                  ],
-                                ).createShader(Rect.fromLTRB(
-                                    100, 250, rect.width, rect.height));
-                              },
-                              blendMode: BlendMode.dstIn,
-                              child: Hero(
-                                tag: "${widget.preTag}_show_${show.id}",
-                                child: CachedNetworkImage(
-                                  fit: BoxFit.cover,
-                                  height: MediaQuery.of(context).size.height *
-                                          (2 / 3) -
-                                      35,
-                                  width: MediaQuery.of(context).size.width,
-                                  imageUrl: show.image,
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
-                                  placeholder: (context, url) => const Center(
-                                    child: SpinKitThreeBounce(
-                                      color: Colors.white,
-                                      size: 30.0,
-                                    ),
-                                  ),
-                                ),
-                              )),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 15),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * (2 / 3),
+                          width: MediaQuery.of(context).size.width,
+                          child: Stack(
+                            fit: StackFit.loose,
                             children: [
-                              ShowPageTitle(title: show.title),
-                              ShowPageMainInfo(
-                                year: show.year,
-                                genres: show.genres,
-                                runTime: show.runTime,
-                                contentRating: show.contentRating,
-                                countries: show.countries,
+                              GestureDetector(
+                                onTap: () {
+                                  Navigate.pushHeroicTo(
+                                      context,
+                                      FullImagePage(
+                                          tag:
+                                              "${widget.preTag}_show_${show.id}",
+                                          imageUrl: show.image));
+                                },
+                                child: ShaderMask(
+                                    shaderCallback: (rect) {
+                                      // ignore: prefer_const_constructors
+                                      return LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: const [
+                                          Colors.black,
+                                          Colors.transparent
+                                        ],
+                                      ).createShader(Rect.fromLTRB(
+                                          100, 250, rect.width, rect.height));
+                                    },
+                                    blendMode: BlendMode.dstIn,
+                                    child: Hero(
+                                      tag: "${widget.preTag}_show_${show.id}",
+                                      child: CachedNetworkImage(
+                                        fit: BoxFit.cover,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                    (2 / 3) -
+                                                35,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        imageUrl: show.image,
+                                        errorWidget: (context, url, error) =>
+                                            const Icon(Icons.error),
+                                        placeholder: (context, url) =>
+                                            const Center(
+                                          child: SpinKitThreeBounce(
+                                            color: Colors.white,
+                                            size: 30.0,
+                                          ),
+                                        ),
+                                      ),
+                                    )),
                               ),
-                              ShowPageRating(
-                                imDbRating: show.imDbRating,
-                                imDbVotes: show.imDbVotes,
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 15),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    ShowPageTitle(title: show.title),
+                                    ShowPageMainInfo(
+                                      year: show.year,
+                                      genres: show.genres,
+                                      runTime: show.runTime,
+                                      contentRating: show.contentRating,
+                                      countries: show.countries,
+                                    ),
+                                    ShowPageRating(
+                                      imDbRating: show.imDbRating,
+                                      imDbVotes: show.imDbVotes,
+                                    ),
+                                  ],
+                                ),
                               ),
+                              ShowPageNavBar(
+                                show: show,
+                              )
                             ],
                           ),
                         ),
-                        ShowPageNavBar(
+                        ShowPagePlot(plot: show.plot),
+                        ShowPageCast(
+                          actorList: show.actorList,
+                        ),
+                        ShowPageEpisodeGuide(show: show),
+                        ShowPageMedia(
+                          images: show.images,
+                          posters: show.posters,
+                        ),
+                        ShowPageMoreInfo(show: show),
+                        ShowPageBoxOffice(show: show),
+                        ShowPageOtherRatings(show: show),
+                        ShowPageSimilars(
                           show: show,
-                        )
+                        ),
+                        ShowPageKeywords(show: show)
                       ],
                     ),
                   ),
-                  ShowPagePlot(plot: show.plot),
-                  ShowPageCast(
-                    actorList: show.actorList,
-                  ),
-                  ShowPageEpisodeGuide(show: show),
-                  ShowPageMedia(
-                    images: show.images,
-                    posters: show.posters,
-                  ),
-                  ShowPageMoreInfo(show: show),
-                  ShowPageBoxOffice(show: show),
-                  ShowPageOtherRatings(show: show),
-                  ShowPageSimilars(
-                    show: show,
-                  ),
-                  ShowPageKeywords(show: show)
-                ],
-              ),
-            ),
-          ),
-        );
+                ),
+              );
     }
   }
 

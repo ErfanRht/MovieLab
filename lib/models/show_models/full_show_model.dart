@@ -89,7 +89,7 @@ class FullShow {
 
   factory FullShow.fromJson(Map<String, dynamic> json) {
     return FullShow(
-      id: json['id'],
+      id: json['id'] ?? "",
       title: json['title'] ?? "",
       type: json['type'] ?? json['role'] ?? "",
       image: json['image'].toString().replaceAll(
