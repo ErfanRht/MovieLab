@@ -28,7 +28,7 @@
 2. Fetch the latest source code from the master branch.
 
 ``` 
-git clone https://github.com/MovieLab/MovieLab.git
+git clone https://github.com/ErfanRht/MovieLab.git
 ```
 
 3. Add api configure file.
