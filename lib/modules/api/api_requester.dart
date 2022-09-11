@@ -250,6 +250,22 @@ class APIRequester {
     }
   }
 
+  // Get popular movies/series of a specific genre
+  Future<List<ShowPreview>?> getGenreItems({required String genre}) async {
+    final response =
+        await getUrl(order: "AdvancedSearch", id: "?genres=$genre");
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body)["results"];
+      List<ShowPreview> result = [];
+      for (int i = 0; i < json.length; i++) {
+        result.add(ShowPreview.fromJson(json[i]));
+      }
+      return result;
+    } else {
+      return null;
+    }
+  }
+
   Future getUrl(
       {required String order,
       String? id,
