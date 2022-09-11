@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class GmButton extends StatelessWidget {
   const GmButton(
@@ -52,7 +51,7 @@ class GmButton extends StatelessWidget {
                   : const SizedBox.shrink(),
               Text(text,
                   style: TextStyle(
-                      color: color, fontSize: 15, fontWeight: FontWeight.w500)),
+                      color: color, fontSize: 15, fontWeight: FontWeight.w600)),
             ],
           ),
         ),

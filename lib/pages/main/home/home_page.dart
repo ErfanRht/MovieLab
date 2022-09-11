@@ -11,6 +11,7 @@ import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 import 'home_data_controller.dart';
 import 'sections/box_office/box_office.dart';
 import 'sections/companies/companies.dart';
+import 'sections/genres/genres.dart';
 import 'sections/home_titles.dart';
 import 'sections/imdb_lists/lists.dart';
 import 'sections/navbar/navbar.dart';
@@ -85,6 +86,18 @@ class HomePage extends StatelessWidget {
                                   const Padding(
                                     padding: EdgeInsets.only(left: 10),
                                     child: HomePopularCompanies(),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 20, top: 5, bottom: 5),
+                                          child: homeTitle('Popular Genres')),
+                                    ],
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 10),
+                                    child: HomePopularGenres(),
                                   ),
                                   Row(
                                     children: [
