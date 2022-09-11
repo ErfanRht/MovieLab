@@ -9,6 +9,7 @@ import 'package:movielab/models/actor_models/full_actor_model.dart';
 import 'package:movielab/models/show_models/external_sites_model.dart';
 import 'package:movielab/models/show_models/full_show_model.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/modules/api/key_getter.dart';
 import 'package:movielab/modules/cache/cacheholder.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
@@ -22,7 +23,8 @@ class APIRequester {
   // Get recently trending movies from the IMDB API
   Future<RequestResult> getTrendingMovies() async {
     final response = await getUrl(
-        url: '$imdbBaseUrl/MostPopularMovies/${apiKeys[activeApiKey]}');
+      order: "MostPopularMovies",
+    );
     if (response.statusCode == 200) {
       if (jsonDecode(response.body)["errorMessage"] != "") {
         return RequestResult.FAILURE_SERVER_PROBLEM;
@@ -42,8 +44,7 @@ class APIRequester {
 
   // Get recently trending TV shows from the IMDB API
   Future<RequestResult> getTrendingTVShows() async {
-    final response = await getUrl(
-        url: '$imdbBaseUrl/MostPopularTVs/${apiKeys[activeApiKey]}');
+    final response = await getUrl(order: "MostPopularTVs");
 
     if (response.statusCode == 200) {
       if (jsonDecode(response.body)["errorMessage"] != "") {
@@ -65,8 +66,7 @@ class APIRequester {
 
   // Get movies which are currently playing in the theaters from the IMDB API
   Future<RequestResult> getInTheaters() async {
-    final response =
-        await getUrl(url: '$imdbBaseUrl/InTheaters/${apiKeys[activeApiKey]}');
+    final response = await getUrl(order: "InTheaters");
 
     if (response.statusCode == 200) {
       if (jsonDecode(response.body)["errorMessage"] != "") {
@@ -91,20 +91,16 @@ class APIRequester {
     http.Response response;
     switch (listName) {
       case ImdbList.TOP_250_MOVIES:
-        response = await getUrl(
-            url: '$imdbBaseUrl/Top250Movies/${apiKeys[activeApiKey]}');
+        response = await getUrl(order: "Top250Movies");
         break;
       case ImdbList.TOP_250_TVS:
-        response = await getUrl(
-            url: '$imdbBaseUrl/Top250TVs/${apiKeys[activeApiKey]}');
+        response = await getUrl(order: "Top250TVs");
         break;
       case ImdbList.BoxOffice:
-        response = await getUrl(
-            url: '$imdbBaseUrl/BoxOffice/${apiKeys[activeApiKey]}');
+        response = await getUrl(order: "BoxOffice");
         break;
       case ImdbList.AllTimeBoxOffice:
-        response = await getUrl(
-            url: '$imdbBaseUrl/BoxOfficeAllTime/${apiKeys[activeApiKey]}');
+        response = await getUrl(order: "BoxOfficeAllTime");
         break;
     }
     if (response.statusCode == 200) {
@@ -136,8 +132,7 @@ class APIRequester {
 
   // Get a company's movies from the IMDB API
   Future<Map?> getCompany({required String id}) async {
-    final response =
-        await getUrl(url: '$imdbBaseUrl/Company/${apiKeys[activeApiKey]}/$id');
+    final response = await getUrl(order: "Company", id: id);
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body)["items"];
       List<ShowPreview> companyMovies = [];
@@ -157,7 +152,9 @@ class APIRequester {
   Future<bool> search({expression, required final String searchType}) async {
     expression ??= Get.find<SearchBarController>().fieldText;
     final response = await getUrl(
-        url: '$imdbBaseUrl/$searchType/${apiKeys[activeApiKey]}/$expression');
+      order: searchType,
+      id: expression,
+    );
 
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body)["results"];
@@ -181,8 +178,10 @@ class APIRequester {
   // Get full details of a show from the IMDB API
   Future<FullShow?> getShow({required String id}) async {
     final response = await getUrl(
-        url:
-            '$imdbBaseUrl/Title/${apiKeys[activeApiKey]}/$id/Posters,Images,Trailer,Ratings,');
+      order: "Title",
+      id: id,
+      additionals: "Posters,Images,Trailer,Ratings,",
+    );
     if (response.statusCode == 200) {
       var showJson = jsonDecode(response.body);
       FullShow show = FullShow.fromJson(showJson);
@@ -197,8 +196,10 @@ class APIRequester {
       {required dynamic show, required int season}) async {
     final cacheHolder = CacheHolder();
     final response = await getUrl(
-        url:
-            '$imdbBaseUrl/SeasonEpisodes/${apiKeys[activeApiKey]}/${show.id}/$season');
+      order: "SeasonEpisodes",
+      id: show.id,
+      season: season.toString(),
+    );
 
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body)["episodes"];
@@ -219,8 +220,10 @@ class APIRequester {
 
   // Get full details of a show from the IMDB API
   Future<FullActor?> getActor({required String id}) async {
-    final response =
-        await getUrl(url: '$imdbBaseUrl/Name/${apiKeys[activeApiKey]}/$id');
+    final response = await getUrl(
+      order: "Name",
+      id: id,
+    );
 
     if (response.statusCode == 200) {
       var actorJson = jsonDecode(response.body);
@@ -234,7 +237,9 @@ class APIRequester {
   // Get external sites of a show from the IMDB API
   Future<ExternalSites?> getExternalSites({required String id}) async {
     final response = await getUrl(
-        url: '$imdbBaseUrl/ExternalSites/${apiKeys[activeApiKey]}/$id');
+      order: "ExternalSites",
+      id: id,
+    );
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
       late ExternalSites externalSites;
@@ -245,49 +250,81 @@ class APIRequester {
     }
   }
 
-  Future getUrl({required String url}) async {
-    var response = await http.get(Uri.parse(url)).timeout(
-          const Duration(seconds: 10),
-        );
-    if (jsonDecode(response.body)['errorMessage'] != "" &&
-        jsonDecode(response.body)['errorMessage'] != null) {
-      // Here we handle the IMDb API limit error
-      // If the API key is invalid, change it to the next one
-      if (kDebugMode) {
-        if (jsonDecode(response.body)['errorMessage'] == "Invalid API Key") {
-          print("${apiKeys[activeApiKey]} is Invalid");
-          notWorkingApiKeys.add(activeApiKey);
-          // $activeApiKey has been added to notWorkingApiKeys
+  Future getUrl(
+      {required String order,
+      String? id,
+      String? season,
+      String? additionals}) async {
+    String url;
+    if (apiKeys.isNotEmpty) {
+      if (id != null && season != null) {
+        url = "$imdbBaseUrl/$order/${apiKeys[activeApiKey]}/$id/$season";
+      } else if (id != null) {
+        if (additionals != null) {
+          url = "$imdbBaseUrl/$order/${apiKeys[activeApiKey]}/$id/$additionals";
         } else {
-          print("Server error: ${jsonDecode(response.body)['errorMessage']}");
-          notWorkingApiKeys.add(activeApiKey);
-          // $activeApiKey has been added to notWorkingApiKeys
+          url = "$imdbBaseUrl/$order/${apiKeys[activeApiKey]}/$id";
         }
+      } else {
+        url = "$imdbBaseUrl/$order/${apiKeys[activeApiKey]}";
       }
+      var response = await http.get(Uri.parse(url)).timeout(
+            const Duration(seconds: 10),
+          );
+      if (jsonDecode(response.body)['errorMessage'] != "" &&
+          jsonDecode(response.body)['errorMessage'] != null) {
+        // Here we handle the IMDb API limit error
+        // If the API key is invalid, change it to the next one
+        if (kDebugMode) {
+          if (jsonDecode(response.body)['errorMessage'] == "Invalid API Key") {
+            print("${apiKeys[activeApiKey]} is Invalid");
+            notWorkingApiKeys.add(activeApiKey);
+            // $activeApiKey has been added to notWorkingApiKeys
+          } else {
+            print("Server error: ${jsonDecode(response.body)['errorMessage']}");
+            notWorkingApiKeys.add(activeApiKey);
+            // $activeApiKey has been added to notWorkingApiKeys
+          }
+        }
 
-      while (true) {
-        if (notWorkingApiKeys.length < apiKeys.length) {
-          activeApiKey = Random().nextInt(apiKeys.length);
-          if (!notWorkingApiKeys.contains(activeApiKey)) {
-            if (kDebugMode) {
-              print("activeApiKey has been changed to: $activeApiKey");
+        while (true) {
+          if (notWorkingApiKeys.length < apiKeys.length) {
+            activeApiKey = Random().nextInt(apiKeys.length);
+            if (!notWorkingApiKeys.contains(activeApiKey)) {
+              if (kDebugMode) {
+                print("activeApiKey has been changed to: $activeApiKey");
+              }
+              await getUrl(
+                      order: order,
+                      id: id,
+                      season: season,
+                      additionals: additionals)
+                  .then((value) {
+                response = value;
+              });
+              break;
             }
-            await getUrl(
-                    url: url.replaceAll(
-                        apiKeys[notWorkingApiKeys.last], apiKeys[activeApiKey]))
-                .then((value) {
-              response = value;
-            });
+          } else {
+            if (kDebugMode) {
+              print(
+                  "There is no working api keys available anymore! It's done.");
+            }
             break;
           }
-        } else {
-          if (kDebugMode) {
-            print("There is no working api keys available anymore! It's done.");
-          }
-          break;
         }
       }
+      return response;
+    } else {
+      var response;
+      await key_getter().then((value) async {
+        await getUrl(
+                order: order, id: id, season: season, additionals: additionals)
+            .then((value) {
+          response = value;
+        });
+        return response;
+      });
+      return response;
     }
-    return response;
   }
 }

@@ -69,30 +69,8 @@ class _ShowListPopupActionsState extends State<ShowListPopupActions>
               activeText: 'Watched',
               activeColor: kPrimaryColor,
               isActive: _isThereInLists['history'] ?? false,
-              onTap: () async {
-                if (_isThereInLists["history"] == false) {
-                  Navigator.pop(context);
-                  await Future.delayed(const Duration(milliseconds: 200));
-                  showModalBottomSheet(
-                      context: context,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(20),
-                      )),
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      transitionAnimationController: AnimationController(
-                          duration: const Duration(milliseconds: 175),
-                          vsync: this),
-                      builder: (context) {
-                        return AddWatchTime(
-                          fullShow: _fullShow,
-                          updateShowData: widget.updateStats,
-                          backgroundColor: widget.backgroundColor,
-                        );
-                      });
-                } else {
-                  handleOnTap(listName: "history");
-                }
+              onTap: () {
+                handleOnTap(listName: "history");
               }),
           ActiveableButton(
               icon: FontAwesomeIcons.bookmark,
@@ -119,39 +97,45 @@ class _ShowListPopupActionsState extends State<ShowListPopupActions>
     );
   }
 
-  void handleOnTap({
+  Future handleOnTap({
     required String listName,
   }) async {
     if (_isThereInLists[listName] == false) {
-      _fullShow = _fullShow ?? await getShowInfo(id: widget.show.id);
-      _preferencesShareholder.addShowToList(
-          showPreview: widget.show,
-          listName: listName,
-          genres: _fullShow!.genres,
-          countries: _fullShow!.countries,
-          languages: _fullShow!.languages,
-          companies: _fullShow!.companies,
-          contentRating: _fullShow!.contentRating,
-          similars: _fullShow!.similars);
-      setState(() {
-        _isThereInLists[listName] = true;
-      });
-      await Future.delayed(const Duration(milliseconds: 200));
-      // ignore: use_build_context_synchronously
-      Navigator.pop(context);
-      await Future.delayed(const Duration(milliseconds: 200));
-      fToast.removeQueuedCustomToasts();
-      fToast.showToast(
-        child: ToastWidget(
-          mainText: "Saved to ${listName.capitalize()}",
-          buttonText: "See list",
-          buttonColor: kAccentColor,
-          pushOnButtonTap: true,
-          listName: listName,
-        ),
-        gravity: ToastGravity.BOTTOM,
-        toastDuration: const Duration(seconds: 3),
-      );
+      if (listName == "history") {
+        handleOnWatched();
+      } else {
+        _fullShow = _fullShow ?? await getShowInfo(id: widget.show.id);
+        if (_fullShow != null) {
+          _preferencesShareholder.addShowToList(
+              showPreview: widget.show,
+              listName: listName,
+              genres: _fullShow!.genres,
+              countries: _fullShow!.countries,
+              languages: _fullShow!.languages,
+              companies: _fullShow!.companies,
+              contentRating: _fullShow!.contentRating,
+              similars: _fullShow!.similars);
+          setState(() {
+            _isThereInLists[listName] = true;
+          });
+          await Future.delayed(const Duration(milliseconds: 200));
+          // ignore: use_build_context_synchronously
+          Navigator.pop(context);
+          await Future.delayed(const Duration(milliseconds: 200));
+          fToast.removeQueuedCustomToasts();
+          fToast.showToast(
+            child: ToastWidget(
+              mainText: "Saved to ${listName.capitalize()}",
+              buttonText: "See list",
+              buttonColor: kAccentColor,
+              pushOnButtonTap: true,
+              listName: listName,
+            ),
+            gravity: ToastGravity.BOTTOM,
+            toastDuration: const Duration(seconds: 3),
+          );
+        }
+      }
     } else {
       _preferencesShareholder.deleteFromList(
           showId: widget.show.id, listName: listName);
@@ -198,6 +182,30 @@ class _ShowListPopupActionsState extends State<ShowListPopupActions>
       );
     }
     widget.updateStats();
+  }
+
+  Future handleOnWatched() async {
+    _fullShow = _fullShow ?? await getShowInfo(id: widget.show.id);
+    if (_fullShow != null) {
+      Navigator.pop(context);
+      await Future.delayed(const Duration(milliseconds: 200));
+      showModalBottomSheet(
+          context: context,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20),
+          )),
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          transitionAnimationController: AnimationController(
+              duration: const Duration(milliseconds: 175), vsync: this),
+          builder: (context) {
+            return AddWatchTime(
+              fullShow: _fullShow,
+              updateShowData: widget.updateStats,
+              backgroundColor: widget.backgroundColor,
+            );
+          });
+    }
   }
 
   getShowListsInformation() async {
