@@ -5,16 +5,15 @@ import 'package:movielab/constants/types.dart';
 import 'package:movielab/models/hive/convertor.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
 import 'package:movielab/modules/tools/system_ui_overlay_style.dart';
-import 'package:movielab/pages/main/home/sections/trendings/home_trendings.dart';
 import 'package:movielab/pages/main/main_controller.dart';
 import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 import 'home_data_controller.dart';
 import 'sections/box_office/box_office.dart';
 import 'sections/companies/companies.dart';
 import 'sections/genres/genres.dart';
-import 'sections/home_titles.dart';
 import 'sections/imdb_lists/lists.dart';
 import 'sections/navbar/navbar.dart';
+import 'sections/trendings/home_trendings.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -60,6 +59,11 @@ class HomePage extends StatelessWidget {
                                   HomeTrendingsBuilder(
                                       trendings: __.inTheaters,
                                       title: "Currently In Theatres"),
+                                  const Padding(
+                                    padding: EdgeInsets.only(top: 10),
+                                    child: HomePopularGenres(
+                                        title: 'Popular Genres'),
+                                  ),
                                   watchlist.isNotEmpty
                                       ? HomeTrendingsBuilder(trendings: [
                                           for (HiveShowPreview hive
@@ -74,54 +78,18 @@ class HomePage extends StatelessWidget {
                                             convertHiveToShowPreview(hive)
                                         ], title: "Your Collection")
                                       : const SizedBox.shrink(),
-                                  Row(
-                                    children: [
-                                      Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 20, top: 5, bottom: 5),
-                                          child:
-                                              homeTitle('Popular Companies')),
-                                    ],
+                                  const HomeIMDbLists(title: 'IMDb Lists'),
+                                  const SizedBox(
+                                    height: 10,
                                   ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: HomePopularCompanies(),
+                                  const HomePopularCompanies(
+                                    title: 'Popular Companies',
                                   ),
-                                  Row(
-                                    children: [
-                                      Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 20, top: 5, bottom: 5),
-                                          child: homeTitle('Popular Genres')),
-                                    ],
+                                  const SizedBox(
+                                    height: 10,
                                   ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: HomePopularGenres(),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 20, top: 15, bottom: 5),
-                                          child: homeTitle('IMDb Lists')),
-                                    ],
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: HomeIMDbLists(),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 20, top: 15, bottom: 5),
-                                          child: homeTitle('Box Office')),
-                                    ],
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: HomeBoxOffice(),
+                                  const HomeBoxOffice(
+                                    title: 'Box Office',
                                   ),
                                   const SizedBox(
                                     height: 20,
