@@ -6,7 +6,7 @@
     With MovieLab, you have movies and tv series information right at your fingertips.
   </p>
   <p align="left">
-  Do you like movies? Try MoviesLab <a href="https://github.com/ErfanRht/MovieLab/releases/">here</a>, or if you are a developer click <a href="https://github.com/ErfanRht/MovieLab#getting-started">here</a>.
+  Do you like movies? Try MovieLab <a href="https://github.com/ErfanRht/MovieLab/releases/">here</a>, or if you are a developer click <a href="https://github.com/ErfanRht/MovieLab#getting-started">here</a>.
   </p>
 </p>
 
