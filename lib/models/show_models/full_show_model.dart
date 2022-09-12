@@ -1,4 +1,5 @@
 import 'package:movielab/models/actor_models/actor_preview_model.dart';
+import 'package:movielab/modules/tools/image_quality_increaser.dart';
 import 'show_preview_model.dart';
 
 // Movie or TV show all detail model class
@@ -92,8 +93,7 @@ class FullShow {
       id: json['id'] ?? "",
       title: json['title'] ?? "",
       type: json['type'] ?? json['role'] ?? "",
-      image: json['image'].toString().replaceAll(
-          "._V1_UX128_CR0,3,128,176_AL_.jpg", "._V1_Ratio0.6716_AL_.jpg"),
+      image: imageQualityIncreaser(json['image']),
       images: json['images'] != null
           ? ImageData.getImages(json['images']) ?? []
           : [],
