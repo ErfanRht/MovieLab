@@ -272,7 +272,31 @@ class APIRequester {
       String? season,
       String? additionals}) async {
     String url;
-    if (apiKeys.isNotEmpty) {
+    if (apiKeys.isEmpty ||
+        (apiKeys.length == 1 && apiKeys[0] == "XXXXXXXXXX")) {
+      var response;
+      await key_getter().then((result) async {
+        if (!result) {
+          if (kDebugMode) {
+            print(
+                "You haven't add any api key to the app, so it won't work!\nFor more information check out the documentation at https://github.com/ErfanRht/MovieLab#getting-started");
+          }
+          response = null;
+        } else {
+          await getUrl(
+                  order: order,
+                  id: id,
+                  season: season,
+                  additionals: additionals)
+              .then((responseBody) {
+            response = responseBody;
+          });
+          return response;
+        }
+        return response;
+      });
+      return response;
+    } else if (apiKeys.isNotEmpty) {
       if (id != null && season != null) {
         url = "$imdbBaseUrl/$order/${apiKeys[activeApiKey]}/$id/$season";
       } else if (id != null) {
@@ -329,17 +353,6 @@ class APIRequester {
           }
         }
       }
-      return response;
-    } else {
-      var response;
-      await key_getter().then((value) async {
-        await getUrl(
-                order: order, id: id, season: season, additionals: additionals)
-            .then((value) {
-          response = value;
-        });
-        return response;
-      });
       return response;
     }
   }
