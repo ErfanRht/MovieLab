@@ -87,12 +87,7 @@ class ListShowBox extends StatelessWidget {
             preferencesShareholder.addShowToList(
                 showPreview: showPreview,
                 listName: listName,
-                genres: fullShow!.genres,
-                countries: fullShow.countries,
-                languages: fullShow.languages,
-                companies: fullShow.companies,
-                contentRating: fullShow.contentRating,
-                similars: fullShow.similars);
+                fullShow: fullShow);
             fToast.removeQueuedCustomToasts();
             fToast.showToast(
               child: ToastWidget(
