@@ -1,6 +1,8 @@
 // Actor or actress preview model class
 import 'dart:convert';
 
+import 'package:movielab/modules/tools/image_quality_increaser.dart';
+
 class ActorPreview {
   final String id;
   final String name;
@@ -18,8 +20,7 @@ class ActorPreview {
     return ActorPreview(
       id: json['id'],
       name: json['name'],
-      image: json['image'].toString().replaceAll(
-          "._V1_UX128_CR0,3,128,176_AL_.jpg", "._V1_Ratio0.6716_AL_.jpg"),
+      image: imageQualityIncreaser(json['image']),
       asCharacter: json['asCharacter'] ?? "",
     );
   }

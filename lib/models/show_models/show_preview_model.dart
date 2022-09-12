@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:movielab/modules/tools/image_quality_increaser.dart';
 
 // Movie or TV show preview model class
 class ShowPreview {
@@ -72,8 +73,7 @@ class ShowPreview {
       title: json['title'] ?? "",
       type: json['type'] ?? json['role'] ?? "",
       crew: json['crew'] ?? json['stars'] ?? "",
-      image: json['image'].toString().replaceAll(
-          "._V1_UX128_CR0,3,128,176_AL_.jpg", "._V1_Ratio0.6716_AL_.jpg"),
+      image: imageQualityIncreaser(json['image']),
       year: json['year'] ??
           (json['description'] != null
               ? json['description']
