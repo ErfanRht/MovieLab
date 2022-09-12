@@ -19,9 +19,16 @@ Widget boxImage(
       color: Colors.white,
       size: 30.0,
     )}) {
-  return SizedBox(
+  return Container(
     width: width,
     height: height,
+    decoration: BoxDecoration(boxShadow: [
+      BoxShadow(
+        color: Colors.black.withOpacity(0.10),
+        blurRadius: 2,
+        offset: const Offset(0, 0),
+      )
+    ], borderRadius: BorderRadius.circular(radius)),
     child: ClipRRect(
         borderRadius: BorderRadius.circular(radius),
         child: Hero(
