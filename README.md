@@ -5,6 +5,9 @@
     MovieLab is an open source mobile application for browsing movies and TV shows, including cast, production crew and personal biographies and plot summaries.
     With MovieLab, you have movies and tv series information right at your fingertips.
   </p>
+  <p align="left">
+  Do you like movies? Try MoviesLab <a href="https://github.com/ErfanRht/MovieLab/releases/">here</a>, or if you are a developer click <a href="https://github.com/ErfanRht/MovieLab#getting-started">here</a>.
+  </p>
 </p>
 
 [![GitHub release (latest)](https://img.shields.io/github/v/release/ErfanRht/MovieLab)](https://github.com/ErfanRht/MovieLab/releases)
@@ -23,7 +26,7 @@
 ## Download
   You can simply download it for Android from [Here](https://ErfanRht.github.io/MovieLab-Intro).
   
-## Build
+## Getting Started
 1. If you don't have Flutter SDK installed; Please visit the official [Flutter](https://docs.flutter.dev/get-started/install) website.
 2. Fetch the latest source code from the master branch.
 
@@ -31,15 +34,23 @@
 git clone https://github.com/ErfanRht/MovieLab.git
 ```
 
-3. Add api configure file.
+3. Add api key.
 
-MovieLab uses the IMDb API to fetch the needed information, which is not limitless, so I can not expose the API key in the repo.
-If you want to build the app, you need to create a new file named `.api.dart` in the lib folder. Add the following code to `.api.dart`, and then add your IMDb api key to the list.
-If you don't have a IMDb api key, should go to [IMDb-API Documentation](https://imdb-api.com/) website and sign up there, then after you creating an account, you can get a free key in your profile section.
+<ul>
 
-``` dart
-final List<String> apiKeys = [];
+MovieLab uses the IMDb API to fetch the needed data, so before using it you have to create an account on [IMDb api website](https://imdb-api.com/Identity/Account/Register), then you can get a free api key in your profile section and apply it to the app by the below steps.
+
+- go to `lib/.api.dart`
+- you will see the code like this
+```dart
+List<String> apiKeys = ["XXXXXXXXXX"];
 ```
+- replace the all `xx..` to your own api key, like this
+```dart
+List<String> apiKeys = 'your_api_key_here';
+```
+- It's done!
+</ul>
 
 4. Run the app with Android Studio or Visual Studio. Or the command line.
 
