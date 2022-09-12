@@ -4,6 +4,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:movielab/models/hive/convertor.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
 import 'package:movielab/models/hive/models/user.dart';
+import 'package:movielab/models/show_models/full_show_model.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/models/user_model/user_model.dart';
 import 'package:movielab/modules/Recommender/Recommender.dart';
@@ -23,6 +24,7 @@ class PreferencesShareholder {
   // Add an item to a list in the shared preferences
   Future<bool> addShowToList(
       {required ShowPreview showPreview,
+      FullShow? fullShow,
       required String listName,
       DateTime? date,
       TimeOfDay? time,
@@ -32,18 +34,23 @@ class PreferencesShareholder {
       String? companies,
       String? contentRating,
       List<ShowPreview>? similars}) async {
+    late HiveShowPreview hiveShow;
     Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
-    HiveShowPreview hiveShow = convertShowPreviewToHive(
-        showPreview: showPreview,
-        rank: (list.length + 1).toString(),
-        date: date,
-        time: time,
-        genres: showPreview.genres ?? genres ?? null!,
-        countries: showPreview.countries ?? countries ?? null!,
-        languages: showPreview.languages ?? languages ?? null!,
-        companies: showPreview.companies ?? companies ?? null!,
-        contentRating: showPreview.contentRating ?? contentRating ?? null!,
-        similars: showPreview.similars ?? similars ?? null!);
+    if (fullShow != null) {
+      hiveShow = await convertFullShowToHive(fullShow: fullShow);
+    } else {
+      hiveShow = convertShowPreviewToHive(
+          showPreview: showPreview,
+          rank: (list.length + 1).toString(),
+          date: date,
+          time: time,
+          genres: showPreview.genres ?? genres!,
+          countries: showPreview.countries ?? countries!,
+          languages: showPreview.languages ?? languages!,
+          companies: showPreview.companies ?? companies!,
+          contentRating: showPreview.contentRating ?? contentRating!,
+          similars: showPreview.similars ?? similars!);
+    }
     list.put(list.length + 1, hiveShow);
     if (kDebugMode) {
       print("The item added to $listName");

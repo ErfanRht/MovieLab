@@ -355,17 +355,11 @@ class AddWatchTimeState extends State<AddWatchTime> {
   // Add the item to the History list
   markAsWatched({required DateTime date, required TimeOfDay time}) async {
     _preferencesShareholder.addShowToList(
-      showPreview: convertFullShowToShowPreview(fullShow: widget.fullShow!),
-      listName: "history",
-      date: date,
-      time: time,
-      genres: widget.fullShow!.genres,
-      countries: widget.fullShow!.countries,
-      languages: widget.fullShow!.languages,
-      companies: widget.fullShow!.companies,
-      contentRating: widget.fullShow!.contentRating,
-      similars: widget.fullShow!.similars,
-    );
+        showPreview: convertFullShowToShowPreview(fullShow: widget.fullShow!),
+        listName: "history",
+        date: date,
+        time: time,
+        fullShow: widget.fullShow);
     widget.updateShowData();
 
     await Future.delayed(const Duration(milliseconds: 200));

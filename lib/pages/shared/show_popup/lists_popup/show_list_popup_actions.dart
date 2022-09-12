@@ -109,12 +109,7 @@ class _ShowListPopupActionsState extends State<ShowListPopupActions>
           _preferencesShareholder.addShowToList(
               showPreview: widget.show,
               listName: listName,
-              genres: _fullShow!.genres,
-              countries: _fullShow!.countries,
-              languages: _fullShow!.languages,
-              companies: _fullShow!.companies,
-              contentRating: _fullShow!.contentRating,
-              similars: _fullShow!.similars);
+              fullShow: _fullShow);
           setState(() {
             _isThereInLists[listName] = true;
           });
@@ -154,15 +149,11 @@ class _ShowListPopupActionsState extends State<ShowListPopupActions>
             buttonColor: kPrimaryColor,
             buttonOnTap: () async {
               await Future.delayed(const Duration(milliseconds: 75));
+              _fullShow = _fullShow ?? await getShowInfo(id: widget.show.id);
               _preferencesShareholder.addShowToList(
                   showPreview: widget.show,
                   listName: listName,
-                  genres: _fullShow!.genres,
-                  countries: _fullShow!.countries,
-                  languages: _fullShow!.languages,
-                  companies: _fullShow!.companies,
-                  contentRating: _fullShow!.contentRating,
-                  similars: _fullShow!.similars);
+                  fullShow: _fullShow);
               fToast.removeQueuedCustomToasts();
               fToast.showToast(
                 child: ToastWidget(

@@ -80,14 +80,14 @@ HiveShowPreview convertShowPreviewToHive(
 
 Future<HiveShowPreview> convertFullShowToHive(
     {required FullShow fullShow,
-    required String rank,
+    String? rank,
     DateTime? date,
     TimeOfDay? time}) async {
   String crew = "";
   await getShowCrew(fullShow: fullShow).then((value) => crew = value);
   return HiveShowPreview()
     ..id = fullShow.id
-    ..rank = rank
+    ..rank = rank ?? ""
     ..title = fullShow.title
     ..type = fullShow.type
     ..crew = crew
