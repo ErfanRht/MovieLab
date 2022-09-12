@@ -122,6 +122,9 @@ class HomePage extends StatelessWidget {
                                   const Padding(
                                     padding: EdgeInsets.only(left: 10),
                                     child: HomeBoxOffice(),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
                                   )
                                 ],
                               ),

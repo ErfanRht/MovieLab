@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class HomeBoxOfficeBox extends StatelessWidget {
   final String title;
@@ -15,7 +14,7 @@ class HomeBoxOfficeBox extends StatelessWidget {
       height: 100,
       decoration: BoxDecoration(
         color: Colors.transparent,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(27.5),
       ),
       child: Stack(fit: StackFit.expand, children: [
         ShaderMask(
@@ -24,12 +23,15 @@ class HomeBoxOfficeBox extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [Colors.black, Colors.transparent],
-              ).createShader(Rect.fromLTRB(50, 50, rect.width, rect.height));
+              ).createShader(Rect.fromLTRB(60, 60, rect.width, rect.height));
             },
             blendMode: BlendMode.dstIn,
-            child: CachedNetworkImage(
-              imageUrl: image,
-              fit: BoxFit.fitWidth,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: CachedNetworkImage(
+                imageUrl: image,
+                fit: BoxFit.fitWidth,
+              ),
             )),
         Center(
           child: Padding(
