@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:movielab/constants/colors.dart';
+import 'package:movielab/constants/types.dart';
 import 'package:movielab/models/hive/convertor.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
@@ -17,6 +18,8 @@ import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 import 'package:movielab/widgets/toast.dart';
 import 'package:ms_undraw/ms_undraw.dart';
 
+import 'sections/history_timeline.dart';
+
 class ListPage extends StatefulWidget {
   final String listName;
   const ListPage({Key? key, required this.listName}) : super(key: key);
@@ -28,6 +31,7 @@ class ListPage extends StatefulWidget {
 class _ListPageState extends State<ListPage> {
   late FToast fToast;
   late List<ShowPreview> list;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -35,6 +39,16 @@ class _ListPageState extends State<ListPage> {
     fToast = FToast();
     fToast.init(context);
     getList();
+    if (widget.listName == 'history') {
+      Future.delayed(const Duration(milliseconds: 300))
+          .then((value) => setState(() {
+                _scrollController.animateTo(
+                  _scrollController.position.maxScrollExtent,
+                  duration: Duration(milliseconds: list.length * 140),
+                  curve: Curves.easeInOut,
+                );
+              }));
+    }
   }
 
   @override
@@ -145,18 +159,54 @@ class _ListPageState extends State<ListPage> {
                 builder: (context, box, _) {
                   final list = box.values.toList().cast<HiveShowPreview>();
                   return list.isNotEmpty
-                      ? InefficaciousRefreshIndicator(
-                          child: ListView.builder(
-                            itemCount: list.length,
-                            physics: const BouncingScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              return ListShowBox(
-                                  listName: widget.listName,
-                                  showPreview: convertHiveToShowPreview(
-                                      list[list.length - index - 1]));
-                            },
-                          ),
-                        )
+                      ? widget.listName == "history"
+                          ? Column(
+                              children: [
+                                Expanded(
+                                  child: InefficaciousRefreshIndicator(
+                                    child: CustomScrollView(
+                                      controller: _scrollController,
+                                      physics: const BouncingScrollPhysics(),
+                                      slivers: [
+                                        TimelineSteps(
+                                          steps: [
+                                            for (HiveShowPreview show in list)
+                                              ListShowBox(
+                                                  listName: widget.listName,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width -
+                                                      76,
+                                                  showPreview:
+                                                      convertHiveToShowPreview(
+                                                          show),
+                                                  showType:
+                                                      ShowType.USER_HISTORY)
+                                          ],
+                                          watchDates: [
+                                            for (HiveShowPreview show in list)
+                                              convertHiveToShowPreview(show)
+                                                  .watchDate
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          : InefficaciousRefreshIndicator(
+                              child: ListView.builder(
+                                itemCount: list.length,
+                                physics: const BouncingScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return ListShowBox(
+                                      listName: widget.listName,
+                                      showPreview: convertHiveToShowPreview(
+                                          list[list.length - index - 1]));
+                                },
+                              ),
+                            )
                       : Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -192,8 +242,19 @@ class _ListPageState extends State<ListPage> {
   Future getList() async {
     PreferencesShareholder preferencesShareholder = PreferencesShareholder();
     list = await preferencesShareholder.getList(listName: widget.listName);
-    setState(() {
-      list = list;
-    });
+    if (widget.listName != 'history') {
+      setState(() {
+        list = list;
+      });
+    } else {
+      list.sort((a, b) => a.watchDate!.compareTo(b.watchDate!));
+      setState(() {
+        list = list;
+      });
+      preferencesShareholder.replaceList(listName: widget.listName, newItems: [
+        for (ShowPreview item in list)
+          convertShowPreviewToHive(showPreview: item)
+      ]);
+    }
   }
 }

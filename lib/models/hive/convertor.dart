@@ -37,15 +37,15 @@ ShowPreview convertHiveToShowPreview(HiveShowPreview hive) {
 
 HiveShowPreview convertShowPreviewToHive(
     {required ShowPreview showPreview,
-    required String rank,
+    String? rank,
     DateTime? date,
     TimeOfDay? time,
-    required String genres,
-    required String countries,
-    required String languages,
-    required String companies,
-    required String contentRating,
-    required List<ShowPreview> similars}) {
+    String? genres,
+    String? countries,
+    String? languages,
+    String? companies,
+    String? contentRating,
+    List<ShowPreview>? similars}) {
   return HiveShowPreview()
     ..id = showPreview.id
     ..rank = showPreview.rank
@@ -55,13 +55,13 @@ HiveShowPreview convertShowPreviewToHive(
     ..image = showPreview.image
     ..year = showPreview.year
     ..imDbRating = showPreview.imDbRating
-    ..genres = genres
-    ..countries = countries
-    ..languages = languages
-    ..companies = companies
-    ..contentRating = contentRating
+    ..genres = showPreview.genres ?? genres!
+    ..countries = showPreview.countries ?? countries!
+    ..languages = showPreview.languages ?? languages!
+    ..companies = showPreview.companies ?? companies!
+    ..contentRating = showPreview.contentRating ?? contentRating!
     ..similars = [
-      for (var hive in similars)
+      for (var hive in showPreview.similars ?? similars!)
         convertShowPreviewToHive(
             showPreview: hive,
             rank: "",
@@ -74,8 +74,8 @@ HiveShowPreview convertShowPreviewToHive(
             contentRating: "",
             similars: [])
     ]
-    ..watchDate = date
-    ..watchTime = time;
+    ..watchDate = showPreview.watchDate ?? date
+    ..watchTime = showPreview.watchTime ?? time;
 }
 
 Future<HiveShowPreview> convertFullShowToHive(

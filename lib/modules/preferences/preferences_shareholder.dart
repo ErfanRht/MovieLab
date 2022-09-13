@@ -37,7 +37,11 @@ class PreferencesShareholder {
     late HiveShowPreview hiveShow;
     Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
     if (fullShow != null) {
-      hiveShow = await convertFullShowToHive(fullShow: fullShow);
+      hiveShow = await convertFullShowToHive(
+        fullShow: fullShow,
+        date: date,
+        time: time,
+      );
     } else {
       hiveShow = convertShowPreviewToHive(
           showPreview: showPreview,
@@ -102,6 +106,18 @@ class PreferencesShareholder {
     return result;
   }
 
+  // Delete a list and replace it to the inputed data
+  bool replaceList(
+      {required String listName, required List<HiveShowPreview> newItems}) {
+    deleteList(listName);
+    Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
+    for (HiveShowPreview item in newItems) {
+      list.put(list.length + 1, item);
+    }
+    return true;
+  }
+
+  // Get all items of a list
   Future<List<ShowPreview>> getList({required String listName}) async {
     Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
     List<HiveShowPreview> listItems = list.values.toList();
