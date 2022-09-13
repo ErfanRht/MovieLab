@@ -31,6 +31,7 @@ class ListPage extends StatefulWidget {
 class _ListPageState extends State<ListPage> {
   late FToast fToast;
   late List<ShowPreview> list;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -38,6 +39,16 @@ class _ListPageState extends State<ListPage> {
     fToast = FToast();
     fToast.init(context);
     getList();
+    if (widget.listName == 'history') {
+      Future.delayed(const Duration(milliseconds: 300))
+          .then((value) => setState(() {
+                _scrollController.animateTo(
+                  _scrollController.position.maxScrollExtent,
+                  duration: Duration(milliseconds: list.length * 140),
+                  curve: Curves.easeInOut,
+                );
+              }));
+    }
   }
 
   @override
@@ -152,29 +163,34 @@ class _ListPageState extends State<ListPage> {
                           ? Column(
                               children: [
                                 Expanded(
-                                  child: CustomScrollView(
-                                    slivers: [
-                                      TimelineSteps(
-                                        steps: [
-                                          for (HiveShowPreview show in list)
-                                            ListShowBox(
-                                                listName: widget.listName,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width -
-                                                    76,
-                                                showPreview:
-                                                    convertHiveToShowPreview(
-                                                        show),
-                                                showType: ShowType.USER_HISTORY)
-                                        ],
-                                        watchDates: [
-                                          for (HiveShowPreview show in list)
-                                            convertHiveToShowPreview(show)
-                                                .watchDate
-                                        ],
-                                      )
-                                    ],
+                                  child: InefficaciousRefreshIndicator(
+                                    child: CustomScrollView(
+                                      controller: _scrollController,
+                                      physics: const BouncingScrollPhysics(),
+                                      slivers: [
+                                        TimelineSteps(
+                                          steps: [
+                                            for (HiveShowPreview show in list)
+                                              ListShowBox(
+                                                  listName: widget.listName,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width -
+                                                      76,
+                                                  showPreview:
+                                                      convertHiveToShowPreview(
+                                                          show),
+                                                  showType:
+                                                      ShowType.USER_HISTORY)
+                                          ],
+                                          watchDates: [
+                                            for (HiveShowPreview show in list)
+                                              convertHiveToShowPreview(show)
+                                                  .watchDate
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ],
@@ -231,12 +247,7 @@ class _ListPageState extends State<ListPage> {
         list = list;
       });
     } else {
-      list.sort((a, b) {
-        print(a.watchDate!);
-        print(b.watchDate!);
-        print(a.watchDate!.compareTo(b.watchDate!));
-        return a.watchDate!.compareTo(b.watchDate!);
-      });
+      list.sort((a, b) => a.watchDate!.compareTo(b.watchDate!));
       setState(() {
         list = list;
       });

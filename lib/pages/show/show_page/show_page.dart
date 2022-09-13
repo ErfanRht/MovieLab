@@ -89,7 +89,8 @@ class _ShowPageState extends State<ShowPage> with TickerProviderStateMixin {
               child: _buildLoadingError()),
         );
       default:
-        return show.id == ""
+        return show.id == "" ||
+                (show.title == "" && show.year == "" && show.image == "")
             ? Scaffold(
                 body: ConnectionErrorWidget(
                     tryAgain: () {},
