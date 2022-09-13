@@ -61,7 +61,7 @@ class TimelineSteps extends StatelessWidget {
               indicatorXY: indicatorY,
               indicator: _TimelineStepIndicator(
                   step:
-                      '${months[(watchDates[itemIndex]?.month ?? 14) - 1].substring(0, 3)} ${watchDates[itemIndex]?.year}'),
+                      '${months[(watchDates[itemIndex]?.month ?? 12) - 1].substring(0, 3)} ${watchDates[itemIndex]?.year}'),
             ),
             beforeLineStyle: const LineStyle(
               color: kPrimaryColor,

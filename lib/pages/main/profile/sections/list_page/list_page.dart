@@ -226,8 +226,24 @@ class _ListPageState extends State<ListPage> {
   Future getList() async {
     PreferencesShareholder preferencesShareholder = PreferencesShareholder();
     list = await preferencesShareholder.getList(listName: widget.listName);
-    setState(() {
-      list = list;
-    });
+    if (widget.listName != 'history') {
+      setState(() {
+        list = list;
+      });
+    } else {
+      list.sort((a, b) {
+        print(a.watchDate!);
+        print(b.watchDate!);
+        print(a.watchDate!.compareTo(b.watchDate!));
+        return a.watchDate!.compareTo(b.watchDate!);
+      });
+      setState(() {
+        list = list;
+      });
+      preferencesShareholder.replaceList(listName: widget.listName, newItems: [
+        for (ShowPreview item in list)
+          convertShowPreviewToHive(showPreview: item)
+      ]);
+    }
   }
 }
