@@ -11,13 +11,18 @@ import 'package:movielab/modules/tools/capitalizer.dart';
 import 'package:movielab/pages/show/show_box/expanded_item_box/expanded_item_box.dart';
 import 'package:movielab/widgets/toast.dart';
 
+// ignore: must_be_immutable
 class ListShowBox extends StatelessWidget {
   final ShowPreview showPreview;
   final String listName;
+  final double? width;
+  final ShowType? showType;
   ListShowBox({
     Key? key,
     required this.showPreview,
     required this.listName,
+    this.width,
+    this.showType,
   }) : super(key: key);
   late FToast fToast;
 
@@ -26,48 +31,46 @@ class ListShowBox extends StatelessWidget {
     fToast = FToast();
     fToast.init(context);
     String id = showPreview.id;
-    return Padding(
-      padding: const EdgeInsets.all(5),
-      child: Slidable(
-          key: UniqueKey(),
-          startActionPane: ActionPane(
-            motion: const ScrollMotion(),
-            dismissible: DismissiblePane(
-              onDismissed: () => delete(),
-            ),
-            children: [
-              SlidableAction(
-                onPressed: (context) => delete(),
-                autoClose: true,
-                backgroundColor: Colors.transparent,
-                foregroundColor: Colors.white,
-                icon: Icons.delete,
-                label: 'Delete',
-              ),
-            ],
+    return Slidable(
+        key: UniqueKey(),
+        startActionPane: ActionPane(
+          motion: const ScrollMotion(),
+          dismissible: DismissiblePane(
+            onDismissed: () => delete(),
           ),
-          endActionPane: ActionPane(
-            motion: const ScrollMotion(),
-            dismissible: DismissiblePane(
-              onDismissed: () => delete(),
+          children: [
+            SlidableAction(
+              onPressed: (context) => delete(),
+              autoClose: true,
+              backgroundColor: Colors.transparent,
+              foregroundColor: Colors.white,
+              icon: Icons.delete,
+              label: 'Delete',
             ),
-            children: [
-              SlidableAction(
-                onPressed: (context) => delete(),
-                autoClose: true,
-                backgroundColor: Colors.transparent,
-                foregroundColor: Colors.white,
-                icon: Icons.delete,
-                label: 'Delete',
-              ),
-            ],
+          ],
+        ),
+        endActionPane: ActionPane(
+          motion: const ScrollMotion(),
+          dismissible: DismissiblePane(
+            onDismissed: () => delete(),
           ),
-          child: ExpandedItemBox(
-            show: showPreview,
-            preTag: "${listName}_",
-            showType: ShowType.USER_LIST,
-          )),
-    );
+          children: [
+            SlidableAction(
+              onPressed: (context) => delete(),
+              autoClose: true,
+              backgroundColor: Colors.transparent,
+              foregroundColor: Colors.white,
+              icon: Icons.delete,
+              label: 'Delete',
+            ),
+          ],
+        ),
+        child: ExpandedItemBox(
+          show: showPreview,
+          preTag: "${listName}_",
+          width: width,
+          showType: showType ?? ShowType.USER_LIST,
+        ));
   }
 
   Future<void> delete() async {

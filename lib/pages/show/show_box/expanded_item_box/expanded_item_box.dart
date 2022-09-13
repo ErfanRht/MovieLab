@@ -15,11 +15,13 @@ class ExpandedItemBox extends StatefulWidget {
   final String? iRank;
   final String preTag;
   final ShowType showType;
+  final double? width;
   const ExpandedItemBox(
       {Key? key,
       required this.show,
       this.iRank,
       this.preTag = "",
+      this.width,
       required this.showType})
       : super(key: key);
 
@@ -68,7 +70,7 @@ class _ExpandedItemBoxState extends State<ExpandedItemBox>
           borderRadius: BorderRadius.circular(15),
           child: Container(
             margin: const EdgeInsets.only(left: 8.5, top: 10),
-            width: MediaQuery.of(context).size.width,
+            width: widget.width ?? MediaQuery.of(context).size.width,
             height: widget.show.image != 'null' ? 160 : 205,
             child: Row(
               children: [
@@ -170,8 +172,10 @@ class _ExpandedItemBoxState extends State<ExpandedItemBox>
                 Container(
                   alignment: Alignment.bottomLeft,
                   width: widget.show.image != 'null'
-                      ? MediaQuery.of(context).size.width - 160
-                      : MediaQuery.of(context).size.width - 40,
+                      ? (widget.width ?? MediaQuery.of(context).size.width) -
+                          160
+                      : (widget.width ?? MediaQuery.of(context).size.width) -
+                          40,
                   padding: const EdgeInsets.only(left: 10, top: 5),
                   child: Column(
                     children: [
@@ -180,7 +184,8 @@ class _ExpandedItemBoxState extends State<ExpandedItemBox>
                         children: [
                           Flexible(
                             child: showBoxText(
-                              text: widget.showType == ShowType.USER_LIST
+                              text: widget.showType == ShowType.USER_LIST ||
+                                      widget.showType == ShowType.USER_HISTORY
                                   ? widget.show.title
                                   : widget.show.rank != ""
                                       ? "${widget.show.rank}. ${widget.show.title}"
@@ -235,8 +240,16 @@ class _ExpandedItemBoxState extends State<ExpandedItemBox>
                               children: [
                                 SizedBox(
                                   width: widget.show.image != 'null'
-                                      ? MediaQuery.of(context).size.width - 180
-                                      : MediaQuery.of(context).size.width - 40,
+                                      ? (widget.width ??
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .width) -
+                                          180
+                                      : (widget.width ??
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .width) -
+                                          40,
                                   child: showBoxText(
                                     text: widget.show.released != ""
                                         ? widget.show.released ??

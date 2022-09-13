@@ -37,7 +37,11 @@ class PreferencesShareholder {
     late HiveShowPreview hiveShow;
     Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
     if (fullShow != null) {
-      hiveShow = await convertFullShowToHive(fullShow: fullShow);
+      hiveShow = await convertFullShowToHive(
+        fullShow: fullShow,
+        date: date,
+        time: time,
+      );
     } else {
       hiveShow = convertShowPreviewToHive(
           showPreview: showPreview,
