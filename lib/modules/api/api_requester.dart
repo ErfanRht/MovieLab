@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:movielab/.api.dart';
+import 'package:movielab/constants/app.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/models/actor_models/full_actor_model.dart';
 import 'package:movielab/models/show_models/external_sites_model.dart';
@@ -32,7 +33,9 @@ class APIRequester {
       var json = jsonDecode(response.body)["items"];
       List<ShowPreview> trendingMovies = [];
       for (int i = 0; i < json.length; i++) {
-        trendingMovies.add(ShowPreview.fromJson(json[i]));
+        if (!unavailableIDs.contains(json[i]["id"])) {
+          trendingMovies.add(ShowPreview.fromJson(json[i]));
+        }
       }
       Get.find<HomeDataController>()
           .updateTrendingMovies(trendingMovies: trendingMovies);
@@ -54,7 +57,9 @@ class APIRequester {
 
       List<ShowPreview> trendingShows = [];
       for (int i = 0; i < json.length; i++) {
-        trendingShows.add(ShowPreview.fromJson(json[i]));
+        if (!unavailableIDs.contains(json[i]["id"])) {
+          trendingShows.add(ShowPreview.fromJson(json[i]));
+        }
       }
       Get.find<HomeDataController>()
           .updateTrendingShows(trendingShows: trendingShows);

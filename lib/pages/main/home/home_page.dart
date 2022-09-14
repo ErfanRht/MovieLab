@@ -121,7 +121,9 @@ class HomePage extends StatelessWidget {
 Future checkForUpdateDialog(BuildContext context) async {
   print("Checking for update dialog");
   await Future.delayed(const Duration(milliseconds: 1750));
-  if (appVersion != latestVersion) {
+  if (latestVersion != null &&
+      latestVersion != "" &&
+      appVersion != latestVersion) {
     showDialog(
         context: context,
         builder: (context) {
