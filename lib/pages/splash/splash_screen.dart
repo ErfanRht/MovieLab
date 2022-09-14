@@ -11,7 +11,8 @@ import 'get_initial_data.dart';
 import 'get_user_data.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({Key? key, this.then}) : super(key: key);
+  final VoidCallback? then;
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
