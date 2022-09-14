@@ -47,7 +47,7 @@ List<String> apiKeys = ["XXXXXXXXXX"];
 ```
 - replace the all `xx..` to your own api key, like this
 ```dart
-List<String> apiKeys = 'your_api_key_here';
+List<String> apiKeys = ["your_api_key_here"];
 ```
 - It's done!
 </ul>
