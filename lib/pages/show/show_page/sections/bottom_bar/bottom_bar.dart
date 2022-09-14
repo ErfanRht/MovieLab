@@ -103,21 +103,6 @@ class _ShowPageBottonBarState extends State<ShowPageBottonBar>
               height: 45,
               width: 45,
               child: Icon(
-                FontAwesomeIcons.clapperboard,
-                size: 22.5,
-              ),
-            ),
-            onTap: () {},
-          ),
-          const SizedBox(
-            width: 7.5,
-          ),
-          InkWell(
-            borderRadius: BorderRadius.circular(30),
-            child: const SizedBox(
-              height: 45,
-              width: 45,
-              child: Icon(
                 FontAwesomeIcons.share,
                 size: 22.5,
               ),

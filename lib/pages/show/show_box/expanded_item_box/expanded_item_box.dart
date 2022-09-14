@@ -185,7 +185,9 @@ class _ExpandedItemBoxState extends State<ExpandedItemBox>
                           Flexible(
                             child: showBoxText(
                               text: widget.showType == ShowType.USER_LIST ||
-                                      widget.showType == ShowType.USER_HISTORY
+                                      widget.showType ==
+                                          ShowType.USER_HISTORY ||
+                                      widget.showType == ShowType.RECOMMENDED
                                   ? widget.show.title
                                   : widget.show.rank != ""
                                       ? "${widget.show.rank}. ${widget.show.title}"
@@ -355,7 +357,8 @@ class _ExpandedItemBoxState extends State<ExpandedItemBox>
                               const SizedBox(
                                 width: 10,
                               ),
-                              widget.show.imDbVotes != "0.0"
+                              widget.show.imDbVotes != "0.0" &&
+                                      widget.show.imDbVotes != null
                                   ? Flexible(
                                       child: Text(
                                       "${widget.show.imDbVotes} votes",

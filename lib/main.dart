@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:movielab/constants/themes.dart';
-import 'package:movielab/pages/main/profile/profile_controller.dart';
-import 'package:movielab/pages/show/show_page/show_page.dart';
 import 'constants/routes.dart';
 import 'models/hive/hive_helper/register_adapters.dart';
 import 'models/hive/models/show_preview.dart';
@@ -12,7 +10,9 @@ import 'modules/cache/cache_data.dart';
 import 'pages/main/home/home_data_controller.dart';
 import 'pages/main/main_controller.dart';
 import 'pages/main/main_page.dart';
+import 'pages/main/profile/profile_controller.dart';
 import 'pages/main/search/search_bar/search_bar_controller.dart';
+import 'pages/show/show_page/show_page.dart';
 import 'pages/splash/splash_screen.dart';
 
 void main() async {
@@ -23,14 +23,9 @@ void main() async {
   runApp(const App());
 }
 
-class App extends StatefulWidget {
+class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
-  @override
-  State<App> createState() => _AppState();
-}
-
-class _AppState extends State<App> {
   final String initRoute = splashScreenRoute;
 
   @override

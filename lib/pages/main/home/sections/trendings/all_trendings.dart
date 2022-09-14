@@ -47,7 +47,9 @@ class AllTrendingsPage extends StatelessWidget {
                           show: trendings[index],
                           iRank: (index + 1).toString(),
                           preTag: title,
-                          showType: ShowType.OFFICIAL_LIST,
+                          showType: title == "Recommended For You"
+                              ? ShowType.RECOMMENDED
+                              : ShowType.OFFICIAL_LIST,
                         );
                       },
                     ),
