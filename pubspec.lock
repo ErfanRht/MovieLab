@@ -15,13 +15,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.1.0"
-  animated_theme_switcher:
-    dependency: "direct main"
-    description:
-      name: animated_theme_switcher
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.6"
   ansicolor:
     dependency: "direct dev"
     description:

@@ -1,8 +1,10 @@
 name: movielab
 description: An open source movie information database application.
 
-publish_to: 'none'
-version: 2.0.7
+version: 3.0.1
+
+homepage: https://erfanrht.github.io/MovieLab-Intro
+documentation: https://github.com/ErfanRht/MovieLab
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
@@ -25,7 +27,9 @@ dependencies:
   google_nav_bar: ^5.0.5
   page_transition: ^2.0.5
   flutter_slidable: ^1.2.0
-  avatar_glow: ^2.0.2 
+  avatar_glow: ^2.0.2   
+  flashy_tab_bar2: ^0.0.4
+  timeline_tile: ^2.0.0
 
   # Used for saving and loading preferences from the device.
   shared_preferences: ^2.0.12  
@@ -45,9 +49,7 @@ dependencies:
   external_path: ^1.0.1
   permission_handler: ^10.0.0
   file_picker: ^5.0.1
-  flashy_tab_bar2: ^0.0.4
-  animated_theme_switcher: ^2.0.6
-  timeline_tile: ^2.0.0
+
 
   
 
