@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:movielab/constants/themes.dart';
 import 'package:movielab/pages/main/profile/profile_controller.dart';
+import 'package:movielab/pages/show/show_page/show_page.dart';
 import 'constants/routes.dart';
 import 'models/hive/hive_helper/register_adapters.dart';
 import 'models/hive/models/show_preview.dart';
@@ -22,9 +23,16 @@ void main() async {
   runApp(const App());
 }
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
   final String initRoute = splashScreenRoute;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,6 +40,21 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppThemes.darkTheme,
       initialRoute: initRoute,
+      onUnknownRoute: (settings) {
+        // ToDo: Setup deep link for iOS.
+        // ToDo: Improve router for Android(not launched).
+        final matches =
+            RegExp(r'(^\/title\/)(tt\d*)').firstMatch(settings.name.toString());
+        if (matches?.group(1).toString() == "/title/" &&
+            matches?.group(2).toString() != null) {
+          return MaterialPageRoute(
+            builder: (BuildContext context) =>
+                ShowPage(id: matches!.group(2).toString()),
+          );
+        }
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const SplashScreen());
+      },
       routes: {
         splashScreenRoute: (context) => const SplashScreen(),
         homeScreenRoute: (context) => const MainPage(),
@@ -51,12 +74,11 @@ Future? initializeHive() async {
   Hive.openBox<HiveShowPreview>('artists');
 }
 
-Future? initializeGetX() {
+Future? initializeGetX() async {
   // Initialize the controllers
   Get.put(MainController());
   Get.put(HomeDataController());
   Get.put(SearchBarController());
   Get.put(ProfileController());
   Get.put(CacheData());
-  return null;
 }
