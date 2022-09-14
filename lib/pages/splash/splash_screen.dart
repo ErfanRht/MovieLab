@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:movielab/constants/app.dart';
 import 'package:movielab/modules/Recommender/Recommender.dart';
 import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/pages/main/main_page.dart';
 import 'package:movielab/widgets/error.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../constants/colors.dart';
 import '../../constants/types.dart';
 import '../../modules/tools/system_ui_overlay_style.dart';
@@ -25,6 +27,10 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     setSystemUIOverlayStyle(systemUIOverlayStyle: SystemUIOverlayStyle.DARK);
     _loadData();
+  }
+
+  void _launchUrl(final String url) async {
+    if (!await launchUrl(Uri.parse(url))) throw 'Could not launch $url';
   }
 
   @override
@@ -67,6 +73,16 @@ class _SplashScreenState extends State<SplashScreen> {
             borderWidth: 10,
           ),
         );
+      case RequestResult.FAILURE_VERSION_PROBLEM:
+        return ConnectionErrorWidget(
+          isItTryAgain: false,
+          tryAgain: () {
+            _launchUrl(
+                secureUrl ?? "https://erfanrht.github.io/MovieLab-Intro");
+          },
+          errorText:
+              'The version of MovieLab that you are using is outdated.\nFor more information check out:\n${secureUrl ?? "erfanrht.github.io/movielab-intro"}',
+        );
       default:
         return ConnectionErrorWidget(
           tryAgain: () {
@@ -87,7 +103,17 @@ class _SplashScreenState extends State<SplashScreen> {
       if (result == RequestResult.SUCCESS) {
         recommender();
         getUserData();
-        Navigate.replaceTo(context, const MainPage());
+        if (supportedVersions != null && supportedVersions!.isNotEmpty) {
+          if (supportedVersions!.contains(appVersion)) {
+            Navigate.replaceTo(context, const MainPage());
+          } else {
+            setState(() {
+              _loadingStatus = RequestResult.FAILURE_VERSION_PROBLEM;
+            });
+          }
+        } else {
+          Navigate.replaceTo(context, const MainPage());
+        }
       } else {
         setState(() {
           _loadingStatus = result;

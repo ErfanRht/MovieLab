@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:movielab/constants/app.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/pages/shared/app_name.dart';
 import 'package:movielab/widgets/buttons/social_media_button.dart';
@@ -37,7 +38,7 @@ class AboutPage extends StatelessWidget {
               height: 10,
             ),
             Text(
-              "Version 2.0.7",
+              "Version ${appVersion.replaceAll('v', '')}",
               style: TextStyle(
                   fontSize: 17.5,
                   color: Colors.white.withOpacity(0.5),

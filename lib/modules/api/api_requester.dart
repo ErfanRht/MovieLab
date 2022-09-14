@@ -276,7 +276,7 @@ class APIRequester {
         (apiKeys.length == 1 && apiKeys[0] == "XXXXXXXXXX")) {
       var response;
       await key_getter().then((result) async {
-        if (!result) {
+        if (result == RequestResult.FAILURE) {
           if (kDebugMode) {
             print(
                 "You haven't add any api key to the app, so it won't work!\nFor more information check out the documentation at https://github.com/ErfanRht/MovieLab#getting-started");
