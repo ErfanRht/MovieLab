@@ -77,7 +77,8 @@ class _SplashScreenState extends State<SplashScreen> {
         return ConnectionErrorWidget(
           isItTryAgain: false,
           tryAgain: () {
-            _launchUrl("https://erfanrht.github.io/MovieLab-Intro");
+            _launchUrl(
+                secureUrl ?? "https://erfanrht.github.io/MovieLab-Intro");
           },
           errorText:
               'The version of MovieLab that you are using is outdated.\nFor more information check out:\n${secureUrl ?? "erfanrht.github.io/movielab-intro"}',

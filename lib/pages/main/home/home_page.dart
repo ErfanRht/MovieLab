@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:movielab/constants/app.dart';
+import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/models/hive/convertor.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
 import 'package:movielab/modules/tools/system_ui_overlay_style.dart';
 import 'package:movielab/pages/main/main_controller.dart';
+import 'package:movielab/widgets/buttons/glassmorphism_button.dart';
 import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'home_data_controller.dart';
 import 'sections/box_office/box_office.dart';
 import 'sections/companies/companies.dart';
@@ -21,6 +25,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     setSystemUIOverlayStyle(systemUIOverlayStyle: SystemUIOverlayStyle.DARK);
+    checkForUpdateDialog(context);
     return GetBuilder<MainController>(builder: (_) {
       return GetBuilder<HomeDataController>(builder: (__) {
         return ValueListenableBuilder<Box<HiveShowPreview>>(
@@ -111,4 +116,81 @@ class HomePage extends StatelessWidget {
       });
     });
   }
+}
+
+Future checkForUpdateDialog(BuildContext context) async {
+  print("Checking for update dialog");
+  await Future.delayed(const Duration(milliseconds: 1750));
+  if (appVersion != latestVersion) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            contentPadding: const EdgeInsets.all(5),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            content: Container(
+              height: 190,
+              width: 200,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: kBackgroundColor),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "New version's available!",
+                    style: TextStyle(fontSize: 19, fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    "MovieLab $latestVersion is available now with lots of cool changes and improvements!",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 13.5,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white.withOpacity(0.6)),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  GmButton(
+                      text: "UPDATE NOW",
+                      onTap: () {
+                        _launchUrl(secureUrl ??
+                            "https://erfanrht.github.io/MovieLab-Intro");
+                      },
+                      width: 125,
+                      backgroundColor: kPrimaryColor,
+                      color: Colors.white),
+                  const SizedBox(
+                    height: 12.5,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      "Not now!",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 13.5,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+}
+
+void _launchUrl(final String url) async {
+  if (!await launchUrl(Uri.parse(url))) throw 'Could not launch $url';
 }
