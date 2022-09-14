@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 
 class ConnectionErrorWidget extends StatelessWidget {
   final String errorText;
-  final VoidCallback tryAgain;
+  final bool isItTryAgain;
+  final VoidCallback? tryAgain;
   const ConnectionErrorWidget(
       {this.errorText = 'An unexpected error occurred while loading data.',
       required this.tryAgain,
-      Key? key})
+      Key? key,
+      this.isItTryAgain = true})
       : super(key: key);
 
   @override
@@ -25,6 +26,7 @@ class ConnectionErrorWidget extends StatelessWidget {
                   onTap: tryAgain,
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
+                    // width: MediaQuery.of(context).size.width,
                     padding: const EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
@@ -34,24 +36,27 @@ class ConnectionErrorWidget extends StatelessWidget {
                       children: [
                         Text(
                           errorText,
-                          style: TextStyle(
+                          textAlign: TextAlign.center,
+                          softWrap: true,
+                          style: const TextStyle(
                               fontSize: 12.5, fontWeight: FontWeight.w600),
                         ),
                         const SizedBox(height: 5),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Try again',
-                                style: TextStyle(
-                                    fontSize: 12.5,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              const Icon(
-                                Icons.refresh,
-                                size: 15,
-                              )
-                            ])
+                        if (isItTryAgain)
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Text(
+                                  'Try again',
+                                  style: TextStyle(
+                                      fontSize: 12.5,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                Icon(
+                                  Icons.refresh,
+                                  size: 15,
+                                )
+                              ])
                       ],
                     ),
                   )),
