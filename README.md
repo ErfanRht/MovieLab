@@ -2,8 +2,8 @@
   <h1 align="center">MovieLab: Movies & TV Guide</h1>
 
   <p align="left">
-    MovieLab is an open source mobile application for browsing movies and TV shows, including cast, production crew and personal biographies and plot summaries.
-    With MovieLab, you have movies and tv series information right at your fingertips.
+    MovieLab is an open source movie tracker and movie finder where you can find movies, series, seasons, episodes. movie recommendation and actors from the largest movie database IMDb. 
+  With MovieLab, you have movies and series information right at your fingertips!
   </p>
   <p align="left">
   Do you like movies? Try MovieLab <a href="https://github.com/ErfanRht/MovieLab/releases/">here</a>, or if you are a developer click <a href="https://github.com/ErfanRht/MovieLab#getting-started">here</a>.
