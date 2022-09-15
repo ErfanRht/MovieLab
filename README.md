@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center">MovieLab</h1>
+  <h1 align="center">MovieLab: Movies & TV Guide</h1>
 
   <p align="left">
     MovieLab is an open source mobile application for browsing movies and TV shows, including cast, production crew and personal biographies and plot summaries.
