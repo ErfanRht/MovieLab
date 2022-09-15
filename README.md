@@ -21,7 +21,18 @@
 <!-- This effect image is from https://github.com/nastyox/Rando.js#nastyox project -->
 
 ## Screenshots
-<img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_01.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_02.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_03.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_04.jpg?raw=true" width="23%" /><img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_05.jpg?raw=true" width="23%" /> <img src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_06.jpg?raw=true" width="23%" />
+
+<div align="center" style="width:100%;display:flex;justify-content:space-between;">
+<img width="32%" src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_01.jpg" align="center" alt="screenshot" />
+<img width="32%" src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_02.jpg" align="center" alt="screenshot" />
+<img width="32%" src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_03.jpg" align="center" alt="screenshot" />
+</div>
+<p> </p>
+<div align="center" style="width:100%;display:flex;justify-content:space-between;">
+<img width="32%" src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_04.jpg" align="center" alt="screenshot" />
+<img width="32%" src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_05.jpg" align="center" alt="screenshot" />
+<img width="32%" src="https://github.com/ErfanRht/MovieLab/blob/master/screenshots/Screenshot_06.jpg" align="center" alt="screenshot" />
+</div>
 
 ## Download
   You can simply download it for Android from [Here](https://ErfanRht.github.io/MovieLab-Intro).
