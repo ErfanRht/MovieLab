@@ -48,23 +48,28 @@ class _ExpandedItemBoxState extends State<ExpandedItemBox>
           },
           onLongPress: () async {
             await Future.delayed(const Duration(milliseconds: 250));
-            await showModalBottomSheet(
-              context: context,
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                top: Radius.circular(20),
-              )),
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              transitionAnimationController: AnimationController(
-                  duration: const Duration(milliseconds: 235), vsync: this),
-              builder: (context) {
-                return ShowListPopupActions(
-                  show: widget.show,
-                  updateStats: updateData,
-                  backgroundColor: kBackgroundColor,
-                );
-              },
-            );
+            if (widget.showType != ShowType.EPISODE) {
+              await showModalBottomSheet(
+                context: context,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(20),
+                )),
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                transitionAnimationController: AnimationController(
+                    duration: const Duration(milliseconds: 235), vsync: this),
+                builder: (context) {
+                  return ShowListPopupActions(
+                    show: widget.show,
+                    updateStats: updateData,
+                    backgroundColor: kBackgroundColor,
+                  );
+                },
+              );
+            } else {
+              // ignore: use_build_context_synchronously
+              openShowPage(context, id: widget.show.id, preTag: widget.preTag);
+            }
             updateData();
           },
           borderRadius: BorderRadius.circular(15),
@@ -198,41 +203,44 @@ class _ExpandedItemBoxState extends State<ExpandedItemBox>
                               fontSize: 14,
                             ),
                           ),
-                          SizedBox(
-                            width: 40,
-                            height: 40,
-                            child: TextButton(
-                                onPressed: () async {
-                                  await Future.delayed(
-                                      const Duration(milliseconds: 250));
-                                  await showModalBottomSheet(
-                                    context: context,
-                                    shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(20),
-                                    )),
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    transitionAnimationController:
-                                        AnimationController(
-                                            duration: const Duration(
-                                                milliseconds: 350),
-                                            vsync: this),
-                                    builder: (context) {
-                                      return ShowListPopupActions(
-                                        show: widget.show,
-                                        updateStats: updateData,
-                                        backgroundColor: kBackgroundColor,
-                                      );
-                                    },
-                                  );
-                                },
-                                style: TextButton.styleFrom(
-                                    padding: EdgeInsets.zero,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(50))),
-                                child: const Icon(Icons.more_vert_rounded)),
-                          )
+                          if (widget.showType != ShowType.EPISODE)
+                            SizedBox(
+                              width: 40,
+                              height: 40,
+                              child: TextButton(
+                                  onPressed: () async {
+                                    await Future.delayed(
+                                        const Duration(milliseconds: 250));
+                                    await showModalBottomSheet(
+                                      context: context,
+                                      shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(20),
+                                      )),
+                                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                                      transitionAnimationController:
+                                          AnimationController(
+                                              duration: const Duration(
+                                                  milliseconds: 350),
+                                              vsync: this),
+                                      builder: (context) {
+                                        return ShowListPopupActions(
+                                          show: widget.show,
+                                          updateStats: updateData,
+                                          backgroundColor: kBackgroundColor,
+                                        );
+                                      },
+                                    );
+                                  },
+                                  style: TextButton.styleFrom(
+                                      padding: EdgeInsets.zero,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(50))),
+                                  child: const Icon(Icons.more_vert_rounded)),
+                            )
+                          else
+                            const SizedBox.shrink()
                         ],
                       ),
                       widget.show.year != "" ||
