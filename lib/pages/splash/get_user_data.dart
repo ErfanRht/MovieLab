@@ -80,11 +80,6 @@ Future<bool> updateUserStats() async {
     if (sortedGenres.length > 7) {
       for (int i = 0; i < sortedGenres.length; i++) {}
     }
-    controller.updateGenres(
-        genres: itemsGenres,
-        sortedGenres: sortedGenres,
-        genresLength: genresLength,
-        genresOthers: genresOthers);
 
     Map<String, int> itemCountries = {};
     int countriesLength = 0;
@@ -110,11 +105,6 @@ Future<bool> updateUserStats() async {
     if (sortedCountries.length > 7) {
       for (int i = 0; i < sortedCountries.length; i++) {}
     }
-    controller.updateCountries(
-        countries: itemCountries,
-        sortedCountries: sortedCountries,
-        countriesLength: countriesLength,
-        countriesOthers: countriesOthers);
 
     Map<String, int> languages = {};
     int languagesLength = 0;
@@ -139,11 +129,6 @@ Future<bool> updateUserStats() async {
     if (sortedLanguages.length > 7) {
       for (int i = 0; i < sortedLanguages.length; i++) {}
     }
-    controller.updateLanguages(
-        languages: languages,
-        sortedLanguages: sortedLanguages,
-        languagesLength: languagesLength,
-        languagesOthers: languagesOthers);
 
     Map<String, int> companies = {};
     int companiesLength = 0;
@@ -168,11 +153,6 @@ Future<bool> updateUserStats() async {
     if (sortedCompanies.length > 7) {
       for (int i = 0; i < sortedCompanies.length; i++) {}
     }
-    controller.updateCompanies(
-        companies: companies,
-        sortedCompanies: sortedCompanies,
-        companiesLength: companiesLength,
-        companiesOthers: companiesOthers);
 
     Map<String, int> contentRatings = {};
     int contentRatingsLength = 0;
@@ -198,11 +178,11 @@ Future<bool> updateUserStats() async {
     if (sortedContentRatings.length > 7) {
       for (int i = 0; i < sortedContentRatings.length; i++) {}
     }
-    controller.updateContentRatings(
-        contentRatings: contentRatings,
-        sortedContentRatings: sortedContentRatings,
-        contentRatingsLength: contentRatingsLength,
-        contentRatingsOthers: contentRatingsOthers);
+    // controller.updateContentRatings(
+    //     contentRatings: contentRatings,
+    //     sortedContentRatings: sortedContentRatings,
+    //     contentRatingsLength: contentRatingsLength,
+    //     contentRatingsOthers: contentRatingsOthers);
     if (kDebugMode) {
       print("User stats updated");
     }

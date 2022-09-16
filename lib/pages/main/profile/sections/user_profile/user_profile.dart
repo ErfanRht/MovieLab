@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
+import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/pages/main/profile/profile_controller.dart';
+import 'package:movielab/pages/main/profile/sections/user_profile/sections/stats_box.dart';
 import 'package:movielab/pages/main/profile/sections/user_stats/user_stats.dart';
 
 import 'edit_user_profile.dart';
 import 'sections/dividers.dart';
 import 'sections/imdb_rating.dart';
-import 'sections/stats_box.dart';
 import 'sections/user_profile_image.dart';
 
 class ProfilePageUserProfile extends StatelessWidget {
-  const ProfilePageUserProfile({Key? key}) : super(key: key);
-
+  ProfilePageUserProfile({Key? key}) : super(key: key);
+  late List<ShowPreview> items;
   @override
   Widget build(BuildContext context) {
+    PreferencesShareholder preferencesShareholder = PreferencesShareholder();
+    items = getAllItems(allLists: preferencesShareholder.getAllLists());
     return GetBuilder<ProfileController>(builder: (_) {
       return Center(
         child: Stack(
           children: [
-            AnimatedContainer(
+            Container(
               height: 530,
               margin: const EdgeInsets.only(top: 64),
               padding: const EdgeInsets.only(top: 70),
@@ -28,7 +32,6 @@ class ProfilePageUserProfile extends StatelessWidget {
               decoration: BoxDecoration(
                   color: kSecondaryColor,
                   borderRadius: BorderRadius.circular(15)),
-              duration: const Duration(milliseconds: 150),
               child: Column(
                 children: [
                   Text(
@@ -52,15 +55,15 @@ class ProfilePageUserProfile extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            statsBox(
-                              context,
+                            UserStatsBox(
                               value: _.watchedMoviesCount.toString(),
-                              text: "Watched\nMovies",
+                              title: "Watched\nMovies",
+                              items: const [],
                             ),
-                            statsBox(
-                              context,
+                            UserStatsBox(
                               value: _.watchedSeriesCount.toString(),
-                              text: "Watched\nSeries",
+                              title: "Watched\nSeries",
+                              items: const [],
                             ),
                           ],
                         ),
@@ -72,25 +75,23 @@ class ProfilePageUserProfile extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      statsBox(context,
-                          value: _.genresLength != 0
-                              ? _.sortedGenres![0]
-                              : "Unknown",
-                          text: "Favorite\nGenre",
+                      UserStatsBox(
+                          title: "Favorite\nGenre",
+                          items: [for (ShowPreview show in items) show.genres!],
                           sizeType: 2),
                       smallDivider(),
-                      statsBox(context,
-                          value: _.companiesLength != 0
-                              ? _.sortedCompanies![0]
-                              : "Unknown",
-                          text: "Favorite\nCompany",
+                      UserStatsBox(
+                          title: "Favorite\nCompany",
+                          items: [
+                            for (ShowPreview show in items) show.companies!
+                          ],
                           sizeType: 2),
                       smallDivider(),
-                      statsBox(context,
-                          value: _.countriesLength != 0
-                              ? _.sortedCountries![0]
-                              : "Unknown",
-                          text: "Favorite\nCountry",
+                      UserStatsBox(
+                          title: "Favorite\nCountry",
+                          items: [
+                            for (ShowPreview show in items) show.countries!
+                          ],
                           sizeType: 2),
                     ],
                   ),
@@ -103,18 +104,18 @@ class ProfilePageUserProfile extends StatelessWidget {
                       const SizedBox(
                         width: 35,
                       ),
-                      statsBox(context,
-                          value: _.languagesLength != 0
-                              ? _.sortedLanguages![0]
-                              : "Unknown",
-                          text: "Favorite\nLanguage",
+                      UserStatsBox(
+                          title: "Favorite\nLanguage",
+                          items: [
+                            for (ShowPreview show in items) show.languages!
+                          ],
                           sizeType: 2),
                       smallDivider(),
-                      statsBox(context,
-                          value: _.contentRatingsLength != 0
-                              ? _.sortedContentRatings![0]
-                              : "Unknown",
-                          text: "Favorite\nContent-Rating",
+                      UserStatsBox(
+                          title: "Favorite\nContent-Rating",
+                          items: [
+                            for (ShowPreview show in items) show.contentRating!
+                          ],
                           width: MediaQuery.of(context).size.width * 0.325,
                           sizeType: 2),
                     ],
@@ -162,4 +163,12 @@ class ProfilePageUserProfile extends StatelessWidget {
       );
     });
   }
+}
+
+List<ShowPreview> getAllItems({required List<List<ShowPreview>> allLists}) {
+  List<ShowPreview> items = [];
+  for (List<ShowPreview> list in allLists) {
+    items.addAll(list);
+  }
+  return items;
 }

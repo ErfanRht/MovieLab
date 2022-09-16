@@ -7,22 +7,14 @@ import 'indicator.dart';
 class StatsChart extends StatefulWidget {
   final int index;
   final String statsName;
-  final List<String> sortedSections;
-  final Map<String, int> sections;
-  final int total;
-  final int length;
-  final int others;
+  final List<String> items;
 
-  const StatsChart(
-      {Key? key,
-      required this.index,
-      required this.statsName,
-      required this.sortedSections,
-      required this.sections,
-      required this.length,
-      required this.total,
-      required this.others})
-      : super(key: key);
+  const StatsChart({
+    Key? key,
+    required this.index,
+    required this.statsName,
+    required this.items,
+  }) : super(key: key);
 
   @override
   State<StatsChart> createState() => StatsChartState();
@@ -30,6 +22,15 @@ class StatsChart extends StatefulWidget {
 
 class StatsChartState extends State<StatsChart> {
   int touchedIndex = -1;
+  List<String> sortedSections = [];
+  Map<String, int> sections = {};
+  int totalLength = 0;
+  int othersLength = 0;
+  @override
+  void initState() {
+    super.initState();
+    getStats();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +82,7 @@ class StatsChartState extends State<StatsChart> {
             child: InefficaciousRefreshIndicator(
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: widget.length,
+                itemCount: sortedSections.length,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return Padding(
@@ -89,9 +90,7 @@ class StatsChartState extends State<StatsChart> {
                           bottom: 2.5, left: widget.index.isOdd ? 30 : 0),
                       child: Indicator(
                         color: kPrimaryColorSchemes[index],
-                        text: index != 6
-                            ? widget.sortedSections[index]
-                            : "Others",
+                        text: index != 6 ? sortedSections[index] : "Others",
                       ));
                 },
               ),
@@ -103,16 +102,18 @@ class StatsChartState extends State<StatsChart> {
   }
 
   List<PieChartSectionData> showingSections() {
-    return List.generate(widget.length, (i) {
+    return List.generate(sortedSections.length, (i) {
       final isTouched = i == touchedIndex;
       final double fontSize = isTouched ? 25 : 16;
       final double radius = isTouched ? 60.0 : 50.0;
       return PieChartSectionData(
         color: kPrimaryColorSchemes[i],
         value: i != 6
-            ? widget.sections[widget.sortedSections[i]]! / widget.total
-            : widget.others / widget.total,
-        title: (widget.sections[widget.sortedSections[i]]!).toString(),
+            ? sections[sortedSections[i]]! / totalLength
+            : othersLength / totalLength,
+        title: i != 6
+            ? (sections[sortedSections[i]]!).toString()
+            : othersLength.toString(),
         radius: radius,
         titleStyle: TextStyle(
             fontSize: fontSize,
@@ -120,5 +121,34 @@ class StatsChartState extends State<StatsChart> {
             color: const Color(0xffffffff)),
       );
     });
+  }
+
+  getStats() {
+    if (widget.items.isNotEmpty) {
+      for (String items in widget.items) {
+        for (String item in items.split(", ")) {
+          totalLength++;
+          if (sections.containsKey(item)) {
+            sections[item] = sections[item]! + 1;
+          } else {
+            if (sections.keys.length > 6) {
+              othersLength++;
+            } else {
+              sections[item] = 1;
+            }
+          }
+        }
+        sortedSections = sections.keys.toList();
+        sortedSections.sort((a, b) => sections[b]!.compareTo(sections[a]!));
+        setState(() {
+          sections = sections;
+          sortedSections = sortedSections;
+          othersLength = othersLength;
+          totalLength = totalLength;
+        });
+      }
+    } else {
+      getStats();
+    }
   }
 }

@@ -118,7 +118,7 @@ class PreferencesShareholder {
   }
 
   // Get all items of a list
-  Future<List<ShowPreview>> getList({required String listName}) async {
+  List<ShowPreview> getList({required String listName}) {
     Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
     List<HiveShowPreview> listItems = list.values.toList();
     List<ShowPreview> result = [];
@@ -128,11 +128,11 @@ class PreferencesShareholder {
     return result;
   }
 
-  Future<List<List<ShowPreview>>> getAllLists() async {
+  List<List<ShowPreview>> getAllLists() {
     List<String> listNames = ["collection", "watchlist", "history"];
     List<List<ShowPreview>> result = [];
     for (String listName in listNames) {
-      result.add(await getList(listName: listName));
+      result.add(getList(listName: listName));
     }
     return result;
   }
