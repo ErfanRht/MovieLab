@@ -2,13 +2,47 @@ import 'package:flutter/material.dart';
 import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/pages/main/profile/sections/user_stats/user_stats.dart';
 
-Widget statsBox(BuildContext context,
-        {required final String? value,
-        required final String text,
-        final double? width,
-        final int sizeType = 1}) =>
-    SizedBox(
-      width: width ?? MediaQuery.of(context).size.width * 0.25,
+class UserStatsBox extends StatefulWidget {
+  final String title;
+  final double? width;
+  final int sizeType;
+  final String? value;
+  final List<String> items;
+
+  const UserStatsBox(
+      {Key? key,
+      this.width,
+      required this.title,
+      this.sizeType = 1,
+      this.value,
+      required this.items})
+      : super(key: key);
+
+  @override
+  State<UserStatsBox> createState() => _UserStatsBoxState();
+}
+
+class _UserStatsBoxState extends State<UserStatsBox> {
+  late Map<String, int> sections;
+  late List<String> sortedSections;
+  late String? value;
+  @override
+  void initState() {
+    super.initState();
+    sections = {};
+    sortedSections = [];
+    value = "";
+    if (widget.value == null) {
+      getStats();
+    } else {
+      value = widget.value!;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: widget.width ?? MediaQuery.of(context).size.width * 0.25,
       child: TextButton(
         onPressed: () {
           Navigate.pushTo(context, const UserStatsPage());
@@ -26,15 +60,15 @@ Widget statsBox(BuildContext context,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Text(
-                value!,
+                value != "" ? value! : "Unknown",
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: sizeType == 2 ? 18 : 24),
+                    fontSize: widget.sizeType == 2 ? 18 : 24),
               ),
               const SizedBox(height: 2),
               Text(
-                text,
+                widget.title,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: Colors.white.withOpacity(0.75),
@@ -45,3 +79,24 @@ Widget statsBox(BuildContext context,
         ),
       ),
     );
+  }
+
+  getStats() {
+    if (widget.items.isNotEmpty) {
+      for (String items in widget.items) {
+        for (String item in items.split(", ")) {
+          if (sections.containsKey(item)) {
+            sections[item] = sections[item]! + 1;
+          } else {
+            sections[item] = 1;
+          }
+        }
+        sortedSections = sections.keys.toList();
+        sortedSections.sort((a, b) => sections[b]!.compareTo(sections[a]!));
+        setState(() {
+          value = sortedSections[0];
+        });
+      }
+    } else {}
+  }
+}

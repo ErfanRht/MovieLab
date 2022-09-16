@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
+import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/pages/main/profile/profile_controller.dart';
 import 'package:movielab/pages/main/profile/sections/list_page/sections/stats_page/sections/navbar.dart';
 import 'package:movielab/pages/main/profile/sections/list_page/sections/stats_page/sections/stats_chart.dart';
+import 'package:movielab/pages/main/profile/sections/user_profile/user_profile.dart';
 
 class UserStatsPage extends StatelessWidget {
   const UserStatsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<ShowPreview> items = [];
+    PreferencesShareholder preferencesShareholder = PreferencesShareholder();
+    items = getAllItems(allLists: preferencesShareholder.getAllLists());
     return GetBuilder<ProfileController>(builder: (_) {
       return Scaffold(
           appBar: listPageStatsNavbar(context, listName: "${_.name}'s"),
@@ -58,64 +64,36 @@ class UserStatsPage extends StatelessWidget {
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                     )),
-                if (_.genres.isNotEmpty) ...[
+                if (items.isNotEmpty) ...[
                   const SizedBox(
                     height: 25,
                   ),
                   StatsChart(
                     index: 0,
                     statsName: "Genres",
-                    sortedSections: _.sortedGenres!,
-                    sections: _.genres,
-                    length: (_.sortedGenres?.length)! > 7
-                        ? 7
-                        : (_.sortedGenres?.length)!,
-                    total: _.genresLength,
-                    others: _.genresOthers,
+                    items: [for (ShowPreview show in items) show.genres!],
                   ),
                   StatsChart(
                     index: 1,
                     statsName: "Countries",
-                    sortedSections: _.sortedCountries!,
-                    sections: _.countries,
-                    length: (_.sortedCountries?.length)! > 7
-                        ? 7
-                        : (_.sortedCountries?.length)!,
-                    total: _.countriesLength,
-                    others: _.countriesOthers,
+                    items: [for (ShowPreview show in items) show.countries!],
                   ),
                   StatsChart(
                     index: 2,
                     statsName: "Languages",
-                    sortedSections: _.sortedLanguages!,
-                    sections: _.languages,
-                    length: (_.sortedLanguages?.length)! > 7
-                        ? 7
-                        : (_.sortedLanguages?.length)!,
-                    total: _.languagesLength,
-                    others: _.languagesOthers,
+                    items: [for (ShowPreview show in items) show.languages!],
                   ),
                   StatsChart(
                     index: 3,
                     statsName: "Companies",
-                    sortedSections: _.sortedCompanies!,
-                    sections: _.companies,
-                    length: (_.sortedCompanies?.length)! > 7
-                        ? 7
-                        : (_.sortedCompanies?.length)!,
-                    total: _.companiesLength,
-                    others: _.companiesOthers,
+                    items: [for (ShowPreview show in items) show.companies!],
                   ),
                   StatsChart(
                     index: 4,
                     statsName: "Contents",
-                    sortedSections: _.sortedContentRatings!,
-                    sections: _.contentRatings,
-                    length: (_.sortedContentRatings?.length)! > 7
-                        ? 7
-                        : (_.sortedContentRatings?.length)!,
-                    total: _.contentRatingsLength,
-                    others: _.contentRatingsOthers,
+                    items: [
+                      for (ShowPreview show in items) show.contentRating!
+                    ],
                   ),
                 ]
               ],

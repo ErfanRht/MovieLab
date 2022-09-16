@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:movielab/constants/colors.dart';
 
 class AppName extends StatelessWidget {
@@ -10,7 +9,8 @@ class AppName extends StatelessWidget {
     return RichText(
       text: const TextSpan(
         text: 'Movie',
-        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        style: TextStyle(
+            fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
         children: <TextSpan>[
           TextSpan(text: 'Lab', style: TextStyle(color: kPrimaryColor)),
         ],
