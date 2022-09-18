@@ -12,6 +12,15 @@ class ProfileController extends GetxController {
     update();
   }
 
+  String? nameErrorText;
+  String? usernameErrorText;
+  updateTextFields(
+      {final String? nameErrorText, final String? usernameErrorText}) {
+    this.nameErrorText = nameErrorText ?? this.nameErrorText;
+    this.usernameErrorText = usernameErrorText ?? this.usernameErrorText;
+    update();
+  }
+
   int watchedMoviesCount = 0;
   int watchedSeriesCount = 0;
   updateWatchedMoviesCount(int count) {

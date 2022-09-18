@@ -15,7 +15,7 @@ Widget userProfileImage(BuildContext context,
                     child: Material(
                       color: Colors.transparent,
                       child: Ink.image(
-                        image: _.imageUrl != "Empty"
+                        image: _.imageUrl != ""
                             ? FileImage(File(_.imageUrl)) as ImageProvider
                             : const AssetImage("assets/images/no_picture.png"),
                         fit: BoxFit.cover,
