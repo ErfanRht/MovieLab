@@ -144,9 +144,9 @@ class PreferencesShareholder {
       user = userBox.getAt(0)!;
     } else {
       user = HiveUser()
-        ..name = "Your name"
-        ..username = "Your username"
-        ..imageUrl = "Empty";
+        ..name = ""
+        ..username = ""
+        ..imageUrl = "";
       userBox.put(0, user);
     }
 
