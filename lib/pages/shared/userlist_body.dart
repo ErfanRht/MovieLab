@@ -11,10 +11,11 @@ import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/main/profile/sections/list_page/sections/history_timeline.dart';
-import 'package:movielab/pages/show/show_box/lists_show_box.dart';
 import 'package:movielab/widgets/error.dart';
 import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 import 'package:ms_undraw/ms_undraw.dart';
+
+import 'item_exhibitor/item_box/lists_show_box.dart';
 
 class UserListBody extends StatefulWidget {
   const UserListBody({Key? key, required this.listName}) : super(key: key);
@@ -58,7 +59,7 @@ class _UserListBodyState extends State<UserListBody> {
                         itemCount: _.recommendations.length,
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
-                          return ListShowBox(
+                          return ListItemBox(
                               listName: widget.listName,
                               showPreview: _.recommendations[index]);
                         },
@@ -112,7 +113,7 @@ class _UserListBodyState extends State<UserListBody> {
                                     TimelineSteps(
                                       steps: [
                                         for (HiveShowPreview show in list)
-                                          ListShowBox(
+                                          ListItemBox(
                                               listName: widget.listName,
                                               width: MediaQuery.of(context)
                                                       .size
@@ -140,7 +141,7 @@ class _UserListBodyState extends State<UserListBody> {
                             itemCount: list.length,
                             physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
-                              return ListShowBox(
+                              return ListItemBox(
                                   listName: widget.listName,
                                   showPreview: convertHiveToShowPreview(
                                       list[list.length - index - 1]));
@@ -180,7 +181,7 @@ class _UserListBodyState extends State<UserListBody> {
 
   Future getList() async {
     PreferencesShareholder preferencesShareholder = PreferencesShareholder();
-    list = await preferencesShareholder.getList(listName: widget.listName);
+    list = preferencesShareholder.getList(listName: widget.listName);
     if (widget.listName != 'history') {
       setState(() {
         list = list;

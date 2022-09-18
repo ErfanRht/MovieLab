@@ -1,3 +1,3 @@
 const splashScreenRoute = "/splash";
 const homeScreenRoute = "/home";
-const showPageRoute = "/show";
+const ItemPageRoute = "/show";

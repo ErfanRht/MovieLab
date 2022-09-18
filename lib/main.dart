@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:movielab/constants/themes.dart';
 import 'constants/routes.dart';
+import 'constants/themes.dart';
 import 'models/hive/hive_helper/register_adapters.dart';
 import 'models/hive/models/show_preview.dart';
 import 'models/hive/models/user.dart';
@@ -12,7 +12,7 @@ import 'pages/main/main_controller.dart';
 import 'pages/main/main_page.dart';
 import 'pages/main/profile/profile_controller.dart';
 import 'pages/main/search/search_bar/search_bar_controller.dart';
-import 'pages/show/show_page/show_page.dart';
+import 'pages/shared/item_exhibitor/item_page/item_page.dart';
 import 'pages/splash/splash_screen.dart';
 
 void main() async {
@@ -44,7 +44,7 @@ class App extends StatelessWidget {
             matches?.group(2).toString() != null) {
           return MaterialPageRoute(
             builder: (BuildContext context) =>
-                ShowPage(id: matches!.group(2).toString()),
+                ItemPage(id: matches!.group(2).toString()),
           );
         }
         return MaterialPageRoute(
