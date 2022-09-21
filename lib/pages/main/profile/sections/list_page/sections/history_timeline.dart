@@ -1,16 +1,15 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/general.dart';
-import 'package:movielab/pages/show/show_box/lists_show_box.dart';
+import 'package:movielab/pages/shared/item_exhibitor/item_box/lists_show_box.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 class TimelineSteps extends StatelessWidget {
   const TimelineSteps({Key? key, required this.steps, required this.watchDates})
       : super(key: key);
 
-  final List<ListShowBox> steps;
+  final List<ListItemBox> steps;
   final List<DateTime?> watchDates;
 
   @override
@@ -28,7 +27,7 @@ class TimelineSteps extends StatelessWidget {
           }
 
           final int itemIndex = index ~/ 2;
-          final ListShowBox step = steps[itemIndex];
+          final ListItemBox step = steps[itemIndex];
 
           final bool isLeftAlign = itemIndex.isEven;
 
@@ -107,7 +106,7 @@ class _TimelineStepsChild extends StatelessWidget {
     required this.step,
   }) : super(key: key);
 
-  final ListShowBox step;
+  final ListItemBox step;
   final bool isLeftAlign;
 
   @override

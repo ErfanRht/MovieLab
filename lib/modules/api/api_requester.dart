@@ -81,7 +81,9 @@ class APIRequester {
 
       List<ShowPreview> inTheaters = [];
       for (int i = 0; i < json.length; i++) {
-        inTheaters.add(ShowPreview.fromJson(json[i]));
+        if (!unavailableIDs.contains(json[i]["id"])) {
+          inTheaters.add(ShowPreview.fromJson(json[i]));
+        }
       }
       Get.find<HomeDataController>().updateInTheaters(inTheaters: inTheaters);
       return RequestResult.SUCCESS;

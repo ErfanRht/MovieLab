@@ -72,7 +72,7 @@ class ShowPreview {
       rank: json['rank'] ?? "",
       title: json['title'] ?? "",
       type: json['type'] ?? json['role'] ?? "",
-      crew: json['crew'] ?? json['stars'] ?? "",
+      crew: json['crew'] ?? json['stars'] ?? json['role'] ?? "",
       image: imageQualityIncreaser(json['image']),
       year: json['year'] ??
           (json['description'] != null

@@ -3,7 +3,7 @@ import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/pages/main/home/sections/home_titles.dart';
 import 'package:movielab/pages/main/home/sections/trendings/all_trendings.dart';
-import 'package:movielab/pages/show/show_box/compressed_item_box/compressed_item_box.dart';
+import 'package:movielab/pages/shared/item_exhibitor/item_box/compressed_item_box/compressed_item_box.dart';
 import 'package:movielab/widgets/error.dart';
 
 class HomeTrendingsBuilder extends StatelessWidget {

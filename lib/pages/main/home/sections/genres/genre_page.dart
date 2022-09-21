@@ -7,7 +7,7 @@ import 'package:movielab/constants/types.dart';
 import 'package:movielab/models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/api/api_requester.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
-import 'package:movielab/pages/show/show_box/expanded_item_box/expanded_item_box.dart';
+import 'package:movielab/pages/shared/item_exhibitor/item_box/expanded_item_box/expanded_item_box.dart';
 import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 
 class GenrePage extends StatefulWidget {
