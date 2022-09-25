@@ -1,4 +1,4 @@
-const String appVersion = "v3.0.1";
+const String appVersion = "v3.0.2";
 
 String? latestVersion;
 List<String>? supportedVersions;
