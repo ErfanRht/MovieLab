@@ -42,9 +42,7 @@ class _ItemPageState extends State<ItemPage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    setSystemUIOverlayStyle(
-        systemUIOverlayStyle: SystemUIOverlayStyle.DARK,
-        color: kSecondaryColor);
+    setSystemUIOverlayStyle(color: kSecondaryColor);
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       if (_scrollController.position.userScrollDirection ==
@@ -70,7 +68,7 @@ class _ItemPageState extends State<ItemPage> with TickerProviderStateMixin {
   @override
   void dispose() {
     super.dispose();
-    setSystemUIOverlayStyle(systemUIOverlayStyle: SystemUIOverlayStyle.DARK);
+    setSystemUIOverlayStyle();
     _scrollController.removeListener(() {});
   }
 

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
@@ -12,6 +13,7 @@ import 'package:movielab/modules/tools/system_ui_overlay_style.dart';
 import 'package:movielab/widgets/error.dart';
 import 'package:movielab/widgets/full_image_page.dart';
 import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
+import 'package:movielab/widgets/toast.dart';
 import 'sections/bottom_bar.dart';
 import 'sections/summary.dart';
 import 'sections/title.dart';
@@ -35,39 +37,35 @@ class _ActorPageState extends State<ActorPage> with TickerProviderStateMixin {
   final preferencesShareholder = PreferencesShareholder();
   bool isFavourite = false;
   dynamic actor;
+  late FToast fToast;
 
   @override
   void initState() {
     super.initState();
-    setSystemUIOverlayStyle(
-        systemUIOverlayStyle: SystemUIOverlayStyle.DARK,
-        color: kSecondaryColor);
+    setSystemUIOverlayStyle(color: kSecondaryColor);
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       if (_scrollController.position.userScrollDirection ==
           ScrollDirection.reverse) {
         if (_isBottomAppBarVisible) {
-          setState(() {
-            _isBottomAppBarVisible = false;
-          });
+          setState(() => _isBottomAppBarVisible = false);
         }
       }
       if (_scrollController.position.userScrollDirection ==
           ScrollDirection.forward) {
         if (!_isBottomAppBarVisible) {
-          setState(() {
-            _isBottomAppBarVisible = true;
-          });
+          setState(() => _isBottomAppBarVisible = true);
         }
       }
     });
+    fToast = FToast();
     loadItemData();
   }
 
   @override
   void dispose() {
     super.dispose();
-    setSystemUIOverlayStyle(systemUIOverlayStyle: SystemUIOverlayStyle.DARK);
+    setSystemUIOverlayStyle();
     _scrollController.removeListener(() {});
   }
 
@@ -103,15 +101,57 @@ class _ActorPageState extends State<ActorPage> with TickerProviderStateMixin {
                 )),
           ),
           floatingActionButton: FloatingActionButton(
-              onPressed: () {
+              onPressed: () async {
                 if (!isFavourite) {
                   preferencesShareholder.addArtistToFav(actor: actor);
+                  await Future.delayed(const Duration(milliseconds: 200));
+                  fToast.removeQueuedCustomToasts();
+                  fToast.showToast(
+                    child: ToastWidget(
+                      mainText: "Saved to Artists",
+                      buttonText: "See list",
+                      buttonColor: kAccentColor,
+                      pushOnButtonTap: true,
+                      listName: 'artists',
+                    ),
+                    gravity: ToastGravity.BOTTOM,
+                    toastDuration: const Duration(seconds: 3),
+                  );
+                  setState(() => isFavourite = true);
                 } else {
                   preferencesShareholder.unfavArtist(id: actor.id);
+                  await Future.delayed(const Duration(milliseconds: 200));
+                  fToast.removeQueuedCustomToasts();
+                  fToast.showToast(
+                    child: ToastWidget(
+                        mainText: "Ramoved from Artists",
+                        buttonText: "Undo",
+                        buttonColor: kPrimaryColor,
+                        buttonOnTap: () async {
+                          await Future.delayed(
+                              const Duration(milliseconds: 75));
+                          preferencesShareholder.addArtistToFav(actor: actor);
+                          await Future.delayed(
+                              const Duration(milliseconds: 200));
+                          fToast.removeQueuedCustomToasts();
+                          fToast.showToast(
+                            child: ToastWidget(
+                              mainText: "Saved to Artists",
+                              buttonText: "See list",
+                              buttonColor: kAccentColor,
+                              pushOnButtonTap: true,
+                              listName: 'artists',
+                            ),
+                            gravity: ToastGravity.BOTTOM,
+                            toastDuration: const Duration(seconds: 3),
+                          );
+                          setState(() => isFavourite = true);
+                        }),
+                    gravity: ToastGravity.BOTTOM,
+                    toastDuration: const Duration(seconds: 3),
+                  );
+                  setState(() => isFavourite = false);
                 }
-                setState(() {
-                  isFavourite = !isFavourite;
-                });
               },
               backgroundColor: kPrimaryColor,
               child: Icon(
@@ -234,31 +274,23 @@ class _ActorPageState extends State<ActorPage> with TickerProviderStateMixin {
   }
 
   Future loadItemData() async {
-    if (actor == null) {
-      await getItemInfo(id: widget.id, itemType: ItemType.ARTIST)
-          .then((response) {
-        if (response != null) {
-          setState(() {
-            actor = response;
-            _loadingStatus = RequestResult.SUCCESS;
-          });
-          preferencesShareholder.isFaved(id: widget.id).then((value) => {
-                setState(() {
-                  isFavourite = value;
-                })
-              });
-        } else {
-          setState(() {
-            _loadingStatus = RequestResult.FAILURE;
-          });
-        }
-      });
-    } else {
-      // preferencesShareholder.isThereInLists(showId: widget.id).then((value) => {
-      //       setState(() {
-      //         _isThereInLists = value;
-      //       })
-      //     });
-    }
+    await getItemInfo(id: widget.id, itemType: ItemType.ARTIST)
+        .then((response) {
+      if (response != null) {
+        setState(() {
+          actor = response;
+          _loadingStatus = RequestResult.SUCCESS;
+        });
+        preferencesShareholder.isFaved(id: widget.id).then((value) => {
+              setState(() {
+                isFavourite = value;
+              })
+            });
+      } else {
+        setState(() {
+          _loadingStatus = RequestResult.FAILURE;
+        });
+      }
+    });
   }
 }

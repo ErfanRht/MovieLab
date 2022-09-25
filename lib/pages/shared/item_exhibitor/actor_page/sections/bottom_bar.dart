@@ -29,23 +29,6 @@ class ActorPageBottomBar extends StatelessWidget {
               height: 45,
               width: 45,
               child: Icon(
-                FontAwesomeIcons.arrowUpRightFromSquare,
-                size: 22.5,
-              ),
-            ),
-            onTap: () {
-              Scaffold.of(context).openEndDrawer();
-            },
-          ),
-          const SizedBox(
-            width: 7.5,
-          ),
-          InkWell(
-            borderRadius: BorderRadius.circular(30),
-            child: const SizedBox(
-              height: 45,
-              width: 45,
-              child: Icon(
                 FontAwesomeIcons.share,
                 size: 22.5,
               ),

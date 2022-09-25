@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:movielab/constants/app.dart';
 import 'package:movielab/constants/colors.dart';
-import 'package:movielab/constants/types.dart';
 import 'package:movielab/models/hive/convertor.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
 import 'package:movielab/modules/tools/system_ui_overlay_style.dart';
@@ -24,7 +23,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    setSystemUIOverlayStyle(systemUIOverlayStyle: SystemUIOverlayStyle.DARK);
+    setSystemUIOverlayStyle();
     checkForUpdateDialog(context);
     return GetBuilder<MainController>(builder: (_) {
       return GetBuilder<HomeDataController>(builder: (__) {
