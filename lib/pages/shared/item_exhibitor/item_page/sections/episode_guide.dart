@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:movielab/constants/colors.dart';
-import 'package:movielab/models/show_models/full_show_model.dart';
+import 'package:movielab/models/item_models/show_models/full_show_model.dart';
 import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/widgets/buttons/glassmorphism_button.dart';
 import 'package:movielab/widgets/section_title.dart';

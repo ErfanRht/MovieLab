@@ -45,7 +45,7 @@ class AllTimeBoxOfficePage extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 return ExpandedItemBox(
                                   show: _.allTimeBoxOffice[index],
-                                  showType: ShowType.BOX_OFFICE,
+                                  showType: ItemSuit.BOX_OFFICE,
                                 );
                               },
                             ),

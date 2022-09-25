@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import '../../models/actor_models/full_actor_model.dart';
-import '../../models/show_models/full_show_model.dart';
+import 'package:movielab/models/item_models/actor_models/full_actor_model.dart';
+import 'package:movielab/models/item_models/show_models/full_show_model.dart';
 
 class CacheData extends GetxController {
   List<FullShow> showsData = [];

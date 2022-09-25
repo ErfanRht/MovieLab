@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/user_lists.dart';
-import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/models/item_models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/pages/shared/item_exhibitor/item_popup/show_list_popup_actions.dart';
 import 'package:movielab/widgets/buttons_section.dart';

@@ -1,4 +1,4 @@
-import 'package:movielab/models/actor_models/actor_preview_model.dart';
+import 'package:movielab/models/item_models/actor_models/actor_preview_model.dart';
 import 'package:movielab/modules/tools/image_quality_increaser.dart';
 import 'show_preview_model.dart';
 

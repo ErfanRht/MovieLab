@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:movielab/models/hive/models/actor_preview.dart';
 import 'constants/routes.dart';
 import 'constants/themes.dart';
 import 'models/hive/hive_helper/register_adapters.dart';
@@ -43,8 +44,9 @@ class App extends StatelessWidget {
         if (matches?.group(1).toString() == "/title/" &&
             matches?.group(2).toString() != null) {
           return MaterialPageRoute(
-            builder: (BuildContext context) =>
-                ItemPage(id: matches!.group(2).toString()),
+            builder: (BuildContext context) => ItemPage(
+              id: matches!.group(2).toString(),
+            ),
           );
         }
         return MaterialPageRoute(
@@ -66,7 +68,7 @@ Future? initializeHive() async {
   Hive.openBox<HiveShowPreview>('collection');
   Hive.openBox<HiveShowPreview>('watchlist');
   Hive.openBox<HiveShowPreview>('history');
-  Hive.openBox<HiveShowPreview>('artists');
+  Hive.openBox<HiveActorPreview>('artists');
 }
 
 Future? initializeGetX() async {

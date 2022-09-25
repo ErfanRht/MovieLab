@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movielab/pages/shared/actor/actor_box/compressed_actor_box.dart';
+import 'package:movielab/pages/shared/item_exhibitor/item_box/actor_box/compressed_actor_box.dart';
 import 'package:movielab/widgets/section_title.dart';
 
 class ItemPageCast extends StatelessWidget {

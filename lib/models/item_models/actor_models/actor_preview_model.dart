@@ -1,6 +1,7 @@
 // Actor or actress preview model class
 import 'dart:convert';
 
+import 'package:movielab/models/item_models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/tools/image_quality_increaser.dart';
 
 class ActorPreview {
@@ -8,12 +9,20 @@ class ActorPreview {
   final String name;
   final String image;
   final String asCharacter;
+  final List<ShowPreview>? knownFor;
+  final String? birthDate;
+  final String? deathDate;
+  final String? height;
 
   const ActorPreview({
     required this.id,
     required this.name,
     required this.image,
     required this.asCharacter,
+    this.knownFor,
+    this.birthDate,
+    this.deathDate,
+    this.height,
   });
 
   factory ActorPreview.fromJson(Map<String, dynamic> json) {

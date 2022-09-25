@@ -23,9 +23,9 @@ enum ListName {
   PERSONAL_LIST
 }
 
-enum ItemType { MOVIE, TV, ARTIST, OTHER, UNKNOWN }
+enum ItemType { SHOW, ARTIST, OTHER, UNKNOWN }
 
-enum ShowType {
+enum ItemSuit {
   SEARCH_PAGE,
   OFFICIAL_LIST,
   USER_LIST,

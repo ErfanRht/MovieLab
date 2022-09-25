@@ -20,7 +20,7 @@ class EpisodeGuideSeasonEpisodes extends StatelessWidget {
           return ExpandedItemBox(
             show: show.seasons[season][episode],
             preTag: "episode",
-            showType: ShowType.EPISODE,
+            showType: ItemSuit.EPISODE,
           );
         },
       ),

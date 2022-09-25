@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movielab/models/show_models/full_show_model.dart';
+import 'package:movielab/models/item_models/show_models/full_show_model.dart';
 
 class ItemPageNavBar extends StatelessWidget {
   final FullShow show;

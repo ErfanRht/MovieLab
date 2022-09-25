@@ -1,14 +1,14 @@
 import 'package:get/get.dart';
+import 'package:movielab/models/item_models/actor_models/full_actor_model.dart';
+import 'package:movielab/models/item_models/show_models/full_show_model.dart';
 import 'package:movielab/modules/cache/cache_data.dart';
-import '../../models/actor_models/full_actor_model.dart';
-import '../../models/show_models/full_show_model.dart';
 
 class CacheHolder {
   // To save a movie or show info to the cache so it can be accessed later without having to make a request to the IMDB API again.
   Future saveShowInfoInCache({required FullShow show}) async {
     bool thereIs = false;
-    List<FullShow> shows = Get.find<CacheData>().showsData;
-    for (FullShow iShow in shows) {
+    List<dynamic> shows = Get.find<CacheData>().showsData;
+    for (dynamic iShow in shows) {
       if (iShow.id == show.id) {
         thereIs = true;
         break;
@@ -22,8 +22,8 @@ class CacheHolder {
   // To save an actor or actress info to the cache so it can be accessed later without having to make a request to the IMDB API again.
   Future saveActorInfoInCache({required FullActor actor}) async {
     bool thereIs = false;
-    List<FullActor> actors = Get.find<CacheData>().actorsData;
-    for (FullActor iActor in actors) {
+    List<dynamic> actors = Get.find<CacheData>().actorsData;
+    for (dynamic iActor in actors) {
       if (iActor.id == actor.id) {
         thereIs = true;
         break;
@@ -51,8 +51,8 @@ class CacheHolder {
 
   // To get a movie or show info that has been saved in cache.
   Future<FullShow?> getShowInfoFromCache({required String id}) async {
-    List<FullShow> shows = Get.find<CacheData>().showsData;
-    for (FullShow iShow in shows) {
+    List<dynamic> shows = Get.find<CacheData>().showsData;
+    for (dynamic iShow in shows) {
       if (iShow.id == id) {
         // There is the show in cache
         return iShow;
@@ -63,8 +63,8 @@ class CacheHolder {
 
   // To get a actor or actress info that has been saved in cache.
   Future<FullActor?> getActorInfoFromCache({required String id}) async {
-    List<FullActor> actors = Get.find<CacheData>().actorsData;
-    for (FullActor iactor in actors) {
+    List<dynamic> actors = Get.find<CacheData>().actorsData;
+    for (dynamic iactor in actors) {
       if (iactor.id == id) {
         // There is the actor in cache
         return iactor;

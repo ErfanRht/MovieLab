@@ -2,10 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:movielab/models/hive/convertor.dart';
+import 'package:movielab/models/hive/models/actor_preview.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
 import 'package:movielab/models/hive/models/user.dart';
-import 'package:movielab/models/show_models/full_show_model.dart';
-import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/models/item_models/actor_models/actor_preview_model.dart';
+import 'package:movielab/models/item_models/actor_models/full_actor_model.dart';
+import 'package:movielab/models/item_models/show_models/full_show_model.dart';
+import 'package:movielab/models/item_models/show_models/show_preview_model.dart';
 import 'package:movielab/models/user_model/user_model.dart';
 import 'package:movielab/modules/Recommender/Recommender.dart';
 import 'package:movielab/pages/splash/get_user_data.dart';
@@ -55,7 +58,7 @@ class PreferencesShareholder {
           contentRating: showPreview.contentRating ?? contentRating!,
           similars: showPreview.similars ?? similars!);
     }
-    list.put(list.length + 1, hiveShow);
+    list.add(hiveShow);
     if (kDebugMode) {
       print("The item added to $listName");
     }
@@ -64,12 +67,43 @@ class PreferencesShareholder {
     return true;
   }
 
+  // Add an artist to the favourite artists list
+  Future<bool> addArtistToFav({
+    required FullActor actor,
+  }) async {
+    Box<HiveActorPreview> list = Hive.box<HiveActorPreview>('artists');
+    list.add(convertFullActorToHive(actor: actor));
+    if (kDebugMode) {
+      print("The artist added to favourite artists list");
+    }
+    recommender();
+    updateUserStats();
+    return true;
+  }
+
+  // Delete an item from a list in the shared preferences
+  Future<bool> unfavArtist({required String id}) async {
+    Box<HiveActorPreview> list = Hive.box<HiveActorPreview>('artists');
+    for (int i = 0; i < list.length; i++) {
+      if (list.getAt(i)?.id == id) {
+        list.deleteAt(i);
+        if (kDebugMode) {
+          print("The item unfaved");
+        }
+        return true;
+      }
+    }
+    recommender();
+    updateUserStats();
+    return false;
+  }
+
   // Delete an item from a list in the shared preferences
   Future<bool> deleteFromList(
-      {required String showId, required String listName}) async {
+      {required String id, required String listName}) async {
     Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
     for (int i = 0; i < list.length; i++) {
-      if (list.getAt(i)?.id == showId) {
+      if (list.getAt(i)?.id == id) {
         list.deleteAt(i);
         if (kDebugMode) {
           print("The item deleted from $listName");
@@ -106,13 +140,27 @@ class PreferencesShareholder {
     return result;
   }
 
+  Future<bool> isFaved({required String id}) async {
+    Box<HiveActorPreview> list = Hive.box<HiveActorPreview>('artists');
+    for (int i = 0; i < list.length; i++) {
+      if (list.getAt(i)?.id == id) {
+        if (kDebugMode) {
+          print("Item is faved");
+        }
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   // Delete a list and replace it to the inputed data
   bool replaceList(
       {required String listName, required List<HiveShowPreview> newItems}) {
     deleteList(listName);
     Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
     for (HiveShowPreview item in newItems) {
-      list.put(list.length + 1, item);
+      list.add(item);
     }
     return true;
   }
@@ -124,6 +172,17 @@ class PreferencesShareholder {
     List<ShowPreview> result = [];
     for (HiveShowPreview item in listItems) {
       result.add(convertHiveToShowPreview(item));
+    }
+    return result;
+  }
+
+  // Get all items of a list
+  List<ActorPreview> getFavActors() {
+    Box<HiveActorPreview> list = Hive.box<HiveActorPreview>('artists');
+    List<HiveActorPreview> listItems = list.values.toList();
+    List<ActorPreview> result = [];
+    for (HiveActorPreview item in listItems) {
+      result.add(convertHiveToActorPreview(item));
     }
     return result;
   }

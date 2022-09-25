@@ -49,7 +49,7 @@ class BoxOfficePAge extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 return ExpandedItemBox(
                                   show: _.boxOffice[index],
-                                  showType: ShowType.BOX_OFFICE,
+                                  showType: ItemSuit.BOX_OFFICE,
                                 );
                               },
                             ),

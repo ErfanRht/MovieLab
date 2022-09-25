@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:movielab/constants/colors.dart';
-import 'package:movielab/models/show_models/full_show_model.dart';
+import 'package:movielab/models/item_models/show_models/full_show_model.dart';
 
 class ItemPagePosters extends StatelessWidget {
   final List<PosterData> posters;
