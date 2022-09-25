@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:movielab/models/actor_models/actor_preview_model.dart';
+import 'package:movielab/models/item_models/actor_models/actor_preview_model.dart';
 import 'package:movielab/modules/tools/navigate.dart';
-import 'package:movielab/pages/shared/actor/actor_page/actor_page.dart';
+import 'package:movielab/pages/shared/item_exhibitor/actor_page/actor_page.dart';
 import 'package:movielab/pages/shared/item_exhibitor/item_box/item_box_common.dart';
 
 class CompressedActorBox extends StatelessWidget {

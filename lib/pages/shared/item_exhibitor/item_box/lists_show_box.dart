@@ -3,9 +3,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
-import 'package:movielab/models/show_models/full_show_model.dart';
-import 'package:movielab/models/show_models/show_preview_model.dart';
-import 'package:movielab/modules/cache/get_show_info.dart';
+import 'package:movielab/models/item_models/show_models/full_show_model.dart';
+import 'package:movielab/models/item_models/show_models/show_preview_model.dart';
+import 'package:movielab/modules/cache/get_item_info.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/modules/tools/capitalizer.dart';
 import 'package:movielab/widgets/toast.dart';
@@ -16,7 +16,7 @@ class ListItemBox extends StatelessWidget {
   final ShowPreview showPreview;
   final String listName;
   final double? width;
-  final ShowType? showType;
+  final ItemSuit? showType;
   ListItemBox({
     Key? key,
     required this.showPreview,
@@ -69,14 +69,14 @@ class ListItemBox extends StatelessWidget {
           show: showPreview,
           preTag: "${listName}_",
           width: width,
-          showType: showType ?? ShowType.USER_LIST,
+          showType: showType ?? ItemSuit.USER_LIST,
         ));
   }
 
   Future<void> delete() async {
     final preferencesShareholder = PreferencesShareholder();
     preferencesShareholder.deleteFromList(
-        showId: showPreview.id, listName: listName);
+        id: showPreview.id, listName: listName);
     await Future.delayed(const Duration(milliseconds: 200));
     fToast.removeQueuedCustomToasts();
     fToast.showToast(
@@ -86,7 +86,8 @@ class ListItemBox extends StatelessWidget {
           buttonColor: kPrimaryColor,
           buttonOnTap: () async {
             await Future.delayed(const Duration(milliseconds: 75));
-            FullShow? fullShow = await getShowInfo(id: showPreview.id);
+            FullShow? fullShow =
+                await getItemInfo(id: showPreview.id, itemType: ItemType.SHOW);
             preferencesShareholder.addShowToList(
                 showPreview: showPreview,
                 listName: listName,
@@ -110,7 +111,7 @@ class ListItemBox extends StatelessWidget {
   }
 
   _loadShowInfo(final String id) async {
-    await getShowInfo(id: id).then((value) {
+    await getItemInfo(id: id, itemType: ItemType.SHOW).then((value) {
       return value;
     });
   }

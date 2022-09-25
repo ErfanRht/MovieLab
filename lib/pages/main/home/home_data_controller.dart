@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '../../../models/show_models/show_preview_model.dart';
+import 'package:movielab/models/item_models/show_models/show_preview_model.dart';
 
 class HomeDataController extends GetxController {
   List<ShowPreview> trendingMovies = [];

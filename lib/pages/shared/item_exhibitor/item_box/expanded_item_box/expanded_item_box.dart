@@ -4,7 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/constants/user_lists.dart';
-import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/models/item_models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/pages/shared/item_exhibitor/item_popup/show_list_popup_actions.dart';
 import 'package:movielab/widgets/buttons_section.dart';
@@ -15,7 +15,7 @@ class ExpandedItemBox extends StatefulWidget {
   final ShowPreview show;
   final String? iRank;
   final String preTag;
-  final ShowType showType;
+  final ItemSuit showType;
   final double? width;
   const ExpandedItemBox(
       {Key? key,
@@ -49,7 +49,7 @@ class _ExpandedItemBoxState extends State<ExpandedItemBox>
           },
           onLongPress: () async {
             await Future.delayed(const Duration(milliseconds: 250));
-            if (widget.showType != ShowType.EPISODE) {
+            if (widget.showType != ItemSuit.EPISODE) {
               await showModalBottomSheet(
                 context: context,
                 shape: const RoundedRectangleBorder(
@@ -190,10 +190,10 @@ class _ExpandedItemBoxState extends State<ExpandedItemBox>
                         children: [
                           Flexible(
                             child: itemBoxText(
-                              text: widget.showType == ShowType.USER_LIST ||
+                              text: widget.showType == ItemSuit.USER_LIST ||
                                       widget.showType ==
-                                          ShowType.USER_HISTORY ||
-                                      widget.showType == ShowType.RECOMMENDED
+                                          ItemSuit.USER_HISTORY ||
+                                      widget.showType == ItemSuit.RECOMMENDED
                                   ? widget.show.title
                                   : widget.show.rank != ""
                                       ? "${widget.show.rank}. ${widget.show.title}"
@@ -204,7 +204,7 @@ class _ExpandedItemBoxState extends State<ExpandedItemBox>
                               fontSize: 14,
                             ),
                           ),
-                          if (widget.showType != ShowType.EPISODE)
+                          if (widget.showType != ItemSuit.EPISODE)
                             SizedBox(
                               width: 40,
                               height: 40,
@@ -382,7 +382,7 @@ class _ExpandedItemBoxState extends State<ExpandedItemBox>
                           ),
                         ),
                       ],
-                      if (widget.showType == ShowType.BOX_OFFICE) ...[
+                      if (widget.showType == ItemSuit.BOX_OFFICE) ...[
                         info(
                             info: widget.show.weekend,
                             infoText: 'Weekend: ${widget.show.weekend}'),
@@ -411,7 +411,7 @@ class _ExpandedItemBoxState extends State<ExpandedItemBox>
                             info: widget.show.foreign,
                             infoText: 'Foreign: ${widget.show.foreign}'),
                       ],
-                      widget.showType == ShowType.EPISODE
+                      widget.showType == ItemSuit.EPISODE
                           ? Padding(
                               padding: const EdgeInsets.only(top: 10),
                               child: Wrap(

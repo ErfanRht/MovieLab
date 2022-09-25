@@ -59,7 +59,7 @@ class _CompanyPageState extends State<CompanyPage> {
                           itemBuilder: (context, index) {
                             return ExpandedItemBox(
                               show: companyData['movies'][index],
-                              showType: ShowType.OFFICIAL_LIST,
+                              showType: ItemSuit.OFFICIAL_LIST,
                             );
                           },
                         ),

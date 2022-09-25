@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movielab/models/actor_models/full_actor_model.dart';
+import 'package:movielab/models/item_models/actor_models/full_actor_model.dart';
 import 'package:movielab/widgets/section_title.dart';
 
 class ActorPageMoreInfo extends StatelessWidget {

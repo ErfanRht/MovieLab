@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movielab/constants/colors.dart';
-import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/models/item_models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/pages/main/profile/profile_controller.dart';

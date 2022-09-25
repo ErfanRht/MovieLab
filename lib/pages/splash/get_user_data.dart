@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/models/item_models/show_models/show_preview_model.dart';
 import 'package:movielab/models/user_model/user_model.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/pages/main/profile/profile_controller.dart';
@@ -25,7 +25,7 @@ Future<bool> getUserInformation() async {
 
 Future<bool> updateUserStats() async {
   PreferencesShareholder preferencesShareholder = PreferencesShareholder();
-  List<List<ShowPreview>> allLists = await preferencesShareholder.getAllLists();
+  List<List<ShowPreview>> allLists = preferencesShareholder.getAllLists();
   List<ShowPreview> items = await getAllItems(allLists: allLists);
 
   ProfileController controller = Get.find<ProfileController>();

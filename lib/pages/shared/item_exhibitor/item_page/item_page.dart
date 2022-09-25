@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
-import 'package:movielab/modules/cache/get_show_info.dart';
+import 'package:movielab/modules/cache/get_item_info.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/modules/tools/system_ui_overlay_style.dart';
@@ -64,7 +64,7 @@ class _ItemPageState extends State<ItemPage> with TickerProviderStateMixin {
         }
       }
     });
-    loadShowData();
+    loadItemData();
   }
 
   @override
@@ -112,7 +112,7 @@ class _ItemPageState extends State<ItemPage> with TickerProviderStateMixin {
                             child: ItemPageBottonBar(
                               show: show,
                               isThereInLists: _isThereInLists,
-                              updateShowData: loadShowData,
+                              updateShowData: loadItemData,
                             )),
                       )
                     : const SizedBox.shrink(),
@@ -136,7 +136,7 @@ class _ItemPageState extends State<ItemPage> with TickerProviderStateMixin {
                                   builder: (context) {
                                     return AddWatchTime(
                                       fullShow: show,
-                                      updateShowData: loadShowData,
+                                      updateShowData: loadItemData,
                                       backgroundColor: kSecondaryColor,
                                     );
                                   })
@@ -284,7 +284,7 @@ class _ItemPageState extends State<ItemPage> with TickerProviderStateMixin {
                   setState(() {
                     _loadingStatus = RequestResult.LOADING;
                   });
-                  loadShowData();
+                  loadItemData();
                 }),
               ],
             ),
@@ -298,9 +298,10 @@ class _ItemPageState extends State<ItemPage> with TickerProviderStateMixin {
     }
   }
 
-  Future loadShowData() async {
+  Future loadItemData() async {
     if (show == null) {
-      await getShowInfo(id: widget.id).then((response) {
+      await getItemInfo(id: widget.id, itemType: ItemType.SHOW)
+          .then((response) {
         if (response != null) {
           setState(() {
             show = response;

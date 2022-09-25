@@ -8,7 +8,7 @@ import 'package:movielab/pages/main/main_controller.dart';
 import 'package:movielab/pages/main/search/search.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar.dart';
 import 'package:movielab/pages/main/search/search_bar/search_bar_controller.dart';
-import 'package:movielab/pages/shared/actor/actor_box/expanded_actor_box.dart';
+import 'package:movielab/pages/shared/item_exhibitor/item_box/actor_box/expanded_actor_box.dart';
 import 'package:movielab/pages/shared/item_exhibitor/item_box/expanded_item_box/expanded_item_box.dart';
 import 'package:movielab/widgets/error.dart';
 import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
@@ -127,7 +127,7 @@ class SearchPage extends StatelessWidget {
                               ? ExpandedItemBox(
                                   show: result![index],
                                   preTag: "Search_page_",
-                                  showType: ShowType.SEARCH_PAGE,
+                                  showType: ItemSuit.SEARCH_PAGE,
                                 )
                               : ExpandedActorBox(
                                   actor: convertShowPreviewToActorPreview(

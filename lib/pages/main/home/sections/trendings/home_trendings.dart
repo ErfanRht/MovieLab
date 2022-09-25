@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/models/item_models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/tools/navigate.dart';
 import 'package:movielab/pages/main/home/sections/home_titles.dart';
 import 'package:movielab/pages/main/home/sections/trendings/all_trendings.dart';

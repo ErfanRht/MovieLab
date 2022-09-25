@@ -4,9 +4,11 @@ import 'package:external_path/external_path.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:movielab/models/hive/models/actor_preview.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
 import 'package:movielab/models/hive/models/user.dart';
-import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/models/item_models/actor_models/actor_preview_model.dart';
+import 'package:movielab/models/item_models/show_models/show_preview_model.dart';
 import 'package:movielab/models/user_model/user_model.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/modules/recommender/recommender.dart';
@@ -26,24 +28,23 @@ Future<bool> createBackup() async {
     };
 
     List<ShowPreview> watchlist =
-        await preferencesShareholder.getList(listName: "watchlist");
+        preferencesShareholder.getList(listName: "watchlist");
     userData['watchlist'] = [
       for (ShowPreview show in watchlist) ShowPreview.toMap(show)
     ];
     List<ShowPreview> history =
-        await preferencesShareholder.getList(listName: "history");
+        preferencesShareholder.getList(listName: "history");
     userData['history'] = [
       for (ShowPreview show in history) ShowPreview.toMap(show)
     ];
     List<ShowPreview> collection =
-        await preferencesShareholder.getList(listName: "collection");
+        preferencesShareholder.getList(listName: "collection");
     userData['collection'] = [
       for (ShowPreview show in collection) ShowPreview.toMap(show)
     ];
-    List<ShowPreview> artists =
-        await preferencesShareholder.getList(listName: "artists");
+    List<ActorPreview> artists = preferencesShareholder.getFavActors();
     userData['artists'] = [
-      for (ShowPreview show in artists) ShowPreview.toMap(show)
+      for (ActorPreview show in artists) ActorPreview.toMap(show)
     ];
     String jsonData = jsonEncode(userData);
     await Permission.storage.request();

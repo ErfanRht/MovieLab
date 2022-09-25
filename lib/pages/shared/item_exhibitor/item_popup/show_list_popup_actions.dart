@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movielab/constants/colors.dart';
-import 'package:movielab/models/show_models/full_show_model.dart';
-import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/constants/types.dart';
+import 'package:movielab/models/item_models/show_models/full_show_model.dart';
+import 'package:movielab/models/item_models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/modules/tools/capitalizer.dart';
-import 'package:movielab/modules/cache/get_show_info.dart';
+import 'package:movielab/modules/cache/get_item_info.dart';
 import 'package:movielab/widgets/buttons/activeable_button.dart';
 import 'package:movielab/widgets/toast.dart';
 import 'watchtime/watchtime.dart';
@@ -103,7 +104,8 @@ class _ItemPopupActionsState extends State<ItemPopupActions>
       if (listName == "history") {
         handleOnWatched();
       } else {
-        _fullShow = _fullShow ?? await getShowInfo(id: widget.show.id);
+        _fullShow = _fullShow ??
+            await getItemInfo(id: widget.show.id, itemType: ItemType.SHOW);
         if (_fullShow != null) {
           _preferencesShareholder.addShowToList(
               showPreview: widget.show,
@@ -132,7 +134,7 @@ class _ItemPopupActionsState extends State<ItemPopupActions>
       }
     } else {
       _preferencesShareholder.deleteFromList(
-          showId: widget.show.id, listName: listName);
+          id: widget.show.id, listName: listName);
       setState(() {
         _isThereInLists[listName] = false;
       });
@@ -148,7 +150,9 @@ class _ItemPopupActionsState extends State<ItemPopupActions>
             buttonColor: kPrimaryColor,
             buttonOnTap: () async {
               await Future.delayed(const Duration(milliseconds: 75));
-              _fullShow = _fullShow ?? await getShowInfo(id: widget.show.id);
+              _fullShow = _fullShow ??
+                  await getItemInfo(
+                      id: widget.show.id, itemType: ItemType.SHOW);
               _preferencesShareholder.addShowToList(
                   showPreview: widget.show,
                   listName: listName,
@@ -175,7 +179,8 @@ class _ItemPopupActionsState extends State<ItemPopupActions>
   }
 
   Future handleOnWatched() async {
-    _fullShow = _fullShow ?? await getShowInfo(id: widget.show.id);
+    _fullShow = _fullShow ??
+        await getItemInfo(id: widget.show.id, itemType: ItemType.SHOW);
     if (_fullShow != null) {
       Navigator.pop(context);
       await Future.delayed(const Duration(milliseconds: 200));
@@ -210,7 +215,8 @@ class _ItemPopupActionsState extends State<ItemPopupActions>
   }
 
   _loadShowInfo() async {
-    await getShowInfo(id: widget.show.id).then((value) {
+    await getItemInfo(id: widget.show.id, itemType: ItemType.SHOW)
+        .then((value) {
       setState(() {
         _fullShow = value;
       });

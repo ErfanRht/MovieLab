@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:movielab/models/actor_models/actor_preview_model.dart';
+import 'package:movielab/models/hive/models/actor_preview.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
-import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/models/item_models/actor_models/actor_preview_model.dart';
+import 'package:movielab/models/item_models/actor_models/full_actor_model.dart';
+import 'package:movielab/models/item_models/show_models/full_show_model.dart';
+import 'package:movielab/models/item_models/show_models/show_preview_model.dart';
 import 'package:movielab/models/user_model/user_model.dart';
-import '../show_models/full_show_model.dart';
 import 'models/user.dart';
 
 ShowPreview convertHiveToShowPreview(HiveShowPreview hive) {
@@ -32,6 +34,19 @@ ShowPreview convertHiveToShowPreview(HiveShowPreview hive) {
     watchDate: hive.watchDate,
     watchTime: hive.watchTime,
     similars: [for (var hive in hive.similars) convertHiveToShowPreview(hive)],
+  );
+}
+
+ActorPreview convertHiveToActorPreview(HiveActorPreview hive) {
+  return ActorPreview(
+    id: hive.id,
+    name: hive.name,
+    asCharacter: hive.asCharacter,
+    image: hive.image,
+    birthDate: hive.birthDate,
+    deathDate: hive.deathDate,
+    height: hive.height,
+    knownFor: [for (var hive in hive.knownFor) convertHiveToShowPreview(hive)],
   );
 }
 
@@ -76,6 +91,33 @@ HiveShowPreview convertShowPreviewToHive(
     ]
     ..watchDate = showPreview.watchDate ?? date
     ..watchTime = showPreview.watchTime ?? time;
+}
+
+HiveActorPreview convertFullActorToHive({
+  required FullActor actor,
+}) {
+  return HiveActorPreview(
+      id: actor.id,
+      name: actor.name,
+      image: actor.image,
+      asCharacter: "",
+      knownFor: [
+        for (var hive in actor.knownFor)
+          convertShowPreviewToHive(
+              showPreview: hive,
+              rank: "",
+              date: null,
+              time: null,
+              genres: "",
+              countries: "",
+              languages: "",
+              companies: "",
+              contentRating: "",
+              similars: [])
+      ],
+      height: actor.height,
+      birthDate: actor.birthDate,
+      deathDate: actor.deathDate);
 }
 
 Future<HiveShowPreview> convertFullShowToHive(

@@ -49,7 +49,7 @@ class Top250MoviesPage extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 return ExpandedItemBox(
                                   show: _.topRatedMovies[index],
-                                  showType: ShowType.OFFICIAL_LIST,
+                                  showType: ItemSuit.OFFICIAL_LIST,
                                 );
                               },
                             ),

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:movielab/constants/colors.dart';
-import 'package:movielab/models/actor_models/full_actor_model.dart';
+import 'package:movielab/models/item_models/actor_models/full_actor_model.dart';
 
 class ActorPageNavBar extends StatefulWidget {
   final FullActor? actor;
@@ -19,7 +17,6 @@ class _ActorPageNavBarState extends State<ActorPageNavBar> {
   @override
   void initState() {
     super.initState();
-    // isFavorite = widget.isBookmarked;
   }
 
   @override
@@ -39,28 +36,6 @@ class _ActorPageNavBarState extends State<ActorPageNavBar> {
                 size: 25,
               ),
             ),
-            IconButton(
-              onPressed: () {
-                isFavorite
-                    ? {
-                        setState(() {
-                          isFavorite = false;
-                        })
-                      }
-                    : {
-                        setState(() {
-                          isFavorite = true;
-                        })
-                      };
-              },
-              icon: Icon(
-                isFavorite
-                    ? FontAwesomeIcons.heart
-                    : FontAwesomeIcons.solidHeart,
-                color: kPrimaryColor,
-                size: 27.5,
-              ),
-            )
           ],
         ),
       ),

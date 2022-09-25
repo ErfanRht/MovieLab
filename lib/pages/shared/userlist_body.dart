@@ -6,11 +6,13 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/constants/types.dart';
 import 'package:movielab/models/hive/convertor.dart';
+import 'package:movielab/models/hive/models/actor_preview.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
-import 'package:movielab/models/show_models/show_preview_model.dart';
+import 'package:movielab/models/item_models/show_models/show_preview_model.dart';
 import 'package:movielab/modules/preferences/preferences_shareholder.dart';
 import 'package:movielab/pages/main/home/home_data_controller.dart';
 import 'package:movielab/pages/main/profile/sections/list_page/sections/history_timeline.dart';
+import 'package:movielab/pages/shared/item_exhibitor/item_box/actor_box/expanded_actor_box.dart';
 import 'package:movielab/widgets/error.dart';
 import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
 import 'package:ms_undraw/ms_undraw.dart';
@@ -95,106 +97,161 @@ class _UserListBodyState extends State<UserListBody> {
                         ]);
             },
           )
-        : ValueListenableBuilder<Box<HiveShowPreview>>(
-            valueListenable:
-                Hive.box<HiveShowPreview>(widget.listName).listenable(),
-            builder: (context, box, _) {
-              final list = box.values.toList().cast<HiveShowPreview>();
-              return list.isNotEmpty
-                  ? widget.listName == "history"
-                      ? Column(
-                          children: [
-                            Expanded(
-                              child: InefficaciousRefreshIndicator(
-                                child: CustomScrollView(
-                                  controller: _scrollController,
-                                  physics: const BouncingScrollPhysics(),
-                                  slivers: [
-                                    TimelineSteps(
-                                      steps: [
-                                        for (HiveShowPreview show in list)
-                                          ListItemBox(
-                                              listName: widget.listName,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width -
-                                                  76,
-                                              showPreview:
-                                                  convertHiveToShowPreview(
-                                                      show),
-                                              showType: ShowType.USER_HISTORY)
-                                      ],
-                                      watchDates: [
-                                        for (HiveShowPreview show in list)
-                                          convertHiveToShowPreview(show)
-                                              .watchDate
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      : InefficaciousRefreshIndicator(
+        : widget.listName == "artists"
+            ? ValueListenableBuilder<Box<HiveActorPreview>>(
+                valueListenable:
+                    Hive.box<HiveActorPreview>(widget.listName).listenable(),
+                builder: (context, box, _) {
+                  final list = box.values.toList().cast<HiveActorPreview>();
+                  return list.isNotEmpty
+                      ? InefficaciousRefreshIndicator(
                           child: ListView.builder(
                             itemCount: list.length,
                             physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
-                              return ListItemBox(
-                                  listName: widget.listName,
-                                  showPreview: convertHiveToShowPreview(
-                                      list[list.length - index - 1]));
+                              return ExpandedActorBox(
+                                actor: convertHiveToActorPreview(
+                                    list[list.length - index - 1]),
+                              );
                             },
                           ),
                         )
-                  : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                          const SizedBox(height: 100),
-                          Text(
-                              "You haven't add anything in your ${widget.listName} yet!",
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600)),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.width,
-                            child: UnDraw(
-                              color: kGreyColor,
-                              illustration: UnDrawIllustration.empty,
-                              padding: const EdgeInsets.all(65),
-                              placeholder: const Center(
-                                child: SpinKitThreeBounce(
-                                  color: Colors.white,
-                                  size: 30,
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                              const SizedBox(height: 100),
+                              Text(
+                                  "You haven't add anything in your ${widget.listName} yet!",
+                                  style: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600)),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.width,
+                                child: UnDraw(
+                                  color: kGreyColor,
+                                  illustration: UnDrawIllustration.empty,
+                                  padding: const EdgeInsets.all(65),
+                                  placeholder: const Center(
+                                    child: SpinKitThreeBounce(
+                                      color: Colors.white,
+                                      size: 30,
+                                    ),
+                                  ),
+                                  errorWidget: ConnectionErrorWidget(
+                                      errorText:
+                                          "An unexpected error occurred while loading the illustration.",
+                                      tryAgain: () {}),
                                 ),
                               ),
-                              errorWidget: ConnectionErrorWidget(
-                                  errorText:
-                                      "An unexpected error occurred while loading the illustration.",
-                                  tryAgain: () {}),
-                            ),
-                          ),
-                        ]);
-            },
-          );
+                            ]);
+                },
+              )
+            : ValueListenableBuilder<Box<HiveShowPreview>>(
+                valueListenable:
+                    Hive.box<HiveShowPreview>(widget.listName).listenable(),
+                builder: (context, box, _) {
+                  final list = box.values.toList().cast<HiveShowPreview>();
+                  return list.isNotEmpty
+                      ? widget.listName == "history"
+                          ? Column(
+                              children: [
+                                Expanded(
+                                  child: InefficaciousRefreshIndicator(
+                                    child: CustomScrollView(
+                                      controller: _scrollController,
+                                      physics: const BouncingScrollPhysics(),
+                                      slivers: [
+                                        TimelineSteps(
+                                          steps: [
+                                            for (HiveShowPreview show in list)
+                                              ListItemBox(
+                                                  listName: widget.listName,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width -
+                                                      76,
+                                                  showPreview:
+                                                      convertHiveToShowPreview(
+                                                          show),
+                                                  showType:
+                                                      ItemSuit.USER_HISTORY)
+                                          ],
+                                          watchDates: [
+                                            for (HiveShowPreview show in list)
+                                              convertHiveToShowPreview(show)
+                                                  .watchDate
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          : InefficaciousRefreshIndicator(
+                              child: ListView.builder(
+                                itemCount: list.length,
+                                physics: const BouncingScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return ListItemBox(
+                                      listName: widget.listName,
+                                      showPreview: convertHiveToShowPreview(
+                                          list[list.length - index - 1]));
+                                },
+                              ),
+                            )
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                              const SizedBox(height: 100),
+                              Text(
+                                  "You haven't add anything in your ${widget.listName} yet!",
+                                  style: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600)),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.width,
+                                child: UnDraw(
+                                  color: kGreyColor,
+                                  illustration: UnDrawIllustration.empty,
+                                  padding: const EdgeInsets.all(65),
+                                  placeholder: const Center(
+                                    child: SpinKitThreeBounce(
+                                      color: Colors.white,
+                                      size: 30,
+                                    ),
+                                  ),
+                                  errorWidget: ConnectionErrorWidget(
+                                      errorText:
+                                          "An unexpected error occurred while loading the illustration.",
+                                      tryAgain: () {}),
+                                ),
+                              ),
+                            ]);
+                },
+              );
   }
 
   Future getList() async {
     PreferencesShareholder preferencesShareholder = PreferencesShareholder();
-    list = preferencesShareholder.getList(listName: widget.listName);
-    if (widget.listName != 'history') {
-      setState(() {
-        list = list;
-      });
-    } else {
-      list.sort((a, b) => a.watchDate!.compareTo(b.watchDate!));
-      setState(() {
-        list = list;
-      });
-      preferencesShareholder.replaceList(listName: widget.listName, newItems: [
-        for (ShowPreview item in list)
-          convertShowPreviewToHive(showPreview: item)
-      ]);
+    if (widget.listName != "artists") {
+      list = preferencesShareholder.getList(listName: widget.listName);
+      if (widget.listName != 'history') {
+        setState(() {
+          list = list;
+        });
+      } else {
+        list.sort((a, b) => a.watchDate!.compareTo(b.watchDate!));
+        setState(() {
+          list = list;
+        });
+        preferencesShareholder.replaceList(
+            listName: widget.listName,
+            newItems: [
+              for (ShowPreview item in list)
+                convertShowPreviewToHive(showPreview: item)
+            ]);
+      }
     }
   }
 }

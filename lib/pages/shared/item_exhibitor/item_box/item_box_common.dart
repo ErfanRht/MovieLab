@@ -6,7 +6,12 @@ import 'package:movielab/pages/shared/item_exhibitor/item_page/item_page.dart';
 
 openItemPage(BuildContext context,
     {required final String id, final String preTag = ""}) {
-  Navigate.pushHeroicTo(context, ItemPage(id: id, preTag: preTag));
+  Navigate.pushHeroicTo(
+      context,
+      ItemPage(
+        id: id,
+        preTag: preTag,
+      ));
 }
 
 Widget boxImage(
