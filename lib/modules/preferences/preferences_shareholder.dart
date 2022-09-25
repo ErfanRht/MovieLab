@@ -58,7 +58,7 @@ class PreferencesShareholder {
           contentRating: showPreview.contentRating ?? contentRating!,
           similars: showPreview.similars ?? similars!);
     }
-    list.put(list.length + 1, hiveShow);
+    list.add(hiveShow);
     if (kDebugMode) {
       print("The item added to $listName");
     }
@@ -72,7 +72,7 @@ class PreferencesShareholder {
     required FullActor actor,
   }) async {
     Box<HiveActorPreview> list = Hive.box<HiveActorPreview>('artists');
-    list.put(list.length + 1, convertFullActorToHive(actor: actor));
+    list.add(convertFullActorToHive(actor: actor));
     if (kDebugMode) {
       print("The artist added to favourite artists list");
     }
@@ -160,7 +160,7 @@ class PreferencesShareholder {
     deleteList(listName);
     Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
     for (HiveShowPreview item in newItems) {
-      list.put(list.length + 1, item);
+      list.add(item);
     }
     return true;
   }
