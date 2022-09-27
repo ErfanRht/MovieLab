@@ -77,22 +77,33 @@ class _BackupPageState extends State<BackupPage> with TickerProviderStateMixin {
                 description:
                     "Select the exported movielab-backup-date.db from file manager",
                 onPressed: () async {
-                  await restoreBackup().then((final bool success) async {
-                    fToast.removeQueuedCustomToasts();
-                    fToast.showToast(
-                      child: ToastWidget(
-                        mainText: success
-                            ? "The backup file imported successfully."
-                            : "There's a problem with the imported file!",
-                        mainTextColor: success ? Colors.green : kPrimaryColor,
-                        buttonText: "Ok",
-                        fontSize: 13,
-                        buttonColor: Colors.black,
-                        closeOnButtonTap: true,
-                      ),
-                      gravity: ToastGravity.BOTTOM,
-                      toastDuration: const Duration(seconds: 2),
-                    );
+                  guideModalSheet(context,
+                      height: 290,
+                      vsync: this,
+                      title: "Select Backup File",
+                      decription:
+                          "Select the backup file from your storage, and be aware that your current account info will be replaced by this file content.",
+                      buttonText: "Select File", onTap: () async {
+                    await restoreBackup().then((final bool success) async {
+                      await Future.delayed(const Duration(milliseconds: 100));
+                      Navigator.pop(context);
+                      await Future.delayed(const Duration(milliseconds: 200));
+                      fToast.removeQueuedCustomToasts();
+                      fToast.showToast(
+                        child: ToastWidget(
+                          mainText: success
+                              ? "The backup file imported successfully."
+                              : "There's a problem with the imported file!",
+                          mainTextColor: success ? Colors.green : kPrimaryColor,
+                          buttonText: "Ok",
+                          fontSize: 13,
+                          buttonColor: Colors.black,
+                          closeOnButtonTap: true,
+                        ),
+                        gravity: ToastGravity.BOTTOM,
+                        toastDuration: const Duration(seconds: 2),
+                      );
+                    });
                   });
                 }),
           ],

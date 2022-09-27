@@ -7,6 +7,7 @@ import 'package:movielab/constants/app.dart';
 import 'package:movielab/constants/colors.dart';
 import 'package:movielab/models/hive/convertor.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
+import 'package:movielab/modules/cache/cache_data.dart';
 import 'package:movielab/modules/tools/system_ui_overlay_style.dart';
 import 'package:movielab/pages/main/main_controller.dart';
 import 'package:movielab/widgets/buttons/activeable_button.dart';
@@ -34,7 +35,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     setSystemUIOverlayStyle();
-    checkForUpdateDialog(context, this);
+    if (!Get.find<CacheData>().updateNotice) {
+      checkForUpdateDialog(context, this);
+      Get.find<CacheData>().updateNoticed();
+    }
   }
 
   @override

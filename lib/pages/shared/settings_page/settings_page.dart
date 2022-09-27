@@ -48,7 +48,7 @@ class _SettingsPageState extends State<SettingsPage>
                       title: "Clear media content cache",
                       decription:
                           "This will remove all cached content like images, trailers, etc., and wouldn't hurt your personal data.",
-                      buttonText: "Clear cache", onTap: () async {
+                      buttonText: "Clear Cache", onTap: () async {
                     await DefaultCacheManager().emptyCache();
                     await Future.delayed(const Duration(milliseconds: 200));
                     Navigator.pop(context);

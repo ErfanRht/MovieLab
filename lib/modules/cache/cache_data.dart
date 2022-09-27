@@ -7,6 +7,8 @@ class CacheData extends GetxController {
   List<FullActor> actorsData = [];
   List<Map> companiesData = [];
 
+  bool updateNotice = false;
+
   addShowData({required FullShow show}) {
     showsData.add(show);
     update();
@@ -19,6 +21,11 @@ class CacheData extends GetxController {
 
   addCompanyData({required Map company}) {
     companiesData.add(company);
+    update();
+  }
+
+  updateNoticed() {
+    updateNotice = true;
     update();
   }
 }

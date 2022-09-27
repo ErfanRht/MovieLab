@@ -6,7 +6,6 @@ import 'package:movielab/models/hive/models/actor_preview.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
 import 'package:movielab/models/hive/models/user.dart';
 import 'package:movielab/models/item_models/actor_models/actor_preview_model.dart';
-import 'package:movielab/models/item_models/actor_models/full_actor_model.dart';
 import 'package:movielab/models/item_models/show_models/full_show_model.dart';
 import 'package:movielab/models/item_models/show_models/show_preview_model.dart';
 import 'package:movielab/models/user_model/user_model.dart';
@@ -16,7 +15,12 @@ import 'package:movielab/pages/splash/get_user_data.dart';
 class PreferencesShareholder {
   // Delete all items of a list in the shared preferences
   Future<bool> deleteList(String listName) async {
-    Box<HiveShowPreview> list = Hive.box<HiveShowPreview>(listName);
+    late Box list;
+    if (listName == "artists") {
+      list = Hive.box<HiveActorPreview>(listName);
+    } else {
+      list = Hive.box<HiveShowPreview>(listName);
+    }
     list.deleteAll(list.keys.toList());
     if (kDebugMode) {
       print("All items of $listName deleted");
@@ -69,7 +73,7 @@ class PreferencesShareholder {
 
   // Add an artist to the favourite artists list
   Future<bool> addArtistToFav({
-    required FullActor actor,
+    required dynamic actor,
   }) async {
     Box<HiveActorPreview> list = Hive.box<HiveActorPreview>('artists');
     list.add(convertFullActorToHive(actor: actor));
