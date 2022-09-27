@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:movielab/constants/app.dart';
@@ -7,8 +9,10 @@ import 'package:movielab/models/hive/convertor.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
 import 'package:movielab/modules/tools/system_ui_overlay_style.dart';
 import 'package:movielab/pages/main/main_controller.dart';
-import 'package:movielab/widgets/buttons/glassmorphism_button.dart';
+import 'package:movielab/widgets/buttons/activeable_button.dart';
+import 'package:movielab/widgets/error.dart';
 import 'package:movielab/widgets/inefficacious_refresh_indicator.dart';
+import 'package:ms_undraw/ms_undraw.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'home_data_controller.dart';
 import 'sections/box_office/box_office.dart';
@@ -18,13 +22,18 @@ import 'sections/imdb_lists/lists.dart';
 import 'sections/navbar/navbar.dart';
 import 'sections/trendings/home_trendings.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  @override
   Widget build(BuildContext context) {
     setSystemUIOverlayStyle();
-    checkForUpdateDialog(context);
+    checkForUpdateDialog(context, this);
     return GetBuilder<MainController>(builder: (_) {
       return GetBuilder<HomeDataController>(builder: (__) {
         return ValueListenableBuilder<Box<HiveShowPreview>>(
@@ -117,77 +126,109 @@ class HomePage extends StatelessWidget {
   }
 }
 
-Future checkForUpdateDialog(BuildContext context) async {
-  print("Checking for update dialog");
-  await Future.delayed(const Duration(milliseconds: 1750));
+Future checkForUpdateDialog(BuildContext context, dynamic vsync) async {
+  if (kDebugMode) {
+    print("Checking for update dialog");
+  }
+  await Future.delayed(const Duration(milliseconds: 1999));
   if (latestVersion != null &&
       latestVersion != "" &&
       appVersion != latestVersion) {
-    showDialog(
+    showModalBottomSheet(
         context: context,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+          top: Radius.circular(20),
+        )),
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        backgroundColor: kSecondaryColor,
+        transitionAnimationController: AnimationController(
+            duration: const Duration(milliseconds: 425), vsync: vsync),
         builder: (context) {
-          return AlertDialog(
-            contentPadding: const EdgeInsets.all(5),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            content: Container(
-              height: 190,
-              width: 200,
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: kBackgroundColor),
+          return Container(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              color: kBackgroundColor,
+              height: 425,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "New version's available!",
-                    style: TextStyle(fontSize: 19, fontWeight: FontWeight.w700),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "MovieLab $latestVersion is available now with lots of cool changes and improvements!",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 13.5,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white.withOpacity(0.6)),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  GmButton(
-                      text: "UPDATE NOW",
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width / 3,
+                      margin: const EdgeInsets.only(top: 8.5, bottom: 7.5),
+                      height: 3,
+                      color: Colors.white.withOpacity(0.4),
+                    ),
+                    UnDraw(
+                      color: kAccentColor,
+                      illustration: UnDrawIllustration.upgrade,
+                      height: 150,
+                      placeholder: const Center(
+                        child: SpinKitThreeBounce(
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                      ),
+                      errorWidget: ConnectionErrorWidget(
+                          errorText:
+                              "An unexpected error occurred while loading the illustration.",
+                          tryAgain: () {}),
+                    ),
+                    const Text(
+                      "Update MovieLab",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600, fontSize: 18.5),
+                    ),
+                    const SizedBox(
+                      height: 7.5,
+                    ),
+                    Text(
+                      "${latestVersion!.replaceAll('v', 'Version ')} · 21.0 MB",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                          color: Colors.white.withOpacity(0.66)),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Please update MovieLab to the latest version. The version you are using is out of date and may stop working soon.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 13.5),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    ActiveableButton(
+                      isActive: true,
+                      text: "Download now!",
+                      icon: null,
                       onTap: () {
                         _launchUrl(secureUrl ??
                             "https://erfanrht.github.io/MovieLab-Intro");
                       },
-                      width: 125,
-                      backgroundColor: kPrimaryColor,
-                      color: Colors.white),
-                  const SizedBox(
-                    height: 12.5,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text(
-                      "Not now!",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 13.5,
-                        fontWeight: FontWeight.w500,
+                      activeColor: kAccentColor,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text(
+                        "Remind me later",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: kAccentColor,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-          );
+                  ]));
         });
   }
 }
