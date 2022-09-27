@@ -4,7 +4,6 @@ import 'package:external_path/external_path.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:movielab/models/hive/models/actor_preview.dart';
 import 'package:movielab/models/hive/models/show_preview.dart';
 import 'package:movielab/models/hive/models/user.dart';
 import 'package:movielab/models/item_models/actor_models/actor_preview_model.dart';
@@ -141,6 +140,11 @@ Future<bool> restoreBackup() async {
               for (Map<String, dynamic> show in item['similars'])
                 ShowPreview.fromJson(show)
             ],
+          );
+        }
+        for (var item in backup['artists']) {
+          shareholder.addArtistToFav(
+            actor: item,
           );
         }
 
