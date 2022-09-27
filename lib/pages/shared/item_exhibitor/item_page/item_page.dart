@@ -63,6 +63,7 @@ class _ItemPageState extends State<ItemPage> with TickerProviderStateMixin {
       }
     });
     loadItemData();
+    setSystemUIOverlayStyle(color: kSecondaryColor);
   }
 
   @override

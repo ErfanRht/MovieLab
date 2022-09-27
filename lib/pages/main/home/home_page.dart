@@ -31,9 +31,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     setSystemUIOverlayStyle();
     checkForUpdateDialog(context, this);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return GetBuilder<MainController>(builder: (_) {
       return GetBuilder<HomeDataController>(builder: (__) {
         return ValueListenableBuilder<Box<HiveShowPreview>>(
